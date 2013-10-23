@@ -17,7 +17,7 @@ Documentation
 
 Documentation is generated with Sphinx, by basically following the [this tutorial](http://matplotlib.org/sampledoc/).
 
-Uploading the documentation to github ph-pages is done by checking out the ph-pages branch, copying in the newly built documentation from `doc/_build/`, then committing the changes.
+Uploading the documentation to github ph-pages is done by checking out the gh-pages branch, copying in the newly built documentation from `doc/_build/html/`, then committing the changes. A related tutorial can be found [here](http://help.github.com/articles/creating-project-pages-manually), but this shouldn't be followed explicitly, because the gh-pages branch already exists (although it could easily be deleted and remade).
 
 Git Branching Model
 ===================
