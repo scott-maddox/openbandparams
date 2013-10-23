@@ -12,10 +12,14 @@ Structure
 
 Build scripts are located in the root directory, the package source code is in `/src/`, documentation is in `/doc/`, and examples are in `/examples/`.
 
+Git Branching Model
+===================
+I'm using the Git branching model described [here](http://nvie.com/posts/a-successful-git-branching-model/).
+
 Design
 ======
 
-Here's the problem. Some of the parameters depend on temperature, and some don't. The ones that depend on temperature have to be functions, while the ones that don't are not functions. The user has no clear way of knowing which parameters are functions, and which are not, until an exception is thrown. Should I just make all parameters functions of temperature, even if they aren't really? Or I can make them all functions with keyword arguments, and only use T values if needed (and show in the docstring if it's used). This is probably the cleanest approach.
+Here's the problem: some of the parameters depend on temperature, and some don't. The ones that depend on temperature have to be functions, while the ones that don't are not functions. The user has no clear way of knowing which parameters are functions, and which are not, until an exception is thrown. Should I just make all parameters functions of temperature, even if they aren't really? Or I can make them all functions with keyword arguments, and only use T values if needed (and show in the docstring if it's used). This is probably the cleanest approach.
 
 The next question is how to best store the values. Should they be hardcoded in, with references in comments? This is the most runtime efficient. If I have a separate wiki for maintaining the most up-to-date values, then I could just do periodic releases with the changes from the wiki incorporated by looking at the wiki change history. This would be a fairly manual approach, as apposed to automated. However, in this case I think requiring a human in the loop isn't necessarily a bad thing, since the human can sanity check the changes. Linus still does merges to the Linux kernal by hand.
 

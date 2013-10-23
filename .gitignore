@@ -10,6 +10,9 @@ system_response_logs/
 # compiled source
 *.pyc
 
+# setup.py generated files
+*.egg-info
+
 # packages
 *.7z
 *.dmg
