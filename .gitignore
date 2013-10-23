@@ -9,7 +9,11 @@ system_response_logs/
 
 # compiled source
 *.pyc
+
+# build directories
+dist/
 build/
+doc/_build/
 
 # setup.py generated files
 *.egg-info
@@ -23,6 +27,9 @@ build/
 *.rar
 *.tar
 *.zip
+
+# Aptana generated files
+.settings/
 
 # OS generated files
 .DS_Store
