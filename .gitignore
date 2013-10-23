@@ -9,6 +9,7 @@ system_response_logs/
 
 # compiled source
 *.pyc
+build/
 
 # setup.py generated files
 *.egg-info

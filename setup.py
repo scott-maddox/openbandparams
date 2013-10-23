@@ -30,5 +30,6 @@ setup(name='openbandparams',
       author='Scott Maddox',
       author_email='smaddox@utexas.edu',
       license='AGPLv3',
-      packages=find_packages("src", exclude="tests"),
+      packages=['openbandparams'],
+      package_dir={'openbandparams': 'src/openbandparams'},
       zip_safe=True)
