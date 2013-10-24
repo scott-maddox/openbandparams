@@ -29,35 +29,46 @@ from openbandparams.base_material import Base
 from openbandparams.equations import varshni
 
 class Binary(Base):
-    def __init__(self, name):
-        self.name = name
-    def a(self, T=300):
+    name = None
+    
+    # All methods should be class methods so that they can reference parameters
+    # defined by the inheriting class.
+    @classmethod
+    def a(cls, T=300):
         '''
         Returns the lattice parameter, a, in Angstroms at a given
         temperature, T, in Kelvin (default: 300 K)
         '''
-        return self._a_300K + self._da_dT * (T - 300)
-    def Eg_Gamma(self, T=300):
+        return cls._a_300K + cls._da_dT * (T - 300)
+    
+    @classmethod
+    def Eg_Gamma(cls, T=300):
         '''
-        Returns the Gamma-valley bandgap, Eg_Gamma, in electron Volts at a given
-        temperature, T, in Kelvin (default: 300 K)
+        Returns the Gamma-valley bandgap, Eg_Gamma, in electron Volts at a
+        given temperature, T, in Kelvin (default: 300 K).
         '''
-        return varshni(self._Eg_Gamma_0, self._alpha_Gamma, self._beta_Gamma, T)
-    def Eg_X(self, T=300):
+        return varshni(cls._Eg_Gamma_0, cls._alpha_Gamma, cls._beta_Gamma, T)
+    
+    @classmethod
+    def Eg_X(cls, T=300):
         '''
         Returns the X-valley bandgap, Eg_X, in electron Volts at a given
         temperature, T, in Kelvin (default: 300 K)
         '''
-        return varshni(self._Eg_X_0, self._alpha_X, self._beta_X, T)
-    def Eg_L(self, T=300):
+        return varshni(cls._Eg_X_0, cls._alpha_X, cls._beta_X, T)
+    
+    @classmethod
+    def Eg_L(cls, T=300):
         '''
         Returns the L-valley bandgap, Eg_L, in electron Volts at a given
         temperature, T, in Kelvin (default: 300 K)
         '''
-        return varshni(self._Eg_L_0, self._alpha_L, self._beta_L, T)
-    def Eg(self, T=300):
+        return varshni(cls._Eg_L_0, cls._alpha_L, cls._beta_L, T)
+    
+    @classmethod
+    def Eg(cls, T=300):
         '''
         Returns the bandgap, Eg, in electron Volts at a given
         temperature, T, in Kelvin (default: 300 K)
         '''
-        return min(self.Eg_Gamma(T), self.Eg_X(T), self.Eg_L(T))
+        return min(cls.Eg_Gamma(T), cls.Eg_X(T), cls.Eg_L(T))
