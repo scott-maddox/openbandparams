@@ -37,8 +37,8 @@ label = []
 for b in [AlP, GaP, InP,
           AlAs, GaAs, InAs,
           AlSb, GaSb, InSb]:
-    x.append(b.a(T))
-    y.append(b.Eg(T))
+    x.append(b.a(T=T))
+    y.append(b.Eg(T=T))
     label.append(b.name)
 ax.plot(x, y, 'k.')
 
@@ -62,8 +62,8 @@ for tern in [AlGaP,  AlInP,  GaInP,
              AlAsSb, GaAsSb, InAsSb]:
     for i, f in zip(indices, fractions):
         instance = tern(f)
-        x[i] = instance.a(T)
-        y[i] = instance.Eg(T)
+        x[i] = instance.a(T=T)
+        y[i] = instance.Eg(T=T)
     ax.plot(x, y)
 
 plt.show()

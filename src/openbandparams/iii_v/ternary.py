@@ -61,7 +61,7 @@ class Ternary(AlloyBase):
                            { '_init' : AlGaAs_init })
         '''
         pass
-    def _interpolate(self, param, T=None):
+    def _interpolate(self, param, **kwargs):
         vals = []
         for b in [self.binary1, self.binary2]:
             try:
@@ -71,48 +71,53 @@ class Ternary(AlloyBase):
                 e.message +=' missing param `%s`'%param
                 raise e
         x = self._x
-        if T is None:
+        if kwargs is None:
             A = vals[0]
             B = vals[1]
         else:
-            A = vals[0](T)
-            B = vals[1](T)
+            A = vals[0](**kwargs)
+            B = vals[1](**kwargs)
         if hasattr(self, '_bowing_%s'%param):
             C = getattr(self, '_bowing_%s'%param)
             return A*x + B*(1-x) - C*x*(1-x)
         else:
             return A*x + B*(1-x)
     
-    def a(self, T=300):
+    def a(self, **kwargs):
         '''
         Returns the lattice parameter, a, in Angstroms at a given
         temperature, T, in Kelvin (default: 300 K)
         '''
-        return self._interpolate('a', T)
-    def Eg_Gamma(self, T=300):
+        T = self._get_T(kwargs)
+        return self._interpolate('a', T=T)
+    def Eg_Gamma(self, **kwargs):
         '''
         Returns the Gamma-valley bandgap, Eg_Gamma, in electron Volts at a given
         temperature, T, in Kelvin (default: 300 K)
         '''
-        return self._interpolate('Eg_Gamma', T)
-    def Eg_X(self, T=300):
+        T = self._get_T(kwargs)
+        return self._interpolate('Eg_Gamma', T=T)
+    def Eg_X(self, **kwargs):
         '''
         Returns the X-valley bandgap, Eg_X, in electron Volts at a given
         temperature, T, in Kelvin (default: 300 K)
         '''
-        return self._interpolate('Eg_X', T)
-    def Eg_L(self, T=300):
+        T = self._get_T(kwargs)
+        return self._interpolate('Eg_X', T=T)
+    def Eg_L(self, **kwargs):
         '''
         Returns the L-valley bandgap, Eg_L, in electron Volts at a given
         temperature, T, in Kelvin (default: 300 K)
         '''
-        return self._interpolate('Eg_L', T)
-    def Eg(self, T=300):
+        T = self._get_T(kwargs)
+        return self._interpolate('Eg_L', T=T)
+    def Eg(self, **kwargs):
         '''
         Returns the bandgap, Eg, in electron Volts at a given
         temperature, T, in Kelvin (default: 300 K)
         '''
-        return min(self.Eg_Gamma(T), self.Eg_X(T), self.Eg_L(T))
+        T = self._get_T(kwargs)
+        return min(self.Eg_Gamma(T=T), self.Eg_X(T=T), self.Eg_L(T=T))
 
 class ReversedTernary(Ternary):
     def __init__(self, x=None, **kwargs):
