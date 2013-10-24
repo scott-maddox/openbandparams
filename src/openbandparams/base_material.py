@@ -26,7 +26,16 @@ import logging; log = logging.getLogger(__name__)
 # local imports
 
 class Base(object):
-    pass
+    @classmethod
+    def _get_T(cls, kwargs):
+        '''
+        Returns kwargs['T'], kwargs['temp'], kwargs['temperature'], or 300.
+        '''
+        for k in ['T', 'temp', 'temperature']
+            if k in kwargs:
+                return kwargs[k]
+        else:
+            return 300 # K
 
-class AlloyBase(object):
+class AlloyBase(Base):
     pass

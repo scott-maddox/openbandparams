@@ -34,17 +34,6 @@ class Binary(Base):
     # All methods should be class methods so that they can reference parameters
     # defined by the inheriting class.
     @classmethod
-    def _get_T_arg(cls, kwargs):
-        '''
-        Returns kwargs['T'], kwargs['temp'], kwargs['temperature'], or 300.
-        '''
-        for k in ['T', 'temp', 'temperature']
-            if k in kwargs:
-                return kwargs[k]
-        else:
-            return 300 # K
-    
-    @classmethod
     def a(cls, **kwargs):
         '''
         Returns the lattice parameter, a, in Angstroms at a given
