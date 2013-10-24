@@ -34,41 +34,57 @@ class Binary(Base):
     # All methods should be class methods so that they can reference parameters
     # defined by the inheriting class.
     @classmethod
-    def a(cls, T=300):
+    def _get_T_arg(cls, kwargs):
+        '''
+        Returns kwargs['T'], kwargs['temp'], kwargs['temperature'], or 300.
+        '''
+        for k in ['T', 'temp', 'temperature']
+            if k in kwargs:
+                return kwargs[k]
+        else:
+            return 300 # K
+    
+    @classmethod
+    def a(cls, **kwargs):
         '''
         Returns the lattice parameter, a, in Angstroms at a given
-        temperature, T, in Kelvin (default: 300 K)
+        temperature, T, in Kelvin (default: 300 K).
         '''
+        T = cls._get_T(kwargs)
         return cls._a_300K + cls._da_dT * (T - 300)
     
     @classmethod
-    def Eg_Gamma(cls, T=300):
+    def Eg_Gamma(cls, **kwargs):
         '''
         Returns the Gamma-valley bandgap, Eg_Gamma, in electron Volts at a
         given temperature, T, in Kelvin (default: 300 K).
         '''
+        T = cls._get_T(kwargs)
         return varshni(cls._Eg_Gamma_0, cls._alpha_Gamma, cls._beta_Gamma, T)
     
     @classmethod
-    def Eg_X(cls, T=300):
+    def Eg_X(cls, **kwargs):
         '''
         Returns the X-valley bandgap, Eg_X, in electron Volts at a given
-        temperature, T, in Kelvin (default: 300 K)
+        temperature, T, in Kelvin (default: 300 K).
         '''
+        T = cls._get_T(kwargs)
         return varshni(cls._Eg_X_0, cls._alpha_X, cls._beta_X, T)
     
     @classmethod
-    def Eg_L(cls, T=300):
+    def Eg_L(cls, **kwargs):
         '''
         Returns the L-valley bandgap, Eg_L, in electron Volts at a given
-        temperature, T, in Kelvin (default: 300 K)
+        temperature, T, in Kelvin (default: 300 K).
         '''
+        T = cls._get_T(kwargs)
         return varshni(cls._Eg_L_0, cls._alpha_L, cls._beta_L, T)
     
     @classmethod
-    def Eg(cls, T=300):
+    def Eg(cls, **kwargs):
         '''
         Returns the bandgap, Eg, in electron Volts at a given
-        temperature, T, in Kelvin (default: 300 K)
+        temperature, T, in Kelvin (default: 300 K).
         '''
+        T = cls._get_T(kwargs)
         return min(cls.Eg_Gamma(T), cls.Eg_X(T), cls.Eg_L(T))
