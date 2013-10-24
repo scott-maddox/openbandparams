@@ -27,17 +27,6 @@ import logging; log = logging.getLogger(__name__)
 from openbandparams.base_material import AlloyBase
 
 class Ternary(AlloyBase):
-    _bowing_Eg_Gamma = 0
-    _bowing_Eg_X = 0
-    _bowing_Eg_L = 0
-    _bowing_Delta_SO = 0
-    _bowing_meff_e_Gamma = 0
-    _bowing_meff_HH_DOS = 0
-    _bowing_meff_LH_DOS = 0
-    _bowing_Ep = 0
-    _bowing_F = 0
-    _bowing_VBO = 0
-    _bowing_a_c = 0
     def __init__(self, x=None, **kwargs):
         AlloyBase.__init__(self)
         if x is not None:
