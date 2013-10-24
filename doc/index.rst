@@ -12,7 +12,7 @@ Useful and relavent algorithms will also be provided for tasks such as interpola
 
 Example scripts will also be provided for generating common plots such as bandgap vs. lattice constant, band alignments vs. lattice constant, conduction band minima vs. alloy composition, and so on.
 
-Example usage scripts are available from the `Github repository`_, and additional documentation is available in the :ref:`modindex`.
+The source code and example usage scripts are available from the `Github repository`_, and additional documentation is available in the :ref:`modindex`.
 
 .. _Github repository: http://github.com/scott-maddox/openbandparams
 
