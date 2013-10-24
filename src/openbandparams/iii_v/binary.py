@@ -76,4 +76,4 @@ class Binary(Base):
         temperature, T, in Kelvin (default: 300 K).
         '''
         T = cls._get_T(kwargs)
-        return min(cls.Eg_Gamma(T), cls.Eg_X(T), cls.Eg_L(T))
+        return min(cls.Eg_Gamma(T=T), cls.Eg_X(T=T), cls.Eg_L(T=T))

@@ -31,7 +31,7 @@ class Base(object):
         '''
         Returns kwargs['T'], kwargs['temp'], kwargs['temperature'], or 300.
         '''
-        for k in ['T', 'temp', 'temperature']
+        for k in ['T', 'temp', 'temperature']:
             if k in kwargs:
                 return kwargs[k]
         else:
