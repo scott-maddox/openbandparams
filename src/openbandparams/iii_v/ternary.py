@@ -35,6 +35,10 @@ class Ternary(AlloyBase):
             self._x = float(kwargs[self.element1])
         elif self.element2 in kwargs:
             self._x = (1 - float(kwargs[self.element2]))
+        else:
+            raise TypeError("Missing required key word argument."
+                            "'x', '%s', or '%s' is needed."%(self.element1,
+                                                             self.element2))
         self._init() # initialize any values that depend on self._x
     
     def _init(self):
