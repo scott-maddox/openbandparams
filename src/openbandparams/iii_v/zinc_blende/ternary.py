@@ -24,7 +24,7 @@ import logging; log = logging.getLogger(__name__)
 # third party imports
 
 # local imports
-from openbandparams.iii_v.ternary import create_ternary, create_reversed_ternary
+from openbandparams.iii_v.ternary import Ternary
 from openbandparams.iii_v.zinc_blende.binary import (AlN,  GaN,  InN,
                                                      AlP,  GaP,  InP,
                                                      AlAs, GaAs, InAs,
@@ -34,12 +34,15 @@ from openbandparams.iii_v.zinc_blende.binary import (AlN,  GaN,  InN,
 # An instance of the class must be created, and the alloy fraction passed in,
 # before it can be used. See `simple_example_2.py` for examples.
 
-# Nitrides
-AlGaN = create_ternary('AlGaN', 'Al', AlN, 'Ga', GaN,
-                       {
-                        '_bowing_Eg_Gamma' : 0.76, #eV    lin_band_2002
-                        '_bowing_Eg_X' : 0.3, #eV    lin_band_2002
-                        })
+# Nitrides            {
+class AlGaN(Ternary):
+    name = 'AlGaN'
+    element1 = 'Al'
+    element2 = 'Ga'
+    binary1 = AlN
+    binary2 = GaN
+    _bowing_Eg_Gamma = 0.76, #eV    lin_band_2002
+    _bowing_Eg_X = 0.3, #eV    lin_band_2002
 AlInN = create_ternary('AlInN', 'Al', AlN, 'In', InN,
                        {
                         '_bowing_Eg_Gamma' : 2.73, #eV    lin_band_2002
