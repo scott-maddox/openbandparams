@@ -10,6 +10,11 @@ system_response_logs/
 # compiled source
 *.pyc
 
+# build directories
+dist/
+build/
+doc/_build/
+
 # packages
 *.7z
 *.dmg
