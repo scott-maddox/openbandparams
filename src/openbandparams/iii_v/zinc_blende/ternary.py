@@ -24,7 +24,7 @@ import logging; log = logging.getLogger(__name__)
 # third party imports
 
 # local imports
-from openbandparams.iii_v.ternary import Ternary
+from openbandparams.iii_v.ternary import Ternary, create_reversed_ternary
 from openbandparams.iii_v.zinc_blende.binary import (AlN,  GaN,  InN,
                                                      AlP,  GaP,  InP,
                                                      AlAs, GaAs, InAs,
@@ -43,230 +43,322 @@ class AlGaN(Ternary):
     binary2 = GaN
     _bowing_Eg_Gamma = 0.76, #eV    lin_band_2002
     _bowing_Eg_X = 0.3, #eV    lin_band_2002
-AlInN = create_ternary('AlInN', 'Al', AlN, 'In', InN,
-                       {
-                        '_bowing_Eg_Gamma' : 2.73, #eV    lin_band_2002
-                        '_bowing_Eg_X' : 3.62, #eV    lin_band_2002
-                        })
-GaInN = create_ternary('GaInN', 'Ga', GaN, 'In', InN,
-                       {
-                        '_bowing_Eg_Gamma' : 1.38, #eV    lin_band_2002
-                        '_bowing_Eg_X' : 1.67, #eV    lin_band_2002
-                        })
+    
+class AlInN(Ternary):
+    name = 'AlInN'
+    element1 = 'Al'
+    element2 = 'In'
+    binary1 = AlN
+    binary2 = InN
+    _bowing_Eg_Gamma = 2.73, #eV    lin_band_2002
+    _bowing_Eg_X = 3.62, #eV    lin_band_2002
+    
+class GaInN(Ternary):
+    name = 'GaInN'
+    element1 = 'Ga'
+    element2 = 'In'
+    binary1 = AlN
+    binary2 = InN
+    _bowing_Eg_Gamma = 1.38, #eV    lin_band_2002
+    _bowing_Eg_X = 1.67, #eV    lin_band_2002
 
 GaAlN = create_reversed_ternary('GaAlN', AlGaN)
 InAlN = create_reversed_ternary('InAlN', AlInN)
 InGaN = create_reversed_ternary('InGaN', GaInN)
 
 # Phosphides
-AlGaP = create_ternary('AlGaP', 'Al', AlP, 'Ga', GaP,
-                       {
-                        '_bowing_Eg_X' : 0.13, #eV    vurgaftman_band_2001
-                        })
-AlInP = create_ternary('AlInP', 'Al', AlP, 'In', InP,
-                       {
-                        '_bowing_Eg_Gamma' : -0.48, #eV    vurgaftman_band_2001
-                        '_bowing_Eg_X' : 0.38, #eV    vurgaftman_band_2001
-                        '_bowing_Delta_SO' : -0.19, #eV    vurgaftman_band_2001
-                        '_bowing_meff_e_Gamma' : 0.22, #m_e    vurgaftman_band_2001
-                        })
-GaInP = create_ternary('GaInP', 'Ga', GaP, 'In', InP,
-                       {
-                        '_bowing_Eg_Gamma' : 0.65, #eV    vurgaftman_band_2001
-                        '_bowing_Eg_X' : 0.2, #eV    vurgaftman_band_2001
-                        '_bowing_Eg_L' : 1.03, #eV    vurgaftman_band_2001
-                        '_bowing_meff_e_Gamma' : 0.051, #m_e    vurgaftman_band_2001
-                        '_bowing_F' : 0.78, #vurgaftman_band_2001
-                        })
+class AlGaP(Ternary):
+    name = 'AlGaP'
+    element1 = 'Al'
+    element2 = 'Ga'
+    binary1 = AlP
+    binary2 = GaP
+    _bowing_Eg_X = 0.13 #eV    vurgaftman_band_2001
+
+class AlInP(Ternary):
+    name = 'AlInP'
+    element1 = 'Al'
+    element2 = 'In'
+    binary1 = AlP
+    binary2 = InP
+    _bowing_Eg_Gamma = -0.48 #eV    vurgaftman_band_2001
+    _bowing_Eg_X = 0.38 #eV    vurgaftman_band_2001
+    _bowing_Delta_SO = -0.19 #eV    vurgaftman_band_2001
+    _bowing_meff_e_Gamma = 0.22 #m_e    vurgaftman_band_2001
+
+class GaInP(Ternary):
+    name = 'GaInP'
+    element1 = 'Ga'
+    element2 = 'In'
+    binary1 = GaP
+    binary2 = InP
+    _bowing_Eg_Gamma = 0.65 #eV    vurgaftman_band_2001
+    _bowing_Eg_X = 0.2 #eV    vurgaftman_band_2001
+    _bowing_Eg_L = 1.03 #eV    vurgaftman_band_2001
+    _bowing_meff_e_Gamma = 0.051 #m_e    vurgaftman_band_2001
+    _bowing_F = 0.78 #vurgaftman_band_2001
 
 GaAlP = create_reversed_ternary('GaAlP', AlGaP)
 InAlP = create_reversed_ternary('InAlP', AlInP)
 InGaP = create_reversed_ternary('InGaP', GaInP)
 
 # Arsenides
-def AlGaAs_init(self):
-    '''
-    AlGaAs's Eg_Gamma has an alloy dependent bowing parameter
-    '''
-    self._bowing_Eg_Gamma = 1.31*self._x - 0.127 #eV    vurgaftman_band_2001
+class AlGaAs(Ternary):
+    name = 'AlGaAs'
+    element1 = 'Al'
+    element2 = 'Ga'
+    binary1 = AlAs
+    binary2 = GaAs
+    _bowing_Eg_X = 0.055 #eV    vurgaftman_band_2001
+    def _init(self):
+        '''
+        AlGaAs's Eg_Gamma has an alloy dependent bowing parameter
+        '''
+        self._bowing_Eg_Gamma = 1.31*self._x - 0.127 #eV    vurgaftman_band_2001
 
-AlGaAs = create_ternary('AlGaAs', 'Al', AlAs, 'Ga', GaAs,
-                       {
-                        '_init' : AlGaAs_init,
-                        '_bowing_Eg_X' : 0.055, #eV    vurgaftman_band_2001
-                        })
-AlInAs = create_ternary('AlInAs', 'Al', AlAs, 'In', InAs,
-                       {
-                        '_bowing_Eg_Gamma' : 0.7, #eV    vurgaftman_band_2001
-                        '_bowing_Delta_SO' : 0.15, #eV    vurgaftman_band_2001
-                        '_bowing_meff_e_Gamma' : 0.049, #m_e    vurgaftman_band_2001
-                        '_bowing_Ep' : -4.81, #eV    vurgaftman_band_2001
-                        '_bowing_F' : -4.44, #vurgaftman_band_2001
-                        '_bowing_VBO' : -0.64, #eV    vurgaftman_band_2001
-                        '_bowing_a_c' : -1.4, #eV    vurgaftman_band_2001
-                        })
-GaInAs = create_ternary('GaInAs', 'Ga', GaAs, 'In', InAs,
-                       {
-                        '_bowing_Eg_Gamma' : 0.477, #eV    vurgaftman_band_2001
-                        '_bowing_Eg_X' : 1.4, #eV    vurgaftman_band_2001
-                        '_bowing_Eg_L' : 0.33, #eV    vurgaftman_band_2001
-                        '_bowing_Delta_SO' : 0.15, #eV    vurgaftman_band_2001
-                        '_bowing_meff_e_Gamma' : 0.0091, #m_e    vurgaftman_band_2001
-                        '_bowing_meff_HH_DOS' : -0.145, #m_e    vurgaftman_band_2001
-                        '_bowing_meff_LH_DOS' : 0.0202, #m_e    vurgaftman_band_2001
-                        '_bowing_Ep' : -1.48, #eV    vurgaftman_band_2001
-                        '_bowing_F' : 1.77, #vurgaftman_band_2001
-                        '_bowing_VBO' : -0.38, #eV    vurgaftman_band_2001
-                        '_bowing_a_c' : 2.61, #eV    vurgaftman_band_2001
-                        })
+class AlInAs(Ternary):
+    name = 'AlInAs'
+    element1 = 'Al'
+    element2 = 'In'
+    binary1 = AlAs
+    binary2 = InAs
+    _bowing_Eg_Gamma = 0.7 #eV    vurgaftman_band_2001
+    _bowing_Delta_SO = 0.15 #eV    vurgaftman_band_2001
+    _bowing_meff_e_Gamma = 0.049 #m_e    vurgaftman_band_2001
+    _bowing_Ep = -4.81 #eV    vurgaftman_band_2001
+    _bowing_F = -4.44 #vurgaftman_band_2001
+    _bowing_VBO = -0.64 #eV    vurgaftman_band_2001
+    _bowing_a_c = -1.4 #eV    vurgaftman_band_2001
+
+class GaInAs(Ternary):
+    name = 'GaInAs'
+    element1 = 'Ga'
+    element2 = 'In'
+    binary1 = GaAs
+    binary2 = InAs
+    _bowing_Eg_Gamma = 0.477 #eV    vurgaftman_band_2001
+    _bowing_Eg_X = 1.4 #eV    vurgaftman_band_2001
+    _bowing_Eg_L = 0.33 #eV    vurgaftman_band_2001
+    _bowing_Delta_SO = 0.15 #eV    vurgaftman_band_2001
+    _bowing_meff_e_Gamma = 0.0091 #m_e    vurgaftman_band_2001
+    _bowing_meff_HH_DOS = -0.145 #m_e    vurgaftman_band_2001
+    _bowing_meff_LH_DOS = 0.0202 #m_e    vurgaftman_band_2001
+    _bowing_Ep = -1.48 #eV    vurgaftman_band_2001
+    _bowing_F = 1.77 #vurgaftman_band_2001
+    _bowing_VBO = -0.38 #eV    vurgaftman_band_2001
+    _bowing_a_c = 2.61 #eV    vurgaftman_band_2001
 
 GaAlAs = create_reversed_ternary('GaAlAs', AlGaAs)
 InAlAs = create_reversed_ternary('InAlAs', AlInAs)
 InGaAs = create_reversed_ternary('InGaAs', GaInAs)
 
 # Antimonides
-def AlGaSb_init(self):
-    '''
-    AlGaSb's Eg_Gamma has an alloy dependent bowing parameter
-    '''
-    self._bowing_Eg_Gamma = 1.22*self._x - 0.044 #eV    vurgaftman_band_2001
-AlGaSb = create_ternary('AlGaSb', 'Al', AlSb, 'Ga', GaSb,
-                       {
-                        '_init' : AlGaSb_init,
-                        '_bowing_Delta_SO' : 0.3, #eV    vurgaftman_band_2001
-                        })
-AlInSb = create_ternary('AlInSb', 'Al', AlSb, 'In', InSb,
-                       {
-                        '_bowing_Eg_Gamma' : 0.43, #eV    vurgaftman_band_2001
-                        '_bowing_Delta_SO' : 0.25, #eV    vurgaftman_band_2001
-                        })
-GaInSb = create_ternary('GaInSb', 'Ga', GaSb, 'In', InSb,
-                       {
-                        '_bowing_Eg_Gamma' : 0.415, #eV    vurgaftman_band_2001
-                        '_bowing_Eg_X' : 0.33, #eV    vurgaftman_band_2001
-                        '_bowing_Eg_L' : 0.4, #eV    vurgaftman_band_2001
-                        '_bowing_Delta_SO' : 0.1, #eV    vurgaftman_band_2001
-                        '_bowing_meff_e_Gamma' : 0.0092, #m_e    vurgaftman_band_2001
-                        '_bowing_meff_LH_DOS' : 0.011, #m_e    vurgaftman_band_2001
-                        '_bowing_F' : -6.84, #vurgaftman_band_2001
-                        })
+class AlGaSb(Ternary):
+    name = 'AlGaSb'
+    element1 = 'Al'
+    element2 = 'Ga'
+    binary1 = AlSb
+    binary2 = GaSb
+    def _init(self):
+        '''
+        AlGaSb's Eg_Gamma has an alloy dependent bowing parameter
+        '''
+        self._bowing_Eg_Gamma = 1.22*self._x - 0.044 #eV    vurgaftman_band_2001
+    _bowing_Delta_SO = 0.3 #eV    vurgaftman_band_2001
+
+class AlInSb(Ternary):
+    name = 'AlInSb'
+    element1 = 'Al'
+    element2 = 'In'
+    binary1 = AlSb
+    binary2 = InSb
+    _bowing_Eg_Gamma = 0.43 #eV    vurgaftman_band_2001
+    _bowing_Delta_SO = 0.25 #eV    vurgaftman_band_2001
+
+class GaInSb(Ternary):
+    name = 'GaInSb'
+    element1 = 'Ga'
+    element2 = 'In'
+    binary1 = GaSb
+    binary2 = InSb
+    _bowing_Eg_Gamma = 0.415 #eV    vurgaftman_band_2001
+    _bowing_Eg_X = 0.33 #eV    vurgaftman_band_2001
+    _bowing_Eg_L = 0.4 #eV    vurgaftman_band_2001
+    _bowing_Delta_SO = 0.1 #eV    vurgaftman_band_2001
+    _bowing_meff_e_Gamma = 0.0092 #m_e    vurgaftman_band_2001
+    _bowing_meff_LH_DOS = 0.011 #m_e    vurgaftman_band_2001
+    _bowing_F = -6.84 #vurgaftman_band_2001
 
 GaAlSb = create_reversed_ternary('GaAlSb', AlGaSb)
 InAlSb = create_reversed_ternary('InAlSb', AlInSb)
 InGaSb = create_reversed_ternary('InGaSb', GaInSb)
 
 # Nitride Phosphides
-AlNP = create_ternary('AlNP', 'N', AlN, 'P', AlP,
-                       {
-                        })
-GaNP = create_ternary('GaNP', 'N', GaN, 'P', GaP,
-                       {
-                        '_bowing_Eg_Gamma' : 3.9, #eV    vurgaftman_band_2001
-                        '_bowing_Eg_X' : 10, #eV    vurgaftman_band_2001
-                        })
-InNP = create_ternary('InNP', 'N', InN, 'P', InP,
-                       {
-                        '_bowing_Eg_Gamma' : 15, #eV    vurgaftman_band_2001
-                        })
+class AlNP(Ternary):
+    name = 'AlNP'
+    element1 = 'N'
+    element2 = 'P'
+    binary1 = AlN
+    binary2 = AlP
+
+class GaNP(Ternary):
+    name = 'GaNP'
+    element1 = 'N'
+    element2 = 'P'
+    binary1 = GaN
+    binary2 = GaP
+    _bowing_Eg_Gamma = 3.9 #eV    vurgaftman_band_2001
+    _bowing_Eg_X = 10 #eV    vurgaftman_band_2001
+
+class InNP(Ternary):
+    name = 'InNP'
+    element1 = 'N'
+    element2 = 'P'
+    binary1 = InN
+    binary2 = InP
+    _bowing_Eg_Gamma = 15 #eV    vurgaftman_band_2001
 
 AlPN = create_reversed_ternary('AlPN', AlNP)
 GaPN = create_reversed_ternary('GaPN', GaNP)
 InPN = create_reversed_ternary('InPN', InNP)
 
 # Nitride Arsenides
-AlNAs = create_ternary('AlNAs', 'N', AlN, 'As', AlAs,
-                       {
-                        })
-def GaNAs_init(self):
-    self._bowing_Eg_Gamma = 120.4 - 100*self._x #eV    vurgaftman_band_2001
-GaNAs = create_ternary('GaNAs', 'N', GaN, 'As', GaAs,
-                       {
-                        '_init' : GaNAs_init,
-                        })
-InNAs = create_ternary('InNAs', 'N', InN, 'As', InAs,
-                       {
-                        '_bowing_Eg_Gamma' : 4.22, #eV    vurgaftman_band_2001
-                        })
+class AlNAs(Ternary):
+    name = 'AlNAs'
+    element1 = 'N'
+    element2 = 'As'
+    binary1 = AlN
+    binary2 = AlAs
+
+class GaNAs(Ternary):
+    name = 'GaNAs'
+    element1 = 'N'
+    element2 = 'As'
+    binary1 = GaN
+    binary2 = GaAs
+    def _init(self):
+        self._bowing_Eg_Gamma = 120.4 - 100*self._x #eV    vurgaftman_band_2001
+
+class InNAs(Ternary):
+    name = 'InNAs'
+    element1 = 'N'
+    element2 = 'As'
+    binary1 = InN
+    binary2 = InAs
+    _bowing_Eg_Gamma = 4.22 #eV    vurgaftman_band_2001
 
 AlAsN = create_reversed_ternary('AlAsN', AlNAs)
 GaAsN = create_reversed_ternary('GaAsN', GaNAs)
 InAsN = create_reversed_ternary('InAsN', InNAs)
 
 # Phosphide Arsenides
-AlPAs = create_ternary('AlPAs', 'P', AlP, 'As', AlAs,
-                       {
-                        '_bowing_Eg_Gamma' : 0.22, #eV    vurgaftman_band_2001
-                        '_bowing_Eg_X' : 0.22, #eV    vurgaftman_band_2001
-                        '_bowing_Eg_L' : 0.22, #eV    vurgaftman_band_2001
-                        })
-GaPAs = create_ternary('GaPAs', 'P', GaP, 'As', GaAs,
-                       {
-                        '_bowing_Eg_Gamma' : 0.19, #eV    vurgaftman_band_2001
-                        '_bowing_Eg_X' : 0.24, #eV    vurgaftman_band_2001
-                        '_bowing_Eg_L' : 0.16, #eV    vurgaftman_band_2001
-                        })
-InPAs = create_ternary('InPAs', 'P', InP, 'As', InAs,
-                       {
-                        '_bowing_Eg_Gamma' : 0.1, #eV    vurgaftman_band_2001
-                        '_bowing_Eg_X' : 0.27, #eV    vurgaftman_band_2001
-                        '_bowing_Eg_L' : 0.27, #eV    vurgaftman_band_2001
-                        '_bowing_Delta_SO' : 0.16, #eV    vurgaftman_band_2001
-                        })
+class AlPAs(Ternary):
+    name = 'AlPAs'
+    element1 = 'P'
+    element2 = 'As'
+    binary1 = AlP
+    binary2 = AlAs
+    _bowing_Eg_Gamma = 0.22 #eV    vurgaftman_band_2001
+    _bowing_Eg_X = 0.22 #eV    vurgaftman_band_2001
+    _bowing_Eg_L = 0.22 #eV    vurgaftman_band_2001
+
+class GaPAs(Ternary):
+    name = 'GaPAs'
+    element1 = 'P'
+    element2 = 'As'
+    binary1 = GaP
+    binary2 = GaAs
+    _bowing_Eg_Gamma = 0.19 #eV    vurgaftman_band_2001
+    _bowing_Eg_X = 0.24 #eV    vurgaftman_band_2001
+    _bowing_Eg_L = 0.16 #eV    vurgaftman_band_2001
+
+class InPAs(Ternary):
+    name = 'InPAs'
+    element1 = 'P'
+    element2 = 'As'
+    binary1 = InP
+    binary2 = InAs
+    _bowing_Eg_Gamma = 0.1 #eV    vurgaftman_band_2001
+    _bowing_Eg_X = 0.27 #eV    vurgaftman_band_2001
+    _bowing_Eg_L = 0.27 #eV    vurgaftman_band_2001
+    _bowing_Delta_SO = 0.16 #eV    vurgaftman_band_2001
 
 AlAsP = create_reversed_ternary('AlAsP', AlPAs)
 GaAsP = create_reversed_ternary('GaAsP', GaPAs)
 InAsP = create_reversed_ternary('InAsP', InPAs)
 
 # Phosphide Antimonides
-AlPSb = create_ternary('AlPSb', 'P', AlP, 'Sb', AlSb,
-                       {
-                        '_bowing_Eg_Gamma' : 2.7, #eV    vurgaftman_band_2001
-                        '_bowing_Eg_X' : 2.7, #eV    vurgaftman_band_2001
-                        '_bowing_Eg_L' : 2.7, #eV    vurgaftman_band_2001
-                        })
-GaPSb = create_ternary('GaPSb', 'P', GaP, 'Sb', GaSb,
-                       {
-                        '_bowing_Eg_Gamma' : 2.7, #eV    vurgaftman_band_2001
-                        '_bowing_Eg_X' : 2.7, #eV    vurgaftman_band_2001
-                        '_bowing_Eg_L' : 2.7, #eV    vurgaftman_band_2001
-                        })
-InPSb = create_ternary('InPSb', 'P', InP, 'Sb', InSb,
-                       {
-                        '_bowing_Eg_Gamma' : 1.9, #eV    vurgaftman_band_2001
-                        '_bowing_Eg_X' : 1.9, #eV    vurgaftman_band_2001
-                        '_bowing_Eg_L' : 1.9, #eV    vurgaftman_band_2001
-                        '_bowing_Delta_SO' : 0.75, #eV    vurgaftman_band_2001
-                        })
+class AlPSb(Ternary):
+    name = 'AlPSb'
+    element1 = 'P'
+    element2 = 'Sb'
+    binary1 = AlP
+    binary2 = AlSb
+    _bowing_Eg_Gamma = 2.7 #eV    vurgaftman_band_2001
+    _bowing_Eg_X = 2.7 #eV    vurgaftman_band_2001
+    _bowing_Eg_L = 2.7 #eV    vurgaftman_band_2001
+
+class GaPSb(Ternary):
+    name = 'GaPSb'
+    element1 = 'P'
+    element2 = 'Sb'
+    binary1 = GaP
+    binary2 = GaSb
+    _bowing_Eg_Gamma = 2.7 #eV    vurgaftman_band_2001
+    _bowing_Eg_X = 2.7 #eV    vurgaftman_band_2001
+    _bowing_Eg_L = 2.7 #eV    vurgaftman_band_2001
+
+class InPSb(Ternary):
+    name = 'InPSb'
+    element1 = 'P'
+    element2 = 'Sb'
+    binary1 = InP
+    binary2 = InSb
+    _bowing_Eg_Gamma = 1.9 #eV    vurgaftman_band_2001
+    _bowing_Eg_X = 1.9 #eV    vurgaftman_band_2001
+    _bowing_Eg_L = 1.9 #eV    vurgaftman_band_2001
+    _bowing_Delta_SO = 0.75 #eV    vurgaftman_band_2001
 
 AlSbP = create_reversed_ternary('AlSbP', AlPSb)
 GaSbP = create_reversed_ternary('GaSbP', GaPSb)
 InSbP = create_reversed_ternary('InSbP', InPSb)
 
 # Arsenide Antimonides
-AlAsSb = create_ternary('AlAsSb', 'As', AlAs, 'Sb', AlSb,
-                       {
-                        '_bowing_Eg_Gamma' : 0.8, #eV    vurgaftman_band_2001
-                        '_bowing_Eg_X' : 0.28, #eV    vurgaftman_band_2001
-                        '_bowing_Eg_L' : 0.28, #eV    vurgaftman_band_2001
-                        '_bowing_Delta_SO' : 0.15, #eV    vurgaftman_band_2001
-                        '_bowing_VBO' : -1.71, #eV    vurgaftman_band_2001
-                        })
-GaAsSb = create_ternary('GaAsSb', 'As', GaAs, 'Sb', GaSb,
-                       {
-                        '_bowing_Eg_Gamma' : 1.43, #eV    vurgaftman_band_2001
-                        '_bowing_Eg_X' : 1.2, #eV    vurgaftman_band_2001
-                        '_bowing_Eg_L' : 1.2, #eV    vurgaftman_band_2001
-                        '_bowing_Delta_SO' : 0.6, #eV    vurgaftman_band_2001
-                        '_bowing_VBO' : -1.06, #eV    vurgaftman_band_2001
-                        })
-InAsSb = create_ternary('InAsSb', 'As', InAs, 'Sb', InSb,
-                       {
-                        '_bowing_Eg_Gamma' : 0.67, #eV    vurgaftman_band_2001
-                        '_bowing_Eg_X' : 0.6, #eV    vurgaftman_band_2001
-                        '_bowing_Eg_L' : 0.6, #eV    vurgaftman_band_2001
-                        '_bowing_Delta_SO' : 1.2, #eV    vurgaftman_band_2001
-                        '_bowing_meff_e_Gamma' : 0.035, #m_e    vurgaftman_band_2001
-                        })
+class AlAsSb(Ternary):
+    name = 'AlAsSb'
+    element1 = 'As'
+    element2 = 'Sb'
+    binary1 = AlAs
+    binary2 = AlSb
+    _bowing_Eg_Gamma = 0.8 #eV    vurgaftman_band_2001
+    _bowing_Eg_X = 0.28 #eV    vurgaftman_band_2001
+    _bowing_Eg_L = 0.28 #eV    vurgaftman_band_2001
+    _bowing_Delta_SO = 0.15 #eV    vurgaftman_band_2001
+    _bowing_VBO = -1.71 #eV    vurgaftman_band_2001
+
+class GaAsSb(Ternary):
+    name = 'GaAsSb'
+    element1 = 'As'
+    element2 = 'Sb'
+    binary1 = GaAs
+    binary2 = GaSb
+    _bowing_Eg_Gamma = 1.43 #eV    vurgaftman_band_2001
+    _bowing_Eg_X = 1.2 #eV    vurgaftman_band_2001
+    _bowing_Eg_L = 1.2 #eV    vurgaftman_band_2001
+    _bowing_Delta_SO = 0.6 #eV    vurgaftman_band_2001
+    _bowing_VBO = -1.06 #eV    vurgaftman_band_2001
+
+class InAsSb(Ternary):
+    name = 'InAsSb'
+    element1 = 'As'
+    element2 = 'Sb'
+    binary1 = InAs
+    binary2 = InSb
+    _bowing_Eg_Gamma = 0.67 #eV    vurgaftman_band_2001
+    _bowing_Eg_X = 0.6 #eV    vurgaftman_band_2001
+    _bowing_Eg_L = 0.6 #eV    vurgaftman_band_2001
+    _bowing_Delta_SO = 1.2 #eV    vurgaftman_band_2001
+    _bowing_meff_e_Gamma = 0.035 #m_e    vurgaftman_band_2001
 
 AlSbAs = create_reversed_ternary('AlSbAs', AlAsSb)
 GaSbAs = create_reversed_ternary('GaSbAs', GaAsSb)

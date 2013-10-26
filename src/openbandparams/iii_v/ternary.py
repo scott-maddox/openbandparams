@@ -99,8 +99,8 @@ class Ternary(AlloyBase):
             return self._interpolate('a', T=T)
         else:
             x = cls._get_x(kwargs)
-            T = self._get_T(kwargs)
-            return self._interpolate('a', x=x, T=T)
+            T = cls._get_T(kwargs)
+            return cls._interpolate('a', x=x, T=T)
             
     
     @classinstancemethod
@@ -114,8 +114,8 @@ class Ternary(AlloyBase):
             return self._interpolate('Eg_Gamma', T=T)
         else:
             x = cls._get_x(kwargs)
-            T = self._get_T(kwargs)
-            return self._interpolate('Eg_Gamma', x=x, T=T)
+            T = cls._get_T(kwargs)
+            return cls._interpolate('Eg_Gamma', x=x, T=T)
     
     @classinstancemethod
     def Eg_X(self, cls, **kwargs):
@@ -128,8 +128,8 @@ class Ternary(AlloyBase):
             return self._interpolate('Eg_X', T=T)
         else:
             x = cls._get_x(kwargs)
-            T = self._get_T(kwargs)
-            return self._interpolate('Eg_X', x=x, T=T)
+            T = cls._get_T(kwargs)
+            return cls._interpolate('Eg_X', x=x, T=T)
     
     @classinstancemethod
     def Eg_L(self, cls, **kwargs):
@@ -142,8 +142,8 @@ class Ternary(AlloyBase):
             return self._interpolate('Eg_L', T=T)
         else:
             x = cls._get_x(kwargs)
-            T = self._get_T(kwargs)
-            return self._interpolate('Eg_L', x=x, T=T)
+            T = cls._get_T(kwargs)
+            return cls._interpolate('Eg_L', x=x, T=T)
     
     @classinstancemethod
     def Eg(self, cls, **kwargs):
@@ -156,9 +156,9 @@ class Ternary(AlloyBase):
             return min(self.Eg_Gamma(T=T), self.Eg_X(T=T), self.Eg_L(T=T))
         else:
             x = cls._get_x(kwargs)
-            T = self._get_T(kwargs)
-            return min(self.Eg_Gamma(x=x, T=T), self.Eg_X(x=x, T=T),
-                       self.Eg_L(x=x, T=T))
+            T = cls._get_T(kwargs)
+            return min(cls.Eg_Gamma(x=x, T=T), cls.Eg_X(x=x, T=T),
+                       cls.Eg_L(x=x, T=T))
 
 class ReversedTernary(Ternary):
     def __init__(self, x=None, **kwargs):
