@@ -25,23 +25,29 @@ import logging; log = logging.getLogger(__name__)
 
 # local imports
 from openbandparams.base_material import AlloyBase
+from openbandparams.utils import classinstancemethod
 
 class Ternary(AlloyBase):
-    def __init__(self, x=None, **kwargs):
+    def __init__(self, **kwargs):
         AlloyBase.__init__(self)
-        if x is not None:
-            self._x = float(x)
-        elif self.element1 in kwargs:
-            self._x = float(kwargs[self.element1])
-        elif self.element2 in kwargs:
-            self._x = (1 - float(kwargs[self.element2]))
-        else:
-            raise TypeError("Missing required key word argument."
-                            "'x', '%s', or '%s' is needed."%(self.element1,
-                                                             self.element2))
+        self._x = self._get_x(kwargs)
         self._init() # initialize any values that depend on self._x
     
-    def _init(self):
+    @classmethod
+    def _get_x(cls, kwargs):
+        if 'x' in kwargs:
+            return float(kwargs['x'])
+        elif cls.element1 in kwargs:
+            return float(kwargs[cls.element1])
+        elif cls.element2 in kwargs:
+            return 1 - float(kwargs[cls.element2])
+        else:
+            raise TypeError("Missing required key word argument."
+                            "'x', '%s', or '%s' is needed."%(cls.element1,
+                                                             cls.element2))
+    
+    @classinstancemethod
+    def _init(self, cls):
         '''
         Initializes any values that depend on `self._x`, the alloy fraction.
         
@@ -54,16 +60,22 @@ class Ternary(AlloyBase):
                            { '_init' : AlGaAs_init })
         '''
         pass
-    def _interpolate(self, param, **kwargs):
+    
+    @classinstancemethod
+    def _interpolate(self, cls, param, **kwargs):
+        if self is not None:
+            x = self._x
+        else:
+            x = cls._get_x(kwargs)
+            
         vals = []
-        for b in [self.binary1, self.binary2]:
+        for b in [cls.binary1, cls.binary2]:
             try:
                 vals.append(getattr(b, param))
             except AttributeError as e:
                 e.message +='. Binary `%s`'%b.name
                 e.message +=' missing param `%s`'%param
                 raise e
-        x = self._x
         if kwargs is None:
             A = vals[0]
             B = vals[1]
@@ -76,41 +88,77 @@ class Ternary(AlloyBase):
         else:
             return A*x + B*(1-x)
     
-    def a(self, **kwargs):
+    @classinstancemethod
+    def a(self, cls, **kwargs):
         '''
         Returns the lattice parameter, a, in Angstroms at a given
         temperature, T, in Kelvin (default: 300 K)
         '''
-        T = self._get_T(kwargs)
-        return self._interpolate('a', T=T)
-    def Eg_Gamma(self, **kwargs):
+        if self is not None:
+            T = self._get_T(kwargs)
+            return self._interpolate('a', T=T)
+        else:
+            x = cls._get_x(kwargs)
+            T = cls._get_T(kwargs)
+            return cls._interpolate('a', x=x, T=T)
+            
+    
+    @classinstancemethod
+    def Eg_Gamma(self, cls, **kwargs):
         '''
         Returns the Gamma-valley bandgap, Eg_Gamma, in electron Volts at a given
         temperature, T, in Kelvin (default: 300 K)
         '''
-        T = self._get_T(kwargs)
-        return self._interpolate('Eg_Gamma', T=T)
-    def Eg_X(self, **kwargs):
+        if self is not None:
+            T = self._get_T(kwargs)
+            return self._interpolate('Eg_Gamma', T=T)
+        else:
+            x = cls._get_x(kwargs)
+            T = cls._get_T(kwargs)
+            return cls._interpolate('Eg_Gamma', x=x, T=T)
+    
+    @classinstancemethod
+    def Eg_X(self, cls, **kwargs):
         '''
         Returns the X-valley bandgap, Eg_X, in electron Volts at a given
         temperature, T, in Kelvin (default: 300 K)
         '''
-        T = self._get_T(kwargs)
-        return self._interpolate('Eg_X', T=T)
-    def Eg_L(self, **kwargs):
+        if self is not None:
+            T = self._get_T(kwargs)
+            return self._interpolate('Eg_X', T=T)
+        else:
+            x = cls._get_x(kwargs)
+            T = cls._get_T(kwargs)
+            return cls._interpolate('Eg_X', x=x, T=T)
+    
+    @classinstancemethod
+    def Eg_L(self, cls, **kwargs):
         '''
         Returns the L-valley bandgap, Eg_L, in electron Volts at a given
         temperature, T, in Kelvin (default: 300 K)
         '''
-        T = self._get_T(kwargs)
-        return self._interpolate('Eg_L', T=T)
-    def Eg(self, **kwargs):
+        if self is not None:
+            T = self._get_T(kwargs)
+            return self._interpolate('Eg_L', T=T)
+        else:
+            x = cls._get_x(kwargs)
+            T = cls._get_T(kwargs)
+            return cls._interpolate('Eg_L', x=x, T=T)
+    
+    @classinstancemethod
+    def Eg(self, cls, **kwargs):
         '''
         Returns the bandgap, Eg, in electron Volts at a given
         temperature, T, in Kelvin (default: 300 K)
         '''
-        T = self._get_T(kwargs)
-        return min(self.Eg_Gamma(T=T), self.Eg_X(T=T), self.Eg_L(T=T))
+        if self is not None:
+            T = self._get_T(kwargs)
+            return min(self.Eg_Gamma(T=T), self.Eg_X(T=T), self.Eg_L(T=T))
+        else:
+            x = cls._get_x(kwargs)
+            T = cls._get_T(kwargs)
+            return min(cls.Eg_Gamma(x=x, T=T), cls.Eg_X(x=x, T=T),
+                       cls.Eg_L(x=x, T=T))
 
 class ReversedTernary(Ternary):
     def __init__(self, x=None, **kwargs):

@@ -61,7 +61,7 @@ for tern in [AlGaP,  AlInP,  GaInP,
              AlPSb,  GaPSb,  InPSb,
              AlAsSb, GaAsSb, InAsSb]:
     for i, f in zip(indices, fractions):
-        instance = tern(f)
+        instance = tern(x=f)
         x[i] = instance.a(T=T)
         y[i] = instance.Eg(T=T)
     ax.plot(x, y)

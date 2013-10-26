@@ -20,7 +20,6 @@
 
 # std lib imports
 import logging; log = logging.getLogger(__name__)
-from math import tanh
 
 # third party imports
 

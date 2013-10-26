@@ -25,9 +25,9 @@ from openbandparams.iii_v.zinc_blende.ternary import AlGaAs as alloy
 # calculate the data
 xs = numpy.linspace(0, 1, 100)
 T = 0 #K
-gamma = [alloy(x).Eg_Gamma(T=T) for x in xs]
-X = [alloy(x).Eg_X(T=T) for x in xs]
-L = [alloy(x).Eg_L(T=T) for x in xs]
+gamma = [alloy.Eg_Gamma(x=x, T=T) for x in xs]
+X = [alloy.Eg_X(x=x, T=T) for x in xs]
+L = [alloy.Eg_L(x=x, T=T) for x in xs]
 
 # plot it
 fig = plt.figure()

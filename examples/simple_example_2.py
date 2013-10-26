@@ -38,6 +38,10 @@ print '`AlGaAs(x=0.3).Eg()`: %.3f eV'%AlGaAs(x=0.3).Eg()
 print '`GaAlAs(x=0.7).Eg()`: %.3f eV'%GaAlAs(x=0.7).Eg()
 print ''
 
+print 'Alternate classmethod form:'
+print '`AlGaAs.Eg(Al=0.3, T=300)`: %.3f eV'%AlGaAs.Eg(Al=0.3, T=300)
+print ''
+
 print ('This is the preferred usage (more efficient),'
        'if you want multiple parameters from one alloy composition:')
 myInGaAs = InGaAs(x=0.2)
