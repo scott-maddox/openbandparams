@@ -32,8 +32,8 @@ class classinstancemethod(object):
     """
     Acts like a class method when called from a class, like an
     instance method when called by an instance.  The method should
-    take two arguments, 'self' and 'cls'; one of these will be None
-    depending on how the method was called.
+    take two arguments, 'self' and 'cls'. 'self' will be None
+    if the method was called as a static or class method.
     """
 
     def __init__(self, func):
