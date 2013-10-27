@@ -27,6 +27,14 @@ openbandparams.equations module
     :undoc-members:
     :show-inheritance:
 
+openbandparams.utils module
+---------------------------
+
+.. automodule:: openbandparams.utils
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 openbandparams.version module
 -----------------------------
 
