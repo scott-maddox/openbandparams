@@ -153,7 +153,7 @@ class ReversedTernary(Ternary):
         self.reversed_ternary_inst = self.reversed_ternary(1 - self._x)
 
 def create_reversed_ternary(name, reversed_ternary):
-    new_type= type(name, (Ternary,), {})
+    new_type = type(name, (Ternary,), {})
     new_type.name = name
     new_type.reversed_ternary = reversed_ternary
     new_type.element1 = reversed_ternary.element2

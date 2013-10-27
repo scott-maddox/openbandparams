@@ -19,9 +19,6 @@
 ################################################################################
 
 from openbandparams.iii_v.zinc_blende.binary import *
-
-# Print a hardcoded parameter (API subject to change)
-print 'InAs electron effective mass in Gamma-valley:  %.3f eV'%InAs._meff_e_Gamma
 print ''
 
 # Print an unformatted temperature dependent parameters
@@ -35,6 +32,10 @@ print 'GaAs X-valley gap (at T = 300 K):  %.3f eV'%GaAs.Eg_X()
 print 'GaAs bandgap (at T = 0 K):  %.3f eV'%GaAs.Eg(T=0)
 print 'InAs bandgap (at T = 300 K):  %.3f eV'%InAs.Eg()
 print ''
+
+# Print a temperature dependent parameter
+print ('InAs electron effective mass in'
+       ' the Gamma-valley:  %.3f eV'%InAs.meff_e_Gamma())
 
 # Print a table of material lattice parameters and bandgaps
 import string

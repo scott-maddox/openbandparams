@@ -34,7 +34,7 @@ from openbandparams.iii_v.zinc_blende.binary import (AlN,  GaN,  InN,
 # An instance of the class must be created, and the alloy fraction passed in,
 # before it can be used. See `simple_example_2.py` for examples.
 
-# Nitrides            {
+# Nitrides
 class AlGaN(Ternary):
     name = 'AlGaN'
     element1 = 'Al'
