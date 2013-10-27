@@ -27,10 +27,30 @@ import logging; log = logging.getLogger(__name__)
 from openbandparams.base_material import AlloyBase
 from openbandparams.utils import classinstancemethod
 
+class TernaryType(type):
+    def __getattr__(self, name):
+        # acts like a class method for the Ternary class
+        if hasattr(self.binary1, name) and hasattr(self.binary2, name):
+            def _param_accessor(**kwargs):
+                return self._interpolate(name, **kwargs)
+            return _param_accessor
+        else:
+            raise AttributeError(name)
+
 class Ternary(AlloyBase):
+    __metaclass__ = TernaryType
+    
     def __init__(self, **kwargs):
         AlloyBase.__init__(self)
         self._x = self._get_x(kwargs)
+
+    def __getattr__(self, name):
+        if hasattr(self.binary1, name) and hasattr(self.binary2, name):
+            def _param_accessor(**kwargs):
+                return self._interpolate(name, **kwargs)
+            return _param_accessor
+        else:
+            raise AttributeError(name)
     
     @classmethod
     def _get_x(cls, kwargs):
@@ -44,6 +64,20 @@ class Ternary(AlloyBase):
             raise TypeError("Missing required key word argument."
                             "'x', '%s', or '%s' is needed."%(cls.element1,
                                                              cls.element2))
+    
+    @classmethod
+    def _get_bowing(cls, param, x):
+        if hasattr(cls, '_bowing_%s'%param):
+            # a bowing parameter exists - use it
+            C = getattr(cls, '_bowing_%s'%param)
+            if callable(C):
+                # assume the bowing paramter is composition dependent
+                # if it's callable
+                return C(x)
+            else:
+                return C
+        else:
+            return None
     
     @classinstancemethod
     def _interpolate(self, cls, param, **kwargs):
@@ -60,83 +94,27 @@ class Ternary(AlloyBase):
                 e.message +='. Binary `%s`'%b.name
                 e.message +=' missing param `%s`'%param
                 raise e
-        if kwargs is None:
+        if param[0] == '_':
+            # assume it's a hard coded parameter if it starts with '_'
             A = vals[0]
             B = vals[1]
         else:
+            # otherwise it's an accessor function
             A = vals[0](**kwargs)
             B = vals[1](**kwargs)
-        if hasattr(cls, '_bowing_%s'%param):
-            C = getattr(cls, '_bowing_%s'%param)
-            if callable(C):
-                # composition dependent bowing paramter
-                C = C(x)
+        C = cls._get_bowing(param, x)
+        if C is not None:
+            # a bowing parameter exists - use it
             return A*x + B*(1-x) - C*x*(1-x)
         else:
+            # otherwise, use linear interpolation
             return A*x + B*(1-x)
-    
-    @classinstancemethod
-    def a(self, cls, **kwargs):
-        '''
-        Returns the lattice parameter, a, in Angstroms at a given
-        temperature, T, in Kelvin (default: 300 K)
-        '''
-        if self is not None:
-            T = self._get_T(kwargs)
-            return self._interpolate('a', T=T)
-        else:
-            x = cls._get_x(kwargs)
-            T = cls._get_T(kwargs)
-            return cls._interpolate('a', x=x, T=T)
-            
-    
-    @classinstancemethod
-    def Eg_Gamma(self, cls, **kwargs):
-        '''
-        Returns the Gamma-valley bandgap, Eg_Gamma, in electron Volts at a given
-        temperature, T, in Kelvin (default: 300 K)
-        '''
-        if self is not None:
-            T = self._get_T(kwargs)
-            return self._interpolate('Eg_Gamma', T=T)
-        else:
-            x = cls._get_x(kwargs)
-            T = cls._get_T(kwargs)
-            return cls._interpolate('Eg_Gamma', x=x, T=T)
-    
-    @classinstancemethod
-    def Eg_X(self, cls, **kwargs):
-        '''
-        Returns the X-valley bandgap, Eg_X, in electron Volts at a given
-        temperature, T, in Kelvin (default: 300 K)
-        '''
-        if self is not None:
-            T = self._get_T(kwargs)
-            return self._interpolate('Eg_X', T=T)
-        else:
-            x = cls._get_x(kwargs)
-            T = cls._get_T(kwargs)
-            return cls._interpolate('Eg_X', x=x, T=T)
-    
-    @classinstancemethod
-    def Eg_L(self, cls, **kwargs):
-        '''
-        Returns the L-valley bandgap, Eg_L, in electron Volts at a given
-        temperature, T, in Kelvin (default: 300 K)
-        '''
-        if self is not None:
-            T = self._get_T(kwargs)
-            return self._interpolate('Eg_L', T=T)
-        else:
-            x = cls._get_x(kwargs)
-            T = cls._get_T(kwargs)
-            return cls._interpolate('Eg_L', x=x, T=T)
     
     @classinstancemethod
     def Eg(self, cls, **kwargs):
         '''
         Returns the bandgap, Eg, in electron Volts at a given
-        temperature, T, in Kelvin (default: 300 K)
+        temperature, T, in Kelvin (default: 300 K).
         '''
         if self is not None:
             T = self._get_T(kwargs)
@@ -148,16 +126,26 @@ class Ternary(AlloyBase):
                        cls.Eg_L(x=x, T=T))
 
 class ReversedTernary(Ternary):
-    def __init__(self, x=None, **kwargs):
-        Ternary.__init__(self, x, **kwargs)
-        self.reversed_ternary_inst = self.reversed_ternary(1 - self._x)
+    @classmethod
+    def _get_bowing(cls, param, x):
+        if hasattr(cls._ternary, '_bowing_%s'%param):
+            # a bowing parameter exists - use it
+            C = getattr(cls._ternary, '_bowing_%s'%param)
+            if callable(C):
+                # assume the bowing paramter is composition dependent
+                # if it's callable
+                return C(1-x) # reverse the composition
+            else:
+                return C
+        else:
+            return None
 
-def create_reversed_ternary(name, reversed_ternary):
-    new_type= type(name, (Ternary,), {})
+def create_reversed_ternary(name, ternary):
+    new_type = type(name, (ReversedTernary,), {})
     new_type.name = name
-    new_type.reversed_ternary = reversed_ternary
-    new_type.element1 = reversed_ternary.element2
-    new_type.binary1 = reversed_ternary.binary2
-    new_type.element2 = reversed_ternary.element1
-    new_type.binary2 = reversed_ternary.binary1
+    new_type.element1 = ternary.element2
+    new_type.binary1 = ternary.binary2
+    new_type.element2 = ternary.element1
+    new_type.binary2 = ternary.binary1
+    new_type._ternary = ternary
     return new_type

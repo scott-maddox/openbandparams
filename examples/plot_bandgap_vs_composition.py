@@ -20,7 +20,9 @@
 
 import matplotlib.pyplot as plt
 import numpy
-from openbandparams.iii_v.zinc_blende.ternary import AlGaAs as alloy
+from openbandparams.iii_v.zinc_blende.ternary import *
+
+alloy = AlGaAs
 
 # calculate the data
 xs = numpy.linspace(0, 1, 100)

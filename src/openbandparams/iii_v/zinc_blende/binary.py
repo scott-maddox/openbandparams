@@ -188,13 +188,14 @@ class GaP(Binary):
     _c_44 = 703.3 #GPa    vurgaftman_band_2001
 
     @classmethod
-    def Eg_Gamma(cls, T=300):
+    def Eg_Gamma(cls, **kwargs):
         '''
         Returns the Gamma-valley bandgap, Eg_Gamma, in electron Volts at a
         given temperature, T, in Kelvin (default: 300 K).
 
         GaP has a unique Gamma-gap temperature dependence.
         '''
+        T = cls._get_T(kwargs)
         # vurgaftman_band_2001
         return cls._Eg_Gamma_0+0.1081*(1-1./tanh(164./T)) #eV
 
@@ -269,7 +270,7 @@ class GaAs(Binary):
     _a_300K = 5.65325 #Ang    vurgaftman_band_2001
     _da_dT = 0.0000388 #Ang/K    vurgaftman_band_2001
     _Eg_Gamma_0 = 1.519 #eV    vurgaftman_band_2001
-    _alpha_Gamma = 0.000541 #eV/K    vurgaftman_band_2001
+    _alpha_Gamma = 0.0005405 #eV/K    vurgaftman_band_2001
     _beta_Gamma = 204 #K    vurgaftman_band_2001
     _Eg_X_0 = 1.981 #eV    vurgaftman_band_2001
     _alpha_X = 0.00046 #eV/K    vurgaftman_band_2001

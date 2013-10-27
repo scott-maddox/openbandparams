@@ -33,9 +33,11 @@ print '>>> GaAlAs.Eg(Al=0.7)\n', GaAlAs.Eg(Al=0.7)
 print '>>> GaAlAs.Eg(Ga=0.3)\n', GaAlAs.Eg(Ga=0.3)
 print ''
 
-print '# These two are identical:'
-print '>>> AlGaAs.Eg(x=0.3)\n', AlGaAs.Eg(x=0.3)
-print '>>> GaAlAs.Eg(x=0.7)\n', GaAlAs.Eg(x=0.7)
+print '# These four are identical:'
+print '>>> AlGaAs.Eg(x=0.3)\n', AlGaAs.Eg_Gamma(x=0.3)
+print '>>> AlGaAs(x=0.3).Eg_Gamma()\n', AlGaAs(x=0.3).Eg_Gamma()
+print '>>> GaAlAs.Eg_Gamma(x=0.7)\n', GaAlAs.Eg_Gamma(x=0.7)
+print '>>> GaAlAs(x=0.7).Eg_Gamma()\n', GaAlAs(x=0.7).Eg_Gamma()
 print ''
 
 print 'Alternate forms:'
