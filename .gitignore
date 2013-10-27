@@ -15,6 +15,9 @@ dist/
 build/
 doc/_build/
 
+# setup.py generated files
+*.egg-info
+
 # packages
 *.7z
 *.dmg
@@ -24,6 +27,9 @@ doc/_build/
 *.rar
 *.tar
 *.zip
+
+# Aptana generated files
+.settings/
 
 # OS generated files
 .DS_Store

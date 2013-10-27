@@ -1,20 +1,20 @@
 #
 #   Copyright (c) 2013, Scott J Maddox
 #
-#   This file is part of OpenBandParams.
+#   This file is part of openbandparams.
 #
-#   OpenBandParams is free software: you can redistribute it and/or modify
-#   it under the terms of the GNU Affero General Public License as published by
-#   the Free Software Foundation, either version 3 of the License, or
+#   openbandparams is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU Affero General Public License as published
+#   by the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
 #
-#   PhotonAcq is distributed in the hope that it will be useful,
+#   openbandparams is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU Affero General Public License for more details.
 #
 #   You should have received a copy of the GNU Affero General Public License
-#   along with PhotonAcq.  If not, see <http://www.gnu.org/licenses/>.
+#   along with openbandparams.  If not, see <http://www.gnu.org/licenses/>.
 #
 ################################################################################
 
@@ -26,7 +26,16 @@ import logging; log = logging.getLogger(__name__)
 # local imports
 
 class Base(object):
-    pass
+    @classmethod
+    def _get_T(cls, kwargs):
+        '''
+        Returns kwargs['T'], kwargs['temp'], kwargs['temperature'], or 300.
+        '''
+        for k in ['T', 'temp', 'temperature']:
+            if k in kwargs:
+                return kwargs[k]
+        else:
+            return 300 # K
 
-class AlloyBase(object):
+class AlloyBase(Base):
     pass

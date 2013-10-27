@@ -1,3 +1,23 @@
+#
+#   Copyright (c) 2013, Scott J Maddox
+#
+#   This file is part of openbandparams.
+#
+#   openbandparams is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU Affero General Public License as published
+#   by the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#
+#   openbandparams is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU Affero General Public License for more details.
+#
+#   You should have received a copy of the GNU Affero General Public License
+#   along with openbandparams.  If not, see <http://www.gnu.org/licenses/>.
+#
+################################################################################
+
 import matplotlib.pyplot as plt
 import numpy
 
@@ -17,8 +37,8 @@ label = []
 for b in [AlP, GaP, InP,
           AlAs, GaAs, InAs,
           AlSb, GaSb, InSb]:
-    x.append(b.a(T))
-    y.append(b.Eg(T))
+    x.append(b.a(T=T))
+    y.append(b.Eg(T=T))
     label.append(b.name)
 ax.plot(x, y, 'k.')
 
@@ -41,9 +61,9 @@ for tern in [AlGaP,  AlInP,  GaInP,
              AlPSb,  GaPSb,  InPSb,
              AlAsSb, GaAsSb, InAsSb]:
     for i, f in zip(indices, fractions):
-        instance = tern(f)
-        x[i] = instance.a(T)
-        y[i] = instance.Eg(T)
+        instance = tern(x=f)
+        x[i] = instance.a(T=T)
+        y[i] = instance.Eg(T=T)
     ax.plot(x, y)
 
 plt.show()
