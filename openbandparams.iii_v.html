@@ -107,6 +107,12 @@
 <em class="property">class </em><tt class="descclassname">openbandparams.iii_v.binary.</tt><tt class="descname">Binary</tt><a class="reference internal" href="_modules/openbandparams/iii_v/binary.html#Binary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v.binary.Binary" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="openbandparams.html#openbandparams.base_material.Base" title="openbandparams.base_material.Base"><tt class="xref py py-class docutils literal"><span class="pre">openbandparams.base_material.Base</span></tt></a></p>
 <dl class="classmethod">
+<dt id="openbandparams.iii_v.binary.Binary.Delta_SO">
+<em class="property">classmethod </em><tt class="descname">Delta_SO</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.Delta_SO" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the split-off energy, Delta_SO, in electron Volts.</p>
+</dd></dl>
+
+<dl class="classmethod">
 <dt id="openbandparams.iii_v.binary.Binary.Eg">
 <em class="property">classmethod </em><tt class="descname">Eg</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/openbandparams/iii_v/binary.html#Binary.Eg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.Eg" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the bandgap, Eg, in electron Volts at a given
@@ -121,10 +127,24 @@ given temperature, T, in Kelvin (default: 300 K).</p>
 </dd></dl>
 
 <dl class="classmethod">
+<dt id="openbandparams.iii_v.binary.Binary.Eg_Gamma_0">
+<em class="property">classmethod </em><tt class="descname">Eg_Gamma_0</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.Eg_Gamma_0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the Gamma-valley bandgap, Eg_Gamma, in electron Volts
+at 0 K.</p>
+</dd></dl>
+
+<dl class="classmethod">
 <dt id="openbandparams.iii_v.binary.Binary.Eg_L">
 <em class="property">classmethod </em><tt class="descname">Eg_L</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/openbandparams/iii_v/binary.html#Binary.Eg_L"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.Eg_L" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the L-valley bandgap, Eg_L, in electron Volts at a given
 temperature, T, in Kelvin (default: 300 K).</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.binary.Binary.Eg_L_0">
+<em class="property">classmethod </em><tt class="descname">Eg_L_0</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.Eg_L_0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the L-valley bandgap, Eg_L, in electron Volts
+at 0 K.</p>
 </dd></dl>
 
 <dl class="classmethod">
@@ -135,10 +155,209 @@ temperature, T, in Kelvin (default: 300 K).</p>
 </dd></dl>
 
 <dl class="classmethod">
+<dt id="openbandparams.iii_v.binary.Binary.Eg_X_0">
+<em class="property">classmethod </em><tt class="descname">Eg_X_0</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.Eg_X_0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the X-valley bandgap, Eg_X, in electron Volts
+at 0 K.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.binary.Binary.Ep">
+<em class="property">classmethod </em><tt class="descname">Ep</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.Ep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the Ep matrix element, in electron Volts.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.binary.Binary.F">
+<em class="property">classmethod </em><tt class="descname">F</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.F" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the F Kane parameter (unitless).</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.binary.Binary.Luttinger1">
+<em class="property">classmethod </em><tt class="descname">Luttinger1</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.Luttinger1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the first Luttinger parameter (unitless).</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.binary.Binary.Luttinger2">
+<em class="property">classmethod </em><tt class="descname">Luttinger2</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.Luttinger2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the second Luttinger parameter (unitless).</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.binary.Binary.Luttinger3">
+<em class="property">classmethod </em><tt class="descname">Luttinger3</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.Luttinger3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the second Luttinger parameter (unitless).</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.binary.Binary.VBO">
+<em class="property">classmethod </em><tt class="descname">VBO</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.VBO" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the valance band offset energy, VBO, in electron Volts
+relative to the InSb valance band maximum.</p>
+</dd></dl>
+
+<dl class="classmethod">
 <dt id="openbandparams.iii_v.binary.Binary.a">
 <em class="property">classmethod </em><tt class="descname">a</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/openbandparams/iii_v/binary.html#Binary.a"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.a" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the lattice parameter, a, in Angstroms at a given
 temperature, T, in Kelvin (default: 300 K).</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.binary.Binary.a_300K">
+<em class="property">classmethod </em><tt class="descname">a_300K</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.a_300K" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the lattice parameter, a, in Angstroms at 300 K.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.binary.Binary.a_c">
+<em class="property">classmethod </em><tt class="descname">a_c</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.a_c" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the conduction band deformation potential, a_c, in
+electron Volts.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.binary.Binary.a_v">
+<em class="property">classmethod </em><tt class="descname">a_v</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.a_v" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the valance band deformation potential, a_v, in
+electron Volts.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.binary.Binary.alpha_Gamma">
+<em class="property">classmethod </em><tt class="descname">alpha_Gamma</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.alpha_Gamma" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the Gamma-valley alpha Varshni parameter, alpha_Gamma, in
+electron Volts per Kelvin.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.binary.Binary.alpha_L">
+<em class="property">classmethod </em><tt class="descname">alpha_L</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.alpha_L" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the L-valley alpha Varshni parameter, alpha_L, in
+electron Volts per Kelvin.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.binary.Binary.alpha_X">
+<em class="property">classmethod </em><tt class="descname">alpha_X</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.alpha_X" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the X-valley alpha Varshni parameter, alpha_X, in
+electron Volts per Kelvin.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.binary.Binary.b">
+<em class="property">classmethod </em><tt class="descname">b</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.b" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the b shear deformation potential, in electron Volts.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.binary.Binary.beta_Gamma">
+<em class="property">classmethod </em><tt class="descname">beta_Gamma</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.beta_Gamma" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the Gamma-valley beta Varshni parameter, beta_Gamma, in
+Kelvin.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.binary.Binary.beta_L">
+<em class="property">classmethod </em><tt class="descname">beta_L</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.beta_L" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the L-valley beta Varshni parameter, beta_L, in
+Kelvin.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.binary.Binary.beta_X">
+<em class="property">classmethod </em><tt class="descname">beta_X</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.beta_X" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the X-valley beta Varshni parameter, beta_X, in
+Kelvin.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.binary.Binary.c_11">
+<em class="property">classmethod </em><tt class="descname">c_11</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.c_11" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the c_11 elastic constant, in gigapascals.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.binary.Binary.c_12">
+<em class="property">classmethod </em><tt class="descname">c_12</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.c_12" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the c_12 elastic constant, in gigapascals.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.binary.Binary.c_44">
+<em class="property">classmethod </em><tt class="descname">c_44</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.c_44" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the c_44 elastic constant, in gigapascals.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.binary.Binary.d">
+<em class="property">classmethod </em><tt class="descname">d</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the d shear deformation potential, in electron Volts.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.binary.Binary.da_dT">
+<em class="property">classmethod </em><tt class="descname">da_dT</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.da_dT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the thermal expansion coefficient, da_dT, of the lattice
+parameter, a, in Angstroms per Kelvin.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.binary.Binary.meff_SO">
+<em class="property">classmethod </em><tt class="descname">meff_SO</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.meff_SO" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the split-off band hole effective mass, meff_SO, in units
+of electron mass.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.binary.Binary.meff_e_Gamma">
+<em class="property">classmethod </em><tt class="descname">meff_e_Gamma</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.meff_e_Gamma" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the Gamma-valley electron effective mass, meff_e_Gamma,
+in units of electron mass.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.binary.Binary.meff_e_L_DOS">
+<em class="property">classmethod </em><tt class="descname">meff_e_L_DOS</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.meff_e_L_DOS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the L-valley electron density of states effective mass,
+meff_e_L_DOS, in units of electron mass.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.binary.Binary.meff_e_L_long">
+<em class="property">classmethod </em><tt class="descname">meff_e_L_long</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.meff_e_L_long" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the L-valley electron effective mass in the longitudinal
+direction, meff_e_L_long, in units of electron mass.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.binary.Binary.meff_e_L_trans">
+<em class="property">classmethod </em><tt class="descname">meff_e_L_trans</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.meff_e_L_trans" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the L-valley electron effective mass in the transverse
+direction, meff_e_L_trans, in units of electron mass.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.binary.Binary.meff_e_X_DOS">
+<em class="property">classmethod </em><tt class="descname">meff_e_X_DOS</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.meff_e_X_DOS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the X-valley electron density of states effective mass,
+meff_e_X_DOS, in units of electron mass.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.binary.Binary.meff_e_X_long">
+<em class="property">classmethod </em><tt class="descname">meff_e_X_long</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.meff_e_X_long" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the X-valley electron effective mass in the longitudinal
+direction, meff_e_X_long, in units of electron mass.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.binary.Binary.meff_e_X_trans">
+<em class="property">classmethod </em><tt class="descname">meff_e_X_trans</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.binary.Binary.meff_e_X_trans" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the X-valley electron effective mass in the transverse
+direction, meff_e_X_trans, in units of electron mass.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -153,7 +372,7 @@ temperature, T, in Kelvin (default: 300 K).</p>
 <span id="openbandparams-iii-v-ternary-module"></span><h2>openbandparams.iii_v.ternary module<a class="headerlink" href="#module-openbandparams.iii_v.ternary" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="openbandparams.iii_v.ternary.ReversedTernary">
-<em class="property">class </em><tt class="descclassname">openbandparams.iii_v.ternary.</tt><tt class="descname">ReversedTernary</tt><big>(</big><em>x=None</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/openbandparams/iii_v/ternary.html#ReversedTernary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v.ternary.ReversedTernary" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">openbandparams.iii_v.ternary.</tt><tt class="descname">ReversedTernary</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/openbandparams/iii_v/ternary.html#ReversedTernary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v.ternary.ReversedTernary" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#openbandparams.iii_v.ternary.Ternary" title="openbandparams.iii_v.ternary.Ternary"><tt class="xref py py-class docutils literal"><span class="pre">openbandparams.iii_v.ternary.Ternary</span></tt></a></p>
 </dd></dl>
 
@@ -166,31 +385,17 @@ temperature, T, in Kelvin (default: 300 K).</p>
 <tt class="descname">Eg</tt><em class="property"> = &lt;bound class method Ternary.Eg&gt;</em><a class="reference internal" href="_modules/openbandparams/iii_v/ternary.html#Ternary.Eg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v.ternary.Ternary.Eg" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="openbandparams.iii_v.ternary.Ternary.Eg_Gamma">
-<tt class="descname">Eg_Gamma</tt><em class="property"> = &lt;bound class method Ternary.Eg_Gamma&gt;</em><a class="reference internal" href="_modules/openbandparams/iii_v/ternary.html#Ternary.Eg_Gamma"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v.ternary.Ternary.Eg_Gamma" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+</dd></dl>
 
-<dl class="attribute">
-<dt id="openbandparams.iii_v.ternary.Ternary.Eg_L">
-<tt class="descname">Eg_L</tt><em class="property"> = &lt;bound class method Ternary.Eg_L&gt;</em><a class="reference internal" href="_modules/openbandparams/iii_v/ternary.html#Ternary.Eg_L"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v.ternary.Ternary.Eg_L" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="openbandparams.iii_v.ternary.Ternary.Eg_X">
-<tt class="descname">Eg_X</tt><em class="property"> = &lt;bound class method Ternary.Eg_X&gt;</em><a class="reference internal" href="_modules/openbandparams/iii_v/ternary.html#Ternary.Eg_X"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v.ternary.Ternary.Eg_X" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="openbandparams.iii_v.ternary.Ternary.a">
-<tt class="descname">a</tt><em class="property"> = &lt;bound class method Ternary.a&gt;</em><a class="reference internal" href="_modules/openbandparams/iii_v/ternary.html#Ternary.a"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v.ternary.Ternary.a" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
+<dl class="class">
+<dt id="openbandparams.iii_v.ternary.TernaryType">
+<em class="property">class </em><tt class="descclassname">openbandparams.iii_v.ternary.</tt><tt class="descname">TernaryType</tt><a class="headerlink" href="#openbandparams.iii_v.ternary.TernaryType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">type</span></tt></p>
 </dd></dl>
 
 <dl class="function">
 <dt id="openbandparams.iii_v.ternary.create_reversed_ternary">
-<tt class="descclassname">openbandparams.iii_v.ternary.</tt><tt class="descname">create_reversed_ternary</tt><big>(</big><em>name</em>, <em>reversed_ternary</em><big>)</big><a class="reference internal" href="_modules/openbandparams/iii_v/ternary.html#create_reversed_ternary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v.ternary.create_reversed_ternary" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">openbandparams.iii_v.ternary.</tt><tt class="descname">create_reversed_ternary</tt><big>(</big><em>name</em>, <em>ternary</em><big>)</big><a class="reference internal" href="_modules/openbandparams/iii_v/ternary.html#create_reversed_ternary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v.ternary.create_reversed_ternary" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </div>
