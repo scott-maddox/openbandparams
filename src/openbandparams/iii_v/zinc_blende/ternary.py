@@ -110,11 +110,10 @@ class AlGaAs(Ternary):
     binary1 = AlAs
     binary2 = GaAs
     _bowing_Eg_X = 0.055 #eV    vurgaftman_band_2001
-    def _init(self):
-        '''
-        AlGaAs's Eg_Gamma has an alloy dependent bowing parameter
-        '''
-        self._bowing_Eg_Gamma = 1.31*self._x - 0.127 #eV    vurgaftman_band_2001
+    
+    @classmethod
+    def _bowing_Eg_Gamma(cls, x):
+        return 1.31*x - 0.127 #eV    vurgaftman_band_2001
 
 class AlInAs(Ternary):
     name = 'AlInAs'
@@ -159,12 +158,11 @@ class AlGaSb(Ternary):
     element2 = 'Ga'
     binary1 = AlSb
     binary2 = GaSb
-    def _init(self):
-        '''
-        AlGaSb's Eg_Gamma has an alloy dependent bowing parameter
-        '''
-        self._bowing_Eg_Gamma = 1.22*self._x - 0.044 #eV    vurgaftman_band_2001
     _bowing_Delta_SO = 0.3 #eV    vurgaftman_band_2001
+    
+    @classmethod
+    def _bowing_Eg_Gamma(cls, x):
+        return 1.22*x - 0.044 #eV    vurgaftman_band_2001
 
 class AlInSb(Ternary):
     name = 'AlInSb'
@@ -236,8 +234,10 @@ class GaNAs(Ternary):
     element2 = 'As'
     binary1 = GaN
     binary2 = GaAs
-    def _init(self):
-        self._bowing_Eg_Gamma = 120.4 - 100*self._x #eV    vurgaftman_band_2001
+    
+    @classmethod
+    def _bowing_Eg_Gamma(cls, x):
+        return 120.4 - 100*x #eV    vurgaftman_band_2001
 
 class InNAs(Ternary):
     name = 'InNAs'

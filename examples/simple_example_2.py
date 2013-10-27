@@ -20,31 +20,33 @@
 
 from openbandparams.iii_v.zinc_blende.ternary import *
 
-print 'All three of these are identical:'
-print '`AlGaAs(x=0.3).Eg()`: %.3f eV'%AlGaAs(x=0.3).Eg()
-print '`AlGaAs(Al=0.3).Eg()`: %.3f eV'%AlGaAs(Al=0.3).Eg()
-print '`AlGaAs(Ga=0.7).Eg()`: %.3f eV'%AlGaAs(Ga=0.7).Eg()
+print '# All three of these are identical:'
+print '>>> AlGaAs.Eg(x=0.3)\n', AlGaAs.Eg(x=0.3)
+print '>>> AlGaAs.Eg(Al=0.3)\n', AlGaAs.Eg(Al=0.3)
+print '>>> AlGaAs.Eg(Ga=0.7)\n', AlGaAs.Eg(Ga=0.7)
 print ''
 
-print ('All three of these are identical, '
-       'but different than the previous three:')
-print '`GaAlAs(x=0.3).Eg()`: %.3f eV'%GaAlAs(x=0.3).Eg()
-print '`GaAlAs(Al=0.7).Eg()`: %.3f eV'%GaAlAs(Al=0.7).Eg()
-print '`GaAlAs(Ga=0.3).Eg()`: %.3f eV'%GaAlAs(Ga=0.3).Eg()
+print '# All three of these are identical, '
+print '# but different than the previous three:'
+print '>>> GaAlAs.Eg(x=0.3)\n', GaAlAs.Eg(x=0.3)
+print '>>> GaAlAs.Eg(Al=0.7)\n', GaAlAs.Eg(Al=0.7)
+print '>>> GaAlAs.Eg(Ga=0.3)\n', GaAlAs.Eg(Ga=0.3)
 print ''
 
-print 'These two are identical:'
-print '`AlGaAs(x=0.3).Eg()`: %.3f eV'%AlGaAs(x=0.3).Eg()
-print '`GaAlAs(x=0.7).Eg()`: %.3f eV'%GaAlAs(x=0.7).Eg()
+print '# These two are identical:'
+print '>>> AlGaAs.Eg(x=0.3)\n', AlGaAs.Eg(x=0.3)
+print '>>> GaAlAs.Eg(x=0.7)\n', GaAlAs.Eg(x=0.7)
 print ''
 
-print 'Alternate classmethod form:'
-print '`AlGaAs.Eg(Al=0.3, T=300)`: %.3f eV'%AlGaAs.Eg(Al=0.3, T=300)
+print 'Alternate forms:'
+print '>>> AlGaAs.Eg(x=0.3, T=300)\n', AlGaAs.Eg(x=0.3, T=300)
+print '>>> AlGaAs(x=0.3).Eg()\n', AlGaAs(x=0.3).Eg()
+print '>>> AlGaAs(x=0.3).Eg(T=300)\n', AlGaAs(x=0.3).Eg(T=300)
 print ''
 
 print ('This is the preferred usage (more efficient),'
        'if you want multiple parameters from one alloy composition:')
-myInGaAs = InGaAs(x=0.2)
-print '`myInGaAs = InGaAs(x=0.2)`'
-print '`myInGaAs.Eg_X()`: %.3f eV'%myInGaAs.Eg_X()
-print '`myInGaAs.Eg()`: %.3f eV'%myInGaAs.Eg()
+print '>>> myAlGaAs = AlGaAs(x=0.3)'
+myAlGaAs = AlGaAs(x=0.3)
+print '>>> myAlGaAs.Eg()\n', myAlGaAs.Eg()
+print '>>> myAlGaAs.Eg(T=300)\n', myAlGaAs.Eg(T=300)

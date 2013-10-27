@@ -31,7 +31,6 @@ class Ternary(AlloyBase):
     def __init__(self, **kwargs):
         AlloyBase.__init__(self)
         self._x = self._get_x(kwargs)
-        self._init() # initialize any values that depend on self._x
     
     @classmethod
     def _get_x(cls, kwargs):
@@ -45,21 +44,6 @@ class Ternary(AlloyBase):
             raise TypeError("Missing required key word argument."
                             "'x', '%s', or '%s' is needed."%(cls.element1,
                                                              cls.element2))
-    
-    @classinstancemethod
-    def _init(self, cls):
-        '''
-        Initializes any values that depend on `self._x`, the alloy fraction.
-        
-        Should be overidden when calling `create_ternary`, e.g.
-        
-            def AlGaAs_init(self):
-                """Defines AlGaAs params that depend on self._x"""
-                self._new_param = self._x * 3
-            create_ternary('AlGaAs', 'Al', AlAs, 'Ga', GaAs,
-                           { '_init' : AlGaAs_init })
-        '''
-        pass
     
     @classinstancemethod
     def _interpolate(self, cls, param, **kwargs):
@@ -82,8 +66,11 @@ class Ternary(AlloyBase):
         else:
             A = vals[0](**kwargs)
             B = vals[1](**kwargs)
-        if hasattr(self, '_bowing_%s'%param):
-            C = getattr(self, '_bowing_%s'%param)
+        if hasattr(cls, '_bowing_%s'%param):
+            C = getattr(cls, '_bowing_%s'%param)
+            if callable(C):
+                # composition dependent bowing paramter
+                C = C(x)
             return A*x + B*(1-x) - C*x*(1-x)
         else:
             return A*x + B*(1-x)
@@ -164,15 +151,6 @@ class ReversedTernary(Ternary):
     def __init__(self, x=None, **kwargs):
         Ternary.__init__(self, x, **kwargs)
         self.reversed_ternary_inst = self.reversed_ternary(1 - self._x)
-
-def create_ternary(name, element1, binary1, element2, binary2, params):
-    new_type= type(name, (Ternary,), params)
-    new_type.name = name
-    new_type.element1 = element1
-    new_type.binary1 = binary1
-    new_type.element2 = element2
-    new_type.binary2 = binary2
-    return new_type
 
 def create_reversed_ternary(name, reversed_ternary):
     new_type= type(name, (Ternary,), {})
