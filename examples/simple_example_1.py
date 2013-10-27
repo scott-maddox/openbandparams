@@ -36,6 +36,7 @@ print ''
 # Print a temperature dependent parameter
 print ('InAs electron effective mass in'
        ' the Gamma-valley:  %.3f eV'%InAs.meff_e_Gamma())
+print ''
 
 # Print a table of material lattice parameters and bandgaps
 import string
