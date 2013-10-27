@@ -50,6 +50,7 @@
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
 <li><a class="reference internal" href="#module-openbandparams.base_material">openbandparams.base_material module</a></li>
 <li><a class="reference internal" href="#module-openbandparams.equations">openbandparams.equations module</a></li>
+<li><a class="reference internal" href="#module-openbandparams.utils">openbandparams.utils module</a></li>
 <li><a class="reference internal" href="#module-openbandparams.version">openbandparams.version module</a></li>
 <li><a class="reference internal" href="#module-openbandparams">Module contents</a></li>
 </ul>
@@ -116,7 +117,7 @@
 <dl class="class">
 <dt id="openbandparams.base_material.AlloyBase">
 <em class="property">class </em><tt class="descclassname">openbandparams.base_material.</tt><tt class="descname">AlloyBase</tt><a class="reference internal" href="_modules/openbandparams/base_material.html#AlloyBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.base_material.AlloyBase" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dd><p>Bases: <a class="reference internal" href="#openbandparams.base_material.Base" title="openbandparams.base_material.Base"><tt class="xref py py-class docutils literal"><span class="pre">openbandparams.base_material.Base</span></tt></a></p>
 </dd></dl>
 
 <dl class="class">
@@ -132,6 +133,19 @@
 <dt id="openbandparams.equations.varshni">
 <tt class="descclassname">openbandparams.equations.</tt><tt class="descname">varshni</tt><big>(</big><em>Eg_0</em>, <em>alpha</em>, <em>beta</em>, <em>T</em><big>)</big><a class="reference internal" href="_modules/openbandparams/equations.html#varshni"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.equations.varshni" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+</div>
+<div class="section" id="module-openbandparams.utils">
+<span id="openbandparams-utils-module"></span><h2>openbandparams.utils module<a class="headerlink" href="#module-openbandparams.utils" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openbandparams.utils.classinstancemethod">
+<em class="property">class </em><tt class="descclassname">openbandparams.utils.</tt><tt class="descname">classinstancemethod</tt><big>(</big><em>func</em><big>)</big><a class="reference internal" href="_modules/openbandparams/utils.html#classinstancemethod"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.utils.classinstancemethod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Acts like a class method when called from a class, like an
+instance method when called by an instance.  The method should
+take two arguments, &#8216;self&#8217; and &#8216;cls&#8217;; one of these will be None
+depending on how the method was called.</p>
+</dd></dl>
 
 </div>
 <div class="section" id="module-openbandparams.version">
