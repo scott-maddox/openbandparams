@@ -28,10 +28,11 @@ from openbandparams.base_material import AlloyBase
 from openbandparams.utils import classinstancemethod
 
 class TernaryType(type):
-    def __getattr__(cls, name):
-        if hasattr(cls.binary1, name) and hasattr(cls.binary2, name):
+    def __getattr__(self, name):
+        # acts like a class method for the Ternary class
+        if hasattr(self.binary1, name) and hasattr(self.binary2, name):
             def _param_accessor(**kwargs):
-                return cls._interpolate(name, **kwargs)
+                return self._interpolate(name, **kwargs)
             return _param_accessor
         else:
             raise AttributeError(name)
