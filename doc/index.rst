@@ -6,11 +6,53 @@
 Welcome to openbandparams's documentation!
 ==========================================
 
-The main goal of this project is to provide easy access to semiconductor band parameters for calculations and simulations. Basic functionality should require only the standard python distribution. More advanced functions may require additional third-party packages, such as numpy or scipy.
+This is the first public release of openbandparams.
 
-Useful and relavent algorithms will also be provided for tasks such as interpolating the parameters for alloys, calculating the intrinsic carrier concentration, calculating the carrier concentration for a given Fermi energy, calculating the Fermi energy at a given carrier concentration, and so on. Since some of these calculations can be fairly involved, particularly if simplifying approximations are not made, ease of use must be balanced with speed of execution. In those cases where ease of use is poor, several examples for usage will be provided.
+The main goal of this project is to provide easy access to semiconductor band parameters for calculations and simulations. Basic functionality requires only the standard python distribution.
 
-Example scripts will also be provided for generating common plots such as bandgap vs. lattice constant, band alignments vs. lattice constant, conduction band minima vs. alloy composition, and so on.
+Example scripts are provided for basic usage and for generating common plots such as bandgap vs. lattice constant, bandgap vs. alloy composition.
+
+Included parameters:
+    - lattice constant
+    - thermal expansion coefficient
+    - bandgap energies (direct and indirect)
+    - Varshni parameters
+    - split-off energies
+    - effective masses
+    - Luttinger parameters
+    - Kane parameters (Ep and F)
+    - Valance band offsets
+    - band deformation potentials
+    - elastic constant
+    - alloy bowing parameters
+
+Included materials:
+    - III-V's
+        - Zinc Blendes
+            - Binaries
+                - AlN, GaN, InN,
+                  AlP, GaP, InP,
+                  AlAs, GaAs, InAs,
+                  AlSb, GaSb, InSb
+            - Ternaries
+                - AlGaN,  AlInN,  GaInN,
+                  AlGaP,  AlInP,  GaInP,
+                  AlGaAs, AlInAs, GaInAs,
+                  AlGaSb, AlInSb, GaInSb,
+                  AlNP,   GaNP,   InNP,
+                  AlNAs,  GaNAs,  InNAs,
+                  AlPAs,  GaPAs,  InPAs,
+                  AlPSb,  GaPSb,  InPSb,
+                  AlAsSb, GaAsSb, InAsSb,
+                  GaAlN,  InAlN,  InGaN,
+                  GaAlP,  InAlP,  InGaP,
+                  GaAlAs, InAlAs, InGaAs,
+                  GaAlSb, InAlSb, InGaSb,
+                  AlPN,   GaPN,   InPN,
+                  AlAsN,  GaAsN,  InAsN,
+                  AlAsP,  GaAsP,  InAsP,
+                  AlSbP,  GaSbP,  InSbP,
+                  AlSbAs, GaSbAs, InSbAs
 
 The source code and example usage scripts are available from the `Github repository`_, and additional documentation is available in the :ref:`modindex`.
 
