@@ -18,6 +18,7 @@
 #
 ################################################################################
 
+from openbandparams.iii_v.zinc_blende.binary import *
 from openbandparams.iii_v.zinc_blende.ternary import *
 
 print '# All three of these are identical:'
@@ -48,7 +49,16 @@ print ''
 
 print ('This is the preferred usage (more efficient),'
        'if you want multiple parameters from one alloy composition:')
-print '>>> myAlGaAs = AlGaAs(x=0.3)'
+print '>>> myAlGaAs = AlGaAs(x=0.3)\n',
 myAlGaAs = AlGaAs(x=0.3)
 print '>>> myAlGaAs.Eg()\n', myAlGaAs.Eg()
 print '>>> myAlGaAs.Eg(T=300)\n', myAlGaAs.Eg(T=300)
+
+print 'Lattice matching to a substrate (at the growth temperature):'
+print '>>> a_InP = InP.a(T=800)\n',
+a_InP = InP.a(T=800)
+print '>>> InGaAs_on_InP = InGaAs(a=a_InP, T=800)\n',
+InGaAs_on_InP = InGaAs(a=a_InP, T=800)
+print '>>> InP.a(T=800)\n', InP.a(T=800)
+print '>>> InGaAs_on_InP.a()\n', InGaAs_on_InP.a(T=800)
+print '>>> InGaAs_on_InP.Eg()\n', InGaAs_on_InP.Eg()

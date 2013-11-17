@@ -26,6 +26,7 @@ import logging; log = logging.getLogger(__name__)
 # local imports
 from openbandparams.base_material import AlloyBase
 from openbandparams.utils import classinstancemethod
+from openbandparams.algorithms import bisect
 
 class TernaryType(type):
     def __getattr__(self, name):
@@ -60,6 +61,22 @@ class Ternary(AlloyBase):
             return float(kwargs[cls.element1])
         elif cls.element2 in kwargs:
             return 1 - float(kwargs[cls.element2])
+        elif 'a' in kwargs:
+            # lattice match to the given lattice constant
+            if 'T' not in kwargs:
+                raise ValueError('Lattice matching temperature, T, missing.')
+            a = kwargs['a']
+            T = kwargs['T']
+            # make sure the lattice constant is available
+            b1a = cls.binary1.a(T=T)
+            b2a = cls.binary2.a(T=T)
+            amin = min(b1a, b2a)
+            amax = max(b1a, b2a)
+            if a < amin or a > amax:
+                raise ValueError('a out of range [%.3f, %.3f]'%(amin, amax))
+            # find the correct composition, x
+            x = bisect(func=lambda x: cls.a(x=x, T=T) - a, a=0, b=1)
+            return x
         else:
             raise TypeError("Missing required key word argument."
                             "'x', '%s', or '%s' is needed."%(cls.element1,
