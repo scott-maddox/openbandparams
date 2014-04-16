@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>openbandparams package &mdash; openbandparams 0.2 documentation</title>
+    <title>openbandparams package &mdash; openbandparams 0.3 documentation</title>
     
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.2',
+        VERSION:     '0.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="openbandparams 0.2 documentation" href="index.html" /> 
+    <link rel="top" title="openbandparams 0.3 documentation" href="index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -36,7 +36,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="index.html">openbandparams 0.2 documentation</a> &raquo;</li> 
+        <li><a href="index.html">openbandparams 0.3 documentation</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar">
@@ -48,6 +48,7 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-openbandparams.algorithms">openbandparams.algorithms module</a></li>
 <li><a class="reference internal" href="#module-openbandparams.base_material">openbandparams.base_material module</a></li>
 <li><a class="reference internal" href="#module-openbandparams.equations">openbandparams.equations module</a></li>
 <li><a class="reference internal" href="#module-openbandparams.utils">openbandparams.utils module</a></li>
@@ -112,6 +113,39 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
+<div class="section" id="module-openbandparams.algorithms">
+<span id="openbandparams-algorithms-module"></span><h2>openbandparams.algorithms module<a class="headerlink" href="#module-openbandparams.algorithms" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="openbandparams.algorithms.bisect">
+<tt class="descclassname">openbandparams.algorithms.</tt><tt class="descname">bisect</tt><big>(</big><em>func</em>, <em>a</em>, <em>b</em>, <em>xtol=1e-12</em>, <em>maxiter=100</em><big>)</big><a class="reference internal" href="_modules/openbandparams/algorithms.html#bisect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.algorithms.bisect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds the root of <cite>func</cite> using the bisection method.</p>
+<dl class="docutils">
+<dt>func must be continuous function that accepts a single number input</dt>
+<dd>and returns a single number</dd>
+</dl>
+<p><cite>func(a)</cite> and <cite>func(b)</cite> must have opposite sign</p>
+<dl class="docutils">
+<dt>func <span class="classifier-delimiter">:</span> <span class="classifier">function</span></dt>
+<dd>the function that we want to find the root of</dd>
+<dt>a <span class="classifier-delimiter">:</span> <span class="classifier">number</span></dt>
+<dd>one of the bounds on the input</dd>
+<dt>b <span class="classifier-delimiter">:</span> <span class="classifier">number</span></dt>
+<dd>the other bound on the input</dd>
+<dt>xtol <span class="classifier-delimiter">:</span> <span class="classifier">number, optional</span></dt>
+<dd>the solution tolerance of the input value. The algorithm is
+considered converged if <cite>abs(b-a)2. &lt; xtol</cite></dd>
+<dt>maxiter <span class="classifier-delimiter">:</span> <span class="classifier">number, optional</span></dt>
+<dd>the maximum number of iterations allowed for convergence</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="openbandparams.algorithms.sign">
+<tt class="descclassname">openbandparams.algorithms.</tt><tt class="descname">sign</tt><big>(</big><em>x</em><big>)</big><a class="reference internal" href="_modules/openbandparams/algorithms.html#sign"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.algorithms.sign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns -1, 0, or 1 if <cite>x</cite> is negative, zero, or positive, respectively.</p>
+</dd></dl>
+
+</div>
 <div class="section" id="module-openbandparams.base_material">
 <span id="openbandparams-base-material-module"></span><h2>openbandparams.base_material module<a class="headerlink" href="#module-openbandparams.base_material" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
@@ -171,7 +205,7 @@ if the method was called as a static or class method.</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="index.html">openbandparams 0.2 documentation</a> &raquo;</li> 
+        <li><a href="index.html">openbandparams 0.3 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

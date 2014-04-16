@@ -11,6 +11,14 @@ Subpackages
 Submodules
 ----------
 
+openbandparams.algorithms module
+--------------------------------
+
+.. automodule:: openbandparams.algorithms
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 openbandparams.base_material module
 -----------------------------------
 
