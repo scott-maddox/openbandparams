@@ -1,5 +1,5 @@
 #
-#   Copyright (c) 2013, Scott J Maddox
+#   Copyright (c) 2013-2014, Scott J Maddox
 #
 #   This file is part of openbandparams.
 #
@@ -16,7 +16,7 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with openbandparams.  If not, see <http://www.gnu.org/licenses/>.
 #
-################################################################################
+#############################################################################
 
 from openbandparams.iii_v.zinc_blende.binary import *
 from openbandparams.iii_v.zinc_blende.ternary import *
@@ -31,7 +31,7 @@ print '>>> InP.a(T=Tg)\n', InP.a(T=Tg)
 print '>>> GaPSb_on_InP.a()\n', GaPSb_on_InP.a(T=Tg)
 print '>>> GaPSb_on_InP._x\n', GaPSb_on_InP._x
 
-print 'Get the properties at 70 C'
+print '\nGet the properties at 70 C:'
 T = 273.15+70
 kT = 25.8e-3/300*T
 print 'Eg_Gamma', GaPSb_on_InP.Eg_Gamma(T=T)
@@ -49,7 +49,8 @@ meff_e_L_long = GaPSb_on_InP.meff_e_L_long(T=T)
 print 'meff_e_L_long', meff_e_L_long
 meff_e_L_trans = GaPSb_on_InP.meff_e_L_trans(T=T)
 print 'meff_e_L_trans', meff_e_L_trans
-meff_e_L_DOS = GaPSb_on_InP.meff_e_L_long(T=T)**(1./3) * GaPSb_on_InP.meff_e_L_trans(T=T)**(2./3)
+meff_e_L_DOS = (GaPSb_on_InP.meff_e_L_long(T=T)**(1./3) *
+                GaPSb_on_InP.meff_e_L_trans(T=T)**(2./3))
 print 'meff_e_L_DOS', meff_e_L_DOS
 DOS_ratio = (meff_e_L_DOS)**(3./2) / (meff_e_Gamma)**(3./2)
 print 'eff_DOS_ratio', DOS_ratio
