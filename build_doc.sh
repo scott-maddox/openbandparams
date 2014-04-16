@@ -21,6 +21,6 @@
 #############################################################################
 
 
-sphinx-apidoc -f -o doc src/openbandparams/ -d 2
+sphinx-apidoc -f -o doc src/openbandparams/ -d 4
 cd doc
 make html
