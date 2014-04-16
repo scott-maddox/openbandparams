@@ -1,5 +1,5 @@
 #
-#   Copyright (c) 2013, Scott J Maddox
+#   Copyright (c) 2013-2014, Scott J Maddox
 #
 #   This file is part of openbandparams.
 #
@@ -16,5 +16,5 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with openbandparams.  If not, see <http://www.gnu.org/licenses/>.
 #
-################################################################################
+#############################################################################
 
