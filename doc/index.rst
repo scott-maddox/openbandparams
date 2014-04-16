@@ -6,11 +6,9 @@
 Welcome to openbandparams's documentation!
 ==========================================
 
-This is the first public release of openbandparams.
-
 The main goal of this project is to provide easy access to semiconductor band parameters for calculations and simulations. Basic functionality requires only the standard python distribution.
 
-Example scripts are provided for basic usage and for generating common plots such as bandgap vs. lattice constant, bandgap vs. alloy composition.
+Example scripts are provided for basic usage and for generating common plots such as bandgap vs. lattice constant, bandgap vs. alloy composition. These are currently the best way to learn how to use this package, as the documentation is still lacking.
 
 Included parameters:
     - lattice constant
@@ -63,6 +61,7 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+    modules
 
 Indices and tables
 ==================
