@@ -27,7 +27,7 @@ TMP_DIR="/tmp/openbandparams-gh-pages/"
 rm -rf $TMP_DIR
 mkdir $TMP_DIR
 cd $TMP_DIR
-git clone ssh://git@github.com/scott-maddox/openbandparams.git
+git clone https://github.com/scott-maddox/openbandparams.git
 cd openbandparams
 git pull origin gh-pages
 rsync -av "$HTML_DIR" .

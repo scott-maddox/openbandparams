@@ -26,3 +26,16 @@ I need to think throught the API to make sure it's easy to use for the use cases
 ----
 
 Okay, I now have hardcoded values with preceding underscores and functions without preceding underscores. The hardcoded variable names are subject to change if I decide to change the implementation.
+
+Building and Uploading to PyPI
+==============================
+
+When a new release is ready, and `version.py` has already been updated, run the following commands from the root of the git repository to build and upload the release to PyPI:
+
+    python setup.py build
+    python setup.py register sdist bdist_egg upload
+
+It's also a good idea to update the documentation:
+
+    ./build_doc.sh
+    ./upload_doc.sh
