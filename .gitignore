@@ -1,8 +1,4 @@
 
-# data logs
-scan_logs/
-system_response_logs/
-
 # tmp files
 *.swp
 *.bak
