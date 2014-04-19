@@ -6,7 +6,7 @@ Build scripts are located in the root directory, the package source code is in `
 Documentation
 =============
 
-Documentation is generated with Sphinx, by basically following the [this tutorial](http://matplotlib.org/sampledoc/). The `build_doc.sh` script can be used to build the documentation automatically.
+Documentation is generated with Sphinx, by basically following [this tutorial](http://matplotlib.org/sampledoc/). The `build_doc.sh` script can be used to build the documentation automatically.
 
 Uploading the documentation to github ph-pages is done by pulling the gh-pages branch, rsyncing in the newly built documentation from `doc/_build/html/`, then committing the changes. The `upload_doc.sh` script performs these tasks automatically. A related tutorial can be found [here](http://help.github.com/articles/creating-project-pages-manually), but this shouldn't be followed explicitly, because the gh-pages branch already exists.
 

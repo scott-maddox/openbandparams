@@ -37,6 +37,7 @@ from openbandparams.iii_v.zinc_blende.binary import (AlN,  GaN,  InN,
 # Nitrides
 class AlGaN(Ternary):
     name = 'AlGaN'
+    elements = ('Al', 'Ga', 'N')
     element1 = 'Al'
     element2 = 'Ga'
     binary1 = AlN
@@ -46,6 +47,7 @@ class AlGaN(Ternary):
     
 class AlInN(Ternary):
     name = 'AlInN'
+    elements = ('Al', 'In', 'N')
     element1 = 'Al'
     element2 = 'In'
     binary1 = AlN
@@ -55,6 +57,7 @@ class AlInN(Ternary):
     
 class GaInN(Ternary):
     name = 'GaInN'
+    elements = ('Ga', 'In', 'N')
     element1 = 'Ga'
     element2 = 'In'
     binary1 = AlN
@@ -69,6 +72,7 @@ InGaN = create_reversed_ternary('InGaN', GaInN)
 # Phosphides
 class AlGaP(Ternary):
     name = 'AlGaP'
+    elements = ('Al', 'Ga', 'P')
     element1 = 'Al'
     element2 = 'Ga'
     binary1 = AlP
@@ -77,6 +81,7 @@ class AlGaP(Ternary):
 
 class AlInP(Ternary):
     name = 'AlInP'
+    elements = ('Al', 'In', 'P')
     element1 = 'Al'
     element2 = 'In'
     binary1 = AlP
@@ -88,6 +93,7 @@ class AlInP(Ternary):
 
 class GaInP(Ternary):
     name = 'GaInP'
+    elements = ('Ga', 'In', 'P')
     element1 = 'Ga'
     element2 = 'In'
     binary1 = GaP
@@ -105,6 +111,7 @@ InGaP = create_reversed_ternary('InGaP', GaInP)
 # Arsenides
 class AlGaAs(Ternary):
     name = 'AlGaAs'
+    elements = ('Al', 'Ga', 'As')
     element1 = 'Al'
     element2 = 'Ga'
     binary1 = AlAs
@@ -117,6 +124,7 @@ class AlGaAs(Ternary):
 
 class AlInAs(Ternary):
     name = 'AlInAs'
+    elements = ('Al', 'In', 'As')
     element1 = 'Al'
     element2 = 'In'
     binary1 = AlAs
@@ -131,6 +139,7 @@ class AlInAs(Ternary):
 
 class GaInAs(Ternary):
     name = 'GaInAs'
+    elements = ('Ga', 'In', 'As')
     element1 = 'Ga'
     element2 = 'In'
     binary1 = GaAs
@@ -154,6 +163,7 @@ InGaAs = create_reversed_ternary('InGaAs', GaInAs)
 # Antimonides
 class AlGaSb(Ternary):
     name = 'AlGaSb'
+    elements = ('Al', 'Ga', 'Sb')
     element1 = 'Al'
     element2 = 'Ga'
     binary1 = AlSb
@@ -166,6 +176,7 @@ class AlGaSb(Ternary):
 
 class AlInSb(Ternary):
     name = 'AlInSb'
+    elements = ('Al', 'In', 'Sb')
     element1 = 'Al'
     element2 = 'In'
     binary1 = AlSb
@@ -175,6 +186,7 @@ class AlInSb(Ternary):
 
 class GaInSb(Ternary):
     name = 'GaInSb'
+    elements = ('Ga', 'In', 'Sb')
     element1 = 'Ga'
     element2 = 'In'
     binary1 = GaSb
@@ -194,6 +206,7 @@ InGaSb = create_reversed_ternary('InGaSb', GaInSb)
 # Nitride Phosphides
 class AlNP(Ternary):
     name = 'AlNP'
+    elements = ('Al', 'N', 'P')
     element1 = 'N'
     element2 = 'P'
     binary1 = AlN
@@ -201,6 +214,7 @@ class AlNP(Ternary):
 
 class GaNP(Ternary):
     name = 'GaNP'
+    elements = ('Ga', 'N', 'P')
     element1 = 'N'
     element2 = 'P'
     binary1 = GaN
@@ -210,6 +224,7 @@ class GaNP(Ternary):
 
 class InNP(Ternary):
     name = 'InNP'
+    elements = ('In', 'N', 'P')
     element1 = 'N'
     element2 = 'P'
     binary1 = InN
@@ -223,6 +238,7 @@ InPN = create_reversed_ternary('InPN', InNP)
 # Nitride Arsenides
 class AlNAs(Ternary):
     name = 'AlNAs'
+    elements = ('Al', 'N', 'As')
     element1 = 'N'
     element2 = 'As'
     binary1 = AlN
@@ -230,6 +246,7 @@ class AlNAs(Ternary):
 
 class GaNAs(Ternary):
     name = 'GaNAs'
+    elements = ('Ga', 'N', 'As')
     element1 = 'N'
     element2 = 'As'
     binary1 = GaN
@@ -241,6 +258,7 @@ class GaNAs(Ternary):
 
 class InNAs(Ternary):
     name = 'InNAs'
+    elements = ('In', 'N', 'As')
     element1 = 'N'
     element2 = 'As'
     binary1 = InN
@@ -254,6 +272,7 @@ InAsN = create_reversed_ternary('InAsN', InNAs)
 # Phosphide Arsenides
 class AlPAs(Ternary):
     name = 'AlPAs'
+    elements = ('Al', 'P', 'As')
     element1 = 'P'
     element2 = 'As'
     binary1 = AlP
@@ -264,6 +283,7 @@ class AlPAs(Ternary):
 
 class GaPAs(Ternary):
     name = 'GaPAs'
+    elements = ('Ga', 'P', 'As')
     element1 = 'P'
     element2 = 'As'
     binary1 = GaP
@@ -274,6 +294,7 @@ class GaPAs(Ternary):
 
 class InPAs(Ternary):
     name = 'InPAs'
+    elements = ('In', 'P', 'As')
     element1 = 'P'
     element2 = 'As'
     binary1 = InP
@@ -290,6 +311,7 @@ InAsP = create_reversed_ternary('InAsP', InPAs)
 # Phosphide Antimonides
 class AlPSb(Ternary):
     name = 'AlPSb'
+    elements = ('Al', 'P', 'As')
     element1 = 'P'
     element2 = 'Sb'
     binary1 = AlP
@@ -300,6 +322,7 @@ class AlPSb(Ternary):
 
 class GaPSb(Ternary):
     name = 'GaPSb'
+    elements = ('Ga', 'P', 'As')
     element1 = 'P'
     element2 = 'Sb'
     binary1 = GaP
@@ -310,6 +333,7 @@ class GaPSb(Ternary):
 
 class InPSb(Ternary):
     name = 'InPSb'
+    elements = ('In', 'P', 'As')
     element1 = 'P'
     element2 = 'Sb'
     binary1 = InP
@@ -326,6 +350,7 @@ InSbP = create_reversed_ternary('InSbP', InPSb)
 # Arsenide Antimonides
 class AlAsSb(Ternary):
     name = 'AlAsSb'
+    elements = ('Al', 'As', 'Sb')
     element1 = 'As'
     element2 = 'Sb'
     binary1 = AlAs
@@ -338,6 +363,7 @@ class AlAsSb(Ternary):
 
 class GaAsSb(Ternary):
     name = 'GaAsSb'
+    elements = ('Ga', 'As', 'Sb')
     element1 = 'As'
     element2 = 'Sb'
     binary1 = GaAs
@@ -350,6 +376,7 @@ class GaAsSb(Ternary):
 
 class InAsSb(Ternary):
     name = 'InAsSb'
+    elements = ('In', 'As', 'Sb')
     element1 = 'As'
     element2 = 'Sb'
     binary1 = InAs
