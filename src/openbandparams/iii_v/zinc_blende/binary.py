@@ -27,8 +27,13 @@ from math import tanh
 # local imports
 from openbandparams.iii_v.binary import Binary
 
+# Each Binary is a class instead of an instance because GaP has a different
+# Eg_Gamma temperature dependence. I could have only had GaP be a subclass,
+# but for consistency i just made them all subclasses.
+
 class AlN(Binary):
     name = 'AlN'
+    elements = ('Al', 'N')
     _a_300K = 4.38 #Ang    vurgaftman_band_2001
     _da_dT = 0 #Ang/K    vurgaftman_band_2001
     _Eg_Gamma_0 = 4.9 #eV    vurgaftman_band_2001
@@ -61,6 +66,7 @@ class AlN(Binary):
 
 class GaN(Binary):
     name = 'GaN'
+    elements = ('Ga', 'N')
     _a_300K = 4.5 #Ang    vurgaftman_band_2001
     _da_dT = 0 #Ang/K    vurgaftman_band_2001
     _Eg_Gamma_0 = 3.299 #eV    vurgaftman_band_2001
@@ -93,6 +99,7 @@ class GaN(Binary):
 
 class InN(Binary):
     name = 'InN'
+    elements = ('In', 'N')
     _a_300K = 4.98 #Ang    vurgaftman_band_2001
     _da_dT = 0 #Ang/K    vurgaftman_band_2001
     _Eg_Gamma_0 = 1.94 #eV    vurgaftman_band_2001
@@ -125,6 +132,7 @@ class InN(Binary):
 
 class AlP(Binary):
     name = 'AlP'
+    elements = ('Al', 'P')
     _a_300K = 5.4672 #Ang    vurgaftman_band_2001
     _da_dT = 0.0000292 #Ang/K    vurgaftman_band_2001
     _Eg_Gamma_0 = 3.63 #eV    vurgaftman_band_2001
@@ -157,6 +165,7 @@ class AlP(Binary):
 
 class GaP(Binary):
     name = 'GaP'
+    elements = ('Ga', 'P')
     _a_300K = 5.4505 #Ang    vurgaftman_band_2001
     _da_dT = 0.0000292 #Ang/K    vurgaftman_band_2001
     _Eg_Gamma_0 = 2.886 #eV    vurgaftman_band_2001
@@ -201,6 +210,7 @@ class GaP(Binary):
 
 class InP(Binary):
     name = 'InP'
+    elements = ('In', 'P')
     _a_300K = 5.8697 #Ang    vurgaftman_band_2001
     _da_dT = 0.0000279 #Ang/K    vurgaftman_band_2001
     _Eg_Gamma_0 = 1.4236 #eV    vurgaftman_band_2001
@@ -233,6 +243,7 @@ class InP(Binary):
 
 class AlAs(Binary):
     name = 'AlAs'
+    elements = ('Al', 'As')
     _a_300K = 5.6611 #Ang    vurgaftman_band_2001
     _da_dT = 0.000029 #Ang/K    vurgaftman_band_2001
     _Eg_Gamma_0 = 3.099 #eV    vurgaftman_band_2001
@@ -267,6 +278,7 @@ class AlAs(Binary):
 
 class GaAs(Binary):
     name = 'GaAs'
+    elements = ('Ga', 'As')
     _a_300K = 5.65325 #Ang    vurgaftman_band_2001
     _da_dT = 0.0000388 #Ang/K    vurgaftman_band_2001
     _Eg_Gamma_0 = 1.519 #eV    vurgaftman_band_2001
@@ -303,6 +315,7 @@ class GaAs(Binary):
 
 class InAs(Binary):
     name = 'InAs'
+    elements = ('In', 'As')
     _a_300K = 6.0583 #Ang    vurgaftman_band_2001
     _da_dT = 0.0000274 #Ang/K    vurgaftman_band_2001
     _Eg_Gamma_0 = 0.417 #eV    vurgaftman_band_2001
@@ -339,6 +352,7 @@ class InAs(Binary):
 
 class AlSb(Binary):
     name = 'AlSb'
+    elements = ('Al', 'Sb')
     _a_300K = 6.1355 #Ang    vurgaftman_band_2001
     _da_dT = 0.000026 #Ang/K    vurgaftman_band_2001
     _Eg_Gamma_0 = 2.386 #eV    vurgaftman_band_2001
@@ -373,6 +387,7 @@ class AlSb(Binary):
 
 class GaSb(Binary):
     name = 'GaSb'
+    elements = ('Ga', 'Sb')
     _a_300K = 6.0959 #Ang    vurgaftman_band_2001
     _da_dT = 0.0000472 #Ang/K    vurgaftman_band_2001
     _Eg_Gamma_0 = 0.812 #eV    vurgaftman_band_2001
@@ -407,6 +422,7 @@ class GaSb(Binary):
 
 class InSb(Binary):
     name = 'InSb'
+    elements = ('In', 'Sb')
     _a_300K = 6.4794 #Ang    vurgaftman_band_2001
     _da_dT = 0.0000348 #Ang/K    vurgaftman_band_2001
     _Eg_Gamma_0 = 0.235 #eV    vurgaftman_band_2001

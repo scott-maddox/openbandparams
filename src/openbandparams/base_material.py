@@ -26,6 +26,14 @@ import logging; log = logging.getLogger(__name__)
 # local imports
 
 class Base(object):
+    
+    name = 'Base'
+    elements = tuple([])
+    
+    @classmethod
+    def elementFraction(cls, element):
+        raise NotImplementedError()
+    
     @classmethod
     def _get_T(cls, kwargs):
         '''
@@ -38,4 +46,4 @@ class Base(object):
             return 300 # K
 
 class AlloyBase(Base):
-    pass
+    name = 'AlloyBase'

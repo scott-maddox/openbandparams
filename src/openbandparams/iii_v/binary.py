@@ -28,10 +28,17 @@ from openbandparams.base_material import Base
 from openbandparams.equations import varshni
 
 class Binary(Base):
-    name = None
     
-    # All methods should be class methods so that they can reference parameters
-    # defined by the inheriting class.
+    # All methods should be class methods so that they can reference
+    # parameters defined by subclasses.
+    
+    @classmethod
+    def elementFraction(cls, element):
+        if element in cls.elements:
+            return 1.
+        else:
+            return 0.
+    
     @classmethod
     def a_300K(cls, **kwargs):
         '''
