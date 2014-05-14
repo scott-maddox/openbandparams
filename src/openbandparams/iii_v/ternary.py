@@ -127,12 +127,12 @@ class Ternary(AlloyBase):
             # otherwise, use linear interpolation
             return A*x + B*(1-x)
     
-    @classmethod
-    def elementFraction(cls, element):
+    @classinstancemethod
+    def elementFraction(self, cls, element):
         if element == cls.element1:
-            return cls._x
+            return self._x
         elif element == cls.element2:
-            return (1 - cls._x)
+            return (1 - self._x)
         elif element in cls.elements:
             return 1
         else:
