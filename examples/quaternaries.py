@@ -20,11 +20,29 @@
 
 from openbandparams.iii_v.zinc_blende.binary import *
 from openbandparams.iii_v.zinc_blende.quaternary import *
-quat = GaInPAs(Ga=0.1, a=InP.a(), T=300)
-print 'GaInPAs lattice matched to InP:'
-print 'Ga fraction: ', quat.elementFraction('Ga')
-print 'P fraction: ', quat.elementFraction('P')
-quat = GaInPAs(As=0.1, a=InP.a(), T=300)
-print 'GaInPAs lattice matched to InP:'
-print 'Ga fraction: ', quat.elementFraction('Ga')
-print 'P fraction: ', quat.elementFraction('P')
+
+# Some identities
+assert GaInPAs(x=0, y=0) == GaInPAs(Ga=0, P=0)
+assert GaInPAs(x=0, y=0) == GaInPAs(x=0, P=0)
+assert GaInPAs(x=0, y=0) == GaInPAs(Ga=0, y=0)
+assert GaInPAs(x=0, y=0) == GaInPAs(Ga=0, As=1)
+assert GaInPAs(x=0, y=0) == GaInPAs(In=1, As=1)
+assert eval(repr(GaInPAs(Ga=0, P=0))) == GaInPAs(x=0, P=0)
+
+# Some inequalities
+assert GaInPAs(x=0, y=0) != GaInPSb(x=0, y=0)
+
+# Some examples
+print 'GaInPAs lattice matched to InP:', GaInPAs(Ga=0.1, a=InP.a(), T=300)
+print 'GaInPAs lattice matched to InP:', GaInPAs(As=0.1, a=InP.a(), T=300)
+
+print 'AlPAsSb(x=.1, y=.3):', AlPAsSb(x=.1, y=.3)
+print 'AlPAsSb(P=.1, y=.3):', AlPAsSb(P=.1, y=.3)
+print 'AlPAsSb(P=.1, As=.3):', AlPAsSb(P=.1, As=.3)
+print 'AlPAsSb(As=.3, Sb=.6):', AlPAsSb(As=.3, Sb=.6)
+print 'AlPAsSb(P=.1, Sb=.6):', AlPAsSb(P=.1, Sb=.6)
+print repr(AlPAsSb(P=0, As=0))
+print 'AlPAsSb lattice matched to InP:', AlPAsSb(P=0, As=0)
+print 'AlPAsSb lattice matched to InP:', AlPAsSb(P=0.1, a=InP.a(), T=300)
+print 'AlPAsSb lattice matched to InP:', AlPAsSb(As=0.1, a=InP.a(), T=300)
+print 'AlPAsSb lattice matched to InP:', AlPAsSb(Sb=0.5, a=InP.a(), T=300)
