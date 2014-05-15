@@ -18,31 +18,46 @@
 #
 #############################################################################
 
-from openbandparams.iii_v.zinc_blende.binary import *
 from openbandparams.iii_v.zinc_blende.quaternary import *
 
-# Some identities
-assert GaInPAs(x=0, y=0) == GaInPAs(Ga=0, P=0)
-assert GaInPAs(x=0, y=0) == GaInPAs(x=0, P=0)
-assert GaInPAs(x=0, y=0) == GaInPAs(Ga=0, y=0)
-assert GaInPAs(x=0, y=0) == GaInPAs(Ga=0, As=1)
-assert GaInPAs(x=0, y=0) == GaInPAs(In=1, As=1)
+# Some identities and inequalities
+print "Type 1 Quaternary:", AlPAsSb
+assert AlPAsSb(x=0, y=0) == AlPAsSb(P=0, y=0)
+assert AlPAsSb(x=0, y=0) == AlPAsSb(x=0, As=0)
+assert AlPAsSb(x=0, y=0) == AlPAsSb(P=0, As=0)
+assert AlPAsSb(x=0, y=0) == AlPAsSb(P=0, Sb=1)
+assert AlPAsSb(x=0, y=0) != GaPAsSb(x=0, y=0)
+assert AlPAsSb(x=0, y=0) != AlPAsSb(x=1, y=0)
+assert AlPAsSb(x=0, y=0) != AlPAsSb(x=0, y=1)
+print "Type 2 Quaternary:", AlGaInAs
+assert AlGaInAs(x=0, y=0) == AlGaInAs(Al=0, y=0)
+assert AlGaInAs(x=0, y=0) == AlGaInAs(x=0, Ga=0)
+assert AlGaInAs(x=0, y=0) == AlGaInAs(Al=0, Ga=0)
+assert AlGaInAs(x=0, y=0) == AlGaInAs(Al=0, In=1)
+assert AlGaInAs(x=0, y=0) != AlGaInSb(x=0, y=0)
+assert AlGaInAs(x=0, y=0) != AlGaInAs(x=1, y=0)
+assert AlGaInAs(x=0, y=0) != AlGaInAs(x=0, y=1)
+print "Type 3 Quaternary:", AlGaPAs
+assert AlGaPAs(x=0, y=0) == AlGaPAs(Al=0, y=0)
+assert AlGaPAs(x=0, y=0) == AlGaPAs(x=0, P=0)
+assert AlGaPAs(x=0, y=0) == AlGaPAs(Al=0, P=0)
+assert AlGaPAs(x=0, y=0) == AlGaPAs(Ga=1, P=0)
+assert AlGaPAs(x=0, y=0) == AlGaPAs(Al=0, As=1)
+assert AlGaPAs(x=0, y=0) == AlGaPAs(Ga=1, As=1)
+assert AlGaPAs(x=0, y=0) != AlGaPSb(x=0, y=0)
+assert AlGaPAs(x=0, y=0) != AlGaPAs(x=1, y=0)
+assert AlGaPAs(x=0, y=0) != AlGaPAs(x=0, y=1)
+
+print ""
+print repr(GaInPAs(x=0, y=0)), "-->", GaInPAs(x=0, y=0)
+print repr(AlPAsSb(x=0, y=0)), "-->", AlPAsSb(x=0, y=0)
 assert eval(repr(GaInPAs(Ga=0, P=0))) == GaInPAs(x=0, P=0)
-
-# Some inequalities
-assert GaInPAs(x=0, y=0) != GaInPSb(x=0, y=0)
-
-# Some examples
-print 'GaInPAs lattice matched to InP:', GaInPAs(Ga=0.1, a=InP.a(), T=300)
-print 'GaInPAs lattice matched to InP:', GaInPAs(As=0.1, a=InP.a(), T=300)
-
-print 'AlPAsSb(x=.1, y=.3):', AlPAsSb(x=.1, y=.3)
-print 'AlPAsSb(P=.1, y=.3):', AlPAsSb(P=.1, y=.3)
-print 'AlPAsSb(P=.1, As=.3):', AlPAsSb(P=.1, As=.3)
-print 'AlPAsSb(As=.3, Sb=.6):', AlPAsSb(As=.3, Sb=.6)
-print 'AlPAsSb(P=.1, Sb=.6):', AlPAsSb(P=.1, Sb=.6)
-print repr(AlPAsSb(P=0, As=0))
-print 'AlPAsSb lattice matched to InP:', AlPAsSb(P=0, As=0)
-print 'AlPAsSb lattice matched to InP:', AlPAsSb(P=0.1, a=InP.a(), T=300)
-print 'AlPAsSb lattice matched to InP:', AlPAsSb(As=0.1, a=InP.a(), T=300)
-print 'AlPAsSb lattice matched to InP:', AlPAsSb(Sb=0.5, a=InP.a(), T=300)
+print ''
+print "Some GaInPAs alloys lattice matched to InP:"
+print GaInPAs(Ga=0.1, a=InP.a(), T=300)
+print GaInPAs(As=0.1, a=InP.a(), T=300)
+print ''
+print "Some AlPAsSb alloys lattice matched to InP (at room temperature):"
+print AlPAsSb(P=0.1, a=InP.a(), T=300)
+print AlPAsSb(As=0.1, a=InP.a(), T=300)
+print AlPAsSb(Sb=0.5, a=InP.a(), T=300)
