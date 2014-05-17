@@ -65,8 +65,10 @@ for binary in [AlP, GaP, InP,
     y_lh = []
     y_hh = []
     for eps_xx in numpy.linspace(-0.02, 0.02, 100):
-        #a_strained = a_0 * ( 1 - eps_xx )
-        a_strained = a_0 / ( eps_xx + 1 )
+        # relative to a_0: eps = ( a0 - ax ) / a0
+        a_strained = a_0 * ( 1 - eps_xx )
+        # relative to a_strianed: eps = ( a0 - ax ) / ax
+        #a_strained = a_0 / ( eps_xx + 1 )
         eps_zz = -2. * c_12 / c_11 * eps_xx
         dE_c = a_c * ( 2 * eps_xx + eps_zz )
         P_eps = -a_v * ( 2 * eps_xx + eps_zz )
