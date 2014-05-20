@@ -456,3 +456,6 @@ binaries = [AlN, GaN, InN,
             AlP, GaP, InP,
             AlAs, GaAs, InAs,
             AlSb, GaSb, InSb]
+
+__all__ = ['binaries']
+__all__ += [binary.name for binary in binaries]

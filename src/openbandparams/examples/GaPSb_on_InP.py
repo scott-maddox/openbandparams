@@ -18,8 +18,7 @@
 #
 #############################################################################
 
-from openbandparams.iii_v.zinc_blende.binary import *
-from openbandparams.iii_v.zinc_blende.ternary import *
+from openbandparams import *
 
 print 'Lattice matching GaPSb to InP (at the growth temperature of 470 C):'
 Tg = 273.15+470

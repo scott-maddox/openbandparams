@@ -20,7 +20,7 @@
 
 import matplotlib.pyplot as plt
 import numpy
-from openbandparams.iii_v.zinc_blende.quaternary import *
+from openbandparams import *
 
 quaternary = GaInPAs
 T = 300
@@ -32,7 +32,6 @@ plt.xlabel('Lattice Parameter at %g K ($\AA$)'%T)
 plt.ylabel('Bandgap at %g K (eV)'%T)
 
 # plot the binaries
-from openbandparams.iii_v.zinc_blende.binary import *
 xs = []
 y_Gamma = []
 y_X = []

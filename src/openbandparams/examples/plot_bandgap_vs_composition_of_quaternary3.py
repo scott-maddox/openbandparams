@@ -20,7 +20,7 @@
 
 import matplotlib.pyplot as plt
 import numpy
-from openbandparams.iii_v.zinc_blende.quaternary import *
+from openbandparams import *
 
 # Type 3 Quaternary
 alloy = GaInPAs

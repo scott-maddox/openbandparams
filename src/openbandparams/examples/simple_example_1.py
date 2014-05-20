@@ -18,8 +18,8 @@
 #
 #############################################################################
 
-from openbandparams.iii_v.zinc_blende.binary import *
-print ''
+#from openbandparams.iii_v.zinc_blende.binary import *
+from openbandparams import *
 
 # Print an unformatted temperature dependent parameters
 print 'GaAs bandgap (at T = 300 K): ', GaAs.Eg(), 'eV'

@@ -637,7 +637,7 @@ class GaInAsSb(Quaternary3):
     ternary3 = GaAsSb
     ternary4 = InAsSb
 
-quaternaires = [# Type 1: AB_{x}C_{y}D_{1-x-y}
+quaternaries = [# Type 1: AB_{x}C_{y}D_{1-x-y}
                 AlNPAs,  #AlNPSb, AlNAsSb,
                 AlPAsSb,
                 GaNPAs, #GaNPSb, GaNAsSb,
@@ -652,3 +652,6 @@ quaternaires = [# Type 1: AB_{x}C_{y}D_{1-x-y}
                 AlGaPAs, AlInPAs, GaInPAs,
                 AlGaPSb, AlInPSb, GaInPSb,
                 AlGaAsSb, AlInAsSb, GaInAsSb]
+
+__all__ = ['quaternaries']
+__all__ += [quaternary.name for quaternary in quaternaries]

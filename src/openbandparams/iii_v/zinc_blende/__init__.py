@@ -18,3 +18,14 @@
 #
 #############################################################################
 
+from . import binary
+from .binary import *
+from . import ternary
+from .ternary import *
+from . import quaternary
+from .quaternary import *
+
+__all__ = []
+__all__ += binary.__all__
+__all__ += ternary.__all__
+__all__ += quaternary.__all__

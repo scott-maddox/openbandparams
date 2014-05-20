@@ -18,7 +18,7 @@
 #
 #############################################################################
 
-from openbandparams.iii_v.zinc_blende.quaternary import *
+from openbandparams import *
 
 # Some identities and inequalities
 print "Type 1 Quaternary:", AlPAsSb

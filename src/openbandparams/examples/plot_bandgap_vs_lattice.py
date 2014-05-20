@@ -20,6 +20,7 @@
 
 import matplotlib.pyplot as plt
 import numpy
+from openbandparams import *
 
 T = 300
 
@@ -30,7 +31,6 @@ plt.xlabel('Lattice Parameter at %g K ($\AA$)'%T)
 plt.ylabel('Bandgap at %g K (eV)'%T)
 
 # plot the binaries
-from openbandparams.iii_v.zinc_blende.binary import *
 x = []
 y = []
 label = []
@@ -49,7 +49,6 @@ for x, y, label in zip(x, y, label):
                 textcoords='offset points')
 
 # plot the ternaries
-from openbandparams.iii_v.zinc_blende.ternary import *
 indices = numpy.arange(100)
 fractions = numpy.linspace(0, 1, 100)
 x = numpy.empty(100, dtype=numpy.float)

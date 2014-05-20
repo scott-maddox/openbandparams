@@ -18,8 +18,7 @@
 #
 #############################################################################
 
-from openbandparams.iii_v.zinc_blende.binary import *
-from openbandparams.iii_v.zinc_blende.ternary import *
+from openbandparams import *
 
 print '# All three of these are identical:'
 print '>>> AlGaAs.Eg(x=0.3)\n', AlGaAs.Eg(x=0.3)

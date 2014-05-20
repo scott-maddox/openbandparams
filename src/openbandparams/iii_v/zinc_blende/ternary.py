@@ -401,12 +401,16 @@ ternaries = [AlGaN,  AlInN,  GaInN,
              AlPSb,  GaPSb,  InPSb,
              AlAsSb, GaAsSb, InAsSb]
 
-reversed = [GaAlN,  InAlN,  InGaN,
-            GaAlP,  InAlP,  InGaP,
-            GaAlAs, InAlAs, InGaAs,
-            GaAlSb, InAlSb, InGaSb,
-            AlPN,   GaPN,   InPN,
-            AlAsN,  GaAsN,  InAsN,
-            AlAsP,  GaAsP,  InAsP,
-            AlSbP,  GaSbP,  InSbP,
-            AlSbAs, GaSbAs, InSbAs]
+alternate_ternaries = [GaAlN,  InAlN,  InGaN,
+                       GaAlP,  InAlP,  InGaP,
+                       GaAlAs, InAlAs, InGaAs,
+                       GaAlSb, InAlSb, InGaSb,
+                       AlPN,   GaPN,   InPN,
+                       AlAsN,  GaAsN,  InAsN,
+                       AlAsP,  GaAsP,  InAsP,
+                       AlSbP,  GaSbP,  InSbP,
+                       AlSbAs, GaSbAs, InSbAs]
+
+__all__ = ['ternaries', 'alternate_ternaries']
+__all__ += [ternary.name for ternary in ternaries]
+__all__ += [ternary.name for ternary in alternate_ternaries]

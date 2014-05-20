@@ -20,7 +20,7 @@
 
 import matplotlib.pyplot as plt
 import numpy
-from openbandparams.iii_v.zinc_blende.ternary import *
+from openbandparams import *
 
 alloy = AlGaAs
 
@@ -37,8 +37,8 @@ ax = fig.add_subplot(111)
 plt.title('%s (T = %.2g K)'%(alloy.name, T))
 plt.xlabel('%s fraction'%alloy.element1)
 plt.ylabel('Bandgap (eV)')
-ax.plot(xs, gamma, 'k-', label='$\Gamma$')
-ax.plot(xs, X, 'k--', label='$X$')
-ax.plot(xs, L, 'k:', label='$L$')
+ax.plot(xs, gamma, 'r-', label='$\Gamma$')
+ax.plot(xs, X, 'g--', label='$X$')
+ax.plot(xs, L, 'b:', label='$L$')
 plt.legend(loc='best')
 plt.show()
