@@ -35,7 +35,7 @@ L = [alloy.Eg_L(x=x, T=T) for x in xs]
 fig = plt.figure()
 ax = fig.add_subplot(111)
 plt.title('%s (T = %.2g K)'%(alloy.name, T))
-plt.xlabel('%s fraction'%alloy.element1)
+plt.xlabel('%s fraction'%alloy.elements[0])
 plt.ylabel('Bandgap (eV)')
 ax.plot(xs, gamma, 'r-', label='$\Gamma$')
 ax.plot(xs, X, 'g--', label='$X$')
