@@ -78,9 +78,9 @@ for xfrac in numpy.linspace(0, 1, 10):
         y_X[i] = instance.Eg_X(T=T)
         y_L[i] = instance.Eg_L(T=T)
     if first:
-        ax.plot(x, y_Gamma, 'r-', label='Gamma')
-        ax.plot(x, y_X, 'b-', label='X')
-        ax.plot(x, y_L, 'g-', label='L')
+        ax.plot(x, y_Gamma, 'r-', label='$\Gamma$')
+        ax.plot(x, y_X, 'b-', label='$X$')
+        ax.plot(x, y_L, 'g-', label='$L$')
         first = False
     else:
         ax.plot(x, y_Gamma, 'r-')
