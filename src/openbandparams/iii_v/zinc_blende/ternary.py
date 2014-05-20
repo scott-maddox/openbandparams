@@ -24,111 +24,84 @@ import logging; log = logging.getLogger(__name__)
 # third party imports
 
 # local imports
-from openbandparams.iii_v.ternary import Ternary, create_reversed_ternary
-from openbandparams.iii_v.zinc_blende.binary import (AlN,  GaN,  InN,
-                                                     AlP,  GaP,  InP,
-                                                     AlAs, GaAs, InAs,
-                                                     AlSb, GaSb, InSb)
+from openbandparams.iii_v.ternary import *
+from openbandparams.iii_v.zinc_blende.binary import *
 
 # Each ternary below is dynamically created as a new class or type.
 # An instance of the class must be created, and the alloy fraction passed in,
 # before it can be used. See `simple_example_2.py` for examples.
 
 # Nitrides
-class AlGaN(Ternary):
+class AlGaN(Ternary1):
     name = 'AlGaN'
     elements = ('Al', 'Ga', 'N')
-    element1 = 'Al'
-    element2 = 'Ga'
-    binary1 = AlN
-    binary2 = GaN
+    binaries = (AlN, GaN)
     _bowing_Eg_Gamma = 0.76, #eV    lin_band_2002
     _bowing_Eg_X = 0.3, #eV    lin_band_2002
     
-class AlInN(Ternary):
+class AlInN(Ternary1):
     name = 'AlInN'
     elements = ('Al', 'In', 'N')
-    element1 = 'Al'
-    element2 = 'In'
-    binary1 = AlN
-    binary2 = InN
+    binaries = (AlN, InN)
     _bowing_Eg_Gamma = 2.73, #eV    lin_band_2002
     _bowing_Eg_X = 3.62, #eV    lin_band_2002
     
-class GaInN(Ternary):
+class GaInN(Ternary1):
     name = 'GaInN'
     elements = ('Ga', 'In', 'N')
-    element1 = 'Ga'
-    element2 = 'In'
-    binary1 = AlN
-    binary2 = InN
+    binaries = (GaN, InN)
     _bowing_Eg_Gamma = 1.38, #eV    lin_band_2002
     _bowing_Eg_X = 1.67, #eV    lin_band_2002
 
-GaAlN = create_reversed_ternary('GaAlN', AlGaN)
-InAlN = create_reversed_ternary('InAlN', AlInN)
-InGaN = create_reversed_ternary('InGaN', GaInN)
+#GaAlN = create_reversed_ternary('GaAlN', AlGaN)
+#InAlN = create_reversed_ternary('InAlN', AlInN)
+#InGaN = create_reversed_ternary('InGaN', GaInN)
 
 # Phosphides
-class AlGaP(Ternary):
+class AlGaP(Ternary1):
     name = 'AlGaP'
     elements = ('Al', 'Ga', 'P')
-    element1 = 'Al'
-    element2 = 'Ga'
-    binary1 = AlP
-    binary2 = GaP
+    binaries = (AlP, GaP)
     _bowing_Eg_X = 0.13 #eV    vurgaftman_band_2001
 
-class AlInP(Ternary):
+class AlInP(Ternary1):
     name = 'AlInP'
     elements = ('Al', 'In', 'P')
-    element1 = 'Al'
-    element2 = 'In'
-    binary1 = AlP
-    binary2 = InP
+    binaries = (AlP, InP)
     _bowing_Eg_Gamma = -0.48 #eV    vurgaftman_band_2001
     _bowing_Eg_X = 0.38 #eV    vurgaftman_band_2001
     _bowing_Delta_SO = -0.19 #eV    vurgaftman_band_2001
     _bowing_meff_e_Gamma = 0.22 #m_e    vurgaftman_band_2001
 
-class GaInP(Ternary):
+class GaInP(Ternary1):
     name = 'GaInP'
     elements = ('Ga', 'In', 'P')
-    element1 = 'Ga'
-    element2 = 'In'
-    binary1 = GaP
-    binary2 = InP
+    binaries = (GaP, InP)
     _bowing_Eg_Gamma = 0.65 #eV    vurgaftman_band_2001
     _bowing_Eg_X = 0.2 #eV    vurgaftman_band_2001
     _bowing_Eg_L = 1.03 #eV    vurgaftman_band_2001
     _bowing_meff_e_Gamma = 0.051 #m_e    vurgaftman_band_2001
     _bowing_F = 0.78 #vurgaftman_band_2001
 
-GaAlP = create_reversed_ternary('GaAlP', AlGaP)
-InAlP = create_reversed_ternary('InAlP', AlInP)
-InGaP = create_reversed_ternary('InGaP', GaInP)
+#GaAlP = create_reversed_ternary('GaAlP', AlGaP)
+#InAlP = create_reversed_ternary('InAlP', AlInP)
+#InGaP = create_reversed_ternary('InGaP', GaInP)
 
 # Arsenides
-class AlGaAs(Ternary):
+class AlGaAs(Ternary1):
     name = 'AlGaAs'
     elements = ('Al', 'Ga', 'As')
-    element1 = 'Al'
-    element2 = 'Ga'
-    binary1 = AlAs
-    binary2 = GaAs
+    binaries = (AlAs, GaAs)
     _bowing_Eg_X = 0.055 #eV    vurgaftman_band_2001
     
     @classmethod
     def _bowing_Eg_Gamma(cls, x):
         return 1.31*x - 0.127 #eV    vurgaftman_band_2001
 
-class AlInAs(Ternary):
+class AlInAs(Ternary1):
     name = 'AlInAs'
     elements = ('Al', 'In', 'As')
-    element1 = 'Al'
-    element2 = 'In'
-    binary1 = AlAs
-    binary2 = InAs
+    binaries = (AlAs, InAs)
     _bowing_Eg_Gamma = 0.7 #eV    vurgaftman_band_2001
     _bowing_Delta_SO = 0.15 #eV    vurgaftman_band_2001
     _bowing_meff_e_Gamma = 0.049 #m_e    vurgaftman_band_2001
@@ -137,13 +110,10 @@ class AlInAs(Ternary):
     _bowing_VBO = -0.64 #eV    vurgaftman_band_2001
     _bowing_a_c = -1.4 #eV    vurgaftman_band_2001
 
-class GaInAs(Ternary):
+class GaInAs(Ternary1):
     name = 'GaInAs'
     elements = ('Ga', 'In', 'As')
-    element1 = 'Ga'
-    element2 = 'In'
-    binary1 = GaAs
-    binary2 = InAs
+    binaries = (GaAs, InAs)
     _bowing_Eg_Gamma = 0.477 #eV    vurgaftman_band_2001
     _bowing_Eg_X = 1.4 #eV    vurgaftman_band_2001
     _bowing_Eg_L = 0.33 #eV    vurgaftman_band_2001
@@ -156,41 +126,32 @@ class GaInAs(Ternary):
     _bowing_VBO = -0.38 #eV    vurgaftman_band_2001
     _bowing_a_c = 2.61 #eV    vurgaftman_band_2001
 
-GaAlAs = create_reversed_ternary('GaAlAs', AlGaAs)
-InAlAs = create_reversed_ternary('InAlAs', AlInAs)
-InGaAs = create_reversed_ternary('InGaAs', GaInAs)
+#GaAlAs = create_reversed_ternary('GaAlAs', AlGaAs)
+#InAlAs = create_reversed_ternary('InAlAs', AlInAs)
+#InGaAs = create_reversed_ternary('InGaAs', GaInAs)
 
 # Antimonides
-class AlGaSb(Ternary):
+class AlGaSb(Ternary1):
     name = 'AlGaSb'
     elements = ('Al', 'Ga', 'Sb')
-    element1 = 'Al'
-    element2 = 'Ga'
-    binary1 = AlSb
-    binary2 = GaSb
+    binaries = (AlSb, GaSb)
     _bowing_Delta_SO = 0.3 #eV    vurgaftman_band_2001
     
     @classmethod
     def _bowing_Eg_Gamma(cls, x):
         return 1.22*x - 0.044 #eV    vurgaftman_band_2001
 
-class AlInSb(Ternary):
+class AlInSb(Ternary1):
     name = 'AlInSb'
     elements = ('Al', 'In', 'Sb')
-    element1 = 'Al'
-    element2 = 'In'
-    binary1 = AlSb
-    binary2 = InSb
+    binaries = (AlSb, InSb)
     _bowing_Eg_Gamma = 0.43 #eV    vurgaftman_band_2001
     _bowing_Delta_SO = 0.25 #eV    vurgaftman_band_2001
 
-class GaInSb(Ternary):
+class GaInSb(Ternary1):
     name = 'GaInSb'
     elements = ('Ga', 'In', 'Sb')
-    element1 = 'Ga'
-    element2 = 'In'
-    binary1 = GaSb
-    binary2 = InSb
+    binaries = (GaSb, InSb)
     _bowing_Eg_Gamma = 0.415 #eV    vurgaftman_band_2001
     _bowing_Eg_X = 0.33 #eV    vurgaftman_band_2001
     _bowing_Eg_L = 0.4 #eV    vurgaftman_band_2001
@@ -199,197 +160,152 @@ class GaInSb(Ternary):
     _bowing_meff_LH_DOS = 0.011 #m_e    vurgaftman_band_2001
     _bowing_F = -6.84 #vurgaftman_band_2001
 
-GaAlSb = create_reversed_ternary('GaAlSb', AlGaSb)
-InAlSb = create_reversed_ternary('InAlSb', AlInSb)
-InGaSb = create_reversed_ternary('InGaSb', GaInSb)
+#GaAlSb = create_reversed_ternary('GaAlSb', AlGaSb)
+#InAlSb = create_reversed_ternary('InAlSb', AlInSb)
+#InGaSb = create_reversed_ternary('InGaSb', GaInSb)
 
 # Nitride Phosphides
-class AlNP(Ternary):
+class AlNP(Ternary2):
     name = 'AlNP'
     elements = ('Al', 'N', 'P')
-    element1 = 'N'
-    element2 = 'P'
-    binary1 = AlN
-    binary2 = AlP
+    binaries = (AlN, AlP)
 
-class GaNP(Ternary):
+class GaNP(Ternary2):
     name = 'GaNP'
     elements = ('Ga', 'N', 'P')
-    element1 = 'N'
-    element2 = 'P'
-    binary1 = GaN
-    binary2 = GaP
+    binaries = (GaN, GaP)
     _bowing_Eg_Gamma = 3.9 #eV    vurgaftman_band_2001
     _bowing_Eg_X = 10 #eV    vurgaftman_band_2001
 
-class InNP(Ternary):
+class InNP(Ternary2):
     name = 'InNP'
     elements = ('In', 'N', 'P')
-    element1 = 'N'
-    element2 = 'P'
-    binary1 = InN
-    binary2 = InP
+    binaries = (InN, InP)
     _bowing_Eg_Gamma = 15 #eV    vurgaftman_band_2001
 
-AlPN = create_reversed_ternary('AlPN', AlNP)
-GaPN = create_reversed_ternary('GaPN', GaNP)
-InPN = create_reversed_ternary('InPN', InNP)
+#AlPN = create_reversed_ternary('AlPN', AlNP)
+#GaPN = create_reversed_ternary('GaPN', GaNP)
+#InPN = create_reversed_ternary('InPN', InNP)
 
 # Nitride Arsenides
-class AlNAs(Ternary):
+class AlNAs(Ternary2):
     name = 'AlNAs'
     elements = ('Al', 'N', 'As')
-    element1 = 'N'
-    element2 = 'As'
-    binary1 = AlN
-    binary2 = AlAs
+    binaries = (AlN, AlAs)
 
-class GaNAs(Ternary):
+class GaNAs(Ternary2):
     name = 'GaNAs'
     elements = ('Ga', 'N', 'As')
-    element1 = 'N'
-    element2 = 'As'
-    binary1 = GaN
-    binary2 = GaAs
+    binaries = (GaN, GaAs)
     
     @classmethod
     def _bowing_Eg_Gamma(cls, x):
         return 120.4 - 100*x #eV    vurgaftman_band_2001
 
-class InNAs(Ternary):
+class InNAs(Ternary2):
     name = 'InNAs'
     elements = ('In', 'N', 'As')
-    element1 = 'N'
-    element2 = 'As'
-    binary1 = InN
-    binary2 = InAs
+    binaries = (InN, InAs)
     _bowing_Eg_Gamma = 4.22 #eV    vurgaftman_band_2001
 
-AlAsN = create_reversed_ternary('AlAsN', AlNAs)
-GaAsN = create_reversed_ternary('GaAsN', GaNAs)
-InAsN = create_reversed_ternary('InAsN', InNAs)
+#AlAsN = create_reversed_ternary('AlAsN', AlNAs)
+#GaAsN = create_reversed_ternary('GaAsN', GaNAs)
+#InAsN = create_reversed_ternary('InAsN', InNAs)
 
 # Phosphide Arsenides
-class AlPAs(Ternary):
+class AlPAs(Ternary2):
     name = 'AlPAs'
     elements = ('Al', 'P', 'As')
-    element1 = 'P'
-    element2 = 'As'
-    binary1 = AlP
-    binary2 = AlAs
+    binaries = (AlP, AlAs)
     _bowing_Eg_Gamma = 0.22 #eV    vurgaftman_band_2001
     _bowing_Eg_X = 0.22 #eV    vurgaftman_band_2001
     _bowing_Eg_L = 0.22 #eV    vurgaftman_band_2001
 
-class GaPAs(Ternary):
+class GaPAs(Ternary2):
     name = 'GaPAs'
     elements = ('Ga', 'P', 'As')
-    element1 = 'P'
-    element2 = 'As'
-    binary1 = GaP
-    binary2 = GaAs
+    binaries = (GaP, GaAs)
     _bowing_Eg_Gamma = 0.19 #eV    vurgaftman_band_2001
     _bowing_Eg_X = 0.24 #eV    vurgaftman_band_2001
     _bowing_Eg_L = 0.16 #eV    vurgaftman_band_2001
 
-class InPAs(Ternary):
+class InPAs(Ternary2):
     name = 'InPAs'
     elements = ('In', 'P', 'As')
-    element1 = 'P'
-    element2 = 'As'
-    binary1 = InP
-    binary2 = InAs
+    binaries = (InP, InAs)
     _bowing_Eg_Gamma = 0.1 #eV    vurgaftman_band_2001
     _bowing_Eg_X = 0.27 #eV    vurgaftman_band_2001
     _bowing_Eg_L = 0.27 #eV    vurgaftman_band_2001
     _bowing_Delta_SO = 0.16 #eV    vurgaftman_band_2001
 
-AlAsP = create_reversed_ternary('AlAsP', AlPAs)
-GaAsP = create_reversed_ternary('GaAsP', GaPAs)
-InAsP = create_reversed_ternary('InAsP', InPAs)
+#AlAsP = create_reversed_ternary('AlAsP', AlPAs)
+#GaAsP = create_reversed_ternary('GaAsP', GaPAs)
+#InAsP = create_reversed_ternary('InAsP', InPAs)
 
 # Phosphide Antimonides
-class AlPSb(Ternary):
+class AlPSb(Ternary2):
     name = 'AlPSb'
-    elements = ('Al', 'P', 'As')
-    element1 = 'P'
-    element2 = 'Sb'
-    binary1 = AlP
-    binary2 = AlSb
+    elements = ('Al', 'P', 'Sb')
+    binaries = (AlP, AlSb)
     _bowing_Eg_Gamma = 2.7 #eV    vurgaftman_band_2001
     _bowing_Eg_X = 2.7 #eV    vurgaftman_band_2001
     _bowing_Eg_L = 2.7 #eV    vurgaftman_band_2001
 
-class GaPSb(Ternary):
+class GaPSb(Ternary2):
     name = 'GaPSb'
-    elements = ('Ga', 'P', 'As')
-    element1 = 'P'
-    element2 = 'Sb'
-    binary1 = GaP
-    binary2 = GaSb
+    elements = ('Ga', 'P', 'Sb')
+    binaries = (GaP, GaSb)
     _bowing_Eg_Gamma = 2.7 #eV    vurgaftman_band_2001
     _bowing_Eg_X = 2.7 #eV    vurgaftman_band_2001
     _bowing_Eg_L = 2.7 #eV    vurgaftman_band_2001
 
-class InPSb(Ternary):
+class InPSb(Ternary2):
     name = 'InPSb'
-    elements = ('In', 'P', 'As')
-    element1 = 'P'
-    element2 = 'Sb'
-    binary1 = InP
-    binary2 = InSb
+    elements = ('In', 'P', 'Sb')
+    binaries = (InP, InSb)
     _bowing_Eg_Gamma = 1.9 #eV    vurgaftman_band_2001
     _bowing_Eg_X = 1.9 #eV    vurgaftman_band_2001
     _bowing_Eg_L = 1.9 #eV    vurgaftman_band_2001
     _bowing_Delta_SO = 0.75 #eV    vurgaftman_band_2001
 
-AlSbP = create_reversed_ternary('AlSbP', AlPSb)
-GaSbP = create_reversed_ternary('GaSbP', GaPSb)
-InSbP = create_reversed_ternary('InSbP', InPSb)
+#AlSbP = create_reversed_ternary('AlSbP', AlPSb)
+#GaSbP = create_reversed_ternary('GaSbP', GaPSb)
+#InSbP = create_reversed_ternary('InSbP', InPSb)
 
 # Arsenide Antimonides
-class AlAsSb(Ternary):
+class AlAsSb(Ternary2):
     name = 'AlAsSb'
     elements = ('Al', 'As', 'Sb')
-    element1 = 'As'
-    element2 = 'Sb'
-    binary1 = AlAs
-    binary2 = AlSb
+    binaries = (AlAs, AlSb)
     _bowing_Eg_Gamma = 0.8 #eV    vurgaftman_band_2001
     _bowing_Eg_X = 0.28 #eV    vurgaftman_band_2001
     _bowing_Eg_L = 0.28 #eV    vurgaftman_band_2001
     _bowing_Delta_SO = 0.15 #eV    vurgaftman_band_2001
     _bowing_VBO = -1.71 #eV    vurgaftman_band_2001
 
-class GaAsSb(Ternary):
+class GaAsSb(Ternary2):
     name = 'GaAsSb'
     elements = ('Ga', 'As', 'Sb')
-    element1 = 'As'
-    element2 = 'Sb'
-    binary1 = GaAs
-    binary2 = GaSb
+    binaries = (GaAs, GaSb)
     _bowing_Eg_Gamma = 1.43 #eV    vurgaftman_band_2001
     _bowing_Eg_X = 1.2 #eV    vurgaftman_band_2001
     _bowing_Eg_L = 1.2 #eV    vurgaftman_band_2001
     _bowing_Delta_SO = 0.6 #eV    vurgaftman_band_2001
     _bowing_VBO = -1.06 #eV    vurgaftman_band_2001
 
-class InAsSb(Ternary):
+class InAsSb(Ternary2):
     name = 'InAsSb'
     elements = ('In', 'As', 'Sb')
-    element1 = 'As'
-    element2 = 'Sb'
-    binary1 = InAs
-    binary2 = InSb
+    binaries = (InAs, InSb)
     _bowing_Eg_Gamma = 0.67 #eV    vurgaftman_band_2001
     _bowing_Eg_X = 0.6 #eV    vurgaftman_band_2001
     _bowing_Eg_L = 0.6 #eV    vurgaftman_band_2001
     _bowing_Delta_SO = 1.2 #eV    vurgaftman_band_2001
     _bowing_meff_e_Gamma = 0.035 #m_e    vurgaftman_band_2001
 
-AlSbAs = create_reversed_ternary('AlSbAs', AlAsSb)
-GaSbAs = create_reversed_ternary('GaSbAs', GaAsSb)
-InSbAs = create_reversed_ternary('InSbAs', InAsSb)
+#AlSbAs = create_reversed_ternary('AlSbAs', AlAsSb)
+#GaSbAs = create_reversed_ternary('GaSbAs', GaAsSb)
+#InSbAs = create_reversed_ternary('InSbAs', InAsSb)
 
 ternaries = [AlGaN,  AlInN,  GaInN,
              AlGaP,  AlInP,  GaInP,
@@ -401,16 +317,16 @@ ternaries = [AlGaN,  AlInN,  GaInN,
              AlPSb,  GaPSb,  InPSb,
              AlAsSb, GaAsSb, InAsSb]
 
-alternate_ternaries = [GaAlN,  InAlN,  InGaN,
-                       GaAlP,  InAlP,  InGaP,
-                       GaAlAs, InAlAs, InGaAs,
-                       GaAlSb, InAlSb, InGaSb,
-                       AlPN,   GaPN,   InPN,
-                       AlAsN,  GaAsN,  InAsN,
-                       AlAsP,  GaAsP,  InAsP,
-                       AlSbP,  GaSbP,  InSbP,
-                       AlSbAs, GaSbAs, InSbAs]
+#alternate_ternaries = [GaAlN,  InAlN,  InGaN,
+#                       GaAlP,  InAlP,  InGaP,
+#                       GaAlAs, InAlAs, InGaAs,
+#                       GaAlSb, InAlSb, InGaSb,
+#                       AlPN,   GaPN,   InPN,
+#                       AlAsN,  GaAsN,  InAsN,
+#                       AlAsP,  GaAsP,  InAsP,
+#                       AlSbP,  GaSbP,  InSbP,
+#                       AlSbAs, GaSbAs, InSbAs]
 
-__all__ = ['ternaries', 'alternate_ternaries']
+__all__ = ['ternaries'] #, 'alternate_ternaries']
 __all__ += [ternary.name for ternary in ternaries]
-__all__ += [ternary.name for ternary in alternate_ternaries]
+#__all__ += [ternary.name for ternary in alternate_ternaries]

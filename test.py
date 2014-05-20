@@ -17,23 +17,8 @@
 #   along with openbandparams.  If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
-
-from setuptools import setup, find_packages
-
-# read in __version__
-exec(open('src/openbandparams/version.py').read())
-
-setup(name='openbandparams',
-      version=__version__, # read from version.py
-      description='open source semiconductor band parameters',
-      url='http://scott-maddox.github.io/openbandparams',
-      author='Scott J. Maddox',
-      author_email='smaddox@utexas.edu',
-      license='AGPLv3',
-      packages=['openbandparams',
-                'openbandparams.tests',
-                'openbandparams.examples',
-                'openbandparams.iii_v',
-                'openbandparams.iii_v.zinc_blende'],
-      package_dir={'openbandparams': 'src/openbandparams'},
-      zip_safe=True)
+'''
+Find and run all unit tests in the project.
+'''
+import nose
+nose.main()

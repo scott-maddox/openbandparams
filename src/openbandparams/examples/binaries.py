@@ -21,6 +21,7 @@
 #from openbandparams.iii_v.zinc_blende.binary import *
 from openbandparams import *
 
+print 'Binary:', GaAs
 # Print an unformatted temperature dependent parameters
 print 'GaAs bandgap (at T = 300 K): ', GaAs.Eg(), 'eV'
 print ''
@@ -43,6 +44,6 @@ import string
 print ' Material | Lattice Param. [Ang] | Bandgap [eV]'
 print '------------------------------------------------'
 for mat in binaries:
-    print string.rjust(mat.name, 7),
+    print string.rjust(str(mat), 7),
     print '  | ', string.rjust('%.3f'%mat.a(), 12), ' '*4,
     print '  |    %.3f'%mat.Eg()

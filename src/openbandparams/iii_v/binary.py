@@ -27,7 +27,18 @@ import logging; log = logging.getLogger(__name__)
 from openbandparams.base_material import Base
 from openbandparams.equations import varshni
 
+class BinaryType(type):
+    def __str__(self):
+        return self.name
+    
+    def __repr__(self):
+        return self.name
+    
+    def __eq__(self, other):
+        return (type(self) == type(other))
+
 class Binary(Base):
+    __metaclass__ = BinaryType
     
     # All methods should be class methods so that they can reference
     # parameters defined by subclasses.

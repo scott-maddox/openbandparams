@@ -73,6 +73,12 @@ for binary in [AlP, GaP, InP,
         a_strained = a_0 * ( 1 - eps_xx )
         # 2. relative to a_strianed [ eps = ( a0 - ax ) / ax ]:
         #a_strained = a_0 / ( eps_xx + 1 )
+        # Note: I'm implicitly assuming growth is on the (100) surface.
+        # Growth on other surfaces will have different strain effects.
+        # This is approach is probably also not directly applicable to
+        # ternaries or quaternaries near transitions to indirect gap,
+        # since the various conduction band valleys react differently
+        # to strain.
         eps_zz = -2. * c_12 / c_11 * eps_xx
         dE_c = a_c * ( 2 * eps_xx + eps_zz )
         P_eps = -a_v * ( 2 * eps_xx + eps_zz )
