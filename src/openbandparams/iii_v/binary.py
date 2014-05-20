@@ -24,6 +24,7 @@ import logging; log = logging.getLogger(__name__)
 # third party imports
 
 # local imports
+from openbandparams.utils import classinstancemethod
 from openbandparams.base_material import Base
 from openbandparams.equations import varshni
 
@@ -42,6 +43,12 @@ class Binary(Base):
     
     # All methods should be class methods so that they can reference
     # parameters defined by subclasses.
+    @classinstancemethod
+    def LaTeX(self, cls):
+        if self is not None:
+            return self.name
+        else:
+            return cls.name
     
     @classmethod
     def elementFraction(cls, element):

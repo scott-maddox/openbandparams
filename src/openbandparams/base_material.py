@@ -25,6 +25,13 @@ import logging; log = logging.getLogger(__name__)
 
 # local imports
 
+class BaseType(type):
+    def __str__(self):
+        return self.name
+    
+    def __repr__(self):
+        return self.name
+
 class Base(object):
     
     name = 'Base'

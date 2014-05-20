@@ -23,60 +23,34 @@
 # third party imports
 
 # local imports
-from openbandparams.base_material import AlloyBase
+from openbandparams.base_material import BaseType, AlloyBase
 from openbandparams.utils import classinstancemethod
 from openbandparams.algorithms import bisect
 
-class Quaternary1or2Type(type):
+class Quaternary1or2Type(BaseType):
     def __getattr__(self, name):
         # acts like a class method for Quaternary.__getattr__
-        if (hasattr(self.ternary1, name) and
-            hasattr(self.ternary2, name) and
-            hasattr(self.ternary3, name)):
+        if (hasattr(self.ternaries[0], name) and
+            hasattr(self.ternaries[1], name) and
+            hasattr(self.ternaries[2], name)):
             def _param_accessor(**kwargs):
                 return self._interpolate(name, **kwargs)
             return _param_accessor
         else:
             raise AttributeError(name)
 
-class Quaternary1Type(Quaternary1or2Type):
-    def __str__(self):
-        e1 = self.element1
-        e2 = self.element2
-        e3 = self.element3
-        e4 = self.element4
-        return "{A}{B}_{{x}}{C}_{{y}}{D}_{{1-x-y}}".format(
-                                              A=e1, B=e2, C=e3, D=e4)
-
-class Quaternary2Type(Quaternary1or2Type):
-    def __str__(self):
-        e1 = self.element1
-        e2 = self.element2
-        e3 = self.element3
-        e4 = self.element4
-        return "{A}_{{x}}{B}_{{y}}{C}_{{1-x-y}}{D}".format(
-                                              A=e1, B=e2, C=e3, D=e4)
-
-class Quaternary3Type(type):
+class Quaternary3Type(BaseType):
     def __getattr__(self, name):
         # acts like a class method for Quaternary3.__getattr__
-        if (hasattr(self.ternary1, name) and
-            hasattr(self.ternary2, name) and
-            hasattr(self.ternary3, name) and
-            hasattr(self.ternary4, name)):
+        if (hasattr(self.ternaries[0], name) and
+            hasattr(self.ternaries[1], name) and
+            hasattr(self.ternaries[2], name) and
+            hasattr(self.ternaries[3], name)):
             def _param_accessor(**kwargs):
                 return self._interpolate(name, **kwargs)
             return _param_accessor
         else:
             raise AttributeError(name)
-    
-    def __str__(self):
-        e1 = self.element1
-        e2 = self.element2
-        e3 = self.element3
-        e4 = self.element4
-        return "{A}_{{x}}{B}_{{1-x}}{C}_{{y}}{D}_{{1-y}}".format(
-                                              A=e1, B=e2, C=e3, D=e4)
 
 class Quaternary(AlloyBase):
     @classinstancemethod
@@ -110,15 +84,16 @@ class Quaternary1or2(Quaternary):
     alloys of the form Ax By Cz D or A Bx Cy Dz," JEM, vol. 7, no. 5,
     pp. 639-646, Sep. 1978.
     '''
+    __metaclass__ = Quaternary1or2Type
     
     def __init__(self, **kwargs):
         Quaternary.__init__(self)
         self._x, self._y, self._z = self._get_xyz(kwargs)
 
     def __getattr__(self, name):
-        if (hasattr(self.ternary1, name) and
-            hasattr(self.ternary2, name) and
-            hasattr(self.ternary3, name)):
+        if (hasattr(self.ternaries[0], name) and
+            hasattr(self.ternaries[1], name) and
+            hasattr(self.ternaries[2], name)):
             def _param_accessor(**kwargs):
                 return self._interpolate(name, **kwargs)
             return _param_accessor
@@ -211,7 +186,7 @@ class Quaternary1or2(Quaternary):
             x, y, z = cls._get_xyz(kwargs)
             
         vals = []
-        for t in [cls.ternary1, cls.ternary2, cls.ternary3]:
+        for t in [cls.ternaries[0], cls.ternaries[1], cls.ternaries[2]]:
             try:
                 vals.append(getattr(t, param))
             except AttributeError as e:
@@ -252,12 +227,8 @@ class Quaternary1or2(Quaternary):
             return num / denom
 
 # Type 1: AB_{x}C_{y}D_{1-x-y}
-# binary1 = AB
-# binary2 = AC
-# binary3 = AD
-# ternary1 = t12
-# ternary2 = t13
-# ternary3 = t23
+# binaryies = (AB, AC, AD)
+# ternaries = (ABC, ABD ,ACD)
 class Quaternary1(Quaternary1or2):
     '''
     For alloys of the AB_{x}C_{y}D_{1-x-y} type [1], where A is the only
@@ -268,33 +239,42 @@ class Quaternary1(Quaternary1or2):
     alloys of the form Ax By Cz D or A Bx Cy Dz," JEM, vol. 7, no. 5,
     pp. 639-646, Sep. 1978.
     '''
-    __metaclass__ = Quaternary1Type
-
-    def __str__(self):
-        e1 = self.element1
-        e2 = self.element2
-        e3 = self.element3
-        e4 = self.element4
-        f2 = self.elementFraction(e2)
-        f3 = self.elementFraction(e3)
-        f4 = self.elementFraction(e4)
-        return "{A}{B}_{{{:g}}}{C}_{{{:g}}}{D}_{{{:g}}}".format(
-                                              f2, f3, f4,
-                                              A=e1, B=e2, C=e3, D=e4)
+    
     def __repr__(self):
-        e1 = self.element1
-        e2 = self.element2
-        e3 = self.element3
-        e4 = self.element4
+        e1 = self.elements[0]
+        e2 = self.elements[1]
+        e3 = self.elements[2]
+        e4 = self.elements[3]
         f2 = self.elementFraction(e2)
         f3 = self.elementFraction(e3)
         return "{A}{B}{C}{D}({B}={:g}, {C}={:g})".format(f2, f3,
                                                  A=e1, B=e2, C=e3, D=e4)
+
+    @classinstancemethod
+    def LaTeX(self, cls):
+        if self is not None:
+            e1 = self.elements[0]
+            e2 = self.elements[1]
+            e3 = self.elements[2]
+            e4 = self.elements[3]
+            f2 = self.elementFraction(e2)
+            f3 = self.elementFraction(e3)
+            f4 = self.elementFraction(e4)
+            return "{A}{B}_{{{:g}}}{C}_{{{:g}}}{D}_{{{:g}}}".format(
+                                                  f2, f3, f4,
+                                                  A=e1, B=e2, C=e3, D=e4)
+        else:
+            e1 = cls.elements[0]
+            e2 = cls.elements[1]
+            e3 = cls.elements[2]
+            e4 = cls.elements[3]
+            return "{A}{B}_{{x}}{C}_{{y}}{D}_{{1-x-y}}".format(
+                                                  A=e1, B=e2, C=e3, D=e4)
     
     @classmethod
     def _has_x(cls, kwargs):
         '''Returns True if x is explicitly defined in kwargs'''
-        return ('x' in kwargs) or (cls.element2 in kwargs)
+        return ('x' in kwargs) or (cls.elements[1] in kwargs)
     
     @classmethod
     def _get_x(cls, kwargs):
@@ -304,16 +284,16 @@ class Quaternary1(Quaternary1or2):
         '''
         if 'x' in kwargs:
             return round(float(kwargs['x']), 6)
-        elif cls.element2 in kwargs:
-            return round(float(kwargs[cls.element2]), 6)
+        elif cls.elements[1] in kwargs:
+            return round(float(kwargs[cls.elements[1]]), 6)
         else:
             raise TypeError("Neither 'x' nor '{}' are in kwargs"
-                            "".format(cls.element2))
+                            "".format(cls.elements[1]))
     
     @classmethod
     def _has_y(cls, kwargs):
         '''Returns True if y is explicitly defined in kwargs'''
-        return ('y' in kwargs) or (cls.element3 in kwargs)
+        return ('y' in kwargs) or (cls.elements[2] in kwargs)
     
     @classmethod
     def _get_y(cls, kwargs):
@@ -323,16 +303,16 @@ class Quaternary1(Quaternary1or2):
         '''
         if 'y' in kwargs:
             return round(float(kwargs['y']), 6)
-        elif cls.element3 in kwargs:
-            return round(float(kwargs[cls.element3]), 6)
+        elif cls.elements[2] in kwargs:
+            return round(float(kwargs[cls.elements[2]]), 6)
         else:
             raise TypeError("Neither 'y' nor '{}' are in kwargs"
-                            "".format(cls.element3))
+                            "".format(cls.elements[2]))
     
     @classmethod
     def _has_z(cls, kwargs):
         '''Returns True if z is explicitly defined in kwargs'''
-        return ('z' in kwargs) or (cls.element4 in kwargs)
+        return ('z' in kwargs) or (cls.elements[3] in kwargs)
     
     @classmethod
     def _get_z(cls, kwargs):
@@ -342,11 +322,11 @@ class Quaternary1(Quaternary1or2):
         '''
         if 'z' in kwargs:
             return round(float(kwargs['z']), 6)
-        elif cls.element4 in kwargs:
-            return round(float(kwargs[cls.element4]), 6)
+        elif cls.elements[3] in kwargs:
+            return round(float(kwargs[cls.elements[3]]), 6)
         else:
             raise TypeError("Neither 'z' nor '{}' are in kwargs"
-                            "".format(cls.element4))
+                            "".format(cls.elements[3]))
     
     @classmethod
     def _get_usage(cls):
@@ -357,30 +337,26 @@ class Quaternary1(Quaternary1or2):
                 "\n    - 'a' and 'T' and ('x' or '{2}')"
                 "\n    - 'a' and 'T' and ('y' or '{3}')"
                 "\n    - 'a' and 'T' and ('z' or '{4}')"
-                            "".format(None, cls.element1, cls.element2,
-                                            cls.element3, cls.element4))
+                            "".format(None, cls.elements[0], cls.elements[1],
+                                            cls.elements[2], cls.elements[3]))
 
     @classinstancemethod
     def elementFraction(self, cls, element):
         # AB_{x}C_{y}D_{1-x-y}
-        if element == cls.element1:
+        if element == cls.elements[0]:
             return 1
-        elif element == cls.element2:
+        elif element == cls.elements[1]:
             return self._x
-        elif element == cls.element3:
+        elif element == cls.elements[2]:
             return self._y
-        elif element == cls.element4:
+        elif element == cls.elements[3]:
             return self._z
         else:
             return 0
 
 # Type 2: A_{x}B_{y}C_{1-x-y}D
-# binary1 = AD
-# binary2 = BD
-# binary3 = CD
-# ternary1 = ABD
-# ternary2 = ACD
-# ternary3 = BCD
+# binaries = (AD, BD, CD)
+# ternaries = (ABD, ACD, BCD)
 class Quaternary2(Quaternary1or2):
     '''
     For alloys of the A_{x}B_{y}C_{1-x-y}D type [1], where D is the only
@@ -391,33 +367,42 @@ class Quaternary2(Quaternary1or2):
     alloys of the form Ax By Cz D or A Bx Cy Dz," JEM, vol. 7, no. 5,
     pp. 639-646, Sep. 1978.
     '''
-    __metaclass__ = Quaternary2Type
 
-    def __str__(self):
-        e1 = self.element1
-        e2 = self.element2
-        e3 = self.element3
-        e4 = self.element4
-        f1 = self.elementFraction(e1)
-        f2 = self.elementFraction(e2)
-        f3 = self.elementFraction(e3)
-        return "{A}_{{{:g}}}{B}_{{{:g}}}{C}_{{{:g}}}{D}".format(
-                                              f1, f2, f3,
-                                              A=e1, B=e2, C=e3, D=e4)
     def __repr__(self):
-        e1 = self.element1
-        e2 = self.element2
-        e3 = self.element3
-        e4 = self.element4
+        e1 = self.elements[0]
+        e2 = self.elements[1]
+        e3 = self.elements[2]
+        e4 = self.elements[3]
         f1 = self.elementFraction(e1)
         f2 = self.elementFraction(e2)
         return "{A}{B}{C}{D}({A}={:g}, {B}={:g})".format(f1, f2,
                                                  A=e1, B=e2, C=e3, D=e4)
+
+    @classinstancemethod
+    def LaTeX(self, cls):
+        if self is not None:
+            e1 = self.elements[0]
+            e2 = self.elements[1]
+            e3 = self.elements[2]
+            e4 = self.elements[3]
+            f1 = self.elementFraction(e1)
+            f2 = self.elementFraction(e2)
+            f3 = self.elementFraction(e3)
+            return "{A}_{{{:g}}}{B}_{{{:g}}}{C}_{{{:g}}}{D}".format(
+                                                  f1, f2, f3,
+                                                  A=e1, B=e2, C=e3, D=e4)
+        else:
+            e1 = cls.elements[0]
+            e2 = cls.elements[1]
+            e3 = cls.elements[2]
+            e4 = cls.elements[3]
+            return "{A}_{{x}}{B}_{{y}}{C}_{{1-x-y}}{D}".format(
+                                                  A=e1, B=e2, C=e3, D=e4)
     
     @classmethod
     def _has_x(cls, kwargs):
         '''Returns True if x is explicitly defined in kwargs'''
-        return ('x' in kwargs) or (cls.element1 in kwargs)
+        return ('x' in kwargs) or (cls.elements[0] in kwargs)
     
     @classmethod
     def _get_x(cls, kwargs):
@@ -427,16 +412,16 @@ class Quaternary2(Quaternary1or2):
         '''
         if 'x' in kwargs:
             return round(float(kwargs['x']), 6)
-        elif cls.element1 in kwargs:
-            return round(float(kwargs[cls.element1]), 6)
+        elif cls.elements[0] in kwargs:
+            return round(float(kwargs[cls.elements[0]]), 6)
         else:
             raise TypeError("Neither 'x' nor '{}' are in kwargs"
-                            "".format(cls.element1))
+                            "".format(cls.elements[0]))
     
     @classmethod
     def _has_y(cls, kwargs):
         '''Returns True if y is explicitly defined in kwargs'''
-        return ('y' in kwargs) or (cls.element2 in kwargs)
+        return ('y' in kwargs) or (cls.elements[1] in kwargs)
     
     @classmethod
     def _get_y(cls, kwargs):
@@ -446,16 +431,16 @@ class Quaternary2(Quaternary1or2):
         '''
         if 'y' in kwargs:
             return round(float(kwargs['y']), 6)
-        elif cls.element2 in kwargs:
-            return round(float(kwargs[cls.element2]), 6)
+        elif cls.elements[1] in kwargs:
+            return round(float(kwargs[cls.elements[1]]), 6)
         else:
             raise TypeError("Neither 'y' nor '{}' are in kwargs"
-                            "".format(cls.element2))
+                            "".format(cls.elements[1]))
     
     @classmethod
     def _has_z(cls, kwargs):
         '''Returns True if z is explicitly defined in kwargs'''
-        return ('z' in kwargs) or (cls.element3 in kwargs)
+        return ('z' in kwargs) or (cls.elements[2] in kwargs)
     
     @classmethod
     def _get_z(cls, kwargs):
@@ -465,11 +450,11 @@ class Quaternary2(Quaternary1or2):
         '''
         if 'z' in kwargs:
             return round(float(kwargs['z']), 6)
-        elif cls.element3 in kwargs:
-            return round(float(kwargs[cls.element3]), 6)
+        elif cls.elements[2] in kwargs:
+            return round(float(kwargs[cls.elements[2]]), 6)
         else:
             raise TypeError("Neither 'z' nor '{}' are in kwargs"
-                            "".format(cls.element3))
+                            "".format(cls.elements[2]))
     
     @classmethod
     def _get_usage(cls):
@@ -480,32 +465,26 @@ class Quaternary2(Quaternary1or2):
                 "\n    - 'a' and 'T' and ('x' or '{1}')"
                 "\n    - 'a' and 'T' and ('y' or '{2}')"
                 "\n    - 'a' and 'T' and ('z' or '{3}')"
-                            "".format(None, cls.element1, cls.element2,
-                                            cls.element3, cls.element4))
+                            "".format(None, cls.elements[0], cls.elements[1],
+                                            cls.elements[2], cls.elements[3]))
 
     @classinstancemethod
     def elementFraction(self, cls, element):
         # A_{x}B_{y}C_{1-x-y}D
-        if element == cls.element1:
+        if element == cls.elements[0]:
             return self._x
-        elif element == cls.element2:
+        elif element == cls.elements[1]:
             return self._y
-        elif element == cls.element3:
+        elif element == cls.elements[2]:
             return self._z
-        elif element == cls.element4:
+        elif element == cls.elements[3]:
             return 1
         else:
             return 0
 
 # Type 3: A_{x}B_{1-x}C_{y}D_{1-y}
-# binary1 = AC
-# binary2 = AD
-# binary3 = BC
-# binary4 = BD
-# ternary1 = ABC
-# ternary2 = ABD
-# ternary3 = ACD
-# ternary4 = BCD
+# binaries = (AC, AD, BC, BD)
+# ternaries = (ABC, ABD, ACD, BCD)
 class Quaternary3(Quaternary):
     '''
     For alloys of the A_{x}B_{1-x}C_{y}D_{1-y} type [1-2]. Where A and B are
@@ -528,46 +507,56 @@ class Quaternary3(Quaternary):
         self._y = self._get_y(kwargs)
 
     def __getattr__(self, name):
-        if (hasattr(self.ternary1, name) and
-            hasattr(self.ternary2, name) and
-            hasattr(self.ternary3, name) and
-            hasattr(self.ternary4, name)):
+        if (hasattr(self.ternaries[0], name) and
+            hasattr(self.ternaries[1], name) and
+            hasattr(self.ternaries[2], name) and
+            hasattr(self.ternaries[3], name)):
             def _param_accessor(**kwargs):
                 return self._interpolate(name, **kwargs)
             return _param_accessor
         else:
             raise AttributeError(name)
 
-    def __str__(self):
-        e1 = self.element1
-        e2 = self.element2
-        e3 = self.element3
-        e4 = self.element4
-        f1 = self.elementFraction(e1)
-        f2 = self.elementFraction(e2)
-        f3 = self.elementFraction(e3)
-        f4 = self.elementFraction(e4)
-        return "{A}_{{{:g}}}{B}_{{{:g}}}{C}_{{{:g}}}{D}_{{{:g}}}".format(
-                                              f1, f2, f3, f4,
-                                              A=e1, B=e2, C=e3, D=e4)
     def __repr__(self):
-        e1 = self.element1
-        e2 = self.element2
-        e3 = self.element3
-        e4 = self.element4
+        e1 = self.elements[0]
+        e2 = self.elements[1]
+        e3 = self.elements[2]
+        e4 = self.elements[3]
         f1 = self.elementFraction(e1)
         f3 = self.elementFraction(e3)
         return "{A}{B}{C}{D}({A}={:g}, {C}={:g})".format(f1, f3,
                                                  A=e1, B=e2, C=e3, D=e4)
-    
+
+    @classinstancemethod
+    def LaTeX(self, cls):
+        if self is not None:
+            e1 = self.elements[0]
+            e2 = self.elements[1]
+            e3 = self.elements[2]
+            e4 = self.elements[3]
+            f1 = self.elementFraction(e1)
+            f2 = self.elementFraction(e2)
+            f3 = self.elementFraction(e3)
+            f4 = self.elementFraction(e4)
+            return "{A}_{{{:g}}}{B}_{{{:g}}}{C}_{{{:g}}}{D}_{{{:g}}}".format(
+                                                  f1, f2, f3, f4,
+                                                  A=e1, B=e2, C=e3, D=e4)
+        else:
+            e1 = cls.elements[0]
+            e2 = cls.elements[1]
+            e3 = cls.elements[2]
+            e4 = cls.elements[3]
+            return "{A}_{{x}}{B}_{{1-x}}{C}_{{y}}{D}_{{1-y}}".format(
+                                                  A=e1, B=e2, C=e3, D=e4)
+
     @classmethod
     def _get_x(cls, kwargs):
         if 'x' in kwargs:
             return round(float(kwargs['x']), 6)
-        elif cls.element1 in kwargs:
-            return round(float(kwargs[cls.element1]), 6)
-        elif cls.element2 in kwargs:
-            return 1 - round(float(kwargs[cls.element2]), 6)
+        elif cls.elements[0] in kwargs:
+            return round(float(kwargs[cls.elements[0]]), 6)
+        elif cls.elements[1] in kwargs:
+            return 1 - round(float(kwargs[cls.elements[1]]), 6)
         elif 'a' in kwargs:
             # lattice match to the given lattice constant
             y = cls._get_y(kwargs) # need the other composition fixed
@@ -587,17 +576,17 @@ class Quaternary3(Quaternary):
             return x
         else:
             raise TypeError("Missing required key word argument."
-                            "'x', '%s', or '%s' is needed."%(cls.element1,
-                                                             cls.element2))
+                            "'x', '%s', or '%s' is needed."%(cls.elements[0],
+                                                             cls.elements[1]))
     
     @classmethod
     def _get_y(cls, kwargs):
         if 'y' in kwargs:
             return round(float(kwargs['y']), 6)
-        elif cls.element3 in kwargs:
-            return round(float(kwargs[cls.element3]), 6)
-        elif cls.element4 in kwargs:
-            return 1 - round(float(kwargs[cls.element4]), 6)
+        elif cls.elements[2] in kwargs:
+            return round(float(kwargs[cls.elements[2]]), 6)
+        elif cls.elements[3] in kwargs:
+            return 1 - round(float(kwargs[cls.elements[3]]), 6)
         elif 'a' in kwargs:
             # lattice match to the given lattice constant
             x = cls._get_x(kwargs) # need the other composition fixed
@@ -617,8 +606,8 @@ class Quaternary3(Quaternary):
             return y
         else:
             raise TypeError("Missing required key word argument."
-                            "'x', '%s', or '%s' is needed."%(cls.element3,
-                                                             cls.element4))
+                            "'x', '%s', or '%s' is needed."%(cls.elements[2],
+                                                             cls.elements[3]))
     
     @classinstancemethod
     def _interpolate(self, cls, param, **kwargs):
@@ -630,7 +619,8 @@ class Quaternary3(Quaternary):
             y = cls._get_y(kwargs)
             
         vals = []
-        for t in [cls.ternary1, cls.ternary2, cls.ternary3, cls.ternary4]:
+        for t in [cls.ternaries[0], cls.ternaries[1],
+                  cls.ternaries[2], cls.ternaries[3]]:
             try:
                 vals.append(getattr(t, param))
             except AttributeError as e:
@@ -669,13 +659,13 @@ class Quaternary3(Quaternary):
     
     @classinstancemethod
     def elementFraction(self, cls, element):
-        if element == cls.element1:
+        if element == cls.elements[0]:
             return self._x
-        elif element == cls.element2:
+        elif element == cls.elements[1]:
             return (1 - self._x)
-        elif element == cls.element3:
+        elif element == cls.elements[2]:
             return self._y
-        elif element == cls.element4:
+        elif element == cls.elements[3]:
             return (1 - self._y)
         else:
             return 0

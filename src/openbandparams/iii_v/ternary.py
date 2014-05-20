@@ -24,11 +24,11 @@ import logging; log = logging.getLogger(__name__)
 # third party imports
 
 # local imports
-from openbandparams.base_material import AlloyBase
+from openbandparams.base_material import BaseType, AlloyBase
 from openbandparams.utils import classinstancemethod
 from openbandparams.algorithms import bisect
 
-class TernaryType(type):
+class TernaryType(BaseType):
     def __getattr__(self, name):
         # acts like a class method for the Ternary class
         if (hasattr(self.binaries[0], name) and
@@ -38,12 +38,6 @@ class TernaryType(type):
             return _param_accessor
         else:
             raise AttributeError(name)
-    
-    def __str__(self):
-        return self.name
-    
-    def __repr__(self):
-        return self.name
 
 class Ternary(AlloyBase):
     __metaclass__ = TernaryType
