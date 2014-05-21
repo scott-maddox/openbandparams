@@ -21,6 +21,7 @@
 from openbandparams.iii_v.zinc_blende.binary import GaAs, AlAs
 from openbandparams.iii_v.zinc_blende.quaternary import (quaternaries,
     AlGaInAs, AlPAsSb, AlGaAsSb, GaPAsSb, AlGaInSb, AlGaPAs)
+from openbandparams.iii_v.zinc_blende.quaternary import *
 import unittest
 
 

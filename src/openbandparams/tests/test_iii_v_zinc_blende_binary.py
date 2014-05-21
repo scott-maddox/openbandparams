@@ -19,6 +19,7 @@
 #############################################################################
 
 from openbandparams.iii_v.zinc_blende.binary import binaries, GaAs, InAs
+from openbandparams.iii_v.zinc_blende.binary import *
 import unittest
 
 
