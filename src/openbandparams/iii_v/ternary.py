@@ -153,7 +153,7 @@ class Ternary1(Ternary):
         elif 'a' in kwargs:
             # lattice match to the given lattice constant
             if 'T' not in kwargs:
-                raise ValueError('Lattice matching temperature, T, missing.')
+                raise TypeError('Lattice matching temperature, T, missing.')
             a = kwargs['a']
             T = kwargs['T']
             # make sure the lattice constant is available
@@ -209,7 +209,7 @@ class Ternary2(Ternary):
         elif 'a' in kwargs:
             # lattice match to the given lattice constant
             if 'T' not in kwargs:
-                raise ValueError('Lattice matching temperature, T, missing.')
+                raise TypeError('Lattice matching temperature, T, missing.')
             a = kwargs['a']
             T = kwargs['T']
             # make sure the lattice constant is available

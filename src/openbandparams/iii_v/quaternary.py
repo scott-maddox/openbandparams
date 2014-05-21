@@ -27,6 +27,7 @@ from openbandparams.base_material import BaseType, AlloyBase
 from openbandparams.utils import classinstancemethod
 from openbandparams.algorithms import bisect
 
+
 class Quaternary1or2Type(BaseType):
     def __getattr__(self, name):
         # acts like a class method for Quaternary.__getattr__
@@ -38,6 +39,7 @@ class Quaternary1or2Type(BaseType):
             return _param_accessor
         else:
             raise AttributeError(name)
+
 
 class Quaternary3Type(BaseType):
     def __getattr__(self, name):
@@ -51,6 +53,7 @@ class Quaternary3Type(BaseType):
             return _param_accessor
         else:
             raise AttributeError(name)
+
 
 class Quaternary(AlloyBase):
     @classinstancemethod
@@ -68,24 +71,25 @@ class Quaternary(AlloyBase):
             T = cls._get_T(kwargs)
             return min(cls.Eg_Gamma(x=x, y=y, T=T), cls.Eg_X(x=x, y=y, T=T),
                        cls.Eg_L(x=x, y=y, T=T))
-    
+
     def __eq__(self, other):
         return (type(self) == type(other) and
                 self._x == other._x and
                 self._y == other._y)
 
+
 class Quaternary1or2(Quaternary):
     '''
     For alloys of the AB_{x}C_{y}D_{1-x-y} and A_{x}B_{y}C_{1-x-y}D types [1].
     These require only three ternaries for interpolation.
-    
+
     [1] C. K. Williams, T. H. Glisson, J. R. Hauser, and M. A. Littlejohn,
     "Energy bandgap and lattice constant contours of iii-v quaternary
     alloys of the form Ax By Cz D or A Bx Cy Dz," JEM, vol. 7, no. 5,
     pp. 639-646, Sep. 1978.
     '''
     __metaclass__ = Quaternary1or2Type
-    
+
     def __init__(self, **kwargs):
         Quaternary.__init__(self)
         self._x, self._y, self._z = self._get_xyz(kwargs)
@@ -99,13 +103,13 @@ class Quaternary1or2(Quaternary):
             return _param_accessor
         else:
             raise AttributeError(name)
-    
+
     @classmethod
     def _validate_xyz(cls, x, y, z):
         assert x >= 0. and x <= 1.
         assert y >= 0. and y <= 1.
         assert z >= 0. and z <= 1.
-        
+
     @classmethod
     def _get_xyz(cls, kwargs):
         if cls._has_x(kwargs) and cls._has_y(kwargs):
@@ -131,46 +135,46 @@ class Quaternary1or2(Quaternary):
                                          z=cls._get_z(kwargs))
         else:
             raise TypeError(
-                "Missing required key word argument.\n"+cls._get_usage())
+                "Missing required key word argument.\n" + cls._get_usage())
         cls._validate_xyz(x, y, z)
         return x, y, z
-    
+
     @classmethod
     def _lattice_match(cls, a, T, x=None, y=None, z=None):
         if x is not None:
             # make sure the lattice constant is in range
             a1 = cls.a(x=x, y=0, T=T)
-            a2 = cls.a(x=x, y=(1-x), T=T)
+            a2 = cls.a(x=x, y=(1 - x), T=T)
             amin = min(a1, a2)
             amax = max(a1, a2)
             if a < amin or a > amax:
-                raise ValueError('a out of range [%.3f, %.3f]'%(amin, amax))
+                raise ValueError('a out of range [%.3f, %.3f]' % (amin, amax))
             # find the correct y composition
-            y = bisect(func=lambda y: cls.a(x=x, y=y, T=T) - a, a=0, b=(1-x))
+            y = bisect(func=lambda y: cls.a(x=x, y=y, T=T) - a, a=0, b=(1 - x))
             z = round(1 - x - y, 6)
             return x, y, z
         elif y is not None:
             # make sure the lattice constant is in range
             a1 = cls.a(x=0, y=y, T=T)
-            a2 = cls.a(x=(1-y), y=y, T=T)
+            a2 = cls.a(x=(1 - y), y=y, T=T)
             amin = min(a1, a2)
             amax = max(a1, a2)
             if a < amin or a > amax:
-                raise ValueError('a out of range [%.3f, %.3f]'%(amin, amax))
+                raise ValueError('a out of range [%.3f, %.3f]' % (amin, amax))
             # find the correct y composition
-            x = bisect(func=lambda x: cls.a(x=x, y=y, T=T) - a, a=0, b=(1-y))
+            x = bisect(func=lambda x: cls.a(x=x, y=y, T=T) - a, a=0, b=(1 - y))
             z = round(1 - x - y, 6)
             return x, y, z
         elif z is not None:
             # make sure the lattice constant is in range
             a1 = cls.a(x=0, z=z, T=T)
-            a2 = cls.a(x=(1-z), z=z, T=T)
+            a2 = cls.a(x=(1 - z), z=z, T=T)
             amin = min(a1, a2)
             amax = max(a1, a2)
             if a < amin or a > amax:
-                raise ValueError('a out of range [%.3f, %.3f]'%(amin, amax))
+                raise ValueError('a out of range [%.3f, %.3f]' % (amin, amax))
             # find the correct y composition
-            x = bisect(func=lambda x: cls.a(x=x, z=z, T=T) - a, a=0, b=(1-z))
+            x = bisect(func=lambda x: cls.a(x=x, z=z, T=T) - a, a=0, b=(1 - z))
             y = round(1 - x - z, 6)
             return x, y, z
         else:
@@ -184,14 +188,14 @@ class Quaternary1or2(Quaternary):
             z = self._z
         else:
             x, y, z = cls._get_xyz(kwargs)
-            
+
         vals = []
         for t in [cls.ternaries[0], cls.ternaries[1], cls.ternaries[2]]:
             try:
                 vals.append(getattr(t, param))
             except AttributeError as e:
-                e.message +='. Ternary `%s`'%t.name
-                e.message +=' missing param `%s`'%param
+                e.message += '. Ternary `%s`' % t.name
+                e.message += ' missing param `%s`' % param
                 raise e
         if param[0] == '_':
             # assume it's a hard coded parameter if it starts with '_'
@@ -202,9 +206,9 @@ class Quaternary1or2(Quaternary):
             # otherwise it's an accessor function.
             # See the reference in this class's docstring for more
             # information about the interpolation method.
-            u = ( 1. + x - y ) / 2.
-            v = ( 1. + y - z ) / 2.
-            w = ( 1. + x - z ) / 2.
+            u = (1. + x - y) / 2.
+            v = (1. + y - z) / 2.
+            w = (1. + x - z) / 2.
             new_kwargs = dict(kwargs)
             new_kwargs['x'] = u
             t12 = vals[0](**new_kwargs)
@@ -212,9 +216,9 @@ class Quaternary1or2(Quaternary):
             t13 = vals[1](**new_kwargs)
             new_kwargs['x'] = v
             t23 = vals[2](**new_kwargs)
-        weight12 = x*y
-        weight13 = x*z
-        weight23 = y*z
+        weight12 = x * y
+        weight13 = x * z
+        weight23 = y * z
         denom = weight12 + weight13 + weight23
         if denom == 0.:
             # handle this explicitly, so there's no divide by zero
@@ -223,8 +227,9 @@ class Quaternary1or2(Quaternary):
             else:
                 return t13
         else:
-            num = weight12*t12 + weight13*t13 + weight23*t23
+            num = weight12 * t12 + weight13 * t13 + weight23 * t23
             return num / denom
+
 
 # Type 1: AB_{x}C_{y}D_{1-x-y}
 # binaryies = (AB, AC, AD)
@@ -233,13 +238,13 @@ class Quaternary1(Quaternary1or2):
     '''
     For alloys of the AB_{x}C_{y}D_{1-x-y} type [1], where A is the only
     Group III element. These require only three ternaries for interpolation.
-    
+
     [1] C. K. Williams, T. H. Glisson, J. R. Hauser, and M. A. Littlejohn,
     "Energy bandgap and lattice constant contours of iii-v quaternary
     alloys of the form Ax By Cz D or A Bx Cy Dz," JEM, vol. 7, no. 5,
     pp. 639-646, Sep. 1978.
     '''
-    
+
     def __repr__(self):
         e1 = self.elements[0]
         e2 = self.elements[1]
@@ -270,12 +275,12 @@ class Quaternary1(Quaternary1or2):
             e4 = cls.elements[3]
             return "{A}{B}_{{x}}{C}_{{y}}{D}_{{1-x-y}}".format(
                                                   A=e1, B=e2, C=e3, D=e4)
-    
+
     @classmethod
     def _has_x(cls, kwargs):
         '''Returns True if x is explicitly defined in kwargs'''
         return ('x' in kwargs) or (cls.elements[1] in kwargs)
-    
+
     @classmethod
     def _get_x(cls, kwargs):
         '''
@@ -289,12 +294,12 @@ class Quaternary1(Quaternary1or2):
         else:
             raise TypeError("Neither 'x' nor '{}' are in kwargs"
                             "".format(cls.elements[1]))
-    
+
     @classmethod
     def _has_y(cls, kwargs):
         '''Returns True if y is explicitly defined in kwargs'''
         return ('y' in kwargs) or (cls.elements[2] in kwargs)
-    
+
     @classmethod
     def _get_y(cls, kwargs):
         '''
@@ -308,12 +313,12 @@ class Quaternary1(Quaternary1or2):
         else:
             raise TypeError("Neither 'y' nor '{}' are in kwargs"
                             "".format(cls.elements[2]))
-    
+
     @classmethod
     def _has_z(cls, kwargs):
         '''Returns True if z is explicitly defined in kwargs'''
         return ('z' in kwargs) or (cls.elements[3] in kwargs)
-    
+
     @classmethod
     def _get_z(cls, kwargs):
         '''
@@ -327,18 +332,18 @@ class Quaternary1(Quaternary1or2):
         else:
             raise TypeError("Neither 'z' nor '{}' are in kwargs"
                             "".format(cls.elements[3]))
-    
+
     @classmethod
     def _get_usage(cls):
         return ("The  supported kwarg combinations are as follows:"
-                "\n    - ('x' or '{2}') and ('y' or '{3}')"
-                "\n    - ('x' or '{2}') and ('z' or '{4}')"
-                "\n    - ('y' or '{3}') and ('z' or '{4}')"
-                "\n    - 'a' and 'T' and ('x' or '{2}')"
-                "\n    - 'a' and 'T' and ('y' or '{3}')"
-                "\n    - 'a' and 'T' and ('z' or '{4}')"
-                            "".format(None, cls.elements[0], cls.elements[1],
-                                            cls.elements[2], cls.elements[3]))
+                "\n    - ('x' or '{B}') and ('y' or '{C}')"
+                "\n    - ('x' or '{B}') and ('z' or '{D}')"
+                "\n    - ('y' or '{C}') and ('z' or '{D}')"
+                "\n    - 'a' and 'T' and ('x' or '{B}')"
+                "\n    - 'a' and 'T' and ('y' or '{C}')"
+                "\n    - 'a' and 'T' and ('z' or '{D}')"
+                            "".format(A=cls.elements[0], B=cls.elements[1],
+                                      C=cls.elements[2], D=cls.elements[3]))
 
     @classinstancemethod
     def elementFraction(self, cls, element):
@@ -354,6 +359,7 @@ class Quaternary1(Quaternary1or2):
         else:
             return 0
 
+
 # Type 2: A_{x}B_{y}C_{1-x-y}D
 # binaries = (AD, BD, CD)
 # ternaries = (ABD, ACD, BCD)
@@ -361,7 +367,7 @@ class Quaternary2(Quaternary1or2):
     '''
     For alloys of the A_{x}B_{y}C_{1-x-y}D type [1], where D is the only
     Group V element. These require only three ternaries for interpolation.
-    
+
     [1] C. K. Williams, T. H. Glisson, J. R. Hauser, and M. A. Littlejohn,
     "Energy bandgap and lattice constant contours of iii-v quaternary
     alloys of the form Ax By Cz D or A Bx Cy Dz," JEM, vol. 7, no. 5,
@@ -398,12 +404,12 @@ class Quaternary2(Quaternary1or2):
             e4 = cls.elements[3]
             return "{A}_{{x}}{B}_{{y}}{C}_{{1-x-y}}{D}".format(
                                                   A=e1, B=e2, C=e3, D=e4)
-    
+
     @classmethod
     def _has_x(cls, kwargs):
         '''Returns True if x is explicitly defined in kwargs'''
         return ('x' in kwargs) or (cls.elements[0] in kwargs)
-    
+
     @classmethod
     def _get_x(cls, kwargs):
         '''
@@ -417,12 +423,12 @@ class Quaternary2(Quaternary1or2):
         else:
             raise TypeError("Neither 'x' nor '{}' are in kwargs"
                             "".format(cls.elements[0]))
-    
+
     @classmethod
     def _has_y(cls, kwargs):
         '''Returns True if y is explicitly defined in kwargs'''
         return ('y' in kwargs) or (cls.elements[1] in kwargs)
-    
+
     @classmethod
     def _get_y(cls, kwargs):
         '''
@@ -436,12 +442,12 @@ class Quaternary2(Quaternary1or2):
         else:
             raise TypeError("Neither 'y' nor '{}' are in kwargs"
                             "".format(cls.elements[1]))
-    
+
     @classmethod
     def _has_z(cls, kwargs):
         '''Returns True if z is explicitly defined in kwargs'''
         return ('z' in kwargs) or (cls.elements[2] in kwargs)
-    
+
     @classmethod
     def _get_z(cls, kwargs):
         '''
@@ -455,18 +461,18 @@ class Quaternary2(Quaternary1or2):
         else:
             raise TypeError("Neither 'z' nor '{}' are in kwargs"
                             "".format(cls.elements[2]))
-    
+
     @classmethod
     def _get_usage(cls):
         return ("The  supported kwarg combinations are as follows:"
-                "\n    - ('x' or '{1}') and ('y' or '{2}')"
-                "\n    - ('x' or '{1}') and ('z' or '{3}')"
-                "\n    - ('y' or '{2}') and ('z' or '{3}')"
-                "\n    - 'a' and 'T' and ('x' or '{1}')"
-                "\n    - 'a' and 'T' and ('y' or '{2}')"
-                "\n    - 'a' and 'T' and ('z' or '{3}')"
-                            "".format(None, cls.elements[0], cls.elements[1],
-                                            cls.elements[2], cls.elements[3]))
+                "\n    - ('x' or '{A}') and ('y' or '{B}')"
+                "\n    - ('x' or '{A}') and ('z' or '{C}')"
+                "\n    - ('y' or '{B}') and ('z' or '{C}')"
+                "\n    - 'a' and 'T' and ('x' or '{A}')"
+                "\n    - 'a' and 'T' and ('y' or '{B}')"
+                "\n    - 'a' and 'T' and ('z' or '{C}')"
+                            "".format(A=cls.elements[0], B=cls.elements[1],
+                                      C=cls.elements[2], D=cls.elements[3]))
 
     @classinstancemethod
     def elementFraction(self, cls, element):
@@ -482,6 +488,7 @@ class Quaternary2(Quaternary1or2):
         else:
             return 0
 
+
 # Type 3: A_{x}B_{1-x}C_{y}D_{1-y}
 # binaries = (AC, AD, BC, BD)
 # ternaries = (ABC, ABD, ACD, BCD)
@@ -490,7 +497,7 @@ class Quaternary3(Quaternary):
     For alloys of the A_{x}B_{1-x}C_{y}D_{1-y} type [1-2]. Where A and B are
     Group III elements, and C and D are Group V elements. These require
     four ternaries for interpolation.
-    
+
     [1] T. H. Glisson, J. R. Hauser, M. A. Littlejohn, and C. K. Williams,
     "Energy bandgap and lattice constant contours of iii-v quaternary
     alloys," JEM, vol. 7, no. 1, pp. 1-16, Jan. 1978.
@@ -500,11 +507,10 @@ class Quaternary3(Quaternary):
     vol. 89, no. 11, pp. 5815-5875, Jun. 2001.
     '''
     __metaclass__ = Quaternary3Type
-    
+
     def __init__(self, **kwargs):
         Quaternary.__init__(self)
-        self._x = self._get_x(kwargs)
-        self._y = self._get_y(kwargs)
+        self._x, self._y = self._get_xy(kwargs)
 
     def __getattr__(self, name):
         if (hasattr(self.ternaries[0], name) and
@@ -550,82 +556,123 @@ class Quaternary3(Quaternary):
                                                   A=e1, B=e2, C=e3, D=e4)
 
     @classmethod
+    def _has_x(cls, kwargs):
+        '''Returns True if x is explicitly defined in kwargs'''
+        return (('x' in kwargs) or (cls.elements[0] in kwargs) or
+                (cls.elements[1] in kwargs))
+
+    @classmethod
     def _get_x(cls, kwargs):
+        '''
+        Returns x if it is explicitly defined in kwargs.
+        Otherwise, raises TypeError.
+        '''
         if 'x' in kwargs:
             return round(float(kwargs['x']), 6)
         elif cls.elements[0] in kwargs:
             return round(float(kwargs[cls.elements[0]]), 6)
         elif cls.elements[1] in kwargs:
-            return 1 - round(float(kwargs[cls.elements[1]]), 6)
-        elif 'a' in kwargs:
-            # lattice match to the given lattice constant
-            y = cls._get_y(kwargs) # need the other composition fixed
-            if 'T' not in kwargs:
-                raise ValueError('Lattice matching temperature, T, missing.')
-            a = kwargs['a']
-            T = kwargs['T']
-            # make sure the lattice constant is available
-            x0a = cls.a(x=0, y=y, T=T)
-            x1a = cls.a(x=1, y=y, T=T)
-            amin = min(x0a, x1a)
-            amax = max(x0a, x1a)
-            if a < amin or a > amax:
-                raise ValueError('a out of range [%.3f, %.3f]'%(amin, amax))
-            # find the correct composition, x
-            x = bisect(func=lambda x: cls.a(x=x, y=y, T=T) - a, a=0, b=1)
-            return x
+            return round(1 - round(float(kwargs[cls.elements[1]]), 6), 6)
         else:
-            raise TypeError("Missing required key word argument."
-                            "'x', '%s', or '%s' is needed."%(cls.elements[0],
-                                                             cls.elements[1]))
-    
+            raise TypeError("Neither 'x', '{}' nor '{}' are in kwargs"
+                            "".format(cls.elements[0], cls.elements[1]))
+
+    @classmethod
+    def _has_y(cls, kwargs):
+        '''Returns True if y is explicitly defined in kwargs'''
+        return (('y' in kwargs) or (cls.elements[2] in kwargs) or
+                (cls.elements[2] in kwargs))
+
     @classmethod
     def _get_y(cls, kwargs):
+        '''
+        Returns y if it is explicitly defined in kwargs.
+        Otherwise, raises TypeError.
+        '''
         if 'y' in kwargs:
             return round(float(kwargs['y']), 6)
         elif cls.elements[2] in kwargs:
             return round(float(kwargs[cls.elements[2]]), 6)
         elif cls.elements[3] in kwargs:
-            return 1 - round(float(kwargs[cls.elements[3]]), 6)
-        elif 'a' in kwargs:
-            # lattice match to the given lattice constant
-            x = cls._get_x(kwargs) # need the other composition fixed
-            if 'T' not in kwargs:
-                raise ValueError('Lattice matching temperature, T, missing.')
-            a = kwargs['a']
-            T = kwargs['T']
-            # make sure the lattice constant is available
-            y0a = cls.a(x=x, y=0, T=T)
-            y1a = cls.a(x=x, y=1, T=T)
-            amin = min(y0a, y1a)
-            amax = max(y0a, y1a)
-            if a < amin or a > amax:
-                raise ValueError('a out of range [%.3f, %.3f]'%(amin, amax))
-            # find the correct composition, y
-            y = bisect(func=lambda y: cls.a(x=x, y=y, T=T) - a, a=0, b=1)
-            return y
+            return round(1 - round(float(kwargs[cls.elements[3]]), 6), 6)
         else:
-            raise TypeError("Missing required key word argument."
-                            "'x', '%s', or '%s' is needed."%(cls.elements[2],
-                                                             cls.elements[3]))
-    
+            raise TypeError("Neither 'y' nor '{}' are in kwargs"
+                            "".format(cls.elements[2]))
+
+    @classmethod
+    def _get_xy(cls, kwargs):
+        if cls._has_x(kwargs) and cls._has_y(kwargs):
+            x = cls._get_x(kwargs)
+            y = cls._get_y(kwargs)
+        elif 'a' in kwargs and 'T' in kwargs and cls._has_x(kwargs):
+            x, y = cls._lattice_match(kwargs['a'], kwargs['T'],
+                                      x=cls._get_x(kwargs))
+        elif 'a' in kwargs and 'T' in kwargs and cls._has_y(kwargs):
+            x, y = cls._lattice_match(kwargs['a'], kwargs['T'],
+                                      y=cls._get_y(kwargs))
+        else:
+            raise TypeError(
+                "Missing required key word argument.\n" + cls._get_usage())
+        cls._validate_xy(x, y)
+        return x, y
+
+    @classmethod
+    def _lattice_match(cls, a, T, x=None, y=None):
+        if x is not None:
+            # make sure the lattice constant is in range
+            a1 = cls.a(x=x, y=0, T=T)
+            a2 = cls.a(x=x, y=1, T=T)
+            amin = min(a1, a2)
+            amax = max(a1, a2)
+            if a < amin or a > amax:
+                raise ValueError('a out of range [%.3f, %.3f]' % (amin, amax))
+            # find the correct y composition
+            y = bisect(func=lambda y: cls.a(x=x, y=y, T=T) - a, a=0, b=1)
+            return x, y
+        elif y is not None:
+            # make sure the lattice constant is in range
+            a1 = cls.a(x=0, y=y, T=T)
+            a2 = cls.a(x=1, y=y, T=T)
+            amin = min(a1, a2)
+            amax = max(a1, a2)
+            if a < amin or a > amax:
+                raise ValueError('a out of range [%.3f, %.3f]' % (amin, amax))
+            # find the correct y composition
+            x = bisect(func=lambda x: cls.a(x=x, y=y, T=T) - a, a=0, b=1)
+            return x, y
+        else:
+            raise ValueError('Need x or y')
+
+    @classmethod
+    def _validate_xy(cls, x, y):
+        assert x >= 0. and x <= 1.
+        assert y >= 0. and y <= 1.
+
+    @classmethod
+    def _get_usage(cls):
+        return ("The  supported kwarg combinations are as follows:"
+                "\n    - ('x', '{A}' or '{B}') and ('y', '{C}' or '{D}')"
+                "\n    - 'a' and 'T' and ('x', '{A}' or '{B}')"
+                "\n    - 'a' and 'T' and ('y', '{C}' or '{D}')"
+                            "".format(A=cls.elements[0], B=cls.elements[1],
+                                      C=cls.elements[2], D=cls.elements[3]))
+
     @classinstancemethod
     def _interpolate(self, cls, param, **kwargs):
         if self is not None:
             x = self._x
             y = self._y
         else:
-            x = cls._get_x(kwargs)
-            y = cls._get_y(kwargs)
-            
+            x, y = cls._get_xy(kwargs)
+
         vals = []
         for t in [cls.ternaries[0], cls.ternaries[1],
                   cls.ternaries[2], cls.ternaries[3]]:
             try:
                 vals.append(getattr(t, param))
             except AttributeError as e:
-                e.message +='. Ternary `%s`'%t.name
-                e.message +=' missing param `%s`'%param
+                e.message += '. Ternary `%s`' % t.name
+                e.message += ' missing param `%s`' % param
                 raise e
         if param[0] == '_':
             # assume it's a hard coded parameter if it starts with '_'
@@ -644,8 +691,8 @@ class Quaternary3(Quaternary):
             BCD = vals[3](**new_kwargs)
         xinv = 1. - x
         yinv = 1. - y
-        xweight = x*xinv
-        yweight = y*yinv
+        xweight = x * xinv
+        yweight = y * yinv
         denom = xweight + yweight
         if denom == 0.:
             # handle this explicitly, so there's no divide by zero
@@ -654,9 +701,10 @@ class Quaternary3(Quaternary):
             else:
                 return ACD
         else:
-            num = xweight*( y*ABC + yinv*ABD ) + yweight*( x*ACD + xinv*BCD )
+            num = (xweight * (y * ABC + yinv * ABD) +
+                   yweight * (x * ACD + xinv * BCD))
             return num / denom
-    
+
     @classinstancemethod
     def elementFraction(self, cls, element):
         if element == cls.elements[0]:
