@@ -18,14 +18,9 @@
 #
 #############################################################################
 
-# std lib imports
-
-# third party imports
-
-# local imports
+from openbandparams.algorithms import bisect
 from openbandparams.base_material import BaseType, AlloyBase
 from openbandparams.utils import classinstancemethod
-from openbandparams.algorithms import bisect
 
 
 class Quaternary1or2Type(BaseType):

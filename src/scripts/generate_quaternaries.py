@@ -7,8 +7,8 @@ print '''
 # ternaries = (ABC, ABD ,ACD)'''
 for iii in iiis:
     for i in xrange(len(vs)):
-        for j in xrange(i+1, len(vs)):
-            for k in xrange(j+1, len(vs)):
+        for j in xrange(i + 1, len(vs)):
+            for k in xrange(j + 1, len(vs)):
                 print '''
 class {A}{B}{C}{D}(Quaternary1):
     name = '{A}{B}{C}{D}'
@@ -23,8 +23,8 @@ print '''
 # ternaries = (ABD, ACD, BCD)'''
 for v in vs:
     for i in xrange(len(iiis)):
-        for j in xrange(i+1, len(iiis)):
-            for k in xrange(j+1, len(iiis)):
+        for j in xrange(i + 1, len(iiis)):
+            for k in xrange(j + 1, len(iiis)):
                 print '''
 class {A}{B}{C}{D}(Quaternary2):
     name = '{A}{B}{C}{D}'
@@ -38,9 +38,9 @@ print '''
 # binaries = (AC, AD, BC, BD)
 # ternaries = (ABC, ABD, ACD, BCD)'''
 for i in xrange(len(iiis)):
-    for j in xrange(i+1, len(iiis)):
+    for j in xrange(i + 1, len(iiis)):
         for k in xrange(len(vs)):
-            for l in xrange(k+1, len(vs)):
+            for l in xrange(k + 1, len(vs)):
                 print '''
 class {A}{B}{C}{D}(Quaternary3):
     name = '{A}{B}{C}{D}'

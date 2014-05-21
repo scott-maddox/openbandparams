@@ -27,8 +27,8 @@ T = 300
 # initialize the plot
 fig = plt.figure()
 ax = fig.add_subplot(111)
-plt.xlabel('Lattice Parameter at %g K ($\AA$)'%T)
-plt.ylabel('Bandgap at %g K (eV)'%T)
+plt.xlabel('Lattice Parameter at %g K ($\AA$)' % T)
+plt.ylabel('Bandgap at %g K (eV)' % T)
 
 # plot the binaries
 x = []
@@ -44,8 +44,8 @@ ax.plot(x, y, 'k.')
 
 # label the binaries
 for x, y, label in zip(x, y, label):
-    ax.annotate(label, xy=(x, y), xytext=(-5, 5), ha='right', va = 'bottom',
-                bbox = dict(linewidth=0, fc = 'white', alpha = 0.9),
+    ax.annotate(label, xy=(x, y), xytext=(-5, 5), ha='right', va='bottom',
+                bbox=dict(linewidth=0, fc='white', alpha=0.9),
                 textcoords='offset points')
 
 # plot the ternaries
@@ -53,11 +53,11 @@ indices = numpy.arange(100)
 fractions = numpy.linspace(0, 1, 100)
 x = numpy.empty(100, dtype=numpy.float)
 y = numpy.empty(100, dtype=numpy.float)
-for tern in [AlGaP,  AlInP,  GaInP,
+for tern in [AlGaP, AlInP, GaInP,
              AlGaAs, AlInAs, GaInAs,
              AlGaSb, AlInSb, GaInSb,
-             AlPAs,  GaPAs,  InPAs,
-             AlPSb,  GaPSb,  InPSb,
+             AlPAs, GaPAs, InPAs,
+             AlPSb, GaPSb, InPSb,
              AlAsSb, GaAsSb, InAsSb]:
     for i, f in zip(indices, fractions):
         instance = tern(x=f)

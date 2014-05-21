@@ -18,12 +18,10 @@
 #
 #############################################################################
 
-from . import binary
+from . import binary, quaternary, ternary
 from .binary import *
-from . import ternary
-from .ternary import *
-from . import quaternary
 from .quaternary import *
+from .ternary import *
 
 __all__ = []
 __all__ += binary.__all__

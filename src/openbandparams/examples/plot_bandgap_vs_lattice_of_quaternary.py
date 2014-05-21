@@ -28,8 +28,8 @@ T = 300
 # initialize the plot
 fig = plt.figure()
 ax = fig.add_subplot(111)
-plt.xlabel('Lattice Parameter at %g K ($\AA$)'%T)
-plt.ylabel('Bandgap at %g K (eV)'%T)
+plt.xlabel('Lattice Parameter at %g K ($\AA$)' % T)
+plt.ylabel('Bandgap at %g K (eV)' % T)
 
 # plot the binaries
 xs = []
@@ -49,16 +49,16 @@ ax.plot(xs, y_L, 'g.')
 
 # label the binaries
 for x, y, label in zip(xs, y_Gamma, labels):
-    ax.annotate(label, xy=(x, y), xytext=(-5, 5), ha='right', va = 'bottom',
-                bbox = dict(linewidth=0, fc = 'white', alpha = 0.9),
+    ax.annotate(label, xy=(x, y), xytext=(-5, 5), ha='right', va='bottom',
+                bbox=dict(linewidth=0, fc='white', alpha=0.9),
                 textcoords='offset points')
 for x, y, label in zip(xs, y_X, labels):
-    ax.annotate(label, xy=(x, y), xytext=(-5, 5), ha='right', va = 'bottom',
-                bbox = dict(linewidth=0, fc = 'white', alpha = 0.9),
+    ax.annotate(label, xy=(x, y), xytext=(-5, 5), ha='right', va='bottom',
+                bbox=dict(linewidth=0, fc='white', alpha=0.9),
                 textcoords='offset points')
 for x, y, label in zip(xs, y_L, labels):
-    ax.annotate(label, xy=(x, y), xytext=(-5, 5), ha='right', va = 'bottom',
-                bbox = dict(linewidth=0, fc = 'white', alpha = 0.9),
+    ax.annotate(label, xy=(x, y), xytext=(-5, 5), ha='right', va='bottom',
+                bbox=dict(linewidth=0, fc='white', alpha=0.9),
                 textcoords='offset points')
 
 # plot the quaternary
@@ -95,6 +95,6 @@ for yfrac in numpy.linspace(0, 1, 10):
     ax.plot(x, y_Gamma, 'r--')
     ax.plot(x, y_X, 'b--')
     ax.plot(x, y_L, 'g--')
-    
+
 plt.legend(loc='best')
 plt.show()

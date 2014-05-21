@@ -18,9 +18,12 @@
 #
 #############################################################################
 
-import unittest
-from openbandparams.iii_v.zinc_blende.binary import *
+from openbandparams.iii_v.zinc_blende.binary import GaAs, AlAs
+from openbandparams.iii_v.zinc_blende.ternary import (AlGaAs, GaAsSb, AlPAs,
+                                                      GaInAs)
 from openbandparams.iii_v.zinc_blende.ternary import *
+import unittest
+
 
 class TestIIIVZincBlendeTernary(unittest.TestCase):
 
@@ -54,7 +57,7 @@ class TestIIIVZincBlendeTernary(unittest.TestCase):
         self.assertEqual(AlPAs(x=0), AlPAs(P=0))
         self.assertEqual(AlPAs(x=0), AlPAs(As=1))
         self.assertEqual(AlPAs(P=0), AlPAs(As=1))
-    
+
     def test_missing_x(self):
         with self.assertRaises(TypeError):
             AlGaAs.Eg()

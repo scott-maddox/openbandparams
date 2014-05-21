@@ -24,7 +24,7 @@ from setuptools import setup, find_packages
 exec(open('src/openbandparams/version.py').read())
 
 setup(name='openbandparams',
-      version=__version__, # read from version.py
+      version=__version__,  # read from version.py
       description='open source semiconductor band parameters',
       url='http://scott-maddox.github.io/openbandparams',
       author='Scott J. Maddox',

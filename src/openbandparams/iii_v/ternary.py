@@ -18,15 +18,10 @@
 #
 #############################################################################
 
-# std lib imports
-import logging; log = logging.getLogger(__name__)
-
-# third party imports
-
-# local imports
+from openbandparams.algorithms import bisect
 from openbandparams.base_material import BaseType, AlloyBase
 from openbandparams.utils import classinstancemethod
-from openbandparams.algorithms import bisect
+
 
 class TernaryType(BaseType):
     def __getattr__(self, name):
@@ -39,9 +34,10 @@ class TernaryType(BaseType):
         else:
             raise AttributeError(name)
 
+
 class Ternary(AlloyBase):
     __metaclass__ = TernaryType
-    
+
     def __init__(self, **kwargs):
         AlloyBase.__init__(self)
         self._x = self._get_x(kwargs)
@@ -54,22 +50,22 @@ class Ternary(AlloyBase):
             return _param_accessor
         else:
             raise AttributeError(name)
-    
+
     def __str__(self):
         return self.name
-    
+
     def __repr__(self):
         return '{}(x={})'.format(self.name, self._x)
-    
+
     def __eq__(self, other):
         return (type(self) == type(other) and
                 self._x == other._x)
-    
+
     @classmethod
     def _get_bowing(cls, param, x):
-        if hasattr(cls, '_bowing_%s'%param):
+        if hasattr(cls, '_bowing_%s' % param):
             # a bowing parameter exists - use it
-            C = getattr(cls, '_bowing_%s'%param)
+            C = getattr(cls, '_bowing_%s' % param)
             if callable(C):
                 # assume the bowing paramter is composition dependent
                 # if it's callable
@@ -78,21 +74,21 @@ class Ternary(AlloyBase):
                 return C
         else:
             return None
-    
+
     @classinstancemethod
     def _interpolate(self, cls, param, **kwargs):
         if self is not None:
             x = self._x
         else:
             x = cls._get_x(kwargs)
-            
+
         vals = []
         for b in [cls.binaries[0], cls.binaries[1]]:
             try:
                 vals.append(getattr(b, param))
             except AttributeError as e:
-                e.message +='. Binary `%s`'%b.name
-                e.message +=' missing param `%s`'%param
+                e.message += '. Binary `%s`' % b.name
+                e.message += ' missing param `%s`' % param
                 raise e
         if param[0] == '_':
             # assume it's a hard coded parameter if it starts with '_'
@@ -105,11 +101,11 @@ class Ternary(AlloyBase):
         C = cls._get_bowing(param, x)
         if C is not None:
             # a bowing parameter exists - use it
-            return A*x + B*(1-x) - C*x*(1-x)
+            return A * x + B * (1 - x) - C * x * (1 - x)
         else:
             # otherwise, use linear interpolation
-            return A*x + B*(1-x)
-    
+            return A * x + B * (1 - x)
+
     @classinstancemethod
     def Eg(self, cls, **kwargs):
         '''
@@ -124,6 +120,7 @@ class Ternary(AlloyBase):
             T = cls._get_T(kwargs)
             return min(cls.Eg_Gamma(x=x, T=T), cls.Eg_X(x=x, T=T),
                        cls.Eg_L(x=x, T=T))
+
 
 class Ternary1(Ternary):
     '''
@@ -141,7 +138,7 @@ class Ternary1(Ternary):
             return "{A}_{{x}}{B}_{{1-x}}{C}".format(A=cls.elements[0],
                                                     B=cls.elements[1],
                                                     C=cls.elements[2])
-    
+
     @classmethod
     def _get_x(cls, kwargs):
         if 'x' in kwargs:
@@ -162,15 +159,15 @@ class Ternary1(Ternary):
             amin = min(b1a, b2a)
             amax = max(b1a, b2a)
             if a < amin or a > amax:
-                raise ValueError('a out of range [%.3f, %.3f]'%(amin, amax))
+                raise ValueError('a out of range [%.3f, %.3f]' % (amin, amax))
             # find the correct composition, x
             x = bisect(func=lambda x: cls.a(x=x, T=T) - a, a=0, b=1)
             return x
         else:
             raise TypeError("Missing required key word argument."
-                            "'x', '%s', or '%s' is needed."%(cls.elements[0],
+                            "'x', '%s', or '%s' is needed." % (cls.elements[0],
                                                              cls.elements[1]))
-    
+
     def elementFraction(self, element):
         if element == self.elements[0]:
             return self._x
@@ -180,6 +177,7 @@ class Ternary1(Ternary):
             return 1
         else:
             return 0
+
 
 class Ternary2(Ternary):
     '''
@@ -197,7 +195,7 @@ class Ternary2(Ternary):
             return "{A}{B}_{{x}}{C}_{{1-x}}".format(A=cls.elements[0],
                                                     B=cls.elements[1],
                                                     C=cls.elements[2])
-    
+
     @classmethod
     def _get_x(cls, kwargs):
         if 'x' in kwargs:
@@ -218,15 +216,15 @@ class Ternary2(Ternary):
             amin = min(b1a, b2a)
             amax = max(b1a, b2a)
             if a < amin or a > amax:
-                raise ValueError('a out of range [%.3f, %.3f]'%(amin, amax))
+                raise ValueError('a out of range [%.3f, %.3f]' % (amin, amax))
             # find the correct composition, x
             x = bisect(func=lambda x: cls.a(x=x, T=T) - a, a=0, b=1)
             return x
         else:
             raise TypeError("Missing required key word argument."
-                            "'x', '%s', or '%s' is needed."%(cls.elements[1],
+                            "'x', '%s', or '%s' is needed." % (cls.elements[1],
                                                              cls.elements[2]))
-    
+
     def elementFraction(self, element):
         if element == self.elements[0]:
             return 1
@@ -237,7 +235,7 @@ class Ternary2(Ternary):
         else:
             return 0
 
-#class ReversedTernary(Ternary):
+# class ReversedTernary(Ternary):
 #    @classmethod
 #    def _get_bowing(cls, param, x):
 #        if hasattr(cls._ternary, '_bowing_%s'%param):
@@ -252,7 +250,7 @@ class Ternary2(Ternary):
 #        else:
 #            return None
 
-#def create_reversed_ternary(name, ternary):
+# def create_reversed_ternary(name, ternary):
 #    new_type = type(name, (ReversedTernary,), {})
 #    new_type.name = name
 #    new_type.element1 = ternary.element2

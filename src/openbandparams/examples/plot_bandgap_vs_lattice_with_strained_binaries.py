@@ -27,8 +27,8 @@ T = 300
 # initialize the plot
 fig = plt.figure()
 ax = fig.add_subplot(111)
-plt.xlabel('Lattice Parameter at %g K ($\AA$)'%T)
-plt.ylabel('Bandgap at %g K (eV)'%T)
+plt.xlabel('Lattice Parameter at %g K ($\AA$)' % T)
+plt.ylabel('Bandgap at %g K (eV)' % T)
 
 # plot the binaries
 x = []
@@ -44,8 +44,8 @@ ax.plot(x, y, 'k.')
 
 # label the binaries
 for x, y, label in zip(x, y, label):
-    ax.annotate(label, xy=(x, y), xytext=(-5, 5), ha='right', va = 'bottom',
-                bbox = dict(linewidth=0, fc = 'white', alpha = 0.9),
+    ax.annotate(label, xy=(x, y), xytext=(-5, 5), ha='right', va='bottom',
+                bbox=dict(linewidth=0, fc='white', alpha=0.9),
                 textcoords='offset points')
 
 # plot the strained binaries
@@ -70,9 +70,9 @@ for binary in [AlP, GaP, InP,
         # ways. The first seems more appropriate to me, at least in
         # this instance.
         # 1. relative to a_0 [ eps = ( a0 - ax ) / a0 ]:
-        a_strained = a_0 * ( 1 - eps_xx )
+        a_strained = a_0 * (1 - eps_xx)
         # 2. relative to a_strianed [ eps = ( a0 - ax ) / ax ]:
-        #a_strained = a_0 / ( eps_xx + 1 )
+        # a_strained = a_0 / ( eps_xx + 1 )
         # Note: I'm implicitly assuming growth is on the (100) surface.
         # Growth on other surfaces will have different strain effects.
         # This is approach is probably also not directly applicable to
@@ -80,11 +80,11 @@ for binary in [AlP, GaP, InP,
         # since the various conduction band valleys react differently
         # to strain.
         eps_zz = -2. * c_12 / c_11 * eps_xx
-        dE_c = a_c * ( 2 * eps_xx + eps_zz )
-        P_eps = -a_v * ( 2 * eps_xx + eps_zz )
-        Q_eps = -b / 2 * ( 2 * eps_xx - 2 * eps_zz )
-        dE_hh = - P_eps - Q_eps
-        dE_lh = - P_eps + Q_eps
+        dE_c = a_c * (2 * eps_xx + eps_zz)
+        P_eps = -a_v * (2 * eps_xx + eps_zz)
+        Q_eps = -b / 2 * (2 * eps_xx - 2 * eps_zz)
+        dE_hh = -P_eps - Q_eps
+        dE_lh = -P_eps + Q_eps
         E_c = Eg + dE_c
         E_c_hh = Eg + dE_c - dE_hh
         E_c_lh = Eg + dE_c - dE_lh
@@ -102,7 +102,7 @@ for binary in [AlP, GaP, InP,
         plt.plot(x, y_c, 'b--')
         plt.plot(x, y_lh, 'r-')
         plt.plot(x, y_hh, 'g-')
-    #TODO: check that this isn't BS
+    # TODO: check that this isn't BS
 
 plt.legend(loc='best')
 plt.show()

@@ -18,29 +18,25 @@
 #
 #############################################################################
 
-# std lib imports
-import logging; log = logging.getLogger(__name__)
-
-# third party imports
-
-# local imports
-from openbandparams.utils import classinstancemethod
 from openbandparams.base_material import Base
 from openbandparams.equations import varshni
+from openbandparams.utils import classinstancemethod
+
 
 class BinaryType(type):
     def __str__(self):
         return self.name
-    
+
     def __repr__(self):
         return self.name
-    
+
     def __eq__(self, other):
         return (type(self) == type(other))
 
+
 class Binary(Base):
     __metaclass__ = BinaryType
-    
+
     # All methods should be class methods so that they can reference
     # parameters defined by subclasses.
     @classinstancemethod
@@ -49,21 +45,21 @@ class Binary(Base):
             return self.name
         else:
             return cls.name
-    
+
     @classmethod
     def elementFraction(cls, element):
         if element in cls.elements:
             return 1.
         else:
             return 0.
-    
+
     @classmethod
     def a_300K(cls, **kwargs):
         '''
         Returns the lattice parameter, a, in Angstroms at 300 K.
         '''
         return float(cls._a_300K)
-    
+
     @classmethod
     def da_dT(cls, **kwargs):
         '''
@@ -71,7 +67,7 @@ class Binary(Base):
         parameter, a, in Angstroms per Kelvin.
         '''
         return float(cls._da_dT)
-    
+
     @classmethod
     def a(cls, **kwargs):
         '''
@@ -80,7 +76,7 @@ class Binary(Base):
         '''
         T = cls._get_T(kwargs)
         return float(cls.a_300K() + cls.da_dT() * (T - 300))
-    
+
     @classmethod
     def Eg_Gamma_0(cls, **kwargs):
         '''
@@ -88,7 +84,7 @@ class Binary(Base):
         at 0 K.
         '''
         return float(cls._Eg_Gamma_0)
-    
+
     @classmethod
     def alpha_Gamma(cls, **kwargs):
         '''
@@ -96,7 +92,7 @@ class Binary(Base):
         electron Volts per Kelvin.
         '''
         return float(cls._alpha_Gamma)
-    
+
     @classmethod
     def beta_Gamma(cls, **kwargs):
         '''
@@ -104,7 +100,7 @@ class Binary(Base):
         Kelvin.
         '''
         return float(cls._beta_Gamma)
-    
+
     @classmethod
     def Eg_Gamma(cls, **kwargs):
         '''
@@ -114,7 +110,7 @@ class Binary(Base):
         T = cls._get_T(kwargs)
         return float(varshni(cls.Eg_Gamma_0(), cls.alpha_Gamma(),
                              cls.beta_Gamma(), T))
-    
+
     @classmethod
     def Eg_X_0(cls, **kwargs):
         '''
@@ -122,7 +118,7 @@ class Binary(Base):
         at 0 K.
         '''
         return float(cls._Eg_X_0)
-    
+
     @classmethod
     def alpha_X(cls, **kwargs):
         '''
@@ -130,7 +126,7 @@ class Binary(Base):
         electron Volts per Kelvin.
         '''
         return float(cls._alpha_X)
-    
+
     @classmethod
     def beta_X(cls, **kwargs):
         '''
@@ -138,7 +134,7 @@ class Binary(Base):
         Kelvin.
         '''
         return float(cls._beta_X)
-    
+
     @classmethod
     def Eg_X(cls, **kwargs):
         '''
@@ -148,7 +144,7 @@ class Binary(Base):
         T = cls._get_T(kwargs)
         return float(varshni(cls.Eg_X_0(), cls.alpha_X(),
                              cls.beta_X(), T))
-    
+
     @classmethod
     def Eg_L_0(cls, **kwargs):
         '''
@@ -156,7 +152,7 @@ class Binary(Base):
         at 0 K.
         '''
         return float(cls._Eg_L_0)
-    
+
     @classmethod
     def alpha_L(cls, **kwargs):
         '''
@@ -164,7 +160,7 @@ class Binary(Base):
         electron Volts per Kelvin.
         '''
         return float(cls._alpha_L)
-    
+
     @classmethod
     def beta_L(cls, **kwargs):
         '''
@@ -172,7 +168,7 @@ class Binary(Base):
         Kelvin.
         '''
         return float(cls._beta_L)
-    
+
     @classmethod
     def Eg_L(cls, **kwargs):
         '''
@@ -182,7 +178,7 @@ class Binary(Base):
         T = cls._get_T(kwargs)
         return float(varshni(cls.Eg_L_0(), cls.alpha_L(),
                              cls.beta_L(), T))
-    
+
     @classmethod
     def Eg(cls, **kwargs):
         '''
@@ -192,14 +188,14 @@ class Binary(Base):
         T = cls._get_T(kwargs)
         return float(min(cls.Eg_Gamma(T=T), cls.Eg_X(T=T),
                          cls.Eg_L(T=T)))
-    
+
     @classmethod
     def Delta_SO(cls, **kwargs):
         '''
         Returns the split-off energy, Delta_SO, in electron Volts.
         '''
         return float(cls._Delta_SO)
-    
+
     @classmethod
     def meff_e_Gamma(cls, **kwargs):
         '''
@@ -207,7 +203,7 @@ class Binary(Base):
         in units of electron mass.
         '''
         return float(cls._meff_e_Gamma)
-    
+
     @classmethod
     def meff_e_L_long(cls, **kwargs):
         '''
@@ -215,7 +211,7 @@ class Binary(Base):
         direction, meff_e_L_long, in units of electron mass.
         '''
         return float(cls._meff_e_L_long)
-    
+
     @classmethod
     def meff_e_L_trans(cls, **kwargs):
         '''
@@ -223,7 +219,7 @@ class Binary(Base):
         direction, meff_e_L_trans, in units of electron mass.
         '''
         return float(cls._meff_e_L_trans)
-    
+
     @classmethod
     def meff_e_L_DOS(cls, **kwargs):
         '''
@@ -231,7 +227,7 @@ class Binary(Base):
         meff_e_L_DOS, in units of electron mass.
         '''
         return float(cls._meff_e_L_DOS)
-    
+
     @classmethod
     def meff_e_X_long(cls, **kwargs):
         '''
@@ -239,7 +235,7 @@ class Binary(Base):
         direction, meff_e_X_long, in units of electron mass.
         '''
         return float(cls._meff_e_X_long)
-    
+
     @classmethod
     def meff_e_X_trans(cls, **kwargs):
         '''
@@ -247,7 +243,7 @@ class Binary(Base):
         direction, meff_e_X_trans, in units of electron mass.
         '''
         return float(cls._meff_e_X_trans)
-    
+
     @classmethod
     def meff_e_X_DOS(cls, **kwargs):
         '''
@@ -255,28 +251,28 @@ class Binary(Base):
         meff_e_X_DOS, in units of electron mass.
         '''
         return float(cls._meff_e_X_DOS)
-    
+
     @classmethod
     def Luttinger1(cls, **kwargs):
         '''
         Returns the first Luttinger parameter (unitless).
         '''
         return float(cls._Luttinger1)
-    
+
     @classmethod
     def Luttinger2(cls, **kwargs):
         '''
         Returns the second Luttinger parameter (unitless).
         '''
         return float(cls._Luttinger2)
-    
+
     @classmethod
     def Luttinger3(cls, **kwargs):
         '''
         Returns the second Luttinger parameter (unitless).
         '''
         return float(cls._Luttinger3)
-    
+
     @classmethod
     def meff_SO(cls, **kwargs):
         '''
@@ -284,21 +280,21 @@ class Binary(Base):
         of electron mass.
         '''
         return float(cls._meff_SO)
-    
+
     @classmethod
     def Ep(cls, **kwargs):
         '''
         Returns the Ep matrix element, in electron Volts.
         '''
         return float(cls._Ep)
-    
+
     @classmethod
     def F(cls, **kwargs):
         '''
         Returns the F Kane parameter (unitless).
         '''
         return float(cls._F)
-    
+
     @classmethod
     def VBO(cls, **kwargs):
         '''
@@ -306,7 +302,7 @@ class Binary(Base):
         relative to the InSb valance band maximum.
         '''
         return float(cls._VBO)
-    
+
     @classmethod
     def a_c(cls, **kwargs):
         '''
@@ -314,7 +310,7 @@ class Binary(Base):
         electron Volts.
         '''
         return float(cls._a_c)
-    
+
     @classmethod
     def a_v(cls, **kwargs):
         '''
@@ -322,35 +318,35 @@ class Binary(Base):
         electron Volts.
         '''
         return float(cls._a_v)
-    
+
     @classmethod
     def b(cls, **kwargs):
         '''
         Returns the b shear deformation potential, in electron Volts.
         '''
         return float(cls._b)
-    
+
     @classmethod
     def d(cls, **kwargs):
         '''
         Returns the d shear deformation potential, in electron Volts.
         '''
         return float(cls._d)
-    
+
     @classmethod
     def c_11(cls, **kwargs):
         '''
         Returns the c_11 elastic constant, in gigapascals.
         '''
         return float(cls._c_11)
-    
+
     @classmethod
     def c_12(cls, **kwargs):
         '''
         Returns the c_12 elastic constant, in gigapascals.
         '''
         return float(cls._c_12)
-    
+
     @classmethod
     def c_44(cls, **kwargs):
         '''

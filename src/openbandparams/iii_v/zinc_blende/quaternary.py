@@ -18,16 +18,15 @@
 #
 #############################################################################
 
-# std lib imports
-import logging; log = logging.getLogger(__name__)
-
-# third party imports
-
-# local imports
 from openbandparams.iii_v.quaternary import (Quaternary1, Quaternary2,
-                                             Quaternary3)
-from openbandparams.iii_v.zinc_blende.binary import *
-from openbandparams.iii_v.zinc_blende.ternary import *
+    Quaternary3)
+from openbandparams.iii_v.zinc_blende.binary import (AlN, AlP, AlAs, AlSb,
+    GaN, GaP, GaAs, GaSb, InN, InP, InAs, InSb)
+from openbandparams.iii_v.zinc_blende.ternary import (AlNP, AlNAs, AlPAs,
+    AlPSb, AlAsSb, GaNP, GaNAs, GaPAs, GaPSb, GaAsSb, InNP, InNAs, InPAs,
+    InPSb, InAsSb, AlGaN, AlInN, GaInN, AlGaP, AlInP, GaInP, AlGaAs, AlInAs,
+    GaInAs, AlGaSb, AlInSb, GaInSb)
+
 
 # Type 1: AB_{x}C_{y}D_{1-x-y}
 # binaryies = (AB, AC, AD)
@@ -40,14 +39,14 @@ class AlNPAs(Quaternary1):
     ternaries = (AlNP, AlNAs, AlPAs)
 
 
-#class AlNPSb(Quaternary1):
+# class AlNPSb(Quaternary1):
 #    name = 'AlNPSb'
 #    elements = ('Al', 'N', 'P', 'Sb')
 #    binaries = (AlN, AlP, AlSb)
 #    ternaries = (AlNP, AlNSb, AlPSb)
 
 
-#class AlNAsSb(Quaternary1):
+# class AlNAsSb(Quaternary1):
 #    name = 'AlNAsSb'
 #    elements = ('Al', 'N', 'As', 'Sb')
 #    binaries = (AlN, AlAs, AlSb)
@@ -68,14 +67,14 @@ class GaNPAs(Quaternary1):
     ternaries = (GaNP, GaNAs, GaPAs)
 
 
-#class GaNPSb(Quaternary1):
+# class GaNPSb(Quaternary1):
 #    name = 'GaNPSb'
 #    elements = ('Ga', 'N', 'P', 'Sb')
 #    binaries = (GaN, GaP, GaSb)
 #    ternaries = (GaNP, GaNSb, GaPSb)
 
 
-#class GaNAsSb(Quaternary1):
+# class GaNAsSb(Quaternary1):
 #    name = 'GaNAsSb'
 #    elements = ('Ga', 'N', 'As', 'Sb')
 #    binaries = (GaN, GaAs, GaSb)
@@ -96,14 +95,14 @@ class InNPAs(Quaternary1):
     ternaries = (InNP, InNAs, InPAs)
 
 
-#class InNPSb(Quaternary1):
+# class InNPSb(Quaternary1):
 #    name = 'InNPSb'
 #    elements = ('In', 'N', 'P', 'Sb')
 #    binaries = (InN, InP, InSb)
 #    ternaries = (InNP, InNSb, InPSb)
 
 
-#class InNAsSb(Quaternary1):
+# class InNAsSb(Quaternary1):
 #    name = 'InNAsSb'
 #    elements = ('In', 'N', 'As', 'Sb')
 #    binaries = (InN, InAs, InSb)
@@ -167,7 +166,7 @@ class AlGaNAs(Quaternary3):
     ternaries = (AlGaN, AlGaAs, AlNAs, GaNAs)
 
 
-#class AlGaNSb(Quaternary3):
+# class AlGaNSb(Quaternary3):
 #    name = 'AlGaNSb'
 #    elements = ('Al', 'Ga', 'N', 'Sb')
 #    binaries = (AlN, AlSb, GaN, GaSb)
@@ -209,7 +208,7 @@ class AlInNAs(Quaternary3):
     ternaries = (AlInN, AlInAs, AlNAs, InNAs)
 
 
-#class AlInNSb(Quaternary3):
+# class AlInNSb(Quaternary3):
 #    name = 'AlInNSb'
 #    elements = ('Al', 'In', 'N', 'Sb')
 #    binaries = (AlN, AlSb, InN, InSb)
@@ -251,7 +250,7 @@ class GaInNAs(Quaternary3):
     ternaries = (GaInN, GaInAs, GaNAs, InNAs)
 
 
-#class GaInNSb(Quaternary3):
+# class GaInNSb(Quaternary3):
 #    name = 'GaInNSb'
 #    elements = ('Ga', 'In', 'N', 'Sb')
 #    binaries = (GaN, GaSb, InN, InSb)
@@ -278,12 +277,12 @@ class GaInAsSb(Quaternary3):
     binaries = (GaAs, GaSb, InAs, InSb)
     ternaries = (GaInAs, GaInSb, GaAsSb, InAsSb)
 
-quaternaries = [# Type 1: AB_{x}C_{y}D_{1-x-y}
-                AlNPAs,  #AlNPSb, AlNAsSb,
+quaternaries = [  # Type 1: AB_{x}C_{y}D_{1-x-y}
+                AlNPAs,  # AlNPSb, AlNAsSb,
                 AlPAsSb,
-                GaNPAs, #GaNPSb, GaNAsSb,
+                GaNPAs,  # GaNPSb, GaNAsSb,
                 GaPAsSb,
-                InNPAs, #InNPSb, InNAsSb,
+                InNPAs,  # InNPSb, InNAsSb,
                 InPAsSb,
                 # Type 2: B_{x}C_{y}D_{1-x-y}A
                 AlGaInN, AlGaInP, AlGaInAs, AlGaInSb,

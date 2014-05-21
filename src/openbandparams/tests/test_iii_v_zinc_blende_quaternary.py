@@ -18,10 +18,11 @@
 #
 #############################################################################
 
+from openbandparams.iii_v.zinc_blende.binary import GaAs, AlAs
+from openbandparams.iii_v.zinc_blende.quaternary import (quaternaries,
+    AlGaInAs, AlPAsSb, AlGaAsSb, GaPAsSb, AlGaInSb, AlGaPAs)
 import unittest
-from openbandparams.iii_v.zinc_blende.binary import *
-from openbandparams.iii_v.zinc_blende.ternary import *
-from openbandparams.iii_v.zinc_blende.quaternary import *
+
 
 class TestIIIVZincBlendeQuaternary(unittest.TestCase):
 
