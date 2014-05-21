@@ -25,7 +25,7 @@ from openbandparams.iii_v.zinc_blende.binary import (AlN, GaN, InN, AlP, GaP,
 
 # Each ternary below is dynamically created as a new class or type.
 # An instance of the class must be created, and the alloy fraction passed in,
-# before it can be used. See `simple_example_2.py` for examples.
+# before it can be used. See `openbandparams.examples.ternaries` for examples.
 
 # Nitrides
 class AlGaN(Ternary1):
@@ -50,10 +50,6 @@ class GaInN(Ternary1):
     binaries = (GaN, InN)
     _bowing_Eg_Gamma = 1.38,  # eV    lin_band_2002
     _bowing_Eg_X = 1.67,  # eV    lin_band_2002
-
-# GaAlN = create_reversed_ternary('GaAlN', AlGaN)
-# InAlN = create_reversed_ternary('InAlN', AlInN)
-# InGaN = create_reversed_ternary('InGaN', GaInN)
 
 
 # Phosphides
@@ -83,10 +79,6 @@ class GaInP(Ternary1):
     _bowing_Eg_L = 1.03  # eV    vurgaftman_band_2001
     _bowing_meff_e_Gamma = 0.051  # m_e    vurgaftman_band_2001
     _bowing_F = 0.78  # vurgaftman_band_2001
-
-# GaAlP = create_reversed_ternary('GaAlP', AlGaP)
-# InAlP = create_reversed_ternary('InAlP', AlInP)
-# InGaP = create_reversed_ternary('InGaP', GaInP)
 
 
 # Arsenides
@@ -130,10 +122,6 @@ class GaInAs(Ternary1):
     _bowing_VBO = -0.38  # eV    vurgaftman_band_2001
     _bowing_a_c = 2.61  # eV    vurgaftman_band_2001
 
-# GaAlAs = create_reversed_ternary('GaAlAs', AlGaAs)
-# InAlAs = create_reversed_ternary('InAlAs', AlInAs)
-# InGaAs = create_reversed_ternary('InGaAs', GaInAs)
-
 
 # Antimonides
 class AlGaSb(Ternary1):
@@ -167,10 +155,6 @@ class GaInSb(Ternary1):
     _bowing_meff_LH_DOS = 0.011  # m_e    vurgaftman_band_2001
     _bowing_F = -6.84  # vurgaftman_band_2001
 
-# GaAlSb = create_reversed_ternary('GaAlSb', AlGaSb)
-# InAlSb = create_reversed_ternary('InAlSb', AlInSb)
-# InGaSb = create_reversed_ternary('InGaSb', GaInSb)
-
 
 # Nitride Phosphides
 class AlNP(Ternary2):
@@ -192,10 +176,6 @@ class InNP(Ternary2):
     elements = ('In', 'N', 'P')
     binaries = (InN, InP)
     _bowing_Eg_Gamma = 15  # eV    vurgaftman_band_2001
-
-# AlPN = create_reversed_ternary('AlPN', AlNP)
-# GaPN = create_reversed_ternary('GaPN', GaNP)
-# InPN = create_reversed_ternary('InPN', InNP)
 
 
 # Nitride Arsenides
@@ -220,10 +200,6 @@ class InNAs(Ternary2):
     elements = ('In', 'N', 'As')
     binaries = (InN, InAs)
     _bowing_Eg_Gamma = 4.22  # eV    vurgaftman_band_2001
-
-# AlAsN = create_reversed_ternary('AlAsN', AlNAs)
-# GaAsN = create_reversed_ternary('GaAsN', GaNAs)
-# InAsN = create_reversed_ternary('InAsN', InNAs)
 
 
 # Phosphide Arsenides
@@ -254,10 +230,6 @@ class InPAs(Ternary2):
     _bowing_Eg_L = 0.27  # eV    vurgaftman_band_2001
     _bowing_Delta_SO = 0.16  # eV    vurgaftman_band_2001
 
-# AlAsP = create_reversed_ternary('AlAsP', AlPAs)
-# GaAsP = create_reversed_ternary('GaAsP', GaPAs)
-# InAsP = create_reversed_ternary('InAsP', InPAs)
-
 
 # Phosphide Antimonides
 class AlPSb(Ternary2):
@@ -286,10 +258,6 @@ class InPSb(Ternary2):
     _bowing_Eg_X = 1.9  # eV    vurgaftman_band_2001
     _bowing_Eg_L = 1.9  # eV    vurgaftman_band_2001
     _bowing_Delta_SO = 0.75  # eV    vurgaftman_band_2001
-
-# AlSbP = create_reversed_ternary('AlSbP', AlPSb)
-# GaSbP = create_reversed_ternary('GaSbP', GaPSb)
-# InSbP = create_reversed_ternary('InSbP', InPSb)
 
 
 # Arsenide Antimonides
@@ -325,10 +293,6 @@ class InAsSb(Ternary2):
     _bowing_Delta_SO = 1.2  # eV    vurgaftman_band_2001
     _bowing_meff_e_Gamma = 0.035  # m_e    vurgaftman_band_2001
 
-# AlSbAs = create_reversed_ternary('AlSbAs', AlAsSb)
-# GaSbAs = create_reversed_ternary('GaSbAs', GaAsSb)
-# InSbAs = create_reversed_ternary('InSbAs', InAsSb)
-
 ternaries = [AlGaN, AlInN, GaInN,
              AlGaP, AlInP, GaInP,
              AlGaAs, AlInAs, GaInAs,
@@ -339,16 +303,5 @@ ternaries = [AlGaN, AlInN, GaInN,
              AlPSb, GaPSb, InPSb,
              AlAsSb, GaAsSb, InAsSb]
 
-# alternate_ternaries = [GaAlN,  InAlN,  InGaN,
-#                       GaAlP,  InAlP,  InGaP,
-#                       GaAlAs, InAlAs, InGaAs,
-#                       GaAlSb, InAlSb, InGaSb,
-#                       AlPN,   GaPN,   InPN,
-#                       AlAsN,  GaAsN,  InAsN,
-#                       AlAsP,  GaAsP,  InAsP,
-#                       AlSbP,  GaSbP,  InSbP,
-#                       AlSbAs, GaSbAs, InSbAs]
-
-__all__ = ['ternaries']  # , 'alternate_ternaries']
+__all__ = ['ternaries']
 __all__ += [ternary.name for ternary in ternaries]
-# __all__ += [ternary.name for ternary in alternate_ternaries]
