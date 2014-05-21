@@ -576,7 +576,7 @@ class Quaternary3(Quaternary):
     def _has_y(cls, kwargs):
         '''Returns True if y is explicitly defined in kwargs'''
         return (('y' in kwargs) or (cls.elements[2] in kwargs) or
-                (cls.elements[2] in kwargs))
+                (cls.elements[3] in kwargs))
 
     @classmethod
     def _get_y(cls, kwargs):
@@ -606,6 +606,7 @@ class Quaternary3(Quaternary):
             x, y = cls._lattice_match(kwargs['a'], kwargs['T'],
                                       y=cls._get_y(kwargs))
         else:
+            print kwargs, cls._has_x(kwargs), cls._has_y(kwargs)
             raise TypeError(
                 "Missing required key word argument.\n" + cls._get_usage())
         cls._validate_xy(x, y)
