@@ -12,7 +12,7 @@ Output:
 .. literalinclude:: ./_examples_output/binaries.txt
 
 ternaries.py
------------
+------------
 Source:
 
 .. literalinclude:: ../src/openbandparams/examples/ternaries.py

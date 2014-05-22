@@ -24,6 +24,8 @@ import os
 import os.path
 import subprocess
 
+CWD = os.getcwd()
+
 # sphinx-apidoc -f -o doc -d 4 src/openbandparams/
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 EXAMPLES_DIR = os.path.join(SCRIPT_DIR, 'src/openbandparams/examples')
@@ -41,13 +43,18 @@ examples = [('binaries.py', 'binaries.txt'),
 # version
 os.chdir(os.path.join(SCRIPT_DIR, 'src'))
 
+print ''
+print 'Updating example ouputs'
 for example, output in examples:
     output_path = os.path.join(OUTPUT_DIR, output)
+    output_relpath = os.path.relpath(output_path, CWD)
     example_path = os.path.join(EXAMPLES_DIR, example)
+    example_relpath = os.path.relpath(example_path, CWD)
     with open(output_path, 'w') as f:
-        print 'Running "{}", and saving the output to "{}".'.format(
-                                            example_path, output_path)
+        print '  Running "{}"\n    Saving output to "{}"'.format(
+                                            example_relpath, output_relpath)
         subprocess.check_call(['python', example_path], stdout=f)
+print ''
 
 os.chdir('../doc')
 subprocess.check_call(['make', 'html'])
