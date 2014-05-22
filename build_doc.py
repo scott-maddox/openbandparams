@@ -55,7 +55,7 @@ with open(os.path.join(BUILD_EXAMPLES_DIR,'examples.txt'), 'w') as f:
 for example in examples:
     # build the result filename
     root, ext = os.path.splitext(example)
-    if example.startswith('plot'):
+    if example.lower().startswith('plot'):
         result_type = 'image'
         result = root+'.png'
     else:
