@@ -33,6 +33,8 @@ DOC_DIR = os.path.join(SCRIPT_DIR, 'doc')
 DOC_EXAMPLES_DIR = os.path.join(SCRIPT_DIR, 'doc/examples')
 BUILD_EXAMPLES_DIR = os.path.join(SCRIPT_DIR, 'doc/_build_examples')
 
+if not os.path.exists(DOC_EXAMPLES_DIR):
+    os.mkdir(DOC_EXAMPLES_DIR)
 if not os.path.exists(BUILD_EXAMPLES_DIR):
     os.mkdir(BUILD_EXAMPLES_DIR)
 
