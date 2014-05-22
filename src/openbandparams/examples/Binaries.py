@@ -33,7 +33,7 @@ print 'GaAs bandgap (at T = 0 K):  %.3f eV' % GaAs.Eg(T=0)
 print 'InAs bandgap (at T = 300 K):  %.3f eV' % InAs.Eg()
 print ''
 
-# Print a temperature dependent parameter
+# Print a temperature independent parameter
 print ('InAs electron effective mass in'
        ' the Gamma-valley:  %.3f eV' % InAs.meff_e_Gamma())
 print ''
