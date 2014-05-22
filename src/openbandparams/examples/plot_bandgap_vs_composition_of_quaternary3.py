@@ -43,4 +43,14 @@ plt.clabel(CS, inline=True, fontsize=10)
 plt.title('$%s$ (T = %.0f K)' % (alloy.LaTeX(), T))
 plt.xlabel('%s fraction' % alloy.elements[0])
 plt.ylabel('%s fraction' % alloy.elements[2])
-plt.show()
+
+if __name__ == '__main__':
+    import sys
+    if len(sys.argv) > 1:
+        output_filename = sys.argv[1]
+        if output_filename == "stdout":
+            plt.savefig(sys.stdout, format='png')
+        else:
+            plt.savefig(output_filename)
+    else:
+        plt.show()

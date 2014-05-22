@@ -37,23 +37,32 @@ if not os.path.exists(OUTPUT_DIR):
 examples = [('binaries.py', 'binaries.txt'),
             ('ternaries.py', 'ternaries.txt'),
             ('quaternaries.py', 'quaternaries.txt'),
-            ('GaPSb_on_InP.py', 'GaPSb_on_InP.txt'),]
+            ('GaPSb_on_InP.py', 'GaPSb_on_InP.txt'),
+            ('plot_bandgap_vs_composition_of_quaternary3.py',
+             'plot_bandgap_vs_composition_of_quaternary3.png'),]
 
 # change to the src dir so that python imports the current openbandparams
 # version
 os.chdir(os.path.join(SCRIPT_DIR, 'src'))
 
 print ''
-print 'Updating example ouputs'
+print 'Updating example ouputs...'
 for example, output in examples:
-    output_path = os.path.join(OUTPUT_DIR, output)
-    output_relpath = os.path.relpath(output_path, CWD)
     example_path = os.path.join(EXAMPLES_DIR, example)
+    output_path = os.path.join(OUTPUT_DIR, output)
+    # check if changes have been made
+    if (os.path.exists(output_path) and
+        os.path.getmtime(example_path) < os.path.getmtime(output_path)):
+        # no changes -- skip it
+        continue
     example_relpath = os.path.relpath(example_path, CWD)
+    output_relpath = os.path.relpath(output_path, CWD)
     with open(output_path, 'w') as f:
         print '  Running "{}"\n    Saving output to "{}"'.format(
                                             example_relpath, output_relpath)
-        subprocess.check_call(['python', example_path], stdout=f)
+        subprocess.check_call(['python', example_path, 'stdout'],
+                              stdout=f)
+print 'Done updating example ouputs.'
 print ''
 
 os.chdir('../doc')

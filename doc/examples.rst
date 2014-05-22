@@ -40,3 +40,13 @@ Source:
 Output:
 
 .. literalinclude:: ./_examples_output/GaPSb_on_InP.txt
+
+plot_bandgap_vs_composition_of_quaternary3.py
+---------------------------------------------
+Source:
+
+.. literalinclude:: ../src/openbandparams/examples/plot_bandgap_vs_composition_of_quaternary3.py
+
+Output:
+
+.. image:: ./_examples_output/plot_bandgap_vs_composition_of_quaternary3.png
