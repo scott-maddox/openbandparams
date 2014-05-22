@@ -105,4 +105,11 @@ for binary in [AlP, GaP, InP,
     # TODO: check that this isn't BS
 
 plt.legend(loc='best')
-plt.show()
+
+if __name__ == '__main__':
+    import sys
+    if len(sys.argv) > 1:
+        output_filename = sys.argv[1]
+        plt.savefig(output_filename)
+    else:
+        plt.show()

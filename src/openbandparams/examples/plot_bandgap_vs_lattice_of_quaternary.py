@@ -97,4 +97,11 @@ for yfrac in numpy.linspace(0, 1, 10):
     ax.plot(x, y_L, 'g--')
 
 plt.legend(loc='best')
-plt.show()
+
+if __name__ == '__main__':
+    import sys
+    if len(sys.argv) > 1:
+        output_filename = sys.argv[1]
+        plt.savefig(output_filename)
+    else:
+        plt.show()

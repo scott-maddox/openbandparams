@@ -29,40 +29,81 @@ CWD = os.getcwd()
 # sphinx-apidoc -f -o doc -d 4 src/openbandparams/
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 EXAMPLES_DIR = os.path.join(SCRIPT_DIR, 'src/openbandparams/examples')
-OUTPUT_DIR = os.path.join(SCRIPT_DIR, 'doc/_examples_output')
+DOC_DIR = os.path.join(SCRIPT_DIR, 'doc')
+DOC_EXAMPLES_DIR = os.path.join(SCRIPT_DIR, 'doc/examples')
+BUILD_EXAMPLES_DIR = os.path.join(SCRIPT_DIR, 'doc/_build_examples')
 
-if not os.path.exists(OUTPUT_DIR):
-    os.mkdir(OUTPUT_DIR)
-
-examples = [('binaries.py', 'binaries.txt'),
-            ('ternaries.py', 'ternaries.txt'),
-            ('quaternaries.py', 'quaternaries.txt'),
-            ('GaPSb_on_InP.py', 'GaPSb_on_InP.txt'),
-            ('plot_bandgap_vs_composition_of_quaternary3.py',
-             'plot_bandgap_vs_composition_of_quaternary3.png'),]
+if not os.path.exists(BUILD_EXAMPLES_DIR):
+    os.mkdir(BUILD_EXAMPLES_DIR)
 
 # change to the src dir so that python imports the current openbandparams
 # version
 os.chdir(os.path.join(SCRIPT_DIR, 'src'))
 
 print ''
-print 'Updating example ouputs...'
-for example, output in examples:
+print 'Building examples...'
+examples = [f for f in os.listdir(EXAMPLES_DIR) if
+            (f.endswith('.py') and not f.startswith('_'))]
+
+# save a list of the examples
+with open(os.path.join(BUILD_EXAMPLES_DIR,'examples.txt'), 'w') as f:
+    for example in examples:
+        f.write(example+'\n')
+
+for example in examples:
+    # build the result filename
+    root, ext = os.path.splitext(example)
+    if example.startswith('plot'):
+        result_type = 'image'
+        result = root+'.png'
+    else:
+        result_type = 'literalinclude'
+        result = root+'.txt' 
+
+    # output an rst file for each example
+    rst_path = os.path.join(DOC_EXAMPLES_DIR, root+'.rst')
+    with open(rst_path, 'w') as f:
+        title = root.replace('_', ' ')
+        underline = '='*len(root)
+        f.write('''{title}
+{underline}
+
+Source:
+
+.. literalinclude:: ../../src/openbandparams/examples/{example}
+
+Result:
+
+.. {result_type}:: ../_build_examples/{result}
+'''.format(title=title, underline=underline, result_type=result_type,
+           example=example, result=result))
+    
+    # get the absolute paths
     example_path = os.path.join(EXAMPLES_DIR, example)
-    output_path = os.path.join(OUTPUT_DIR, output)
-    # check if changes have been made
-    if (os.path.exists(output_path) and
-        os.path.getmtime(example_path) < os.path.getmtime(output_path)):
-        # no changes -- skip it
+    result_path = os.path.join(BUILD_EXAMPLES_DIR, result)   
+    
+    # check if changes have been made to the example script
+    if (os.path.exists(result_path) and
+        os.path.getmtime(example_path) < os.path.getmtime(result_path)):
+        # no changes -- skip running it
         continue
+    
+    # get the relative paths (for printing)
     example_relpath = os.path.relpath(example_path, CWD)
-    output_relpath = os.path.relpath(output_path, CWD)
-    with open(output_path, 'w') as f:
-        print '  Running "{}"\n    Saving output to "{}"'.format(
-                                            example_relpath, output_relpath)
-        subprocess.check_call(['python', example_path, 'stdout'],
-                              stdout=f)
-print 'Done updating example ouputs.'
+    result_relpath = os.path.relpath(result_path, CWD)
+    
+    # run the script and save the result
+    print '  Running "{}"\n    Saving result to "{}"'.format(
+                                        example_relpath, result_relpath)
+    if result_type == 'image':
+        subprocess.check_call(['python', example_path, result_path])
+    elif result_type == 'literalinclude':
+        with open(result_path, 'w') as f:
+            subprocess.check_call(['python', example_path], stdout=f)
+    else:
+        raise RuntimeError('Unknown result_type: {}'.format(result_type))
+
+print 'Done building examples.'
 print ''
 
 os.chdir('../doc')

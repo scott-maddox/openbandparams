@@ -48,9 +48,6 @@ if __name__ == '__main__':
     import sys
     if len(sys.argv) > 1:
         output_filename = sys.argv[1]
-        if output_filename == "stdout":
-            plt.savefig(sys.stdout, format='png')
-        else:
-            plt.savefig(output_filename)
+        plt.savefig(output_filename)
     else:
         plt.show()

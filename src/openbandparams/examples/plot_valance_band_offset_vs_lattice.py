@@ -28,7 +28,7 @@ T = 300
 fig = plt.figure()
 ax = fig.add_subplot(111)
 plt.xlabel('Lattice Parameter at %g K ($\AA$)' % T)
-plt.ylabel('Bandgap at %g K (eV)' % T)
+plt.ylabel('Valance Band Offset at %g K (eV)' % T)
 
 # plot the binaries
 x = []
@@ -38,7 +38,7 @@ for b in [AlP, GaP, InP,
           AlAs, GaAs, InAs,
           AlSb, GaSb, InSb]:
     x.append(b.a(T=T))
-    y.append(b.Eg(T=T))
+    y.append(b.VBO(T=T))
     label.append(b.name)
 ax.plot(x, y, 'k.')
 
@@ -62,7 +62,7 @@ for tern in [AlGaP, AlInP, GaInP,
     for i, f in zip(indices, fractions):
         instance = tern(x=f)
         x[i] = instance.a(T=T)
-        y[i] = instance.Eg(T=T)
+        y[i] = instance.VBO(T=T)
     ax.plot(x, y)
 
 if __name__ == '__main__':

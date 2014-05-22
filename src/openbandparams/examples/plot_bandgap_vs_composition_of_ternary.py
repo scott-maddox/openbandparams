@@ -41,4 +41,11 @@ ax.plot(xs, gamma, 'r-', label='$\Gamma$')
 ax.plot(xs, X, 'g--', label='$X$')
 ax.plot(xs, L, 'b:', label='$L$')
 plt.legend(loc='best')
-plt.show()
+
+if __name__ == '__main__':
+    import sys
+    if len(sys.argv) > 1:
+        output_filename = sys.argv[1]
+        plt.savefig(output_filename)
+    else:
+        plt.show()
