@@ -51,4 +51,6 @@ print '>>> GaInAs_on_InP = GaInAs(a=a_InP, T=800)\n',
 GaInAs_on_InP = GaInAs(a=a_InP, T=800)
 print '>>> InP.a(T=800)\n', InP.a(T=800)
 print '>>> GaInAs_on_InP.a()\n', GaInAs_on_InP.a(T=800)
+print '>>> GaInAs_on_InP.elementFraction("Ga")\n', \
+       GaInAs_on_InP.elementFraction("Ga")
 print '>>> GaInAs_on_InP.Eg()\n', GaInAs_on_InP.Eg()
