@@ -5,8 +5,7 @@ Subpackages
 -----------
 
 .. toctree::
-
-    openbandparams.iii_v
+    openbandparams.iii_v.rst
 
 Submodules
 ----------

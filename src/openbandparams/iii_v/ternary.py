@@ -54,9 +54,6 @@ class Ternary(AlloyBase):
     def __str__(self):
         return self.name
 
-    def __repr__(self):
-        return '{}(x={})'.format(self.name, self._x)
-
     def __eq__(self, other):
         return (type(self) == type(other) and
                 self._x == other._x)
@@ -127,6 +124,10 @@ class Ternary1(Ternary):
     For alloys of the A_{x}B_{1-x}C type, where A and B are Group III
     elements, and C is a Group V element.
     '''
+
+    def __repr__(self):
+        return '{}({}={})'.format(self.name, self.elements[0], self._x)
+    
     @classinstancemethod
     def LaTeX(self, cls):
         if self is not None:
@@ -184,6 +185,10 @@ class Ternary2(Ternary):
     For alloys of the AB_{x}C_{1-x} type, where A is a Group III element,
     and B and C are Group V elements.
     '''
+
+    def __repr__(self):
+        return '{}({}={})'.format(self.name, self.elements[1], self._x)
+    
     @classinstancemethod
     def LaTeX(self, cls):
         if self is not None:

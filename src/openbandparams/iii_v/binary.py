@@ -41,6 +41,9 @@ class Binary(Base):
     # parameters defined by subclasses.
     @classinstancemethod
     def LaTeX(self, cls):
+        '''
+        Returns a LaTeX representation.
+        '''
         if self is not None:
             return self.name
         else:
@@ -48,6 +51,11 @@ class Binary(Base):
 
     @classmethod
     def elementFraction(cls, element):
+        '''
+        Returns the fractional concentration of `element` with respect
+        to its sublattice. In a III-V binary, the fraction is either 1 if
+        `element` is present, or 0 if it is not.
+        '''
         if element in cls.elements:
             return 1.
         else:

@@ -1,7 +1,7 @@
 Structure
 =========
 
-Build scripts are located in the root directory, the package source code is in `/src/`, documentation is in `/doc/`, and examples are in `/examples/`.
+Build scripts are located in the root directory, the package source code is in `/src/` with examples in `src/openbandaprams/examples/` and tests in `/src/openbandarams/tests/`. Documentation is in `/doc/`.
 
 Documentation
 =============
@@ -17,25 +17,25 @@ I'm using the Git branching model described [here](http://nvie.com/posts/a-succe
 Design
 ======
 
-Here's the problem: some of the parameters depend on temperature, and some don't. The ones that depend on temperature have to be functions, while the ones that don't are not functions. The user has no clear way of knowing which parameters are functions, and which are not, until an exception is thrown. Should I just make all parameters functions of temperature, even if they aren't really? Or I can make them all functions with keyword arguments, and only use T values if needed (and show in the docstring if it's used). This is probably the cleanest approach.
+A somewhat unusual approach was required to get the desired API.
 
-The next question is how to best store the values. Should they be hardcoded in, with references in comments? This is the most runtime efficient. If I have a separate wiki for maintaining the most up-to-date values, then I could just do periodic releases with the changes from the wiki incorporated by looking at the wiki change history. This would be a fairly manual approach, as apposed to automated. However, in this case I think requiring a human in the loop isn't necessarily a bad thing, since the human can sanity check the changes. Linus still does merges to the Linux kernal by hand.
+Here's the problem: some of the parameters depend on temperature, and some don't. The ones that depend on temperature have to be functions, while the ones that don't are not functions. The user has no clear way of knowing which parameters are functions, and which are not, until an exception is thrown. I could have either made all parameters functions of temperature, even if they aren't really, or I could make them all functions with keyword arguments, and only use T values if needed (and show in the docstring if it's used). The latter approach is the one I settled on.
 
-I need to think throught the API to make sure it's easy to use for the use cases I care most about. Then, and only then, I'll choose the implementation to fit the API. That's right, I'm going to pretend I'm an actual software engineer.
+The next question was how to best store the parameters. Should they be hardcoded in, with references in comments? This is the most runtime efficient. If I have a separate wiki for maintaining the most up-to-date values, then I could just do periodic releases with the changes from the wiki incorporated by looking at the wiki change history. This would be a fairly manual approach, as apposed to automated. However, in this case I think requiring a human in the loop isn't necessarily a bad thing, since the human can sanity check the changes. Apparently Linus still does merges to the Linux kernal by hand.
 
-----
-
-Okay, I now have hardcoded values with preceding underscores and functions without preceding underscores. The hardcoded variable names are subject to change if I decide to change the implementation.
+It's important that the user interface is easy to understand and use. Ultimately it doesn't matter how complex the implementation is (as long as it works). Thus, I'm designing the interface, and only then figuring out how to implement it.
 
 Building and Uploading to PyPI
 ==============================
 
-When a new release is ready, and `version.py` has already been updated, run the following commands from the root of the git repository to build and upload the release to PyPI:
+** Note: this section needs revision **
 
-    python setup.py build
-    python setup.py register sdist bdist_egg upload
-
-It's also a good idea to update the documentation:
+When a new release is ready and merged into the master branch and `version.py` has already been updated, you are almost ready to upload the release to PyPI. You should be on either the develop or release candidate branch. First, you should update the documentation:
 
     ./build_doc.sh
     ./upload_doc.sh
+
+Then run the following commands from the root of the git repository to build and upload the release to PyPI:
+
+    python setup.py build
+    python setup.py register sdist bdist_egg upload

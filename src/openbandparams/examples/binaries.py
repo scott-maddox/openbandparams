@@ -18,7 +18,6 @@
 #
 #############################################################################
 
-# from openbandparams.iii_v.zinc_blende.binary import *
 from openbandparams import *
 
 print 'Binary:', GaAs
