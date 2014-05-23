@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Welcome to openbandparams’s documentation! &mdash; openbandparams 0.3 documentation</title>
+    <title>Welcome to openbandparams’s documentation! &mdash; openbandparams 0.4 documentation</title>
     
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.3',
+        VERSION:     '0.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,8 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="openbandparams 0.3 documentation" href="#" /> 
+    <link rel="top" title="openbandparams 0.4 documentation" href="#" />
+    <link rel="next" title="Installation" href="installation.html" /> 
   </head>
   <body>
     <div class="related">
@@ -36,19 +37,26 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="#">openbandparams 0.3 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="installation.html" title="Installation"
+             accesskey="N">next</a> |</li>
+        <li><a href="#">openbandparams 0.4 documentation</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Welcome to openbandparams&#8217;s documentation!</a><ul>
+<li><a class="reference internal" href="#">Welcome to openbandparams&#8217;s documentation!</a></li>
+<li><a class="reference internal" href="#contents">Contents</a><ul>
 </ul>
 </li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 
+  <h4>Next topic</h4>
+  <p class="topless"><a href="installation.html"
+                        title="next chapter">Installation</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/index.txt"
@@ -77,26 +85,14 @@
             
   <div class="section" id="welcome-to-openbandparams-s-documentation">
 <h1>Welcome to openbandparams&#8217;s documentation!<a class="headerlink" href="#welcome-to-openbandparams-s-documentation" title="Permalink to this headline">¶</a></h1>
-<p>The main goal of this project is to provide easy access to semiconductor band parameters for calculations and simulations. Basic functionality requires only the standard python distribution.</p>
-<p>Example scripts are provided for basic usage and for generating common plots such as bandgap vs. lattice constant, bandgap vs. alloy composition. These are currently the best way to learn how to use this package, as the documentation is still lacking.</p>
+<p>The main goal of this project is to provide easy access to semiconductor
+band parameters for calculations and simulations. Basic functionality
+requires only the standard python distribution.</p>
+<p>Example scripts are provided for basic usage and for generating common
+plots such as bandgap vs. lattice constant and bandgap vs. alloy
+composition.</p>
 <dl class="docutils">
-<dt>Included parameters:</dt>
-<dd><ul class="first last simple">
-<li>lattice constant</li>
-<li>thermal expansion coefficient</li>
-<li>bandgap energies (direct and indirect)</li>
-<li>Varshni parameters</li>
-<li>split-off energies</li>
-<li>effective masses</li>
-<li>Luttinger parameters</li>
-<li>Kane parameters (Ep and F)</li>
-<li>Valance band offsets</li>
-<li>band deformation potentials</li>
-<li>elastic constant</li>
-<li>alloy bowing parameters</li>
-</ul>
-</dd>
-<dt>Included materials:</dt>
+<dt>Materials included in this version:</dt>
 <dd><ul class="first last">
 <li><dl class="first docutils">
 <dt>III-V&#8217;s</dt>
@@ -118,24 +114,31 @@ AlSb, GaSb, InSb</li>
 <li><dl class="first docutils">
 <dt>Ternaries</dt>
 <dd><ul class="first last simple">
-<li>AlGaN,  AlInN,  GaInN,
-AlGaP,  AlInP,  GaInP,
+<li>AlGaN, AlInN, GaInN,
+AlGaP, AlInP, GaInP,
 AlGaAs, AlInAs, GaInAs,
 AlGaSb, AlInSb, GaInSb,
-AlNP,   GaNP,   InNP,
-AlNAs,  GaNAs,  InNAs,
-AlPAs,  GaPAs,  InPAs,
-AlPSb,  GaPSb,  InPSb,
-AlAsSb, GaAsSb, InAsSb,
-GaAlN,  InAlN,  InGaN,
-GaAlP,  InAlP,  InGaP,
-GaAlAs, InAlAs, InGaAs,
-GaAlSb, InAlSb, InGaSb,
-AlPN,   GaPN,   InPN,
-AlAsN,  GaAsN,  InAsN,
-AlAsP,  GaAsP,  InAsP,
-AlSbP,  GaSbP,  InSbP,
-AlSbAs, GaSbAs, InSbAs</li>
+AlNP, GaNP, InNP,
+AlNAs, GaNAs, InNAs,
+AlPAs, GaPAs, InPAs,
+AlPSb, GaPSb, InPSb,
+AlAsSb, GaAsSb, InAsSb</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Quaternaries</dt>
+<dd><ul class="first last simple">
+<li>AlNPAs, AlPAsSb,
+GaNPAs, GaPAsSb,
+InNPAs, InPAsSb,
+AlGaInN, AlGaInP, AlGaInAs, AlGaInSb,
+AlGaNP, AlInNP, GaInNP,
+AlGaNAs, AlInNAs, GaInNAs,
+AlGaPAs, AlInPAs, GaInPAs,
+AlGaPSb, AlInPSb, GaInPSb,
+AlGaAsSb, AlInAsSb, GaInAsSb</li>
 </ul>
 </dd>
 </dl>
@@ -150,11 +153,45 @@ AlSbAs, GaSbAs, InSbAs</li>
 </li>
 </ul>
 </dd>
+<dt>Parameters included in this version:</dt>
+<dd><ul class="first last simple">
+<li>lattice constants</li>
+<li>thermal expansion coefficients</li>
+<li>bandgap energies (direct and indirect)</li>
+<li>Varshni parameters</li>
+<li>split-off energies</li>
+<li>effective masses</li>
+<li>Luttinger parameters</li>
+<li>Kane parameters (Ep and F)</li>
+<li>Valance band offsets</li>
+<li>band deformation potentials</li>
+<li>elastic constants</li>
+<li>alloy bowing parameters</li>
+</ul>
+</dd>
 </dl>
-<p>The source code and example usage scripts are available from the <a class="reference external" href="http://github.com/scott-maddox/openbandparams">Github repository</a>, and additional documentation is available in the <a class="reference internal" href="py-modindex.html"><em>Module Index</em></a>.</p>
-<p>Contents:</p>
+<p>The <a class="reference external" href="http://github.com/scott-maddox/openbandparams">source code</a> and <a class="reference external" href="http://scott-maddox.github.io/openbandparams">documentation</a> are graciously hosted by GitHub.</p>
+</div>
+<div class="section" id="contents">
+<h1>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
-<ul class="simple">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/Binaries.html">Binaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/Ternaries.html">Ternaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/Quaternaries.html">Quaternaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/GaPSb_on_InP.html">GaPSb on InP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/Plot_Bandgap_vs_Composition_of_Ternary.html">Plot Bandgap vs Composition of Ternary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/Plot_Bandgap_vs_Composition_of_Quaternary3.html">Plot Bandgap vs Composition of Quaternary3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/Plot_Bandgap_vs_Lattice_Constant.html">Plot Bandgap vs Lattice Constant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/Plot_Bandgap_vs_Lattice_Constant_of_Quaternary.html">Plot Bandgap vs Lattice Constant of Quaternary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/Plot_Bandgap_vs_Lattice_Constant_of_Strained_Binaries.html">Plot Bandgap vs Lattice Constant of Strained Binaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/Plot_Valance_Band_Offset_vs_Lattice_Constant.html">Plot Valance Band Offset vs Lattice Constant</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="supported_parameters.html">Supported Parameters</a></li>
 </ul>
 </div>
 </div>
@@ -182,11 +219,14 @@ AlSbAs, GaSbAs, InSbAs</li>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="#">openbandparams 0.3 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="installation.html" title="Installation"
+             >next</a> |</li>
+        <li><a href="#">openbandparams 0.4 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2013, Scott J Maddox.
+        &copy; Copyright 2013-2014, Scott J Maddox.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b3.
     </div>
   </body>

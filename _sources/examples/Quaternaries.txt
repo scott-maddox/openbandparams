@@ -1,0 +1,10 @@
+Quaternaries
+============
+
+Source:
+
+.. literalinclude:: ../../src/openbandparams/examples/Quaternaries.py
+
+Result:
+
+.. literalinclude:: ../_build_examples/Quaternaries.txt

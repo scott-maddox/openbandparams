@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>openbandparams.equations &mdash; openbandparams 0.3 documentation</title>
+    <title>openbandparams.equations &mdash; openbandparams 0.4 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.3',
+        VERSION:     '0.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,8 +24,8 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="openbandparams 0.3 documentation" href="../../index.html" />
-    <link rel="up" title="Module code" href="../index.html" /> 
+    <link rel="top" title="openbandparams 0.4 documentation" href="../../index.html" />
+    <link rel="up" title="openbandparams" href="../openbandparams.html" /> 
   </head>
   <body>
     <div class="related">
@@ -37,8 +37,9 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">openbandparams 0.3 documentation</a> &raquo;</li>
-          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+        <li><a href="../../index.html">openbandparams 0.4 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../openbandparams.html" accesskey="U">openbandparams</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar">
@@ -66,7 +67,7 @@
             
   <h1>Source code for openbandparams.equations</h1><div class="highlight"><pre>
 <span class="c">#</span>
-<span class="c">#   Copyright (c) 2013, Scott J Maddox</span>
+<span class="c">#   Copyright (c) 2013-2014, Scott J Maddox</span>
 <span class="c">#</span>
 <span class="c">#   This file is part of openbandparams.</span>
 <span class="c">#</span>
@@ -83,17 +84,11 @@
 <span class="c">#   You should have received a copy of the GNU Affero General Public License</span>
 <span class="c">#   along with openbandparams.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 <span class="c">#</span>
-<span class="c">################################################################################</span>
+<span class="c">#############################################################################</span>
 
-<span class="c"># std lib imports</span>
-<span class="kn">import</span> <span class="nn">logging</span><span class="p">;</span> <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
-
-<span class="c"># third party imports</span>
-
-<span class="c"># local imports</span>
 
 <div class="viewcode-block" id="varshni"><a class="viewcode-back" href="../../openbandparams.html#openbandparams.equations.varshni">[docs]</a><span class="k">def</span> <span class="nf">varshni</span><span class="p">(</span><span class="n">Eg_0</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">Eg_0</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">T</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span> <span class="n">T</span> <span class="o">+</span> <span class="n">beta</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">Eg_0</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">T</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="n">T</span> <span class="o">+</span> <span class="n">beta</span><span class="p">)</span></div>
 </pre></div>
 
           </div>
@@ -110,12 +105,13 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">openbandparams 0.3 documentation</a> &raquo;</li>
-          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+        <li><a href="../../index.html">openbandparams 0.4 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../openbandparams.html" >openbandparams</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2013, Scott J Maddox.
+        &copy; Copyright 2013-2014, Scott J Maddox.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b3.
     </div>
   </body>

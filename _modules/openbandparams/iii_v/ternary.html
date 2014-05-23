@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>openbandparams.iii_v.ternary &mdash; openbandparams 0.3 documentation</title>
+    <title>openbandparams.iii_v.ternary &mdash; openbandparams 0.4 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.3',
+        VERSION:     '0.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,8 +24,8 @@
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="openbandparams 0.3 documentation" href="../../../index.html" />
-    <link rel="up" title="Module code" href="../../index.html" /> 
+    <link rel="top" title="openbandparams 0.4 documentation" href="../../../index.html" />
+    <link rel="up" title="openbandparams.iii_v" href="../iii_v.html" /> 
   </head>
   <body>
     <div class="related">
@@ -37,8 +37,10 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">openbandparams 0.3 documentation</a> &raquo;</li>
-          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+        <li><a href="../../../index.html">openbandparams 0.4 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../../openbandparams.html" >openbandparams</a> &raquo;</li>
+          <li><a href="../iii_v.html" accesskey="U">openbandparams.iii_v</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar">
@@ -66,144 +68,271 @@
             
   <h1>Source code for openbandparams.iii_v.ternary</h1><div class="highlight"><pre>
 <span class="c">#</span>
-<span class="c">#   Copyright (c) 2013, Scott J Maddox</span>
+<span class="c">#   Copyright (c) 2013-2014, Scott J Maddox</span>
 <span class="c">#</span>
-<span class="c">#   This file is part of OpenBandParams.</span>
+<span class="c">#   This file is part of openbandparams.</span>
 <span class="c">#</span>
-<span class="c">#   OpenBandParams is free software: you can redistribute it and/or modify</span>
-<span class="c">#   it under the terms of the GNU Affero General Public License as published by</span>
-<span class="c">#   the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c">#   openbandparams is free software: you can redistribute it and/or modify</span>
+<span class="c">#   it under the terms of the GNU Affero General Public License as published</span>
+<span class="c">#   by the Free Software Foundation, either version 3 of the License, or</span>
 <span class="c">#   (at your option) any later version.</span>
 <span class="c">#</span>
-<span class="c">#   PhotonAcq is distributed in the hope that it will be useful,</span>
+<span class="c">#   openbandparams is distributed in the hope that it will be useful,</span>
 <span class="c">#   but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
 <span class="c">#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
 <span class="c">#   GNU Affero General Public License for more details.</span>
 <span class="c">#</span>
 <span class="c">#   You should have received a copy of the GNU Affero General Public License</span>
-<span class="c">#   along with PhotonAcq.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="c">#   along with openbandparams.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 <span class="c">#</span>
-<span class="c">################################################################################</span>
+<span class="c">#############################################################################</span>
 
-<span class="c"># std lib imports</span>
-<span class="kn">import</span> <span class="nn">logging</span><span class="p">;</span> <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">openbandparams.algorithms</span> <span class="kn">import</span> <span class="n">bisect</span>
+<span class="kn">from</span> <span class="nn">openbandparams.base_material</span> <span class="kn">import</span> <span class="n">BaseType</span><span class="p">,</span> <span class="n">AlloyBase</span>
+<span class="kn">from</span> <span class="nn">openbandparams.utils</span> <span class="kn">import</span> <span class="n">classinstancemethod</span>
 
-<span class="c"># third party imports</span>
 
-<span class="c"># local imports</span>
-<span class="kn">from</span> <span class="nn">openbandparams.base_material</span> <span class="kn">import</span> <span class="n">AlloyBase</span>
+<div class="viewcode-block" id="TernaryType"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.ternary.TernaryType">[docs]</a><span class="k">class</span> <span class="nc">TernaryType</span><span class="p">(</span><span class="n">BaseType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="c"># acts like a class method for the Ternary class</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">binaries</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">name</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">binaries</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">name</span><span class="p">)):</span>
+            <span class="k">def</span> <span class="nf">_param_accessor</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">_param_accessor</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 
+</div>
 <div class="viewcode-block" id="Ternary"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.ternary.Ternary">[docs]</a><span class="k">class</span> <span class="nc">Ternary</span><span class="p">(</span><span class="n">AlloyBase</span><span class="p">):</span>
-    <span class="n">_bowing_Eg_Gamma</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">_bowing_Eg_X</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">_bowing_Eg_L</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">_bowing_Delta_SO</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">_bowing_meff_e_Gamma</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">_bowing_meff_HH_DOS</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">_bowing_meff_LH_DOS</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">_bowing_Ep</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">_bowing_F</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">_bowing_VBO</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">_bowing_a_c</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">__metaclass__</span> <span class="o">=</span> <span class="n">TernaryType</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">AlloyBase</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">element1</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">element1</span><span class="p">])</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">element2</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_x</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">element2</span><span class="p">]))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_init</span><span class="p">()</span> <span class="c"># initialize any values that depend on self._x</span>
-    
-    <span class="k">def</span> <span class="nf">_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        Initializes any values that depend on `self._x`, the alloy fraction.</span>
-<span class="sd">        </span>
-<span class="sd">        Should be overidden when calling `create_ternary`, e.g.</span>
-<span class="sd">        </span>
-<span class="sd">            def AlGaAs_init(self):</span>
-<span class="sd">                &quot;&quot;&quot;Defines AlGaAs params that depend on self._x&quot;&quot;&quot;</span>
-<span class="sd">                self._new_param = self._x * 3</span>
-<span class="sd">            create_ternary(&#39;AlGaAs&#39;, &#39;Al&#39;, AlAs, &#39;Ga&#39;, GaAs,</span>
-<span class="sd">                           { &#39;_init&#39; : AlGaAs_init })</span>
-<span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">pass</span>
-    <span class="k">def</span> <span class="nf">_interpolate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_x</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">binaries</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">name</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">binaries</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">name</span><span class="p">)):</span>
+            <span class="k">def</span> <span class="nf">_param_accessor</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">_param_accessor</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">==</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">and</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_x</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_x</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_get_bowing</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="s">&#39;_bowing_</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">param</span><span class="p">):</span>
+            <span class="c"># a bowing parameter exists - use it</span>
+            <span class="n">C</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="s">&#39;_bowing_</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">param</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">C</span><span class="p">):</span>
+                <span class="c"># assume the bowing paramter is composition dependent</span>
+                <span class="c"># if it&#39;s callable</span>
+                <span class="k">return</span> <span class="n">C</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">C</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span>
+
+    <span class="nd">@classinstancemethod</span>
+    <span class="k">def</span> <span class="nf">_interpolate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cls</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_get_x</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
         <span class="n">vals</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">binary1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">binary2</span><span class="p">]:</span>
+        <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="p">[</span><span class="n">cls</span><span class="o">.</span><span class="n">binaries</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cls</span><span class="o">.</span><span class="n">binaries</span><span class="p">[</span><span class="mi">1</span><span class="p">]]:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">param</span><span class="p">))</span>
             <span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-                <span class="n">e</span><span class="o">.</span><span class="n">message</span> <span class="o">+=</span><span class="s">&#39;. Binary `</span><span class="si">%s</span><span class="s">`&#39;</span><span class="o">%</span><span class="n">b</span><span class="o">.</span><span class="n">name</span>
-                <span class="n">e</span><span class="o">.</span><span class="n">message</span> <span class="o">+=</span><span class="s">&#39; missing param `</span><span class="si">%s</span><span class="s">`&#39;</span><span class="o">%</span><span class="n">param</span>
+                <span class="n">e</span><span class="o">.</span><span class="n">message</span> <span class="o">+=</span> <span class="s">&#39;. Binary `</span><span class="si">%s</span><span class="s">`&#39;</span> <span class="o">%</span> <span class="n">b</span><span class="o">.</span><span class="n">name</span>
+                <span class="n">e</span><span class="o">.</span><span class="n">message</span> <span class="o">+=</span> <span class="s">&#39; missing param `</span><span class="si">%s</span><span class="s">`&#39;</span> <span class="o">%</span> <span class="n">param</span>
                 <span class="k">raise</span> <span class="n">e</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x</span>
-        <span class="k">if</span> <span class="n">T</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;_&#39;</span><span class="p">:</span>
+            <span class="c"># assume it&#39;s a hard coded parameter if it starts with &#39;_&#39;</span>
             <span class="n">A</span> <span class="o">=</span> <span class="n">vals</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="n">B</span> <span class="o">=</span> <span class="n">vals</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">A</span> <span class="o">=</span> <span class="n">vals</span><span class="p">[</span><span class="mi">0</span><span class="p">](</span><span class="n">T</span><span class="p">)</span>
-            <span class="n">B</span> <span class="o">=</span> <span class="n">vals</span><span class="p">[</span><span class="mi">1</span><span class="p">](</span><span class="n">T</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&#39;_bowing_</span><span class="si">%s</span><span class="s">&#39;</span><span class="o">%</span><span class="n">param</span><span class="p">):</span>
-            <span class="n">C</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&#39;_bowing_</span><span class="si">%s</span><span class="s">&#39;</span><span class="o">%</span><span class="n">param</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">A</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">C</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="p">)</span>
+            <span class="c"># otherwise it&#39;s an accessor function</span>
+            <span class="n">A</span> <span class="o">=</span> <span class="n">vals</span><span class="p">[</span><span class="mi">0</span><span class="p">](</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">B</span> <span class="o">=</span> <span class="n">vals</span><span class="p">[</span><span class="mi">1</span><span class="p">](</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_get_bowing</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">C</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="c"># a bowing parameter exists - use it</span>
+            <span class="k">return</span> <span class="n">A</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">B</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">C</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">A</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="p">)</span>
-    
-<div class="viewcode-block" id="Ternary.a"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.ternary.Ternary.a">[docs]</a>    <span class="k">def</span> <span class="nf">a</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">300</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        Returns the lattice parameter, a, in Angstroms at a given</span>
-<span class="sd">        temperature, T, in Kelvin (default: 300 K)</span>
-<span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span></div>
-<div class="viewcode-block" id="Ternary.Eg_Gamma"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.ternary.Ternary.Eg_Gamma">[docs]</a>    <span class="k">def</span> <span class="nf">Eg_Gamma</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">300</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        Returns the Gamma-valley bandgap, Eg_Gamma, in electron Volts at a given</span>
-<span class="sd">        temperature, T, in Kelvin (default: 300 K)</span>
-<span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="s">&#39;Eg_Gamma&#39;</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span></div>
-<div class="viewcode-block" id="Ternary.Eg_X"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.ternary.Ternary.Eg_X">[docs]</a>    <span class="k">def</span> <span class="nf">Eg_X</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">300</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        Returns the X-valley bandgap, Eg_X, in electron Volts at a given</span>
-<span class="sd">        temperature, T, in Kelvin (default: 300 K)</span>
-<span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="s">&#39;Eg_X&#39;</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span></div>
-<div class="viewcode-block" id="Ternary.Eg_L"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.ternary.Ternary.Eg_L">[docs]</a>    <span class="k">def</span> <span class="nf">Eg_L</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">300</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        Returns the L-valley bandgap, Eg_L, in electron Volts at a given</span>
-<span class="sd">        temperature, T, in Kelvin (default: 300 K)</span>
-<span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="s">&#39;Eg_L&#39;</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span></div>
-<div class="viewcode-block" id="Ternary.Eg"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.ternary.Ternary.Eg">[docs]</a>    <span class="k">def</span> <span class="nf">Eg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">300</span><span class="p">):</span>
+            <span class="c"># otherwise, use linear interpolation</span>
+            <span class="k">return</span> <span class="n">A</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">B</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span>
+
+    <span class="nd">@classinstancemethod</span>
+<div class="viewcode-block" id="Ternary.Eg"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.ternary.Ternary.Eg">[docs]</a>    <span class="k">def</span> <span class="nf">Eg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Returns the bandgap, Eg, in electron Volts at a given</span>
-<span class="sd">        temperature, T, in Kelvin (default: 300 K)</span>
+<span class="sd">        temperature, T, in Kelvin (default: 300 K).</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Eg_Gamma</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">Eg_X</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">Eg_L</span><span class="p">(</span><span class="n">T</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">T</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_T</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Eg_Gamma</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">Eg_X</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">Eg_L</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_get_x</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">T</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_get_T</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">Eg_Gamma</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">),</span> <span class="n">cls</span><span class="o">.</span><span class="n">Eg_X</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">),</span>
+                       <span class="n">cls</span><span class="o">.</span><span class="n">Eg_L</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">))</span>
+
 </div></div>
-<div class="viewcode-block" id="ReversedTernary"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.ternary.ReversedTernary">[docs]</a><span class="k">class</span> <span class="nc">ReversedTernary</span><span class="p">(</span><span class="n">Ternary</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="n">Ternary</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">reversed_ternary_inst</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reversed_ternary</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x</span><span class="p">)</span>
+<div class="viewcode-block" id="Ternary1"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.ternary.Ternary1">[docs]</a><span class="k">class</span> <span class="nc">Ternary1</span><span class="p">(</span><span class="n">Ternary</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    For alloys of the A_{x}B_{1-x}C type, where A and B are Group III</span>
+<span class="sd">    elements, and C is a Group V element.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;{}({}={})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x</span><span class="p">)</span>
+    
+    <span class="nd">@classinstancemethod</span>
+<div class="viewcode-block" id="Ternary1.LaTeX"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.ternary.Ternary1.LaTeX">[docs]</a>    <span class="k">def</span> <span class="nf">LaTeX</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cls</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">&quot;{A}_{{{:g}}}{B}_{{{:g}}}{C}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_x</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x</span><span class="p">,</span>
+                                                        <span class="n">A</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                                        <span class="n">B</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                                        <span class="n">C</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">&quot;{A}_{{x}}{B}_{{1-x}}{C}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                                    <span class="n">B</span><span class="o">=</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                                    <span class="n">C</span><span class="o">=</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 </div>
-<div class="viewcode-block" id="create_ternary"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.ternary.create_ternary">[docs]</a><span class="k">def</span> <span class="nf">create_ternary</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">element1</span><span class="p">,</span> <span class="n">binary1</span><span class="p">,</span> <span class="n">element2</span><span class="p">,</span> <span class="n">binary2</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
-    <span class="n">new_type</span><span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="n">Ternary</span><span class="p">,),</span> <span class="n">params</span><span class="p">)</span>
-    <span class="n">new_type</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-    <span class="n">new_type</span><span class="o">.</span><span class="n">element1</span> <span class="o">=</span> <span class="n">element1</span>
-    <span class="n">new_type</span><span class="o">.</span><span class="n">binary1</span> <span class="o">=</span> <span class="n">binary1</span>
-    <span class="n">new_type</span><span class="o">.</span><span class="n">element2</span> <span class="o">=</span> <span class="n">element2</span>
-    <span class="n">new_type</span><span class="o">.</span><span class="n">binary2</span> <span class="o">=</span> <span class="n">binary2</span>
-    <span class="k">return</span> <span class="n">new_type</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_get_x</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s">&#39;x&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;x&#39;</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+        <span class="k">elif</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+        <span class="k">elif</span> <span class="s">&#39;a&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="c"># lattice match to the given lattice constant</span>
+            <span class="k">if</span> <span class="s">&#39;T&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;Lattice matching temperature, T, missing.&#39;</span><span class="p">)</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">]</span>
+            <span class="n">T</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;T&#39;</span><span class="p">]</span>
+            <span class="c"># make sure the lattice constant is available</span>
+            <span class="n">b1a</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">binaries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+            <span class="n">b2a</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">binaries</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+            <span class="n">amin</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">b1a</span><span class="p">,</span> <span class="n">b2a</span><span class="p">)</span>
+            <span class="n">amax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">b1a</span><span class="p">,</span> <span class="n">b2a</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">amin</span> <span class="ow">or</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">amax</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;a out of range [</span><span class="si">%.3f</span><span class="s">, </span><span class="si">%.3f</span><span class="s">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">amin</span><span class="p">,</span> <span class="n">amax</span><span class="p">))</span>
+            <span class="c"># find the correct composition, x</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">bisect</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">cls</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">x</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;Missing required key word argument.&quot;</span>
+                            <span class="s">&quot;&#39;x&#39;, &#39;</span><span class="si">%s</span><span class="s">&#39;, or &#39;</span><span class="si">%s</span><span class="s">&#39; is needed.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                                             <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+
+<div class="viewcode-block" id="Ternary1.elementFraction"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.ternary.Ternary1.elementFraction">[docs]</a>    <span class="k">def</span> <span class="nf">elementFraction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">element</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x</span>
+        <span class="k">elif</span> <span class="n">element</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">element</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+
+</div></div>
+<div class="viewcode-block" id="Ternary2"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.ternary.Ternary2">[docs]</a><span class="k">class</span> <span class="nc">Ternary2</span><span class="p">(</span><span class="n">Ternary</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    For alloys of the AB_{x}C_{1-x} type, where A is a Group III element,</span>
+<span class="sd">    and B and C are Group V elements.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;{}({}={})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x</span><span class="p">)</span>
+    
+    <span class="nd">@classinstancemethod</span>
+<div class="viewcode-block" id="Ternary2.LaTeX"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.ternary.Ternary2.LaTeX">[docs]</a>    <span class="k">def</span> <span class="nf">LaTeX</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cls</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">&quot;{A}{B}_{{{:g}}}{C}_{{{:g}}}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_x</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x</span><span class="p">,</span>
+                                                        <span class="n">A</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                                        <span class="n">B</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                                        <span class="n">C</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">&quot;{A}{B}_{{x}}{C}_{{1-x}}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                                    <span class="n">B</span><span class="o">=</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                                    <span class="n">C</span><span class="o">=</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 </div>
-<div class="viewcode-block" id="create_reversed_ternary"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.ternary.create_reversed_ternary">[docs]</a><span class="k">def</span> <span class="nf">create_reversed_ternary</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">reversed_ternary</span><span class="p">):</span>
-    <span class="n">new_type</span><span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="n">Ternary</span><span class="p">,),</span> <span class="p">{})</span>
-    <span class="n">new_type</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-    <span class="n">new_type</span><span class="o">.</span><span class="n">reversed_ternary</span> <span class="o">=</span> <span class="n">reversed_ternary</span>
-    <span class="n">new_type</span><span class="o">.</span><span class="n">element1</span> <span class="o">=</span> <span class="n">reversed_ternary</span><span class="o">.</span><span class="n">element2</span>
-    <span class="n">new_type</span><span class="o">.</span><span class="n">binary1</span> <span class="o">=</span> <span class="n">reversed_ternary</span><span class="o">.</span><span class="n">binary2</span>
-    <span class="n">new_type</span><span class="o">.</span><span class="n">element2</span> <span class="o">=</span> <span class="n">reversed_ternary</span><span class="o">.</span><span class="n">element1</span>
-    <span class="n">new_type</span><span class="o">.</span><span class="n">binary2</span> <span class="o">=</span> <span class="n">reversed_ternary</span><span class="o">.</span><span class="n">binary1</span>
-    <span class="k">return</span> <span class="n">new_type</span></div>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_get_x</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s">&#39;x&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;x&#39;</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+        <span class="k">elif</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]])</span>
+        <span class="k">elif</span> <span class="s">&#39;a&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="c"># lattice match to the given lattice constant</span>
+            <span class="k">if</span> <span class="s">&#39;T&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;Lattice matching temperature, T, missing.&#39;</span><span class="p">)</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">]</span>
+            <span class="n">T</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;T&#39;</span><span class="p">]</span>
+            <span class="c"># make sure the lattice constant is available</span>
+            <span class="n">b1a</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">binaries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+            <span class="n">b2a</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">binaries</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+            <span class="n">amin</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">b1a</span><span class="p">,</span> <span class="n">b2a</span><span class="p">)</span>
+            <span class="n">amax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">b1a</span><span class="p">,</span> <span class="n">b2a</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">amin</span> <span class="ow">or</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">amax</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;a out of range [</span><span class="si">%.3f</span><span class="s">, </span><span class="si">%.3f</span><span class="s">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">amin</span><span class="p">,</span> <span class="n">amax</span><span class="p">))</span>
+            <span class="c"># find the correct composition, x</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">bisect</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">cls</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">x</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;Missing required key word argument.&quot;</span>
+                            <span class="s">&quot;&#39;x&#39;, &#39;</span><span class="si">%s</span><span class="s">&#39;, or &#39;</span><span class="si">%s</span><span class="s">&#39; is needed.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                                             <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+
+<div class="viewcode-block" id="Ternary2.elementFraction"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.ternary.Ternary2.elementFraction">[docs]</a>    <span class="k">def</span> <span class="nf">elementFraction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">element</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">element</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x</span>
+        <span class="k">elif</span> <span class="n">element</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+
+<span class="c"># class ReversedTernary(Ternary):</span>
+<span class="c">#    @classmethod</span>
+<span class="c">#    def _get_bowing(cls, param, x):</span>
+<span class="c">#        if hasattr(cls._ternary, &#39;_bowing_%s&#39;%param):</span>
+<span class="c">#            # a bowing parameter exists - use it</span>
+<span class="c">#            C = getattr(cls._ternary, &#39;_bowing_%s&#39;%param)</span>
+<span class="c">#            if callable(C):</span>
+<span class="c">#                # assume the bowing paramter is composition dependent</span>
+<span class="c">#                # if it&#39;s callable</span>
+<span class="c">#                return C(1-x) # reverse the composition</span>
+<span class="c">#            else:</span>
+<span class="c">#                return C</span>
+<span class="c">#        else:</span>
+<span class="c">#            return None</span>
+
+<span class="c"># def create_reversed_ternary(name, ternary):</span>
+<span class="c">#    new_type = type(name, (ReversedTernary,), {})</span>
+<span class="c">#    new_type.name = name</span>
+<span class="c">#    new_type.element1 = ternary.element2</span>
+<span class="c">#    new_type.binary1 = ternary.binary2</span>
+<span class="c">#    new_type.element2 = ternary.element1</span>
+<span class="c">#    new_type.binary2 = ternary.binary1</span>
+<span class="c">#    new_type._ternary = ternary</span>
+<span class="c">#    return new_type</span></div></div>
 </pre></div>
 
           </div>
@@ -220,12 +349,14 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">openbandparams 0.3 documentation</a> &raquo;</li>
-          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+        <li><a href="../../../index.html">openbandparams 0.4 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../../openbandparams.html" >openbandparams</a> &raquo;</li>
+          <li><a href="../iii_v.html" >openbandparams.iii_v</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2013, Scott J Maddox.
+        &copy; Copyright 2013-2014, Scott J Maddox.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b3.
     </div>
   </body>
