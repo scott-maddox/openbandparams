@@ -15,6 +15,7 @@ Contents
     installation.rst
     tutorial.rst
     examples.rst
+    supported_parameters.rst
 
 Indices and tables
 ==================

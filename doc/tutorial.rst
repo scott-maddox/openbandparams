@@ -56,6 +56,8 @@ A full list of parameters available for a given material can be printed using th
     meff_e_L_DOS, meff_e_L_long, meff_e_L_trans, meff_e_X_DOS, meff_e_X_long,
     meff_e_X_trans, name'
 
+For documentation of the parameters, see :doc:`supported_parameters`.
+
 Ternary alloys are also supported::
 
     >>> AlGaAs(x=.3)
