@@ -51,6 +51,7 @@ Next, merge the changes from the release branch into the master branch, and tag 
     git checkout master
     git merge --no-ff release-1.0
     git tag -a v1.0
+    git push origin master
 
 Then run the following commands from the root of the git repository to build and upload the release to PyPI:
 
@@ -65,4 +66,4 @@ Finally, merge the release branch into the develop branch, and then delete the r
     git merge --no-ff release-1.0
     git branch -d release-1.0
 
-You're done! Congratulations!
+Congratulations, you're done releasing the new version of openbandparams!
