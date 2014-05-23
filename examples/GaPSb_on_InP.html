@@ -116,7 +116,8 @@
 <span class="n">GaPSb_on_InP</span> <span class="o">=</span> <span class="n">GaInAs</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">a_InP</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">Tg</span><span class="p">)</span>
 <span class="k">print</span> <span class="s">&#39;&gt;&gt;&gt; InP.a(T=Tg)</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">InP</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">Tg</span><span class="p">)</span>
 <span class="k">print</span> <span class="s">&#39;&gt;&gt;&gt; GaPSb_on_InP.a()</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">GaPSb_on_InP</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">Tg</span><span class="p">)</span>
-<span class="k">print</span> <span class="s">&#39;&gt;&gt;&gt; GaPSb_on_InP._x</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">GaPSb_on_InP</span><span class="o">.</span><span class="n">_x</span>
+<span class="k">print</span> <span class="s">&#39;&gt;&gt;&gt; GaPSb_on_InP.elementFraction(&quot;Ga&quot;)</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> \
+    <span class="n">GaPSb_on_InP</span><span class="o">.</span><span class="n">elementFraction</span><span class="p">(</span><span class="s">&quot;Ga&quot;</span><span class="p">)</span>
 
 <span class="k">print</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">Get the properties at 70 C:&#39;</span>
 <span class="n">T</span> <span class="o">=</span> <span class="mf">273.15</span> <span class="o">+</span> <span class="mi">70</span>
@@ -151,7 +152,7 @@
 5.882063885
 &gt;&gt;&gt; GaPSb_on_InP.a()
 5.882063885
-&gt;&gt;&gt; GaPSb_on_InP._x
+&gt;&gt;&gt; GaPSb_on_InP.elementFraction("Ga")
 0.470948311277
 
 Get the properties at 70 C:
