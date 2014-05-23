@@ -26,6 +26,7 @@ exec(open('src/openbandparams/version.py').read())
 setup(name='openbandparams',
       version=__version__,  # read from version.py
       description='open source semiconductor band parameters',
+      long_description=open('doc/PYPI_DESCRIPTION.rst').read(),
       url='http://scott-maddox.github.io/openbandparams',
       author='Scott J. Maddox',
       author_email='smaddox@utexas.edu',
