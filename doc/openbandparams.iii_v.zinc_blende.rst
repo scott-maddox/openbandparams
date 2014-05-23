@@ -12,6 +12,14 @@ openbandparams.iii_v.zinc_blende.binary module
     :undoc-members:
     :show-inheritance:
 
+openbandparams.iii_v.zinc_blende.quaternary module
+--------------------------------------------------
+
+.. automodule:: openbandparams.iii_v.zinc_blende.quaternary
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 openbandparams.iii_v.zinc_blende.ternary module
 -----------------------------------------------
 

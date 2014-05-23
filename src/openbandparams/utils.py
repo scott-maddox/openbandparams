@@ -28,6 +28,7 @@
 #
 ###############################################################################
 
+
 class classinstancemethod(object):
     """
     Acts like a class method when called from a class, like an
@@ -39,26 +40,27 @@ class classinstancemethod(object):
     def __init__(self, func):
         self.func = func
 
-    def __get__(self, obj, type=None):
-        return _methodwrapper(self.func, obj=obj, type=type)
+    def __get__(self, obj, objtype=None):
+        return _methodwrapper(self.func, obj=obj, objtype=objtype)
+
 
 class _methodwrapper(object):
 
-    def __init__(self, func, obj, type):
+    def __init__(self, func, obj, objtype):
         self.func = func
         self.obj = obj
-        self.type = type
+        self.objtype = objtype
 
     def __call__(self, *args, **kw):
         assert 'self' not in kw and 'cls' not in kw, (
             "You cannot use 'self' or 'cls' arguments to a "
             "classinstancemethod")
-        return self.func(*((self.obj, self.type) + args), **kw)
+        return self.func(*((self.obj, self.objtype) + args), **kw)
 
     def __repr__(self):
         if self.obj is None:
             return ('<bound class method %s.%s>'
-                    % (self.type.__name__, self.func.func_name))
+                    % (self.objtype.__name__, self.func.func_name))
         else:
             return ('<bound method %s.%s of %r>'
-                    % (self.type.__name__, self.func.func_name, self.obj))
+                    % (self.objtype.__name__, self.func.func_name, self.obj))

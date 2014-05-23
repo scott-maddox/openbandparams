@@ -18,14 +18,24 @@
 #
 #############################################################################
 
-# std lib imports
-import logging; log = logging.getLogger(__name__)
 
-# third party imports
+class BaseType(type):
+    def __str__(self):
+        return self.name
 
-# local imports
+    def __repr__(self):
+        return self.name
+
 
 class Base(object):
+
+    name = 'Base'
+    elements = tuple([])
+
+    @classmethod
+    def elementFraction(cls, element):
+        raise NotImplementedError()
+
     @classmethod
     def _get_T(cls, kwargs):
         '''
@@ -35,7 +45,8 @@ class Base(object):
             if k in kwargs:
                 return kwargs[k]
         else:
-            return 300 # K
+            return 300  # K
+
 
 class AlloyBase(Base):
-    pass
+    name = 'AlloyBase'

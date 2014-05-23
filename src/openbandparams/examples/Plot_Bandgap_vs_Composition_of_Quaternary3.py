@@ -1,5 +1,3 @@
-#!/bin/sh
-
 #
 #   Copyright (c) 2013-2014, Scott J Maddox
 #
@@ -20,7 +18,36 @@
 #
 #############################################################################
 
+import matplotlib.pyplot as plt
+import numpy
+from openbandparams import *
 
-sphinx-apidoc -f -o doc src/openbandparams/ -d 4
-cd doc
-make html
+# Type 3 Quaternary
+alloy = GaInPAs
+
+# calculate the data
+T = 300  # K
+N = 100
+xs = numpy.linspace(0, 1, N)
+ys = numpy.linspace(0, 1, N)
+X, Y = numpy.meshgrid(xs, ys)
+Z = numpy.empty(shape=(N, N), dtype=numpy.double)
+for i in xrange(N):
+    for j in xrange(N):
+        Z[i, j] = alloy.Eg(x=X[i, j], y=Y[i, j], T=T)
+
+# plot it
+fig = plt.figure()
+CS = plt.contour(X, Y, Z, 10, colors='k')
+plt.clabel(CS, inline=True, fontsize=10)
+plt.title('$%s$ (T = %.0f K)' % (alloy.LaTeX(), T))
+plt.xlabel('%s fraction' % alloy.elements[0])
+plt.ylabel('%s fraction' % alloy.elements[2])
+
+if __name__ == '__main__':
+    import sys
+    if len(sys.argv) > 1:
+        output_filename = sys.argv[1]
+        plt.savefig(output_filename)
+    else:
+        plt.show()

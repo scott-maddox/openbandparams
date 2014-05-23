@@ -24,13 +24,15 @@ from setuptools import setup, find_packages
 exec(open('src/openbandparams/version.py').read())
 
 setup(name='openbandparams',
-      version=__version__, # read from version.py
+      version=__version__,  # read from version.py
       description='open source semiconductor band parameters',
       url='http://scott-maddox.github.io/openbandparams',
       author='Scott J. Maddox',
       author_email='smaddox@utexas.edu',
       license='AGPLv3',
       packages=['openbandparams',
+                'openbandparams.tests',
+                'openbandparams.examples',
                 'openbandparams.iii_v',
                 'openbandparams.iii_v.zinc_blende'],
       package_dir={'openbandparams': 'src/openbandparams'},

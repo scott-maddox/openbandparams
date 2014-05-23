@@ -1,5 +1,3 @@
-#!/bin/sh
-
 #
 #   Copyright (c) 2013-2014, Scott J Maddox
 #
@@ -19,19 +17,3 @@
 #   along with openbandparams.  If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
-
-
-CWD="$(pwd)"
-HTML_DIR="$CWD/doc/_build/html/"
-TMP_DIR="/tmp/openbandparams-gh-pages/"
-rm -rf $TMP_DIR
-mkdir $TMP_DIR
-cd $TMP_DIR
-git clone https://github.com/scott-maddox/openbandparams.git
-cd openbandparams
-git pull origin gh-pages
-rsync -av "$HTML_DIR" .
-git add .
-git commit -a -m "updated documentation"
-git push origin HEAD:gh-pages
-rm -rf "$TMP_DIR"

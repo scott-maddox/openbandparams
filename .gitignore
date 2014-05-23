@@ -10,6 +10,8 @@
 dist/
 build/
 doc/_build/
+doc/_build_examples/
+doc/examples/
 
 # setup.py generated files
 *.egg-info

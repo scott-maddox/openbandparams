@@ -18,12 +18,6 @@
 #
 #############################################################################
 
-# std lib imports
-import logging; log = logging.getLogger(__name__)
-
-# third party imports
-
-# local imports
 
 def varshni(Eg_0, alpha, beta, T):
-    return Eg_0 - alpha * T**2 / ( T + beta)
+    return Eg_0 - alpha * T ** 2 / (T + beta)

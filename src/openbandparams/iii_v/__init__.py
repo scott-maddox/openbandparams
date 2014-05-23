@@ -18,4 +18,8 @@
 #
 #############################################################################
 
-import zinc_blende
+from . import zinc_blende
+from .zinc_blende import *
+
+__all__ = []
+__all__ += zinc_blende.__all__

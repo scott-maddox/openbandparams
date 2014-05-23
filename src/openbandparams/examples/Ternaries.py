@@ -18,8 +18,7 @@
 #
 #############################################################################
 
-from openbandparams.iii_v.zinc_blende.binary import *
-from openbandparams.iii_v.zinc_blende.ternary import *
+from openbandparams import *
 
 print '# All three of these are identical:'
 print '>>> AlGaAs.Eg(x=0.3)\n', AlGaAs.Eg(x=0.3)
@@ -27,18 +26,9 @@ print '>>> AlGaAs.Eg(Al=0.3)\n', AlGaAs.Eg(Al=0.3)
 print '>>> AlGaAs.Eg(Ga=0.7)\n', AlGaAs.Eg(Ga=0.7)
 print ''
 
-print '# All three of these are identical, '
-print '# but different than the previous three:'
-print '>>> GaAlAs.Eg(x=0.3)\n', GaAlAs.Eg(x=0.3)
-print '>>> GaAlAs.Eg(Al=0.7)\n', GaAlAs.Eg(Al=0.7)
-print '>>> GaAlAs.Eg(Ga=0.3)\n', GaAlAs.Eg(Ga=0.3)
-print ''
-
-print '# These four are identical:'
+print '# These two are identical:'
 print '>>> AlGaAs.Eg(x=0.3)\n', AlGaAs.Eg_Gamma(x=0.3)
 print '>>> AlGaAs(x=0.3).Eg_Gamma()\n', AlGaAs(x=0.3).Eg_Gamma()
-print '>>> GaAlAs.Eg_Gamma(x=0.7)\n', GaAlAs.Eg_Gamma(x=0.7)
-print '>>> GaAlAs(x=0.7).Eg_Gamma()\n', GaAlAs(x=0.7).Eg_Gamma()
 print ''
 
 print 'Alternate forms:'
@@ -57,8 +47,10 @@ print '>>> myAlGaAs.Eg(T=300)\n', myAlGaAs.Eg(T=300)
 print 'Lattice matching to a substrate (at the growth temperature):'
 print '>>> a_InP = InP.a(T=800)\n',
 a_InP = InP.a(T=800)
-print '>>> InGaAs_on_InP = InGaAs(a=a_InP, T=800)\n',
-InGaAs_on_InP = InGaAs(a=a_InP, T=800)
+print '>>> GaInAs_on_InP = GaInAs(a=a_InP, T=800)\n',
+GaInAs_on_InP = GaInAs(a=a_InP, T=800)
 print '>>> InP.a(T=800)\n', InP.a(T=800)
-print '>>> InGaAs_on_InP.a()\n', InGaAs_on_InP.a(T=800)
-print '>>> InGaAs_on_InP.Eg()\n', InGaAs_on_InP.Eg()
+print '>>> GaInAs_on_InP.a()\n', GaInAs_on_InP.a(T=800)
+print '>>> GaInAs_on_InP.elementFraction("Ga")\n', \
+       GaInAs_on_InP.elementFraction("Ga")
+print '>>> GaInAs_on_InP.Eg()\n', GaInAs_on_InP.Eg()

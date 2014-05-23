@@ -17,28 +17,8 @@
 #   along with openbandparams.  If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
-
-import matplotlib.pyplot as plt
-import numpy
-from openbandparams.iii_v.zinc_blende.ternary import *
-
-alloy = AlGaAs
-
-# calculate the data
-xs = numpy.linspace(0, 1, 100)
-T = 0 #K
-gamma = [alloy.Eg_Gamma(x=x, T=T) for x in xs]
-X = [alloy.Eg_X(x=x, T=T) for x in xs]
-L = [alloy.Eg_L(x=x, T=T) for x in xs]
-
-# plot it
-fig = plt.figure()
-ax = fig.add_subplot(111)
-plt.title('%s (T = %.2g K)'%(alloy.name, T))
-plt.xlabel('%s fraction'%alloy.element1)
-plt.ylabel('Bandgap (eV)')
-ax.plot(xs, gamma, 'k-', label='$\Gamma$')
-ax.plot(xs, X, 'k--', label='$X$')
-ax.plot(xs, L, 'k:', label='$L$')
-plt.legend(loc='best')
-plt.show()
+'''
+Find and run all unit tests in the project.
+'''
+import nose
+nose.main()
