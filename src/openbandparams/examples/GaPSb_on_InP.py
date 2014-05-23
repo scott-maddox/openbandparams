@@ -28,7 +28,8 @@ print '>>> GaPSb_on_InP = GaPSb(a=a_InP, T=Tg)\n',
 GaPSb_on_InP = GaInAs(a=a_InP, T=Tg)
 print '>>> InP.a(T=Tg)\n', InP.a(T=Tg)
 print '>>> GaPSb_on_InP.a()\n', GaPSb_on_InP.a(T=Tg)
-print '>>> GaPSb_on_InP._x\n', GaPSb_on_InP._x
+print '>>> GaPSb_on_InP.elementFraction("Ga")\n', \
+    GaPSb_on_InP.elementFraction("Ga")
 
 print '\nGet the properties at 70 C:'
 T = 273.15 + 70
