@@ -23,5 +23,5 @@ from .version import __version__
 from . import iii_v
 from .iii_v import *
 
-__all__ = []
+__all__ = ['__version__']
 __all__ += iii_v.__all__
