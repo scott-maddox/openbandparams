@@ -1,11 +1,13 @@
 Tutorial
 ========
 
-Welcome to the openbandparams tutorial. This will teach you the basics. If you have not already installed openbandparams, please see :doc:`installation`. First, start up an interactive python shell::
+Welcome to the `openbandparams` tutorial. This will teach you the basics.
+If you have not already installed `openbandparams`, please see
+:doc:`installation`. First, start up an interactive python shell::
 
     $ python
 
-Next, import everything from the openbandparams package::
+Next, import everything from the `openbandparams` package::
 
     >>> from openbandparams import *
 
@@ -28,7 +30,8 @@ The bandgap, in units of electron Volts (eV), is accessed like this::
     >>> GaAs.Eg()
     1.4224821428571428
 
-Some parameters depend on temperature. If the temperature is not provided, it defaults to 300 Kelvin::
+Some parameters depend on temperature. If the temperature is not provided,
+it defaults to 300 Kelvin::
 
     >>> GaAs.Eg(T=300)
     1.4224821428571428
@@ -46,7 +49,8 @@ There are many parameters available::
     >>> GaAs.meff_e_Gamma()
     0.067
 
-A full list of parameters available for a given material can be printed using the following one-liner::
+A full list of parameters and functions available for a given material
+can be printed using the following one-liner::
 
     >>> ', '.join([param for param in dir(GaAs) if not param.startswith('_')])
     'Delta_SO, Eg, Eg_Gamma, Eg_Gamma_0, Eg_L, Eg_L_0, Eg_X, Eg_X_0, Ep, F,
@@ -71,29 +75,36 @@ Ternary alloys are also supported::
     >>> AlGaAs.Eg(Al=0.3)
     1.840788343373494
 
-As of version 0.4, you must follow the alloy naming scheme. Group III elements come first, with the lowest atomic number elements first, followed by the Group V elements, also ordered by atomic number::
+As of version 0.4, you must follow the alloy naming scheme. Group III
+elements come first, with the lowest atomic number elements first,
+followed by the Group V elements, also ordered by atomic number::
+
+    >>> GaInAs
+    GaInAs
+    >>> GaPAs
+    GaPAs
+
+If you reverse the element order, an error will be raised to let you know::
 
     >>> InGaAs
     Traceback (most recent call last):
       File "<stdin>", line 1, in <module>
     NameError: name 'InGaAs' is not defined
-    >>> GaInAs
-    GaInAs
     >>> GaAsP
     Traceback (most recent call last):
       File "<stdin>", line 1, in <module>
     NameError: name 'GaAsP' is not defined
-    >>> GaPAs
-    GaPAs
 
-Ternaries can be lattice matched to a desired lattice constant at a given lattice matching temperature using the following syntax::
+Ternaries can be lattice matched to a desired lattice constant at a given
+lattice matching temperature using the following syntax::
 
     >>> GaInP(a=GaAs.a(), T=300)
     GaInP(Ga=0.516340648855)
     >>> GaInP(a=GaAs.a(), T=300).Eg()
     1.9259077529765196
 
-Don't forget to include the lattice matching temperature::
+If you forget to include the lattice matching temperature, an error will
+be raised to let you know::
 
     >>> GaInP(a=GaAs.a())
     Traceback (most recent call last):
@@ -131,4 +142,5 @@ It's also possible to print a LaTeX representation of the alloy::
     >>> print GaInPAs(P=0.1, a=InP.a(), T=300).LaTeX()
     Ga_{0.4176}In_{0.5824}P_{0.1}As_{0.9}
 
-Now that you have the basics down, check out the :doc:`examples` to see what's possible.
+Now that you have the basics down, check out the :doc:`examples` to see
+what's possible.

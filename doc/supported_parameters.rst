@@ -1,7 +1,8 @@
 Supported Parameters
 ====================
 
-All of the parameters supported in this version are documented below.
+All of the parameters and functions supported in this version are documented
+below.
 
 .. autoclass:: openbandparams.iii_v.zinc_blende.binary.Binary
     :members:

@@ -1,6 +1,10 @@
-The main goal of this project is to provide easy access to semiconductor band parameters for calculations and simulations. Basic functionality requires only the standard python distribution.
+The main goal of this project is to provide easy access to semiconductor
+band parameters for calculations and simulations. Basic functionality
+requires only the standard python distribution.
 
-Example scripts are provided for basic usage and for generating common plots such as bandgap vs. lattice constant and bandgap vs. alloy composition.
+Example scripts are provided for basic usage and for generating common
+plots such as bandgap vs. lattice constant and bandgap vs. alloy
+composition.
 
 Materials included in this version:
     - III-V's
@@ -32,8 +36,8 @@ Materials included in this version:
                   AlGaAsSb, AlInAsSb, GaInAsSb
 
 Parameters included in this version:
-    - lattice constant
-    - thermal expansion coefficient
+    - lattice constants
+    - thermal expansion coefficients
     - bandgap energies (direct and indirect)
     - Varshni parameters
     - split-off energies
@@ -42,10 +46,10 @@ Parameters included in this version:
     - Kane parameters (Ep and F)
     - Valance band offsets
     - band deformation potentials
-    - elastic constant
+    - elastic constants
     - alloy bowing parameters
 
-The source code and example usage scripts are available from the `Github repository`_. `Documentation`_ is also available.
+The `source code`_ and `documentation`_ are graciously hosted by GitHub.
 
-.. _Github repository: http://github.com/scott-maddox/openbandparams
-.. _Documentation: http://scott-maddox.github.io/openbandparams
+.. _source code: http://github.com/scott-maddox/openbandparams
+.. _documentation: http://scott-maddox.github.io/openbandparams
