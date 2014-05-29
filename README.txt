@@ -1,31 +1,52 @@
-openbandparams
-==============
+The main goal of this project is to provide easy access to semiconductor
+band parameters for calculations and simulations. Basic functionality
+requires only the standard python distribution.
 
-open source semiconductor band parameters
+Example scripts are provided for basic usage and for generating common
+plots such as bandgap vs. lattice constant and bandgap vs. alloy
+composition.
 
-Motiviation
-===========
+Materials included in this version:
+- III-V's
+    - Zinc Blendes
+        - Binaries
+            - AlN, GaN, InN,
+              AlP, GaP, InP,
+              AlAs, GaAs, InAs,
+              AlSb, GaSb, InSb
+        - Ternaries
+            - AlGaN, AlInN, GaInN,
+              AlGaP, AlInP, GaInP,
+              AlGaAs, AlInAs, GaInAs,
+              AlGaSb, AlInSb, GaInSb,
+              AlNP, GaNP, InNP,
+              AlNAs, GaNAs, InNAs,
+              AlPAs, GaPAs, InPAs,
+              AlPSb, GaPSb, InPSb,
+              AlAsSb, GaAsSb, InAsSb
+        - Quaternaries
+            - AlNPAs, AlPAsSb,
+              GaNPAs, GaPAsSb,
+              InNPAs, InPAsSb,
+              AlGaInN, AlGaInP, AlGaInAs, AlGaInSb,
+              AlGaNP, AlInNP, GaInNP,
+              AlGaNAs, AlInNAs, GaInNAs,
+              AlGaPAs, AlInPAs, GaInPAs,
+              AlGaPSb, AlInPSb, GaInPSb,
+              AlGaAsSb, AlInAsSb, GaInAsSb
 
-The main goal of this project is to provide easy access to semiconductor band parameters for calculations and simulations. Basic functionality should require only the standard python distribution. More advanced functions may require additional third-party packages, such as numpy or scipy.
+Parameters included in this version:
+- lattice constants
+- thermal expansion coefficients
+- bandgap energies (direct and indirect)
+- Varshni parameters
+- split-off energies
+- effective masses
+- Luttinger parameters
+- Kane parameters (Ep and F)
+- Valance band offsets
+- band deformation potentials
+- elastic constants
+- alloy bowing parameters
 
-Useful and relavent algorithms will also be provided for tasks such as interpolating the parameters for alloys, calculating the intrinsic carrier concentration, calculating the carrier concentration for a given Fermi energy, calculating the Fermi energy at a given carrier concentration, and so on. Since some of these calculations can be fairly involved, particularly if simplifying approximations are not made, ease of use must be balanced with speed of execution. In those cases where ease of use is poor, several examples for usage will be provided.
-
-Example scripts will also be provided for generating common plots such as bandgap vs. lattice constant, band alignments vs. lattice constant, bandgap vs. alloy composition, and so on.
-
-Installation
-============
-
-To install, simply run the following command from a terminal:
-
-	python setup.py install
-
-For Windows, this command should be run from a command prompt window:
-
-	setup.py install
-
-Additional information on installation can be found [here](http://docs.python.org/2/install/).
-
-Developers
-==========
-
-Additional information for developers can be found in `developers.txt`.
+The [source code](http://github.com/scott-maddox/openbandparams) and [documentation](http://scott-maddox.github.io/openbandparams) are graciously hosted by GitHub.
