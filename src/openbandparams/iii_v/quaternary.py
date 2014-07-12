@@ -606,7 +606,6 @@ class Quaternary3(Quaternary):
             x, y = cls._lattice_match(kwargs['a'], kwargs['T'],
                                       y=cls._get_y(kwargs))
         else:
-            print kwargs, cls._has_x(kwargs), cls._has_y(kwargs)
             raise TypeError(
                 "Missing required key word argument.\n" + cls._get_usage())
         cls._validate_xy(x, y)
@@ -646,7 +645,7 @@ class Quaternary3(Quaternary):
 
     @classmethod
     def _get_usage(cls):
-        return ("The  supported kwarg combinations are as follows:"
+        return ("The supported kwargs combinations are as follows:"
                 "\n    - ('x', '{A}' or '{B}') and ('y', '{C}' or '{D}')"
                 "\n    - 'a' and 'T' and ('x', '{A}' or '{B}')"
                 "\n    - 'a' and 'T' and ('y', '{C}' or '{D}')"
