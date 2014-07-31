@@ -23,7 +23,8 @@ from setuptools import setup, find_packages
 # read in __version__
 exec(open('src/openbandparams/version.py').read())
 
-setup(name='openbandparams',
+setup(
+      name='openbandparams',
       version=__version__,  # read from version.py
       description='open source semiconductor band parameters',
       long_description=open('doc/PYPI_DESCRIPTION.rst').read(),
@@ -37,4 +38,7 @@ setup(name='openbandparams',
                 'openbandparams.iii_v',
                 'openbandparams.iii_v.zinc_blende'],
       package_dir={'openbandparams': 'src/openbandparams'},
-      zip_safe=True)
+      test_suite='openbandparams.tests',
+      zip_safe=True,
+      use_2to3=True,
+      )
