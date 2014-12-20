@@ -72,6 +72,19 @@ class Quaternary(AlloyBase):
                 self._x == other._x and
                 self._y == other._y)
 
+    @classmethod
+    def _get_bowing(cls, param):
+        if hasattr(cls, '_bowing_%s' % param):
+            # bowing parameters exists - use it
+            C = getattr(cls, '_bowing_%s' % param)
+            if hasattr(C, '__call__'):
+                # it's trying to mix the ternary bowing parameters
+                return None
+            else:
+                return C
+        else:
+            return None
+
 
 class Quaternary1or2(Quaternary):
     '''
@@ -211,18 +224,30 @@ class Quaternary1or2(Quaternary):
             t13 = vals[1](**new_kwargs)
             new_kwargs['x'] = v
             t23 = vals[2](**new_kwargs)
+
+        # Calculate the weights, for use in the next step
         weight12 = x * y
         weight13 = x * z
         weight23 = y * z
+        num = weight12 * t12 + weight13 * t13 + weight23 * t23
         denom = weight12 + weight13 + weight23
+        # handle these cases explicitly, so there's no divide by zero
         if denom == 0.:
-            # handle this explicitly, so there's no divide by zero
             if x == 0.:
                 return t23
             else:
                 return t13
+
+        # Check if there are bowing parameters provided
+        C = cls._get_bowing(param)
+        if C is not None:
+            # a bowing parameter exists - use it
+            # Note: this is an experimental mixing formula for
+            # adding additional quaternary-induced bowing
+            return num / denom - C * x * (1-x) * y * (1-y) * z * (1-z)
         else:
-            num = weight12 * t12 + weight13 * t13 + weight23 * t23
+            # otherwise, use a weighted average of the ternary bowing
+            # parameters
             return num / denom
 
 
@@ -669,35 +694,54 @@ class Quaternary3(Quaternary):
                 e.message += '. Ternary `%s`' % t.name
                 e.message += ' missing param `%s`' % param
                 raise e
+        # B1 = Q(0, 0) = BD = InSb
+        # B2 = Q(1, 0) = BC = InAs
+        # B3 = Q(1, 1) = AC = AlAs
+        # B4 = Q(0, 1) = AD = AlSb
+        # T12 = Q(x, 0) = ABD = AlInSb
+        # T23 = Q(1, y) = ACD = AlAsSb
+        # T43 = Q(x, 1) = ABC = AlInAs
+        # T14 = Q(0, y) = BCD = InAsSb
         if param[0] == '_':
             # assume it's a hard coded parameter if it starts with '_'
-            ABC = vals[0]
-            ABD = vals[1]
-            ACD = vals[2]
-            BCD = vals[3]
+            T43 = vals[0]
+            T12 = vals[1]
+            T23 = vals[2]
+            T14 = vals[3]
         else:
             # otherwise it's an accessor function
             new_kwargs = dict(kwargs)
-            new_kwargs['x'] = x
-            ABC = vals[0](**new_kwargs)
-            ABD = vals[1](**new_kwargs)
-            new_kwargs['x'] = y
-            ACD = vals[2](**new_kwargs)
-            BCD = vals[3](**new_kwargs)
+            new_kwargs.pop('x', None)
+            T43 = vals[0](x=x, **new_kwargs)
+            T12 = vals[1](x=x, **new_kwargs)
+            T23 = vals[2](x=y, **new_kwargs)
+            T14 = vals[3](x=y, **new_kwargs)
+
+        # handle these cases explicitly, so there's no divide by zero
+        if x == 0.:
+            return T14
+        elif x == 1.:
+            return T23
+        elif y == 0.:
+            return T12
+        elif y == 1.:
+            return T43
         xinv = 1. - x
         yinv = 1. - y
         xweight = x * xinv
         yweight = y * yinv
+        num = (xweight * (yinv * T12 + y * T43) + 
+               yweight * (xinv * T14 + x * T23))
         denom = xweight + yweight
-        if denom == 0.:
-            # handle this explicitly, so there's no divide by zero
-            if x == 0.:
-                return BCD
-            else:
-                return ACD
+
+        # Check if there are bowing parameters provided
+        C = cls._get_bowing(param)
+        if C is not None:
+            # a bowing parameter exists - use it
+            # Note: this is a new, experimental mixing formula for
+            # adding additional quaternary-induced bowing
+            return num / denom - C * xweight * yweight
         else:
-            num = (xweight * (y * ABC + yinv * ABD) +
-                   yweight * (x * ACD + xinv * BCD))
             return num / denom
 
     @classinstancemethod
