@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>GaPSb on InP &mdash; openbandparams 0.4 documentation</title>
+    <title>GaPSb on InP &mdash; openbandparams 0.5 documentation</title>
     
     <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.4',
+        VERSION:     '0.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="openbandparams 0.4 documentation" href="../index.html" />
+    <link rel="top" title="openbandparams 0.5 documentation" href="../index.html" />
     <link rel="up" title="Examples" href="../examples.html" />
     <link rel="next" title="Plot Bandgap vs Composition of Ternary" href="Plot_Bandgap_vs_Composition_of_Ternary.html" />
     <link rel="prev" title="Quaternaries" href="Quaternaries.html" /> 
@@ -45,7 +45,7 @@
         <li class="right" >
           <a href="Quaternaries.html" title="Quaternaries"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">openbandparams 0.4 documentation</a> &raquo;</li>
+        <li><a href="../index.html">openbandparams 0.5 documentation</a> &raquo;</li>
           <li><a href="../examples.html" accesskey="U">Examples</a> &raquo;</li> 
       </ul>
     </div>
@@ -105,8 +105,13 @@
 <span class="c">#   along with openbandparams.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 <span class="c">#</span>
 <span class="c">#############################################################################</span>
-
+<span class="c"># Make sure we import the local openbandparams version</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> <span class="s">&#39;../..&#39;</span><span class="p">)))</span>
 <span class="kn">from</span> <span class="nn">openbandparams</span> <span class="kn">import</span> <span class="o">*</span>
+
 
 <span class="k">print</span> <span class="s">&#39;Lattice matching GaPSb to InP (at the growth temperature of 470 C):&#39;</span>
 <span class="n">Tg</span> <span class="o">=</span> <span class="mf">273.15</span> <span class="o">+</span> <span class="mi">470</span>
@@ -145,14 +150,14 @@
 </pre></div>
 </div>
 <p>Result:</p>
-<div class="highlight-python"><pre>Lattice matching GaPSb to InP (at the growth temperature of 470 C):
+<div class="highlight-python"><div class="highlight"><pre>Lattice matching GaPSb to InP (at the growth temperature of 470 C):
 &gt;&gt;&gt; a_InP = InP.a(T=Tg)
 &gt;&gt;&gt; GaPSb_on_InP = GaPSb(a=a_InP, T=Tg)
 &gt;&gt;&gt; InP.a(T=Tg)
 5.882063885
 &gt;&gt;&gt; GaPSb_on_InP.a()
 5.882063885
-&gt;&gt;&gt; GaPSb_on_InP.elementFraction("Ga")
+&gt;&gt;&gt; GaPSb_on_InP.elementFraction(&quot;Ga&quot;)
 0.470948311277
 
 Get the properties at 70 C:
@@ -168,7 +173,7 @@ meff_e_L_long 1.23339487221
 meff_e_L_trans 0.0619620871064
 meff_e_L_DOS 0.167926049595
 eff_DOS_ratio 7.70628531639
-</pre>
+</pre></div>
 </div>
 </div>
 
@@ -193,13 +198,13 @@ eff_DOS_ratio 7.70628531639
         <li class="right" >
           <a href="Quaternaries.html" title="Quaternaries"
              >previous</a> |</li>
-        <li><a href="../index.html">openbandparams 0.4 documentation</a> &raquo;</li>
+        <li><a href="../index.html">openbandparams 0.5 documentation</a> &raquo;</li>
           <li><a href="../examples.html" >Examples</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2013-2014, Scott J Maddox.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
 </html>

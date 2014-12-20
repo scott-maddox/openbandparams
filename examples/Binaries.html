@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Binaries &mdash; openbandparams 0.4 documentation</title>
+    <title>Binaries &mdash; openbandparams 0.5 documentation</title>
     
     <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.4',
+        VERSION:     '0.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="openbandparams 0.4 documentation" href="../index.html" />
+    <link rel="top" title="openbandparams 0.5 documentation" href="../index.html" />
     <link rel="up" title="Examples" href="../examples.html" />
     <link rel="next" title="Ternaries" href="Ternaries.html" />
     <link rel="prev" title="Examples" href="../examples.html" /> 
@@ -45,7 +45,7 @@
         <li class="right" >
           <a href="../examples.html" title="Examples"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">openbandparams 0.4 documentation</a> &raquo;</li>
+        <li><a href="../index.html">openbandparams 0.5 documentation</a> &raquo;</li>
           <li><a href="../examples.html" accesskey="U">Examples</a> &raquo;</li> 
       </ul>
     </div>
@@ -105,15 +105,18 @@
 <span class="c">#   along with openbandparams.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 <span class="c">#</span>
 <span class="c">#############################################################################</span>
-
+<span class="c"># Make sure we import the local openbandparams version</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> <span class="s">&#39;../..&#39;</span><span class="p">)))</span>
 <span class="kn">from</span> <span class="nn">openbandparams</span> <span class="kn">import</span> <span class="o">*</span>
 
-<span class="k">print</span> <span class="s">&#39;Binary:&#39;</span><span class="p">,</span> <span class="n">GaAs</span>
 <span class="c"># Print an unformatted temperature dependent parameters</span>
 <span class="k">print</span> <span class="s">&#39;GaAs bandgap (at T = 300 K): &#39;</span><span class="p">,</span> <span class="n">GaAs</span><span class="o">.</span><span class="n">Eg</span><span class="p">(),</span> <span class="s">&#39;eV&#39;</span>
 <span class="k">print</span> <span class="s">&#39;&#39;</span>
 
-<span class="c"># Print some formatted temperature dependent parameters</span>
+<span class="c"># Print some temperature dependent parameters</span>
 <span class="k">print</span> <span class="s">&#39;GaAs bandgap (at T = 300 K):  </span><span class="si">%.3f</span><span class="s"> eV&#39;</span> <span class="o">%</span> <span class="n">GaAs</span><span class="o">.</span><span class="n">Eg</span><span class="p">()</span>
 <span class="k">print</span> <span class="s">&#39;GaAs Gamma-valley gap (at T = 300 K):  </span><span class="si">%.3f</span><span class="s"> eV&#39;</span> <span class="o">%</span> <span class="n">GaAs</span><span class="o">.</span><span class="n">Eg_Gamma</span><span class="p">()</span>
 <span class="k">print</span> <span class="s">&#39;GaAs X-valley gap (at T = 300 K):  </span><span class="si">%.3f</span><span class="s"> eV&#39;</span> <span class="o">%</span> <span class="n">GaAs</span><span class="o">.</span><span class="n">Eg_X</span><span class="p">()</span>
@@ -121,9 +124,40 @@
 <span class="k">print</span> <span class="s">&#39;InAs bandgap (at T = 300 K):  </span><span class="si">%.3f</span><span class="s"> eV&#39;</span> <span class="o">%</span> <span class="n">InAs</span><span class="o">.</span><span class="n">Eg</span><span class="p">()</span>
 <span class="k">print</span> <span class="s">&#39;&#39;</span>
 
-<span class="c"># Print a temperature independent parameter</span>
-<span class="k">print</span> <span class="p">(</span><span class="s">&#39;InAs electron effective mass in&#39;</span>
-       <span class="s">&#39; the Gamma-valley:  </span><span class="si">%.3f</span><span class="s"> eV&#39;</span> <span class="o">%</span> <span class="n">InAs</span><span class="o">.</span><span class="n">meff_e_Gamma</span><span class="p">())</span>
+<span class="c"># Print some temperature independent parameter</span>
+<span class="k">print</span> <span class="p">(</span><span class="s">&#39;GaAs electron effective mass in&#39;</span>
+       <span class="s">&#39; the Gamma-valley:  </span><span class="si">%.3f</span><span class="s"> m0&#39;</span> <span class="o">%</span> <span class="n">GaAs</span><span class="o">.</span><span class="n">meff_e_Gamma</span><span class="p">())</span>
+<span class="k">print</span> <span class="s">&#39;&#39;</span>
+<span class="k">print</span> <span class="p">(</span><span class="s">&#39;GaAs electron effective mass in the X-valley &#39;</span>
+       <span class="s">&#39;in the longitudinal direction:  </span><span class="si">%.3f</span><span class="s"> m0&#39;</span> <span class="o">%</span> <span class="n">GaAs</span><span class="o">.</span><span class="n">meff_e_X_long</span><span class="p">())</span>
+<span class="k">print</span> <span class="p">(</span><span class="s">&#39;GaAs electron effective mass in the X-valley &#39;</span>
+       <span class="s">&#39;in the transverse direction:  </span><span class="si">%.3f</span><span class="s"> m0&#39;</span> <span class="o">%</span> <span class="n">GaAs</span><span class="o">.</span><span class="n">meff_e_X_trans</span><span class="p">())</span>
+<span class="k">print</span> <span class="p">(</span><span class="s">&#39;GaAs electron density-of-states effective mass in&#39;</span>
+       <span class="s">&#39; the X-valley:  </span><span class="si">%.3f</span><span class="s"> m0&#39;</span> <span class="o">%</span> <span class="n">GaAs</span><span class="o">.</span><span class="n">meff_e_X_DOS</span><span class="p">())</span>
+<span class="k">print</span> <span class="s">&#39;&#39;</span>
+<span class="k">print</span> <span class="p">(</span><span class="s">&#39;GaAs electron effective mass in the L-valley &#39;</span>
+       <span class="s">&#39;in the longitudinal direction:  </span><span class="si">%.3f</span><span class="s"> m0&#39;</span> <span class="o">%</span> <span class="n">GaAs</span><span class="o">.</span><span class="n">meff_e_L_long</span><span class="p">())</span>
+<span class="k">print</span> <span class="p">(</span><span class="s">&#39;GaAs electron effective mass in the L-valley &#39;</span>
+       <span class="s">&#39;in the transverse direction:  </span><span class="si">%.3f</span><span class="s"> m0&#39;</span> <span class="o">%</span> <span class="n">GaAs</span><span class="o">.</span><span class="n">meff_e_L_trans</span><span class="p">())</span>
+<span class="k">print</span> <span class="p">(</span><span class="s">&#39;GaAs electron density-of-states effective mass in&#39;</span>
+       <span class="s">&#39; the L-valley:  </span><span class="si">%.3f</span><span class="s"> m0&#39;</span> <span class="o">%</span> <span class="n">GaAs</span><span class="o">.</span><span class="n">meff_e_L_DOS</span><span class="p">())</span>
+<span class="k">print</span> <span class="s">&#39;&#39;</span>
+<span class="k">print</span> <span class="p">(</span><span class="s">&#39;GaAs heavy-hole effective mass &#39;</span>
+       <span class="s">&#39;in the [100] direction:  </span><span class="si">%.3f</span><span class="s"> m0&#39;</span> <span class="o">%</span> <span class="n">GaAs</span><span class="o">.</span><span class="n">meff_hh_100</span><span class="p">())</span>
+<span class="k">print</span> <span class="p">(</span><span class="s">&#39;GaAs heavy-hole effective mass &#39;</span>
+       <span class="s">&#39;in the [110] direction:  </span><span class="si">%.3f</span><span class="s"> m0&#39;</span> <span class="o">%</span> <span class="n">GaAs</span><span class="o">.</span><span class="n">meff_hh_110</span><span class="p">())</span>
+<span class="k">print</span> <span class="p">(</span><span class="s">&#39;GaAs heavy-hole effective mass &#39;</span>
+       <span class="s">&#39;in the [111] direction:  </span><span class="si">%.3f</span><span class="s"> m0&#39;</span> <span class="o">%</span> <span class="n">GaAs</span><span class="o">.</span><span class="n">meff_hh_111</span><span class="p">())</span>
+<span class="k">print</span> <span class="s">&#39;&#39;</span>
+<span class="k">print</span> <span class="p">(</span><span class="s">&#39;GaAs light-hole effective mass &#39;</span>
+       <span class="s">&#39;in the [100] direction:  </span><span class="si">%.3f</span><span class="s"> m0&#39;</span> <span class="o">%</span> <span class="n">GaAs</span><span class="o">.</span><span class="n">meff_lh_100</span><span class="p">())</span>
+<span class="k">print</span> <span class="p">(</span><span class="s">&#39;GaAs light-hole effective mass &#39;</span>
+       <span class="s">&#39;in the [110] direction:  </span><span class="si">%.3f</span><span class="s"> m0&#39;</span> <span class="o">%</span> <span class="n">GaAs</span><span class="o">.</span><span class="n">meff_lh_110</span><span class="p">())</span>
+<span class="k">print</span> <span class="p">(</span><span class="s">&#39;GaAs light-hole effective mass &#39;</span>
+       <span class="s">&#39;in the [111] direction:  </span><span class="si">%.3f</span><span class="s"> m0&#39;</span> <span class="o">%</span> <span class="n">GaAs</span><span class="o">.</span><span class="n">meff_lh_111</span><span class="p">())</span>
+<span class="k">print</span> <span class="s">&#39;&#39;</span>
+<span class="k">print</span> <span class="p">(</span><span class="s">&#39;GaAs split-off band effective mass:&#39;</span>
+       <span class="s">&#39;  </span><span class="si">%.3f</span><span class="s"> m0&#39;</span> <span class="o">%</span> <span class="n">GaAs</span><span class="o">.</span><span class="n">meff_SO</span><span class="p">())</span>
 <span class="k">print</span> <span class="s">&#39;&#39;</span>
 
 <span class="c"># Print a table of material lattice parameters and bandgaps</span>
@@ -137,8 +171,7 @@
 </pre></div>
 </div>
 <p>Result:</p>
-<div class="highlight-python"><pre>Binary: GaAs
-GaAs bandgap (at T = 300 K):  1.42248214286 eV
+<div class="highlight-python"><div class="highlight"><pre>GaAs bandgap (at T = 300 K):  1.42248214286 eV
 
 GaAs bandgap (at T = 300 K):  1.422 eV
 GaAs Gamma-valley gap (at T = 300 K):  1.422 eV
@@ -146,7 +179,25 @@ GaAs X-valley gap (at T = 300 K):  1.899 eV
 GaAs bandgap (at T = 0 K):  1.519 eV
 InAs bandgap (at T = 300 K):  0.354 eV
 
-InAs electron effective mass in the Gamma-valley:  0.026 eV
+GaAs electron effective mass in the Gamma-valley:  0.067 m0
+
+GaAs electron effective mass in the X-valley in the longitudinal direction:  1.300 m0
+GaAs electron effective mass in the X-valley in the transverse direction:  0.230 m0
+GaAs electron density-of-states effective mass in the X-valley:  0.850 m0
+
+GaAs electron effective mass in the L-valley in the longitudinal direction:  1.900 m0
+GaAs electron effective mass in the L-valley in the transverse direction:  0.075 m0
+GaAs electron density-of-states effective mass in the L-valley:  0.560 m0
+
+GaAs heavy-hole effective mass in the [100] direction:  0.350 m0
+GaAs heavy-hole effective mass in the [110] direction:  0.643 m0
+GaAs heavy-hole effective mass in the [111] direction:  0.893 m0
+
+GaAs light-hole effective mass in the [100] direction:  0.090 m0
+GaAs light-hole effective mass in the [110] direction:  0.081 m0
+GaAs light-hole effective mass in the [111] direction:  0.078 m0
+
+GaAs split-off band effective mass:  0.172 m0
 
  Material | Lattice Param. [Ang] | Bandgap [eV]
 ------------------------------------------------
@@ -162,7 +213,7 @@ InAs electron effective mass in the Gamma-valley:  0.026 eV
    AlSb   |         6.136        |    1.616
    GaSb   |         6.096        |    0.727
    InSb   |         6.479        |    0.174
-</pre>
+</pre></div>
 </div>
 </div>
 
@@ -187,13 +238,13 @@ InAs electron effective mass in the Gamma-valley:  0.026 eV
         <li class="right" >
           <a href="../examples.html" title="Examples"
              >previous</a> |</li>
-        <li><a href="../index.html">openbandparams 0.4 documentation</a> &raquo;</li>
+        <li><a href="../index.html">openbandparams 0.5 documentation</a> &raquo;</li>
           <li><a href="../examples.html" >Examples</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2013-2014, Scott J Maddox.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
 </html>

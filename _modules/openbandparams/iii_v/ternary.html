@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>openbandparams.iii_v.ternary &mdash; openbandparams 0.4 documentation</title>
+    <title>openbandparams.iii_v.ternary &mdash; openbandparams 0.5 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.4',
+        VERSION:     '0.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="openbandparams 0.4 documentation" href="../../../index.html" />
+    <link rel="top" title="openbandparams 0.5 documentation" href="../../../index.html" />
     <link rel="up" title="openbandparams.iii_v" href="../iii_v.html" /> 
   </head>
   <body>
@@ -37,7 +37,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">openbandparams 0.4 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">openbandparams 0.5 documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../openbandparams.html" >openbandparams</a> &raquo;</li>
           <li><a href="../iii_v.html" accesskey="U">openbandparams.iii_v</a> &raquo;</li> 
@@ -179,13 +179,11 @@
 <span class="sd">        temperature, T, in Kelvin (default: 300 K).</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="bp">self</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="n">T</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_T</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
-            <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Eg_Gamma</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">Eg_X</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">Eg_L</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">))</span>
+            <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Eg_Gamma</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">Eg_X</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+                       <span class="bp">self</span><span class="o">.</span><span class="n">Eg_L</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">x</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_get_x</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
-            <span class="n">T</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_get_T</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
-            <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">Eg_Gamma</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">),</span> <span class="n">cls</span><span class="o">.</span><span class="n">Eg_X</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">),</span>
-                       <span class="n">cls</span><span class="o">.</span><span class="n">Eg_L</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">))</span>
+            <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">Eg_Gamma</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span> <span class="n">cls</span><span class="o">.</span><span class="n">Eg_X</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+                       <span class="n">cls</span><span class="o">.</span><span class="n">Eg_L</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
 
 </div></div>
 <div class="viewcode-block" id="Ternary1"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.ternary.Ternary1">[docs]</a><span class="k">class</span> <span class="nc">Ternary1</span><span class="p">(</span><span class="n">Ternary</span><span class="p">):</span>
@@ -219,10 +217,8 @@
             <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
         <span class="k">elif</span> <span class="s">&#39;a&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
             <span class="c"># lattice match to the given lattice constant</span>
-            <span class="k">if</span> <span class="s">&#39;T&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;Lattice matching temperature, T, missing.&#39;</span><span class="p">)</span>
             <span class="n">a</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">]</span>
-            <span class="n">T</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;T&#39;</span><span class="p">]</span>
+            <span class="n">T</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;T&#39;</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
             <span class="c"># make sure the lattice constant is available</span>
             <span class="n">b1a</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">binaries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
             <span class="n">b2a</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">binaries</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
@@ -349,7 +345,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">openbandparams 0.4 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">openbandparams 0.5 documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../openbandparams.html" >openbandparams</a> &raquo;</li>
           <li><a href="../iii_v.html" >openbandparams.iii_v</a> &raquo;</li> 
@@ -357,7 +353,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2013-2014, Scott J Maddox.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
 </html>

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>openbandparams.iii_v.binary &mdash; openbandparams 0.4 documentation</title>
+    <title>openbandparams.iii_v.binary &mdash; openbandparams 0.5 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.4',
+        VERSION:     '0.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="openbandparams 0.4 documentation" href="../../../index.html" />
+    <link rel="top" title="openbandparams 0.5 documentation" href="../../../index.html" />
     <link rel="up" title="openbandparams.iii_v" href="../iii_v.html" /> 
   </head>
   <body>
@@ -37,7 +37,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">openbandparams 0.4 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">openbandparams 0.5 documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../openbandparams.html" >openbandparams</a> &raquo;</li>
           <li><a href="../iii_v.html" accesskey="U">openbandparams.iii_v</a> &raquo;</li> 
@@ -262,9 +262,8 @@
 <span class="sd">        Returns the bandgap, Eg, in electron Volts at a given</span>
 <span class="sd">        temperature, T, in Kelvin (default: 300 K).</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="n">T</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_get_T</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">Eg_Gamma</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">),</span> <span class="n">cls</span><span class="o">.</span><span class="n">Eg_X</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">),</span>
-                         <span class="n">cls</span><span class="o">.</span><span class="n">Eg_L</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">Eg_Gamma</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span> <span class="n">cls</span><span class="o">.</span><span class="n">Eg_X</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+                         <span class="n">cls</span><span class="o">.</span><span class="n">Eg_L</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)))</span>
 </div>
     <span class="nd">@classmethod</span>
 <div class="viewcode-block" id="Binary.Delta_SO"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.binary.Binary.Delta_SO">[docs]</a>    <span class="k">def</span> <span class="nf">Delta_SO</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -349,6 +348,56 @@
 <span class="sd">        Returns the second Luttinger parameter (unitless).</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">_Luttinger3</span><span class="p">)</span>
+</div>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Binary.meff_hh_100"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.binary.Binary.meff_hh_100">[docs]</a>    <span class="k">def</span> <span class="nf">meff_hh_100</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the heavy hole band effective mass in the [100] direction,</span>
+<span class="sd">        meff_hh_100, in units of electron mass.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">Luttinger1</span><span class="p">()</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">cls</span><span class="o">.</span><span class="n">Luttinger2</span><span class="p">())</span>
+</div>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Binary.meff_hh_110"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.binary.Binary.meff_hh_110">[docs]</a>    <span class="k">def</span> <span class="nf">meff_hh_110</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the heavy hole band effective mass in the [110] direction,</span>
+<span class="sd">        meff_hh_110, in units of electron mass.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="mf">2.</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">cls</span><span class="o">.</span><span class="n">Luttinger1</span><span class="p">()</span> <span class="o">-</span> <span class="n">cls</span><span class="o">.</span><span class="n">Luttinger2</span><span class="p">()</span>
+                <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">cls</span><span class="o">.</span><span class="n">Luttinger3</span><span class="p">())</span>
+</div>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Binary.meff_hh_111"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.binary.Binary.meff_hh_111">[docs]</a>    <span class="k">def</span> <span class="nf">meff_hh_111</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the heavy hole band effective mass in the [111] direction,</span>
+<span class="sd">        meff_hh_111, in units of electron mass.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">Luttinger1</span><span class="p">()</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">cls</span><span class="o">.</span><span class="n">Luttinger3</span><span class="p">())</span>
+</div>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Binary.meff_lh_100"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.binary.Binary.meff_lh_100">[docs]</a>    <span class="k">def</span> <span class="nf">meff_lh_100</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the light hole band effective mass in the [100] direction,</span>
+<span class="sd">        meff_lh_100, in units of electron mass.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">Luttinger1</span><span class="p">()</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">cls</span><span class="o">.</span><span class="n">Luttinger2</span><span class="p">())</span>
+</div>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Binary.meff_lh_110"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.binary.Binary.meff_lh_110">[docs]</a>    <span class="k">def</span> <span class="nf">meff_lh_110</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the light hole band effective mass in the [110] direction,</span>
+<span class="sd">        meff_lh_110, in units of electron mass.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="mf">2.</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">cls</span><span class="o">.</span><span class="n">Luttinger1</span><span class="p">()</span> <span class="o">+</span> <span class="n">cls</span><span class="o">.</span><span class="n">Luttinger2</span><span class="p">()</span>
+                <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">cls</span><span class="o">.</span><span class="n">Luttinger3</span><span class="p">())</span>
+</div>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Binary.meff_lh_111"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.binary.Binary.meff_lh_111">[docs]</a>    <span class="k">def</span> <span class="nf">meff_lh_111</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the light hole band effective mass in the [111] direction,</span>
+<span class="sd">        meff_lh_111, in units of electron mass.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">Luttinger1</span><span class="p">()</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">cls</span><span class="o">.</span><span class="n">Luttinger3</span><span class="p">())</span>
 </div>
     <span class="nd">@classmethod</span>
 <div class="viewcode-block" id="Binary.meff_SO"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.binary.Binary.meff_SO">[docs]</a>    <span class="k">def</span> <span class="nf">meff_SO</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -446,7 +495,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">openbandparams 0.4 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">openbandparams 0.5 documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../openbandparams.html" >openbandparams</a> &raquo;</li>
           <li><a href="../iii_v.html" >openbandparams.iii_v</a> &raquo;</li> 
@@ -454,7 +503,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2013-2014, Scott J Maddox.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
 </html>

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Plot Bandgap vs Composition of Quaternary3 &mdash; openbandparams 0.4 documentation</title>
+    <title>Plot Bandgap vs Composition of Quaternary3 &mdash; openbandparams 0.5 documentation</title>
     
     <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.4',
+        VERSION:     '0.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,10 +24,10 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="openbandparams 0.4 documentation" href="../index.html" />
+    <link rel="top" title="openbandparams 0.5 documentation" href="../index.html" />
     <link rel="up" title="Examples" href="../examples.html" />
     <link rel="next" title="Plot Bandgap vs Lattice Constant" href="Plot_Bandgap_vs_Lattice_Constant.html" />
-    <link rel="prev" title="Plot Bandgap vs Composition of Ternary" href="Plot_Bandgap_vs_Composition_of_Ternary.html" /> 
+    <link rel="prev" title="Plot Band Offset vs Composition of Ternary" href="Plot_Band_Offset_vs_Composition_of_Ternary.html" /> 
   </head>
   <body>
     <div class="related">
@@ -43,17 +43,17 @@
           <a href="Plot_Bandgap_vs_Lattice_Constant.html" title="Plot Bandgap vs Lattice Constant"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="Plot_Bandgap_vs_Composition_of_Ternary.html" title="Plot Bandgap vs Composition of Ternary"
+          <a href="Plot_Band_Offset_vs_Composition_of_Ternary.html" title="Plot Band Offset vs Composition of Ternary"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">openbandparams 0.4 documentation</a> &raquo;</li>
+        <li><a href="../index.html">openbandparams 0.5 documentation</a> &raquo;</li>
           <li><a href="../examples.html" accesskey="U">Examples</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="Plot_Bandgap_vs_Composition_of_Ternary.html"
-                        title="previous chapter">Plot Bandgap vs Composition of Ternary</a></p>
+  <p class="topless"><a href="Plot_Band_Offset_vs_Composition_of_Ternary.html"
+                        title="previous chapter">Plot Band Offset vs Composition of Ternary</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="Plot_Bandgap_vs_Lattice_Constant.html"
                         title="next chapter">Plot Bandgap vs Lattice Constant</a></p>
@@ -105,10 +105,15 @@
 <span class="c">#   along with openbandparams.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 <span class="c">#</span>
 <span class="c">#############################################################################</span>
+<span class="c"># Make sure we import the local openbandparams version</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> <span class="s">&#39;../..&#39;</span><span class="p">)))</span>
+<span class="kn">from</span> <span class="nn">openbandparams</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span>
-<span class="kn">from</span> <span class="nn">openbandparams</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="c"># Type 3 Quaternary</span>
 <span class="n">alloy</span> <span class="o">=</span> <span class="n">GaInPAs</span>
@@ -126,11 +131,11 @@
 
 <span class="c"># plot it</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">CS</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">CS</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">X</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s">&#39;k&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">clabel</span><span class="p">(</span><span class="n">CS</span><span class="p">,</span> <span class="n">inline</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;$</span><span class="si">%s</span><span class="s">$ (T = </span><span class="si">%.0f</span><span class="s"> K)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">alloy</span><span class="o">.</span><span class="n">LaTeX</span><span class="p">(),</span> <span class="n">T</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s"> fraction&#39;</span> <span class="o">%</span> <span class="n">alloy</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s"> fraction&#39;</span> <span class="o">%</span> <span class="n">alloy</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s"> fraction&#39;</span> <span class="o">%</span> <span class="n">alloy</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s"> fraction&#39;</span> <span class="o">%</span> <span class="n">alloy</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
 
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">sys</span>
@@ -164,15 +169,15 @@
           <a href="Plot_Bandgap_vs_Lattice_Constant.html" title="Plot Bandgap vs Lattice Constant"
              >next</a> |</li>
         <li class="right" >
-          <a href="Plot_Bandgap_vs_Composition_of_Ternary.html" title="Plot Bandgap vs Composition of Ternary"
+          <a href="Plot_Band_Offset_vs_Composition_of_Ternary.html" title="Plot Band Offset vs Composition of Ternary"
              >previous</a> |</li>
-        <li><a href="../index.html">openbandparams 0.4 documentation</a> &raquo;</li>
+        <li><a href="../index.html">openbandparams 0.5 documentation</a> &raquo;</li>
           <li><a href="../examples.html" >Examples</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2013-2014, Scott J Maddox.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
 </html>

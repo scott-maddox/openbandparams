@@ -95,32 +95,35 @@ If you reverse the element order, an error will be raised to let you know::
       File "<stdin>", line 1, in <module>
     NameError: name 'GaAsP' is not defined
 
-Ternaries can be lattice matched to a desired lattice constant at a given
-lattice matching temperature using the following syntax::
+Ternaries can be lattice matched to a desired lattice constant
+using the following syntax::
+
+    >>> GaInP(a=GaAs.a())
+    GaInP(Ga=0.516340648855)
+    >>> GaInP(a=GaAs.a()).Eg()
+    1.9259077529765196
+    >>> GaInP.Eg(a=GaAs.a())
+    1.9259077529765196
+
+In the previous example, a lattice matching temperature of 300 K is assumed.
+To lattice match to a different lattice matching temperature use the
+following syntax::
 
     >>> GaInP(a=GaAs.a(), T=300)
     GaInP(Ga=0.516340648855)
-    >>> GaInP(a=GaAs.a(), T=300).Eg()
-    1.9259077529765196
-
-If you forget to include the lattice matching temperature, an error will
-be raised to let you know::
-
-    >>> GaInP(a=GaAs.a())
-    Traceback (most recent call last):
-      File "<stdin>", line 1, in <module>
-      File "openbandparams/iii_v/ternary.py", line 43, in __init__
-        self._x = self._get_x(kwargs)
-      File "openbandparams/iii_v/ternary.py", line 154, in _get_x
-        raise TypeError('Lattice matching temperature, T, missing.')
-    TypeError: Lattice matching temperature, T, missing.
+    >>> GaInP(a=GaAs.a(), T=400)
+    GaInP(Ga=0.523158422221)
 
 Instancing can be used to get multiple parameters from an alloy::
 
-    >>> myGaInP = GaInP(a=GaAs.a(), T=300)
-    >>> myGaInP.Eg()
+    >>> GaInP_on_GaAs = GaInP(a=GaAs.a(), T=300)
+    >>> GaInP_on_GaAs
+    GaInP(Ga=0.516340648855)
+    >>> GaInP_on_GaAs.Eg(T=300)
     1.9259077529765196
-    >>> myGaInP.a()
+    >>> GaInP_on_GaAs.Eg(T=77)
+    2.010415191481605
+    >>> GaInP_on_GaAs.a()
     5.653250000000166
 
 The same concepts also apply to quaternaries::

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Tutorial &mdash; openbandparams 0.4 documentation</title>
+    <title>Tutorial &mdash; openbandparams 0.5 documentation</title>
     
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.4',
+        VERSION:     '0.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="openbandparams 0.4 documentation" href="index.html" />
+    <link rel="top" title="openbandparams 0.5 documentation" href="index.html" />
     <link rel="next" title="Examples" href="examples.html" />
     <link rel="prev" title="Installation" href="installation.html" /> 
   </head>
@@ -44,7 +44,7 @@
         <li class="right" >
           <a href="installation.html" title="Installation"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">openbandparams 0.4 documentation</a> &raquo;</li> 
+        <li><a href="index.html">openbandparams 0.5 documentation</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar">
@@ -86,7 +86,8 @@
 <p>Welcome to the <cite>openbandparams</cite> tutorial. This will teach you the basics.
 If you have not already installed <cite>openbandparams</cite>, please see
 <a class="reference internal" href="installation.html"><em>Installation</em></a>. First, start up an interactive python shell:</p>
-<div class="highlight-python"><pre>$ python</pre>
+<div class="highlight-python"><div class="highlight"><pre>$ python
+</pre></div>
 </div>
 <p>Next, import everything from the <cite>openbandparams</cite> package:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openbandparams</span> <span class="kn">import</span> <span class="o">*</span>
@@ -173,33 +174,39 @@ followed by the Group V elements, also ordered by atomic number:</p>
 <span class="gt">Traceback (most recent call last):</span>
   File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
 <span class="gr">NameError</span>: <span class="n">name &#39;GaAsP&#39; is not defined</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">NameError</span>: <span class="n">name &#39;GaAsP&#39; is not defined</span>
 </pre></div>
 </div>
-<p>Ternaries can be lattice matched to a desired lattice constant at a given
-lattice matching temperature using the following syntax:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">GaInP</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">GaAs</span><span class="o">.</span><span class="n">a</span><span class="p">(),</span> <span class="n">T</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<p>Ternaries can be lattice matched to a desired lattice constant
+using the following syntax:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">GaInP</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">GaAs</span><span class="o">.</span><span class="n">a</span><span class="p">())</span>
 <span class="go">GaInP(Ga=0.516340648855)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">GaInP</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">GaAs</span><span class="o">.</span><span class="n">a</span><span class="p">(),</span> <span class="n">T</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span><span class="o">.</span><span class="n">Eg</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">GaInP</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">GaAs</span><span class="o">.</span><span class="n">a</span><span class="p">())</span><span class="o">.</span><span class="n">Eg</span><span class="p">()</span>
+<span class="go">1.9259077529765196</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">GaInP</span><span class="o">.</span><span class="n">Eg</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">GaAs</span><span class="o">.</span><span class="n">a</span><span class="p">())</span>
 <span class="go">1.9259077529765196</span>
 </pre></div>
 </div>
-<p>If you forget to include the lattice matching temperature, an error will
-be raised to let you know:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">GaInP</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">GaAs</span><span class="o">.</span><span class="n">a</span><span class="p">())</span>
-<span class="gt">Traceback (most recent call last):</span>
-  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
-  File <span class="nb">&quot;openbandparams/iii_v/ternary.py&quot;</span>, line <span class="m">43</span>, in <span class="n">__init__</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_x</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
-  File <span class="nb">&quot;openbandparams/iii_v/ternary.py&quot;</span>, line <span class="m">154</span>, in <span class="n">_get_x</span>
-    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;Lattice matching temperature, T, missing.&#39;</span><span class="p">)</span>
-<span class="gr">TypeError</span>: <span class="n">Lattice matching temperature, T, missing.</span>
+<p>In the previous example, a lattice matching temperature of 300 K is assumed.
+To lattice match to a different lattice matching temperature use the
+following syntax:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">GaInP</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">GaAs</span><span class="o">.</span><span class="n">a</span><span class="p">(),</span> <span class="n">T</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="go">GaInP(Ga=0.516340648855)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">GaInP</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">GaAs</span><span class="o">.</span><span class="n">a</span><span class="p">(),</span> <span class="n">T</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+<span class="go">GaInP(Ga=0.523158422221)</span>
 </pre></div>
 </div>
 <p>Instancing can be used to get multiple parameters from an alloy:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">myGaInP</span> <span class="o">=</span> <span class="n">GaInP</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">GaAs</span><span class="o">.</span><span class="n">a</span><span class="p">(),</span> <span class="n">T</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">myGaInP</span><span class="o">.</span><span class="n">Eg</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">GaInP_on_GaAs</span> <span class="o">=</span> <span class="n">GaInP</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">GaAs</span><span class="o">.</span><span class="n">a</span><span class="p">(),</span> <span class="n">T</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">GaInP_on_GaAs</span>
+<span class="go">GaInP(Ga=0.516340648855)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">GaInP_on_GaAs</span><span class="o">.</span><span class="n">Eg</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 <span class="go">1.9259077529765196</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">myGaInP</span><span class="o">.</span><span class="n">a</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">GaInP_on_GaAs</span><span class="o">.</span><span class="n">Eg</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mi">77</span><span class="p">)</span>
+<span class="go">2.010415191481605</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">GaInP_on_GaAs</span><span class="o">.</span><span class="n">a</span><span class="p">()</span>
 <span class="go">5.653250000000166</span>
 </pre></div>
 </div>
@@ -247,12 +254,12 @@ what&#8217;s possible.</p>
         <li class="right" >
           <a href="installation.html" title="Installation"
              >previous</a> |</li>
-        <li><a href="index.html">openbandparams 0.4 documentation</a> &raquo;</li> 
+        <li><a href="index.html">openbandparams 0.5 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2013-2014, Scott J Maddox.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
 </html>
