@@ -38,11 +38,11 @@ for i in xrange(N):
 
 # plot it
 fig = plt.figure()
-CS = plt.contour(X, Y, Z, 10, colors='k')
+CS = plt.contour(1-X, 1-Y, Z, 10, colors='k')
 plt.clabel(CS, inline=True, fontsize=10)
 plt.title('$%s$ (T = %.0f K)' % (alloy.LaTeX(), T))
-plt.xlabel('%s fraction' % alloy.elements[0])
-plt.ylabel('%s fraction' % alloy.elements[2])
+plt.xlabel('%s fraction' % alloy.elements[1])
+plt.ylabel('%s fraction' % alloy.elements[3])
 
 if __name__ == '__main__':
     import sys
