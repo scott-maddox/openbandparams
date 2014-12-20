@@ -49,7 +49,8 @@ for i in xrange(N):
 #         else:
         E_hh = alloy.biaxial_strained_E_hh(x=X[i, j], y=Y[i, j],
                                            a0=GaSb.a(), T=T)
-        Eg = alloy.Eg(x=X[i, j], y=Y[i, j], T=T)
+        Eg = alloy.biaxial_strained_Eg(x=X[i, j], y=Y[i, j],
+                                           a0=GaSb.a(), T=T)
         Z[i, j] = E_hh - GaSb.VBO()
         W[i, j] = Eg
         S[i, j] = eps_xx
@@ -66,7 +67,7 @@ plt.title('$%s/GaSb$ (T = %.0f K)' % (alloy.LaTeX(), T))
 plt.xlabel('%s fraction' % alloy.elements[1])
 plt.ylabel('%s fraction' % alloy.elements[3])
 plt.plot([numpy.nan], [numpy.nan], 'b-', label='Strain')
-plt.plot([numpy.nan], [numpy.nan], 'g-', label='Unstrained Bandgap')
+plt.plot([numpy.nan], [numpy.nan], 'g-', label='Strained Bandgap')
 plt.plot([numpy.nan], [numpy.nan], 'r-', label='Strained Valance Band Offset')
 plt.legend(loc='lower left')
 
