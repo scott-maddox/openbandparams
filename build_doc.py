@@ -56,9 +56,9 @@ for root, dirs, files in os.walk(EXAMPLES_DIR):
                                             EXAMPLES_DIR))
 
 # save a list of the examples
-with open(os.path.join(BUILD_EXAMPLES_DIR,'examples.txt'), 'w') as f:
+with open(os.path.join(BUILD_EXAMPLES_DIR, 'examples.txt'), 'w') as f:
     for example in examples:
-        f.write(example+'\n')
+        f.write(example + '\n')
 
 for example in examples:
     # build the result filename
@@ -66,45 +66,54 @@ for example in examples:
     root, ext = os.path.splitext(filename)
     if filename.lower().startswith('plot'):
         result_type = 'image'
-        result = os.path.join(dir, root+'.png')
+        result = os.path.join(dir, root + '.png')
     else:
         result_type = 'literalinclude'
-        result = os.path.join(dir, root+'.txt')
+        result = os.path.join(dir, root + '.txt')
 
     # output an rst file for each example
-    rst_path = os.path.join(DOC_EXAMPLES_DIR, root+'.rst')
-    if not os.path.exists(os.path.dirname(rst_path)):
-        os.makedirs(os.path.dirname(rst_path))
+    rst_path = os.path.join(DOC_EXAMPLES_DIR, dir, '_' + root + '.rst')
+    # ../../src/openbandparams/examples/
+    rst_abs_dir = os.path.dirname(rst_path)
+    example_rel = os.path.relpath(os.path.join(EXAMPLES_DIR, example),
+                                  rst_abs_dir)
+    result_rel = os.path.relpath(os.path.join(BUILD_EXAMPLES_DIR, result),
+                                  rst_abs_dir)
+    if not os.path.exists(rst_abs_dir):
+        os.makedirs(rst_abs_dir)
     with open(rst_path, 'w') as f:
         title = root.replace('_', ' ')
-        underline = '='*len(root)
+        underline = '=' * len(root)
         f.write('''{title}
 {underline}
 
 Source:
 
-.. literalinclude:: ../../src/openbandparams/examples/{example}
+.. literalinclude:: {example_rel}
 
 Result:
 
-.. {result_type}:: ../_build_examples/{result}
-'''.format(title=title, underline=underline, result_type=result_type,
-           example=example, result=result))
-    
+.. {result_type}:: {result_rel}
+'''.format(title=title,
+           underline=underline,
+           result_type=result_type,
+           example_rel=example_rel,
+           result_rel=result_rel))
+
     # get the absolute paths
     example_path = os.path.join(EXAMPLES_DIR, example)
-    result_path = os.path.join(BUILD_EXAMPLES_DIR, result)   
+    result_path = os.path.join(BUILD_EXAMPLES_DIR, result)
 
     # check if changes have been made to the example script
     if (os.path.exists(result_path) and
         os.path.getmtime(example_path) < os.path.getmtime(result_path)):
         # no changes -- skip running it
         continue
-    
+
     # get the relative paths (for printing)
     example_relpath = os.path.relpath(example_path, CWD)
     result_relpath = os.path.relpath(result_path, CWD)
-    
+
     # run the script and save the result
     print '  Running "{}"\n    Saving result to "{}"'.format(
                                         example_relpath, result_relpath)
