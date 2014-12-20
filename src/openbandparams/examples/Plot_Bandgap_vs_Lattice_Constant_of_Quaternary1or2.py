@@ -17,12 +17,20 @@
 #   along with openbandparams.  If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
+# Make sure we import the local openbandparams version
+try:
+    from openbandparams import *
+except ImportError:
+    import os
+    import sys
+    sys.path.append(
+        os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+    from openbandparams import *
 
 import matplotlib.pyplot as plt
 import numpy
-from openbandparams import *
 
-quaternary = GaPAsSb
+quaternary = AlGaInAs
 T = 300
 
 # initialize the plot
@@ -105,6 +113,8 @@ for zfrac in numpy.linspace(0, 1, 10):
     ax.plot(x, y_X, 'b:')
     ax.plot(x, y_L, 'g:')
 
+xmin, xmax = plt.xlim()
+plt.xlim(xmin - 0.05, xmax)
 plt.legend(loc='best')
 
 if __name__ == '__main__':

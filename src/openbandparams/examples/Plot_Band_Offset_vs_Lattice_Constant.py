@@ -17,10 +17,19 @@
 #   along with openbandparams.  If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
+# Make sure we import the local openbandparams version
+try:
+    from openbandparams import *
+except ImportError:
+    import os
+    import sys
+    sys.path.append(
+        os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+    from openbandparams import *
+
 
 import matplotlib.pyplot as plt
 import numpy
-from openbandparams import *
 
 T = 300
 
@@ -100,6 +109,9 @@ for tern in [AlGaP, AlInP, GaInP,
         x[i] = instance.a(T=T)
         y[i] = instance.VBO(T=T)
     ax.plot(x, y, 'r-')
+
+xmin, xmax = plt.xlim()
+plt.xlim(xmin - 0.05, xmax)
 
 if __name__ == '__main__':
     import sys

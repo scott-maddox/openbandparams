@@ -17,8 +17,15 @@
 #   along with openbandparams.  If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
-
-from openbandparams import *
+# Make sure we import the local openbandparams version
+try:
+    from openbandparams import *
+except ImportError:
+    import os
+    import sys
+    sys.path.append(
+        os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+    from openbandparams import *
 
 # Print an unformatted temperature dependent parameters
 print 'GaAs bandgap (at T = 300 K): ', GaAs.Eg(), 'eV'

@@ -17,10 +17,19 @@
 #   along with openbandparams.  If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
+# Make sure we import the local openbandparams version
+try:
+    from openbandparams import *
+except ImportError:
+    import os
+    import sys
+    sys.path.append(
+        os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+    from openbandparams import *
 
 import matplotlib.pyplot as plt
 import numpy
-from openbandparams import *
+
 
 T = 300
 T_lattice = 300
@@ -89,7 +98,7 @@ for x, y, label in zip(x, y, label):
                 bbox=dict(linewidth=0, fc='white', alpha=0.9),
                 textcoords='offset points')
 
-plt.xlim(5.4, 6.5)
+plt.xlim(5.35, 6.5)
 plt.ylim(0, 2.7)
 
 if __name__ == '__main__':
