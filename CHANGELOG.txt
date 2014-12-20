@@ -4,6 +4,7 @@ Changed in 0.7:
 - Fixed the strained binaries bandgap vs lattice constant
   example (the strain effects were reversed)
 - Added a strained binaries band offsets vs lattice constant example
+- Added several advanced examples
 
 Changes in 0.6:
 - Fixed a packaging issue that prevented setup.py from working
