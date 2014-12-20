@@ -18,14 +18,11 @@
 #
 #############################################################################
 # Make sure we import the local openbandparams version
-try:
-    from openbandparams import *
-except ImportError:
-    import os
-    import sys
-    sys.path.append(
-        os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
-    from openbandparams import *
+import os
+import sys
+sys.path.insert(0,
+    os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+from openbandparams import *
 
 
 # Some identities and inequalities
