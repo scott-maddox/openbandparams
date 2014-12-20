@@ -18,8 +18,8 @@
 #
 #############################################################################
 
+from openbandparams.iii_v.base_material import BaseType, Base
 from openbandparams.algorithms import bisect
-from openbandparams.base_material import BaseType, AlloyBase
 from openbandparams.utils import classinstancemethod
 
 
@@ -50,19 +50,7 @@ class Quaternary3Type(BaseType):
             raise AttributeError(name)
 
 
-class Quaternary(AlloyBase):
-    @classinstancemethod
-    def Eg(self, cls, **kwargs):
-        '''
-        Returns the bandgap, Eg, in electron Volts at a given
-        temperature, T, in Kelvin (default: 300 K).
-        '''
-        if self is not None:
-            return min(self.Eg_Gamma(**kwargs), self.Eg_X(**kwargs),
-                       self.Eg_L(**kwargs))
-        else:
-            return min(cls.Eg_Gamma(**kwargs), cls.Eg_X(**kwargs),
-                       cls.Eg_L(**kwargs))
+class Quaternary(Base):
 
     def __eq__(self, other):
         return (type(self) == type(other) and
@@ -114,6 +102,7 @@ class Quaternary1or2(Quaternary):
         assert x >= 0. and x <= 1.
         assert y >= 0. and y <= 1.
         assert z >= 0. and z <= 1.
+        assert x + y + z <= 1. + 1e-5
 
     @classmethod
     def _get_xyz(cls, kwargs):

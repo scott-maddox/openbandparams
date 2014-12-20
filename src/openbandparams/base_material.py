@@ -46,7 +46,3 @@ class Base(object):
                 return kwargs[k]
         else:
             return 300  # K
-
-
-class AlloyBase(Base):
-    name = 'AlloyBase'

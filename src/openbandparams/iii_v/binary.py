@@ -18,18 +18,12 @@
 #
 #############################################################################
 
-from openbandparams.base_material import Base
+from openbandparams.iii_v.base_material import BaseType, Base
 from openbandparams.equations import varshni
 from openbandparams.utils import classinstancemethod
 
 
-class BinaryType(type):
-    def __str__(self):
-        return self.name
-
-    def __repr__(self):
-        return self.name
-
+class BinaryType(BaseType):
     def __eq__(self, other):
         return (type(self) == type(other))
 
@@ -80,7 +74,7 @@ class Binary(Base):
     def a(cls, **kwargs):
         '''
         Returns the lattice parameter, a, in Angstroms at a given
-        temperature, T, in Kelvin (default: 300 K).
+        temperature, `T`, in Kelvin (default: 300 K).
         '''
         T = cls._get_T(kwargs)
         return float(cls.a_300K() + cls.da_dT() * (T - 300))
@@ -113,7 +107,7 @@ class Binary(Base):
     def Eg_Gamma(cls, **kwargs):
         '''
         Returns the Gamma-valley bandgap, Eg_Gamma, in electron Volts at a
-        given temperature, T, in Kelvin (default: 300 K).
+        given temperature, `T`, in Kelvin (default: 300 K).
         '''
         T = cls._get_T(kwargs)
         return float(varshni(cls.Eg_Gamma_0(), cls.alpha_Gamma(),
@@ -147,7 +141,7 @@ class Binary(Base):
     def Eg_X(cls, **kwargs):
         '''
         Returns the X-valley bandgap, Eg_X, in electron Volts at a given
-        temperature, T, in Kelvin (default: 300 K).
+        temperature, `T`, in Kelvin (default: 300 K).
         '''
         T = cls._get_T(kwargs)
         return float(varshni(cls.Eg_X_0(), cls.alpha_X(),
@@ -181,7 +175,7 @@ class Binary(Base):
     def Eg_L(cls, **kwargs):
         '''
         Returns the L-valley bandgap, Eg_L, in electron Volts at a given
-        temperature, T, in Kelvin (default: 300 K).
+        temperature, `T`, in Kelvin (default: 300 K).
         '''
         T = cls._get_T(kwargs)
         return float(varshni(cls.Eg_L_0(), cls.alpha_L(),
@@ -191,7 +185,7 @@ class Binary(Base):
     def Eg(cls, **kwargs):
         '''
         Returns the bandgap, Eg, in electron Volts at a given
-        temperature, T, in Kelvin (default: 300 K).
+        temperature, `T`, in Kelvin (default: 300 K).
         '''
         return float(min(cls.Eg_Gamma(**kwargs), cls.Eg_X(**kwargs),
                          cls.Eg_L(**kwargs)))
@@ -279,56 +273,6 @@ class Binary(Base):
         Returns the second Luttinger parameter (unitless).
         '''
         return float(cls._Luttinger3)
-
-    @classmethod
-    def meff_hh_100(cls, **kwargs):
-        '''
-        Returns the heavy hole band effective mass in the [100] direction,
-        meff_hh_100, in units of electron mass.
-        '''
-        return 1. / (cls.Luttinger1() - 2 * cls.Luttinger2())
-
-    @classmethod
-    def meff_hh_110(cls, **kwargs):
-        '''
-        Returns the heavy hole band effective mass in the [110] direction,
-        meff_hh_110, in units of electron mass.
-        '''
-        return 2. / (2 * cls.Luttinger1() - cls.Luttinger2()
-                - 3 * cls.Luttinger3())
-
-    @classmethod
-    def meff_hh_111(cls, **kwargs):
-        '''
-        Returns the heavy hole band effective mass in the [111] direction,
-        meff_hh_111, in units of electron mass.
-        '''
-        return 1. / (cls.Luttinger1() - 2 * cls.Luttinger3())
-
-    @classmethod
-    def meff_lh_100(cls, **kwargs):
-        '''
-        Returns the light hole band effective mass in the [100] direction,
-        meff_lh_100, in units of electron mass.
-        '''
-        return 1. / (cls.Luttinger1() + 2 * cls.Luttinger2())
-
-    @classmethod
-    def meff_lh_110(cls, **kwargs):
-        '''
-        Returns the light hole band effective mass in the [110] direction,
-        meff_lh_110, in units of electron mass.
-        '''
-        return 2. / (2 * cls.Luttinger1() + cls.Luttinger2()
-                + 3 * cls.Luttinger3())
-
-    @classmethod
-    def meff_lh_111(cls, **kwargs):
-        '''
-        Returns the light hole band effective mass in the [111] direction,
-        meff_lh_111, in units of electron mass.
-        '''
-        return 1. / (cls.Luttinger1() + 2 * cls.Luttinger3())
 
     @classmethod
     def meff_SO(cls, **kwargs):

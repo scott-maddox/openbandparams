@@ -34,7 +34,7 @@ T = 300
 fig = plt.figure()
 ax = fig.add_subplot(111)
 plt.xlabel('Strained Lattice Parameter at %g K ($\AA$)' % T)
-plt.ylabel('Strained Bandgap at %g K (eV)' % T)
+plt.ylabel('Strained Band Offsets at %g K (eV)' % T)
 
 # plot the binaries
 x = []
@@ -44,7 +44,10 @@ for b in [AlP, GaP, InP,
           AlAs, GaAs, InAs,
           AlSb, GaSb, InSb]:
     x.append(b.a(T=T))
-    y.append(b.Eg(T=T))
+    y.append(b.VBO())
+    x.append(b.a(T=T))
+    y.append(b.VBO() + b.Eg(T=T))
+    label.append(b.name)
     label.append(b.name)
 ax.plot(x, y, 'k.')
 
@@ -61,15 +64,21 @@ for b in [AlP, GaP, InP,
           AlAs, GaAs, InAs,
           AlSb, GaSb, InSb]:
     a_strained = [b.biaxial_strained_a0(eps_xx=eps_xx_) for eps_xx_ in eps_xx]
-    E_c_hh = [b.biaxial_strained_E_c_hh(eps_xx=eps_xx_) for eps_xx_ in eps_xx]
-    E_c_lh = [b.biaxial_strained_E_c_lh(eps_xx=eps_xx_) for eps_xx_ in eps_xx]
+    E_c = [b.biaxial_strained_E_c(eps_xx=eps_xx_)
+           for eps_xx_ in eps_xx]
+    E_hh = [b.biaxial_strained_E_hh(eps_xx=eps_xx_)
+            for eps_xx_ in eps_xx]
+    E_lh = [b.biaxial_strained_E_lh(eps_xx=eps_xx_)
+            for eps_xx_ in eps_xx]
     if first:
-        plt.plot(a_strained, E_c_hh, 'r-', label='CB-HH gap')
-        plt.plot(a_strained, E_c_lh, 'g-', label='CB-LH gap')
+        plt.plot(a_strained, E_c, 'r-', label='Conduction band-edge')
+        plt.plot(a_strained, E_hh, 'b-', label='Heavy-hole band-edge')
+        plt.plot(a_strained, E_lh, 'g-', label='Light-hole band-edge')
         first = False
     else:
-        plt.plot(a_strained, E_c_hh, 'r-')
-        plt.plot(a_strained, E_c_lh, 'g-')
+        plt.plot(a_strained, E_c, 'r-')
+        plt.plot(a_strained, E_hh, 'b-')
+        plt.plot(a_strained, E_lh, 'g-')
 
 plt.legend(loc='best')
 

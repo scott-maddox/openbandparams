@@ -48,5 +48,6 @@ Parameters included in this version:
 - band deformation potentials
 - elastic constants
 - alloy bowing parameters
+- effects of biaxial strain
 
 The [source code](http://github.com/scott-maddox/openbandparams) and [documentation](http://scott-maddox.github.io/openbandparams) are graciously hosted by GitHub.
