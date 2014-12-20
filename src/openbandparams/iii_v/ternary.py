@@ -26,7 +26,8 @@ from openbandparams.utils import classinstancemethod
 class TernaryType(BaseType):
     def __getattr__(self, name):
         # acts like a class method for the Ternary class
-        if (hasattr(self.binaries[0], name) and
+        if (not name.startswith('_bowing_') and
+            hasattr(self.binaries[0], name) and
             hasattr(self.binaries[1], name)):
             def _param_accessor(**kwargs):
                 return self._interpolate(name, **kwargs)
@@ -43,7 +44,8 @@ class Ternary(Base):
         self._x = self._get_x(kwargs)
 
     def __getattr__(self, name):
-        if (hasattr(self.binaries[0], name) and
+        if (not name.startswith('_bowing_') and
+            hasattr(self.binaries[0], name) and
             hasattr(self.binaries[1], name)):
             def _param_accessor(**kwargs):
                 return self._interpolate(name, **kwargs)
