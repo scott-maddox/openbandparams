@@ -114,6 +114,7 @@ class Quaternary1or2(Quaternary):
         assert x >= 0. and x <= 1.
         assert y >= 0. and y <= 1.
         assert z >= 0. and z <= 1.
+        assert x + y + z <= 1.
 
     @classmethod
     def _get_xyz(cls, kwargs):
