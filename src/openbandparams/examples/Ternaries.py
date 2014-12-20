@@ -20,13 +20,13 @@
 
 from openbandparams import *
 
-print '# All three of these are identical:'
+print 'All three of these are identical:'
 print '>>> AlGaAs.Eg(x=0.3)\n', AlGaAs.Eg(x=0.3)
 print '>>> AlGaAs.Eg(Al=0.3)\n', AlGaAs.Eg(Al=0.3)
 print '>>> AlGaAs.Eg(Ga=0.7)\n', AlGaAs.Eg(Ga=0.7)
 print ''
 
-print '# These two are identical:'
+print 'These two are identical:'
 print '>>> AlGaAs.Eg(x=0.3)\n', AlGaAs.Eg_Gamma(x=0.3)
 print '>>> AlGaAs(x=0.3).Eg_Gamma()\n', AlGaAs(x=0.3).Eg_Gamma()
 print ''
@@ -43,6 +43,7 @@ print '>>> myAlGaAs = AlGaAs(x=0.3)\n',
 myAlGaAs = AlGaAs(x=0.3)
 print '>>> myAlGaAs.Eg()\n', myAlGaAs.Eg()
 print '>>> myAlGaAs.Eg(T=300)\n', myAlGaAs.Eg(T=300)
+print ''
 
 print 'Lattice matching to a substrate (at the growth temperature):'
 print '>>> a_InP = InP.a(T=800)\n',
@@ -54,3 +55,13 @@ print '>>> GaInAs_on_InP.a()\n', GaInAs_on_InP.a(T=800)
 print '>>> GaInAs_on_InP.elementFraction("Ga")\n', \
        GaInAs_on_InP.elementFraction("Ga")
 print '>>> GaInAs_on_InP.Eg()\n', GaInAs_on_InP.Eg()
+print ''
+
+print 'Other examples:'
+print '>>> AlGaAs.meff_hh_100(Al=0.3)\n', AlGaAs.meff_hh_100(Al=0.3)
+print '>>> AlGaAs.meff_hh_110(Al=0.3)\n', AlGaAs.meff_hh_110(Al=0.3)
+print '>>> AlGaAs.meff_hh_111(Al=0.3)\n', AlGaAs.meff_hh_111(Al=0.3)
+print '>>> AlGaAs.meff_lh_100(Al=0.3)\n', AlGaAs.meff_lh_100(Al=0.3)
+print '>>> AlGaAs.meff_lh_110(Al=0.3)\n', AlGaAs.meff_lh_110(Al=0.3)
+print '>>> AlGaAs.meff_lh_111(Al=0.3)\n', AlGaAs.meff_lh_111(Al=0.3)
+print ''
