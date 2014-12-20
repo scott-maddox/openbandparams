@@ -129,14 +129,17 @@ class Quaternary1or2(Quaternary):
             y = cls._get_y(kwargs)
             z = cls._get_z(kwargs)
             x = round(1 - y - z, 6)
-        elif 'a' in kwargs and 'T' in kwargs and cls._has_x(kwargs):
-            x, y, z = cls._lattice_match(kwargs['a'], kwargs['T'],
+        elif 'a' in kwargs and cls._has_x(kwargs):
+            T = kwargs.get('T', 300)
+            x, y, z = cls._lattice_match(kwargs['a'], T,
                                          x=cls._get_x(kwargs))
-        elif 'a' in kwargs and 'T' in kwargs and cls._has_y(kwargs):
-            x, y, z = cls._lattice_match(kwargs['a'], kwargs['T'],
+        elif 'a' in kwargs and cls._has_y(kwargs):
+            T = kwargs.get('T', 300)
+            x, y, z = cls._lattice_match(kwargs['a'], T,
                                          y=cls._get_y(kwargs))
-        elif 'a' in kwargs and 'T' in kwargs and cls._has_z(kwargs):
-            x, y, z = cls._lattice_match(kwargs['a'], kwargs['T'],
+        elif 'a' in kwargs and cls._has_z(kwargs):
+            T = kwargs.get('T', 300)
+            x, y, z = cls._lattice_match(kwargs['a'], T,
                                          z=cls._get_z(kwargs))
         else:
             raise TypeError(
@@ -356,9 +359,9 @@ class Quaternary1(Quaternary1or2):
                 "\n    - ('x' or '{B}') and ('y' or '{C}')"
                 "\n    - ('x' or '{B}') and ('z' or '{D}')"
                 "\n    - ('y' or '{C}') and ('z' or '{D}')"
-                "\n    - 'a' and 'T' and ('x' or '{B}')"
-                "\n    - 'a' and 'T' and ('y' or '{C}')"
-                "\n    - 'a' and 'T' and ('z' or '{D}')"
+                "\n    - 'a' and ('x' or '{B}')"
+                "\n    - 'a' and ('y' or '{C}')"
+                "\n    - 'a' and ('z' or '{D}')"
                             "".format(A=cls.elements[0], B=cls.elements[1],
                                       C=cls.elements[2], D=cls.elements[3]))
 
@@ -485,9 +488,9 @@ class Quaternary2(Quaternary1or2):
                 "\n    - ('x' or '{A}') and ('y' or '{B}')"
                 "\n    - ('x' or '{A}') and ('z' or '{C}')"
                 "\n    - ('y' or '{B}') and ('z' or '{C}')"
-                "\n    - 'a' and 'T' and ('x' or '{A}')"
-                "\n    - 'a' and 'T' and ('y' or '{B}')"
-                "\n    - 'a' and 'T' and ('z' or '{C}')"
+                "\n    - 'a' and ('x' or '{A}')"
+                "\n    - 'a' and ('y' or '{B}')"
+                "\n    - 'a' and ('z' or '{C}')"
                             "".format(A=cls.elements[0], B=cls.elements[1],
                                       C=cls.elements[2], D=cls.elements[3]))
 
@@ -621,11 +624,13 @@ class Quaternary3(Quaternary):
         if cls._has_x(kwargs) and cls._has_y(kwargs):
             x = cls._get_x(kwargs)
             y = cls._get_y(kwargs)
-        elif 'a' in kwargs and 'T' in kwargs and cls._has_x(kwargs):
-            x, y = cls._lattice_match(kwargs['a'], kwargs['T'],
+        elif 'a' in kwargs and cls._has_x(kwargs):
+            T = kwargs.get('T', 300)
+            x, y = cls._lattice_match(kwargs['a'], T,
                                       x=cls._get_x(kwargs))
-        elif 'a' in kwargs and 'T' in kwargs and cls._has_y(kwargs):
-            x, y = cls._lattice_match(kwargs['a'], kwargs['T'],
+        elif 'a' in kwargs and cls._has_y(kwargs):
+            T = kwargs.get('T', 300)
+            x, y = cls._lattice_match(kwargs['a'], T,
                                       y=cls._get_y(kwargs))
         else:
             raise TypeError(
@@ -669,8 +674,8 @@ class Quaternary3(Quaternary):
     def _get_usage(cls):
         return ("The supported kwargs combinations are as follows:"
                 "\n    - ('x', '{A}' or '{B}') and ('y', '{C}' or '{D}')"
-                "\n    - 'a' and 'T' and ('x', '{A}' or '{B}')"
-                "\n    - 'a' and 'T' and ('y', '{C}' or '{D}')"
+                "\n    - 'a' and ('x', '{A}' or '{B}')"
+                "\n    - 'a' and ('y', '{C}' or '{D}')"
                             "".format(A=cls.elements[0], B=cls.elements[1],
                                       C=cls.elements[2], D=cls.elements[3]))
 

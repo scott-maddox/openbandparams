@@ -96,7 +96,7 @@ class TestIIIVZincBlendeQuaternary(unittest.TestCase):
         with self.assertRaises(TypeError):
             AlPAsSb.Eg(y=0)
         with self.assertRaises(TypeError):
-            AlPAsSb.Eg(x=0, a=6.)
+            AlPAsSb.Eg(a=6.)
         with self.assertRaises(TypeError):
             AlPAsSb.Eg(a=6., T=300)
 
@@ -108,7 +108,7 @@ class TestIIIVZincBlendeQuaternary(unittest.TestCase):
         with self.assertRaises(TypeError):
             AlGaInAs.Eg(y=0)
         with self.assertRaises(TypeError):
-            AlGaInAs.Eg(x=0, a=6.)
+            AlGaInAs.Eg(a=6.)
         with self.assertRaises(TypeError):
             AlGaInAs.Eg(a=6., T=300)
 
@@ -120,7 +120,7 @@ class TestIIIVZincBlendeQuaternary(unittest.TestCase):
         with self.assertRaises(TypeError):
             AlGaAsSb.Eg(y=0)
         with self.assertRaises(TypeError):
-            AlGaAsSb.Eg(x=0, a=6.)
+            AlGaAsSb.Eg(a=6.)
         with self.assertRaises(TypeError):
             AlGaAsSb.Eg(a=6., T=300)
 
