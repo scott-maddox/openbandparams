@@ -1,0 +1,10 @@
+Plot Band Offset vs Lattice Constant No Phosphides
+==================================================
+
+Source:
+
+.. literalinclude:: ../../src/openbandparams/examples/Plot_Band_Offset_vs_Lattice_Constant_No_Phosphides.py
+
+Result:
+
+.. image:: ../_build_examples/Plot_Band_Offset_vs_Lattice_Constant_No_Phosphides.png

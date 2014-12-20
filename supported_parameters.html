@@ -1,0 +1,424 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Supported Parameters &mdash; openbandparams 0.5 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="openbandparams 0.5 documentation" href="index.html" />
+    <link rel="prev" title="Plot Band Offset vs Lattice Constant No Phosphides" href="examples/Plot_Band_Offset_vs_Lattice_Constant_No_Phosphides.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="examples/Plot_Band_Offset_vs_Lattice_Constant_No_Phosphides.html" title="Plot Band Offset vs Lattice Constant No Phosphides"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">openbandparams 0.5 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="examples/Plot_Band_Offset_vs_Lattice_Constant_No_Phosphides.html"
+                        title="previous chapter">Plot Band Offset vs Lattice Constant No Phosphides</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/supported_parameters.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="supported-parameters">
+<h1>Supported Parameters<a class="headerlink" href="#supported-parameters" title="Permalink to this headline">¶</a></h1>
+<p>All of the parameters and functions supported in this version are documented
+below.</p>
+<dl class="class">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary">
+<em class="property">class </em><tt class="descclassname">openbandparams.iii_v.zinc_blende.binary.</tt><tt class="descname">Binary</tt><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="classmethod">
+<dt id="Binary.LaTeX">
+<em class="property">classmethod </em><tt class="descname">LaTeX</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Binary.LaTeX" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a LaTeX representation.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.Delta_SO">
+<em class="property">classmethod </em><tt class="descname">Delta_SO</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.Delta_SO" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the split-off energy, Delta_SO, in electron Volts.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.Eg">
+<em class="property">classmethod </em><tt class="descname">Eg</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.Eg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the bandgap, Eg, in electron Volts at a given
+temperature, T, in Kelvin (default: 300 K).</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.Eg_Gamma">
+<em class="property">classmethod </em><tt class="descname">Eg_Gamma</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.Eg_Gamma" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the Gamma-valley bandgap, Eg_Gamma, in electron Volts at a
+given temperature, T, in Kelvin (default: 300 K).</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.Eg_Gamma_0">
+<em class="property">classmethod </em><tt class="descname">Eg_Gamma_0</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.Eg_Gamma_0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the Gamma-valley bandgap, Eg_Gamma, in electron Volts
+at 0 K.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.Eg_L">
+<em class="property">classmethod </em><tt class="descname">Eg_L</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.Eg_L" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the L-valley bandgap, Eg_L, in electron Volts at a given
+temperature, T, in Kelvin (default: 300 K).</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.Eg_L_0">
+<em class="property">classmethod </em><tt class="descname">Eg_L_0</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.Eg_L_0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the L-valley bandgap, Eg_L, in electron Volts
+at 0 K.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.Eg_X">
+<em class="property">classmethod </em><tt class="descname">Eg_X</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.Eg_X" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the X-valley bandgap, Eg_X, in electron Volts at a given
+temperature, T, in Kelvin (default: 300 K).</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.Eg_X_0">
+<em class="property">classmethod </em><tt class="descname">Eg_X_0</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.Eg_X_0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the X-valley bandgap, Eg_X, in electron Volts
+at 0 K.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.Ep">
+<em class="property">classmethod </em><tt class="descname">Ep</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.Ep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the Ep matrix element, in electron Volts.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.F">
+<em class="property">classmethod </em><tt class="descname">F</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.F" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the F Kane parameter (unitless).</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.Luttinger1">
+<em class="property">classmethod </em><tt class="descname">Luttinger1</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.Luttinger1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the first Luttinger parameter (unitless).</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.Luttinger2">
+<em class="property">classmethod </em><tt class="descname">Luttinger2</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.Luttinger2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the second Luttinger parameter (unitless).</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.Luttinger3">
+<em class="property">classmethod </em><tt class="descname">Luttinger3</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.Luttinger3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the second Luttinger parameter (unitless).</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.VBO">
+<em class="property">classmethod </em><tt class="descname">VBO</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.VBO" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the valance band offset energy, VBO, in electron Volts
+relative to the InSb valance band maximum.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.a">
+<em class="property">classmethod </em><tt class="descname">a</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.a" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the lattice parameter, a, in Angstroms at a given
+temperature, T, in Kelvin (default: 300 K).</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.a_300K">
+<em class="property">classmethod </em><tt class="descname">a_300K</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.a_300K" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the lattice parameter, a, in Angstroms at 300 K.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.a_c">
+<em class="property">classmethod </em><tt class="descname">a_c</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.a_c" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the conduction band deformation potential, a_c, in
+electron Volts.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.a_v">
+<em class="property">classmethod </em><tt class="descname">a_v</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.a_v" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the valance band deformation potential, a_v, in
+electron Volts.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.alpha_Gamma">
+<em class="property">classmethod </em><tt class="descname">alpha_Gamma</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.alpha_Gamma" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the Gamma-valley alpha Varshni parameter, alpha_Gamma, in
+electron Volts per Kelvin.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.alpha_L">
+<em class="property">classmethod </em><tt class="descname">alpha_L</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.alpha_L" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the L-valley alpha Varshni parameter, alpha_L, in
+electron Volts per Kelvin.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.alpha_X">
+<em class="property">classmethod </em><tt class="descname">alpha_X</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.alpha_X" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the X-valley alpha Varshni parameter, alpha_X, in
+electron Volts per Kelvin.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.b">
+<em class="property">classmethod </em><tt class="descname">b</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.b" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the b shear deformation potential, in electron Volts.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.beta_Gamma">
+<em class="property">classmethod </em><tt class="descname">beta_Gamma</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.beta_Gamma" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the Gamma-valley beta Varshni parameter, beta_Gamma, in
+Kelvin.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.beta_L">
+<em class="property">classmethod </em><tt class="descname">beta_L</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.beta_L" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the L-valley beta Varshni parameter, beta_L, in
+Kelvin.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.beta_X">
+<em class="property">classmethod </em><tt class="descname">beta_X</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.beta_X" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the X-valley beta Varshni parameter, beta_X, in
+Kelvin.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.c_11">
+<em class="property">classmethod </em><tt class="descname">c_11</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.c_11" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the c_11 elastic constant, in gigapascals.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.c_12">
+<em class="property">classmethod </em><tt class="descname">c_12</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.c_12" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the c_12 elastic constant, in gigapascals.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.c_44">
+<em class="property">classmethod </em><tt class="descname">c_44</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.c_44" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the c_44 elastic constant, in gigapascals.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.d">
+<em class="property">classmethod </em><tt class="descname">d</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the d shear deformation potential, in electron Volts.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.da_dT">
+<em class="property">classmethod </em><tt class="descname">da_dT</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.da_dT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the thermal expansion coefficient, da_dT, of the lattice
+parameter, a, in Angstroms per Kelvin.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.elementFraction">
+<em class="property">classmethod </em><tt class="descname">elementFraction</tt><big>(</big><em>element</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.elementFraction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the fractional concentration of <cite>element</cite> with respect
+to its sublattice. In a III-V binary, the fraction is either 1 if
+<cite>element</cite> is present, or 0 if it is not.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.meff_SO">
+<em class="property">classmethod </em><tt class="descname">meff_SO</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.meff_SO" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the split-off band hole effective mass, meff_SO, in units
+of electron mass.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.meff_e_Gamma">
+<em class="property">classmethod </em><tt class="descname">meff_e_Gamma</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.meff_e_Gamma" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the Gamma-valley electron effective mass, meff_e_Gamma,
+in units of electron mass.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.meff_e_L_DOS">
+<em class="property">classmethod </em><tt class="descname">meff_e_L_DOS</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.meff_e_L_DOS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the L-valley electron density of states effective mass,
+meff_e_L_DOS, in units of electron mass.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.meff_e_L_long">
+<em class="property">classmethod </em><tt class="descname">meff_e_L_long</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.meff_e_L_long" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the L-valley electron effective mass in the longitudinal
+direction, meff_e_L_long, in units of electron mass.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.meff_e_L_trans">
+<em class="property">classmethod </em><tt class="descname">meff_e_L_trans</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.meff_e_L_trans" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the L-valley electron effective mass in the transverse
+direction, meff_e_L_trans, in units of electron mass.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.meff_e_X_DOS">
+<em class="property">classmethod </em><tt class="descname">meff_e_X_DOS</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.meff_e_X_DOS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the X-valley electron density of states effective mass,
+meff_e_X_DOS, in units of electron mass.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.meff_e_X_long">
+<em class="property">classmethod </em><tt class="descname">meff_e_X_long</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.meff_e_X_long" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the X-valley electron effective mass in the longitudinal
+direction, meff_e_X_long, in units of electron mass.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.meff_e_X_trans">
+<em class="property">classmethod </em><tt class="descname">meff_e_X_trans</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.meff_e_X_trans" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the X-valley electron effective mass in the transverse
+direction, meff_e_X_trans, in units of electron mass.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.meff_hh_100">
+<em class="property">classmethod </em><tt class="descname">meff_hh_100</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.meff_hh_100" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the heavy hole band effective mass in the [100] direction,
+meff_hh_100, in units of electron mass.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.meff_hh_110">
+<em class="property">classmethod </em><tt class="descname">meff_hh_110</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.meff_hh_110" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the heavy hole band effective mass in the [110] direction,
+meff_hh_110, in units of electron mass.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.meff_hh_111">
+<em class="property">classmethod </em><tt class="descname">meff_hh_111</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.meff_hh_111" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the heavy hole band effective mass in the [111] direction,
+meff_hh_111, in units of electron mass.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.meff_lh_100">
+<em class="property">classmethod </em><tt class="descname">meff_lh_100</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.meff_lh_100" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the light hole band effective mass in the [100] direction,
+meff_lh_100, in units of electron mass.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.meff_lh_110">
+<em class="property">classmethod </em><tt class="descname">meff_lh_110</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.meff_lh_110" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the light hole band effective mass in the [110] direction,
+meff_lh_110, in units of electron mass.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="openbandparams.iii_v.zinc_blende.binary.Binary.meff_lh_111">
+<em class="property">classmethod </em><tt class="descname">meff_lh_111</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#openbandparams.iii_v.zinc_blende.binary.Binary.meff_lh_111" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the light hole band effective mass in the [111] direction,
+meff_lh_111, in units of electron mass.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="examples/Plot_Band_Offset_vs_Lattice_Constant_No_Phosphides.html" title="Plot Band Offset vs Lattice Constant No Phosphides"
+             >previous</a> |</li>
+        <li><a href="index.html">openbandparams 0.5 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2014, Scott J Maddox.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>
