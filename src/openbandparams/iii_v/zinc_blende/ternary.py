@@ -32,24 +32,24 @@ class AlGaN(Ternary1):
     name = 'AlGaN'
     elements = ('Al', 'Ga', 'N')
     binaries = (AlN, GaN)
-    _bowing_Eg_Gamma = 0.76,  # eV    W.W. Lin and Y.K. Kuo, in Proc. SPIE (2002), pp. 236-247.
-    _bowing_Eg_X = 0.3,  # eV    W.W. Lin and Y.K. Kuo, in Proc. SPIE (2002), pp. 236-247.
+    _bowing_Eg_Gamma = 0.76  # eV    W.W. Lin and Y.K. Kuo, in Proc. SPIE (2002), pp. 236-247.
+    _bowing_Eg_X = 0.3  # eV    W.W. Lin and Y.K. Kuo, in Proc. SPIE (2002), pp. 236-247.
 
 
 class AlInN(Ternary1):
     name = 'AlInN'
     elements = ('Al', 'In', 'N')
     binaries = (AlN, InN)
-    _bowing_Eg_Gamma = 2.73,  # eV    W.W. Lin and Y.K. Kuo, in Proc. SPIE (2002), pp. 236-247.
-    _bowing_Eg_X = 3.62,  # eV    W.W. Lin and Y.K. Kuo, in Proc. SPIE (2002), pp. 236-247.
+    _bowing_Eg_Gamma = 2.73  # eV    W.W. Lin and Y.K. Kuo, in Proc. SPIE (2002), pp. 236-247.
+    _bowing_Eg_X = 3.62  # eV    W.W. Lin and Y.K. Kuo, in Proc. SPIE (2002), pp. 236-247.
 
 
 class GaInN(Ternary1):
     name = 'GaInN'
     elements = ('Ga', 'In', 'N')
     binaries = (GaN, InN)
-    _bowing_Eg_Gamma = 1.38,  # eV    W.W. Lin and Y.K. Kuo, in Proc. SPIE (2002), pp. 236-247.
-    _bowing_Eg_X = 1.67,  # eV    W.W. Lin and Y.K. Kuo, in Proc. SPIE (2002), pp. 236-247.
+    _bowing_Eg_Gamma = 1.38  # eV    W.W. Lin and Y.K. Kuo, in Proc. SPIE (2002), pp. 236-247.
+    _bowing_Eg_X = 1.67  # eV    W.W. Lin and Y.K. Kuo, in Proc. SPIE (2002), pp. 236-247.
 
 
 # Phosphides
