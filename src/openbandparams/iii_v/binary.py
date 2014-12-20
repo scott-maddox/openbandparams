@@ -410,125 +410,236 @@ class Binary(Base):
         Returns the c_44 elastic constant, in gigapascals.
         '''
         return float(cls._c_44)
-    
+
     @classmethod
-    def biaxial_strained_a(cls, eps_xx, **kwargs):
+    def _get_eps_xx(cls, **kwargs):
+        if 'a0' in kwargs:
+            return cls.biaxial_strained_eps_xx(**kwargs)
+        elif 'eps_xx' in kwargs:
+            return kwargs['eps_xx']
+        else:
+            raise ValueError('Missing required keyword argument'
+                             ' `eps_xx` or `a0`')
+
+    @classmethod
+    def biaxial_strained_eps_xx(cls, **kwargs):
         '''
-        Returns the in-plane lattice constant required to induce the given
-        in-plane strain, `eps_xx`, assuming no lattice relaxation.
-        
+        Returns the in-plane strain, `eps_xx`, induced by growing
+        on a substrate with the given lattice constant, `a0`, assuming no
+        lattice relaxation.
+
+        This assumes growth in the [100] direction.
+
         Note: `eps_xx` should be negative for compressive in-plane strain, and
         positive for tensile in-plane strain.
         '''
-        return cls.a() / (1 - eps_xx)
-    
+        if 'a0' in kwargs:
+            return 1 - cls.a() / kwargs['a0']
+        else:
+            raise ValueError('Missing required keyword argument `a0`')
+
     @classmethod
-    def biaxial_strained_eps_zz(cls, eps_xx, **kwargs):
+    def biaxial_strained_a0(cls, **kwargs):
+        '''
+        Returns the substrate lattice constant, `a0`, required to induce the
+        given in-plane strain, `eps_xx`, assuming no lattice relaxation.
+
+        This assumes growth in the [100] direction.
+
+        Note: `eps_xx` should be negative for compressive in-plane strain, and
+        positive for tensile in-plane strain.
+        '''
+        eps_xx = cls._get_eps_xx(**kwargs)
+        return cls.a() / (1 - eps_xx)
+
+    @classmethod
+    def biaxial_strained_eps_zz(cls, **kwargs):
         '''
         Returns the out-of-plane strain induced by the given in-plane
-        strain, `eps_xx`. This assumes no lattice relaxation.
-        
+        strain, `eps_xx`, or by growth on a substrate with the given lattice
+        constant, `a0`, assuming no lattice relaxation.
+
+        This assumes growth in the [100] direction.
+
         Note: `eps_xx` should be negative for compressive in-plane strain, and
         positive for tensile in-plane strain.
         '''
+        eps_xx = cls._get_eps_xx(**kwargs)
         return -2 * cls.c_12() / cls.c_11() * eps_xx
-    
+
     @classmethod
-    def biaxial_strained_dE_c(cls, eps_xx, **kwargs):
+    def biaxial_strained_dE_c(cls, **kwargs):
         '''
         Returns the conduction band-edge shift, in eV, induced by the
-        given in-plane strain, `eps_xx`.
-        
+        given in-plane strain, `eps_xx`, or by growth on a substrate with
+        the given lattice constant, `a0`, assuming no lattice relaxation.
+
+        This assumes growth in the [100] direction.
+
         Note: `eps_xx` should be negative for compressive in-plane strain, and
         positive for tensile in-plane strain.
         '''
-        return cls.a_c() * (2 * eps_xx + 
-                            cls.biaxial_strained_eps_zz(eps_xx, **kwargs))
+        eps_xx = cls._get_eps_xx(**kwargs)
+        return cls.a_c() * (2 * eps_xx +
+                            cls.biaxial_strained_eps_zz(**kwargs))
 
     @classmethod
-    def biaxial_strained_P_eps(cls, eps_xx, **kwargs):
+    def biaxial_strained_P_eps(cls, **kwargs):
         '''
         Returns the hydrostatic component of the valance band-edge shift,
-        in eV, induced by the given in-plane strain, `eps_xx`.
-        
+        in eV, induced by the given in-plane strain, `eps_xx`, or by growth
+        on a substrate with the given lattice constant, `a0`, assuming no
+        lattice relaxation.
+
+        This assumes growth in the [100] direction.
+
         Note: `eps_xx` should be negative for compressive in-plane strain, and
         positive for tensile in-plane strain.
         '''
-        return cls.a_v() * (2 * eps_xx + 
-                            cls.biaxial_strained_eps_zz(eps_xx, **kwargs))
-    
-    @classmethod
-    def biaxial_strained_Q_eps(cls, eps_xx, **kwargs):
-        '''
-        Returns the uniaxial component of the valance band-edge shift,
-        in eV, induced by the given in-plane strain, `eps_xx`.
-        
-        Note: `eps_xx` should be negative for compressive in-plane strain, and
-        positive for tensile in-plane strain.
-        '''
-        return cls.b() * (cls.biaxial_strained_eps_zz(eps_xx, **kwargs) - eps_xx)
-    
-    @classmethod
-    def biaxial_strained_dE_hh(cls, eps_xx, **kwargs):
-        '''
-        Returns the heavy-hole band-edge shift, in eV, induced by the given
-        in-plane strain, `eps_xx`.
-        
-        Note: `eps_xx` should be negative for compressive in-plane strain, and
-        positive for tensile in-plane strain.
-        '''
-        return -(cls.biaxial_strained_P_eps(eps_xx, **kwargs)
-                 + cls.biaxial_strained_Q_eps(eps_xx, **kwargs))
+        eps_xx = cls._get_eps_xx(**kwargs)
+        return cls.a_v() * (2 * eps_xx +
+                            cls.biaxial_strained_eps_zz(**kwargs))
 
     @classmethod
-    def biaxial_strained_dE_lh(cls, eps_xx, **kwargs):
+    def biaxial_strained_Q_eps(cls, **kwargs):
         '''
-        Returns the light-hole band-edge shift, in eV, induced by the given
-        in-plane strain, `eps_xx`.
-        
+        Returns the uniaxial component of the valance band-edge shift,
+        in eV, induced by the given in-plane strain, `eps_xx`, or by growth
+        on a substrate with the given lattice constant, `a0`, assuming no
+        lattice relaxation.
+
+        This assumes growth in the [100] direction.
+
         Note: `eps_xx` should be negative for compressive in-plane strain, and
         positive for tensile in-plane strain.
         '''
-        return (-cls.biaxial_strained_P_eps(eps_xx, **kwargs)
-                + cls.biaxial_strained_Q_eps(eps_xx, **kwargs))
-    
+        eps_xx = cls._get_eps_xx(**kwargs)
+        return cls.b() * (cls.biaxial_strained_eps_zz(**kwargs) - eps_xx)
+
     @classmethod
-    def biaxial_strained_E_c_hh(cls, eps_xx, **kwargs):
+    def biaxial_strained_dE_hh(cls, **kwargs):
+        '''
+        Returns the heavy-hole band-edge shift, in eV, induced by the given
+        in-plane strain, `eps_xx`, or by growth on a substrate with the given
+        lattice constant, `a0`, assuming no lattice relaxation.
+
+        This assumes growth in the [100] direction.
+
+        Note: `eps_xx` should be negative for compressive in-plane strain, and
+        positive for tensile in-plane strain.
+        '''
+        return -(cls.biaxial_strained_P_eps(**kwargs)
+                 + cls.biaxial_strained_Q_eps(**kwargs))
+
+    @classmethod
+    def biaxial_strained_dE_lh(cls, **kwargs):
+        '''
+        Returns the light-hole band-edge shift, in eV, induced by the given
+        in-plane strain, `eps_xx`, or by growth on a substrate with the given
+        lattice constant, `a0`, assuming no lattice relaxation.
+
+        This assumes growth in the [100] direction.
+
+        Note: `eps_xx` should be negative for compressive in-plane strain, and
+        positive for tensile in-plane strain.
+        '''
+        return (-cls.biaxial_strained_P_eps(**kwargs)
+                + cls.biaxial_strained_Q_eps(**kwargs))
+
+    @classmethod
+    def biaxial_strained_E_c(cls, **kwargs):
+        '''
+        Returns the conduction band-edge offset, in eV, at the given
+        in-plane strain, `eps_xx`, or for growth on a substrate with the given
+        lattice constant, `a0`, assuming no lattice relaxation.
+
+        This assumes growth in the [100] direction.
+
+        Note: `eps_xx` should be negative for compressive in-plane strain, and
+        positive for tensile in-plane strain.
+        '''
+        return (cls.VBO(**kwargs) + cls.Eg(**kwargs)
+                + cls.biaxial_strained_dE_c(**kwargs))
+
+    @classmethod
+    def biaxial_strained_E_hh(cls, **kwargs):
+        '''
+        Returns the heavy-hole band-edge offset, in eV, at the given
+        in-plane strain, `eps_xx`, or for growth on a substrate with the given
+        lattice constant, `a0`, assuming no lattice relaxation.
+
+        This assumes growth in the [100] direction.
+
+        Note: `eps_xx` should be negative for compressive in-plane strain, and
+        positive for tensile in-plane strain.
+        '''
+        return (cls.VBO(**kwargs)
+                + cls.biaxial_strained_dE_hh(**kwargs))
+
+    @classmethod
+    def biaxial_strained_E_lh(cls, **kwargs):
+        '''
+        Returns the light-hole band-edge offset, in eV, at the given
+        in-plane strain, `eps_xx`, or for growth on a substrate with the given
+        lattice constant, `a0`, assuming no lattice relaxation.
+
+        This assumes growth in the [100] direction.
+
+        Note: `eps_xx` should be negative for compressive in-plane strain, and
+        positive for tensile in-plane strain.
+        '''
+        return (cls.VBO(**kwargs)
+                + cls.biaxial_strained_dE_lh(**kwargs))
+
+    @classmethod
+    def biaxial_strained_E_c_hh(cls, **kwargs):
         '''
         Returns the separation between the conduction band-edge and the
         heavy-hole band-edge, in eV, at the given in-plane strain, `eps_xx`,
-        and temperature, `T`, in Kelvin (default: 300 K).
-        
+        or for growth on a substrate with the given lattice constant, `a0`,
+        assuming no lattice relaxation, and at temperature, `T`, in
+        Kelvin (default: 300 K).
+
+        This assumes growth in the [100] direction.
+
         Note: `eps_xx` should be negative for compressive in-plane strain, and
         positive for tensile in-plane strain.
         '''
         return (cls.Eg(**kwargs)
-                + cls.biaxial_strained_dE_c(eps_xx, **kwargs)
-                - cls.biaxial_strained_dE_hh(eps_xx, **kwargs))
-    
+                + cls.biaxial_strained_dE_c(**kwargs)
+                - cls.biaxial_strained_dE_hh(**kwargs))
+
     @classmethod
-    def biaxial_strained_E_c_lh(cls, eps_xx, **kwargs):
+    def biaxial_strained_E_c_lh(cls, **kwargs):
         '''
         Returns the separation between the conduction band-edge and the
         light-hole band-edge, in eV, at the given in-plane strain, `eps_xx`,
-        and temperature, `T`, in Kelvin (default: 300 K).
-        
+        or for growth on a substrate with the given lattice constant, `a0`,
+        assuming no lattice relaxation, and at temperature, `T`, in
+        Kelvin (default: 300 K).
+
+        This assumes growth in the [100] direction.
+
         Note: `eps_xx` should be negative for compressive in-plane strain, and
         positive for tensile in-plane strain.
         '''
         return (cls.Eg(**kwargs)
-                + cls.biaxial_strained_dE_c(eps_xx, **kwargs)
-                - cls.biaxial_strained_dE_lh(eps_xx, **kwargs))
-    
+                + cls.biaxial_strained_dE_c(**kwargs)
+                - cls.biaxial_strained_dE_lh(**kwargs))
+
     @classmethod
-    def biaxial_strained_Eg(cls, eps_xx, **kwargs):
+    def biaxial_strained_Eg(cls, **kwargs):
         '''
         Returns the minimum separation between the conduction band-edge and the
         valance band-edge, in eV, at the given in-plane strain, `eps_xx`,
-        and temperature, `T`, in Kelvin (default: 300 K).
-        
+        or for growth on a substrate with the given lattice constant, `a0`,
+        assuming no lattice relaxation, and at temperature, `T`, in
+        Kelvin (default: 300 K).
+
+        This assumes growth in the [100] direction.
+
         Note: `eps_xx` should be negative for compressive in-plane strain, and
         positive for tensile in-plane strain.
         '''
-        return min(cls.biaxial_strained_E_c_hh(eps_xx, **kwargs),
-                   cls.biaxial_strained_E_c_lh(eps_xx, **kwargs))
+        return min(cls.biaxial_strained_E_c_hh(**kwargs),
+                   cls.biaxial_strained_E_c_lh(**kwargs))
