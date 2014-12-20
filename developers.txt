@@ -37,13 +37,13 @@ Next, bump the version number. From the root of the git repository run these com
     echo "__version__ = '1.0'" > src/openbandparams/version.py
     git commit -am "Bumbed version number to 1.0"
 
-Now is a good time to run the unit tests, to make sure you haven't missed any bugs:
+Now is a good time to run the unit tests and examples, to make sure you haven't missed any bugs:
 
     python test.py
+    python build_doc.py clean
 
-Go ahead and fix any bugs you find in the release branch, and we'll merge them back into the develop branch later. If everything checks out, and you're sure the release is bug free and ready to go, then you can go ahead and update and upload the documentation by running the following commands from the root of the git repository:
+Go ahead and fix any bugs you find in the release branch, and we'll merge them back into the develop branch later. If everything checks out, and you're sure the release is bug free and ready to go, then you can go ahead and upload the documentation by running the following commands from the root of the git repository:
 
-    python build_doc.py
     ./upload_doc.sh
 
 Next, merge the changes from the release branch into the master branch, and tag the release:
