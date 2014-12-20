@@ -18,8 +18,8 @@
 #
 #############################################################################
 
+from openbandparams.iii_v.base_material import BaseType, Base
 from openbandparams.algorithms import bisect
-from openbandparams.base_material import BaseType, AlloyBase
 from openbandparams.utils import classinstancemethod
 
 
@@ -35,11 +35,11 @@ class TernaryType(BaseType):
             raise AttributeError(name)
 
 
-class Ternary(AlloyBase):
+class Ternary(Base):
     __metaclass__ = TernaryType
 
     def __init__(self, **kwargs):
-        AlloyBase.__init__(self)
+        Base.__init__(self)
         self._x = self._get_x(kwargs)
 
     def __getattr__(self, name):
@@ -102,19 +102,6 @@ class Ternary(AlloyBase):
         else:
             # otherwise, use linear interpolation
             return A * x + B * (1 - x)
-
-    @classinstancemethod
-    def Eg(self, cls, **kwargs):
-        '''
-        Returns the bandgap, Eg, in electron Volts at a given
-        temperature, T, in Kelvin (default: 300 K).
-        '''
-        if self is not None:
-            return min(self.Eg_Gamma(**kwargs), self.Eg_X(**kwargs),
-                       self.Eg_L(**kwargs))
-        else:
-            return min(cls.Eg_Gamma(**kwargs), cls.Eg_X(**kwargs),
-                       cls.Eg_L(**kwargs))
 
 
 class Ternary1(Ternary):

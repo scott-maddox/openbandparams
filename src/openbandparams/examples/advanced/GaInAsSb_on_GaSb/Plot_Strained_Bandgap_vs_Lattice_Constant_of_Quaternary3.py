@@ -34,6 +34,7 @@ T = 300
 # initialize the plot
 fig = plt.figure()
 ax = fig.add_subplot(111)
+plt.title('$%s/GaSb$ from 0 to -3%% strain' % (quaternary.LaTeX(), T))
 plt.xlabel('Unstrained Lattice Parameter at %g K ($\AA$)' % T)
 plt.ylabel('Strained Bandgap at %g K (eV)' % T)
 
