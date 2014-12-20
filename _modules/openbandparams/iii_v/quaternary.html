@@ -1,0 +1,857 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>openbandparams.iii_v.quaternary &mdash; openbandparams 0.6 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.6',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="openbandparams 0.6 documentation" href="../../../index.html" />
+    <link rel="up" title="openbandparams.iii_v" href="../iii_v.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">openbandparams 0.6 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../../openbandparams.html" >openbandparams</a> &raquo;</li>
+          <li><a href="../iii_v.html" accesskey="U">openbandparams.iii_v</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for openbandparams.iii_v.quaternary</h1><div class="highlight"><pre>
+<span class="c">#</span>
+<span class="c">#   Copyright (c) 2013-2014, Scott J Maddox</span>
+<span class="c">#</span>
+<span class="c">#   This file is part of openbandparams.</span>
+<span class="c">#</span>
+<span class="c">#   openbandparams is free software: you can redistribute it and/or modify</span>
+<span class="c">#   it under the terms of the GNU Affero General Public License as published</span>
+<span class="c">#   by the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c">#   (at your option) any later version.</span>
+<span class="c">#</span>
+<span class="c">#   openbandparams is distributed in the hope that it will be useful,</span>
+<span class="c">#   but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c">#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c">#   GNU Affero General Public License for more details.</span>
+<span class="c">#</span>
+<span class="c">#   You should have received a copy of the GNU Affero General Public License</span>
+<span class="c">#   along with openbandparams.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="c">#</span>
+<span class="c">#############################################################################</span>
+
+<span class="kn">from</span> <span class="nn">openbandparams.algorithms</span> <span class="kn">import</span> <span class="n">bisect</span>
+<span class="kn">from</span> <span class="nn">openbandparams.base_material</span> <span class="kn">import</span> <span class="n">BaseType</span><span class="p">,</span> <span class="n">AlloyBase</span>
+<span class="kn">from</span> <span class="nn">openbandparams.utils</span> <span class="kn">import</span> <span class="n">classinstancemethod</span>
+
+
+<div class="viewcode-block" id="Quaternary1or2Type"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.quaternary.Quaternary1or2Type">[docs]</a><span class="k">class</span> <span class="nc">Quaternary1or2Type</span><span class="p">(</span><span class="n">BaseType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="c"># acts like a class method for Quaternary.__getattr__</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">name</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">name</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">name</span><span class="p">)):</span>
+            <span class="k">def</span> <span class="nf">_param_accessor</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">_param_accessor</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="Quaternary3Type"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.quaternary.Quaternary3Type">[docs]</a><span class="k">class</span> <span class="nc">Quaternary3Type</span><span class="p">(</span><span class="n">BaseType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="c"># acts like a class method for Quaternary3.__getattr__</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">name</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">name</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">name</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">name</span><span class="p">)):</span>
+            <span class="k">def</span> <span class="nf">_param_accessor</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">_param_accessor</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="Quaternary"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.quaternary.Quaternary">[docs]</a><span class="k">class</span> <span class="nc">Quaternary</span><span class="p">(</span><span class="n">AlloyBase</span><span class="p">):</span>
+    <span class="nd">@classinstancemethod</span>
+<div class="viewcode-block" id="Quaternary.Eg"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.quaternary.Quaternary.Eg">[docs]</a>    <span class="k">def</span> <span class="nf">Eg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the bandgap, Eg, in electron Volts at a given</span>
+<span class="sd">        temperature, T, in Kelvin (default: 300 K).</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Eg_Gamma</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">Eg_X</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+                       <span class="bp">self</span><span class="o">.</span><span class="n">Eg_L</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">Eg_Gamma</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span> <span class="n">cls</span><span class="o">.</span><span class="n">Eg_X</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+                       <span class="n">cls</span><span class="o">.</span><span class="n">Eg_L</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+</div>
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">==</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">and</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_x</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_x</span> <span class="ow">and</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_y</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_y</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_get_bowing</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">param</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="s">&#39;_bowing_</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">param</span><span class="p">):</span>
+            <span class="c"># bowing parameters exists - use it</span>
+            <span class="n">C</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="s">&#39;_bowing_</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">param</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="s">&#39;__call__&#39;</span><span class="p">):</span>
+                <span class="c"># it&#39;s trying to mix the ternary bowing parameters</span>
+                <span class="k">return</span> <span class="bp">None</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">C</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span>
+
+</div>
+<div class="viewcode-block" id="Quaternary1or2"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.quaternary.Quaternary1or2">[docs]</a><span class="k">class</span> <span class="nc">Quaternary1or2</span><span class="p">(</span><span class="n">Quaternary</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    For alloys of the AB_{x}C_{y}D_{1-x-y} and A_{x}B_{y}C_{1-x-y}D types [1].</span>
+<span class="sd">    These require only three ternaries for interpolation.</span>
+
+<span class="sd">    [1] C. K. Williams, T. H. Glisson, J. R. Hauser, and M. A. Littlejohn,</span>
+<span class="sd">    &quot;Energy bandgap and lattice constant contours of iii-v quaternary</span>
+<span class="sd">    alloys of the form Ax By Cz D or A Bx Cy Dz,&quot; JEM, vol. 7, no. 5,</span>
+<span class="sd">    pp. 639-646, Sep. 1978.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">__metaclass__</span> <span class="o">=</span> <span class="n">Quaternary1or2Type</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">Quaternary</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_xyz</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">name</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">name</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">name</span><span class="p">)):</span>
+            <span class="k">def</span> <span class="nf">_param_accessor</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">_param_accessor</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_validate_xyz</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mf">0.</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mf">1.</span>
+        <span class="k">assert</span> <span class="n">y</span> <span class="o">&gt;=</span> <span class="mf">0.</span> <span class="ow">and</span> <span class="n">y</span> <span class="o">&lt;=</span> <span class="mf">1.</span>
+        <span class="k">assert</span> <span class="n">z</span> <span class="o">&gt;=</span> <span class="mf">0.</span> <span class="ow">and</span> <span class="n">z</span> <span class="o">&lt;=</span> <span class="mf">1.</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_get_xyz</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">cls</span><span class="o">.</span><span class="n">_has_x</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span> <span class="ow">and</span> <span class="n">cls</span><span class="o">.</span><span class="n">_has_y</span><span class="p">(</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_get_x</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_get_y</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">z</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">cls</span><span class="o">.</span><span class="n">_has_x</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span> <span class="ow">and</span> <span class="n">cls</span><span class="o">.</span><span class="n">_has_z</span><span class="p">(</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_get_x</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">z</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_get_z</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span> <span class="o">-</span> <span class="n">z</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">cls</span><span class="o">.</span><span class="n">_has_y</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span> <span class="ow">and</span> <span class="n">cls</span><span class="o">.</span><span class="n">_has_z</span><span class="p">(</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_get_y</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">z</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_get_z</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">y</span> <span class="o">-</span> <span class="n">z</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="s">&#39;a&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="ow">and</span> <span class="n">cls</span><span class="o">.</span><span class="n">_has_x</span><span class="p">(</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">T</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;T&#39;</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_lattice_match</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">],</span> <span class="n">T</span><span class="p">,</span>
+                                         <span class="n">x</span><span class="o">=</span><span class="n">cls</span><span class="o">.</span><span class="n">_get_x</span><span class="p">(</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="s">&#39;a&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="ow">and</span> <span class="n">cls</span><span class="o">.</span><span class="n">_has_y</span><span class="p">(</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">T</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;T&#39;</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_lattice_match</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">],</span> <span class="n">T</span><span class="p">,</span>
+                                         <span class="n">y</span><span class="o">=</span><span class="n">cls</span><span class="o">.</span><span class="n">_get_y</span><span class="p">(</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="s">&#39;a&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="ow">and</span> <span class="n">cls</span><span class="o">.</span><span class="n">_has_z</span><span class="p">(</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">T</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;T&#39;</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_lattice_match</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">],</span> <span class="n">T</span><span class="p">,</span>
+                                         <span class="n">z</span><span class="o">=</span><span class="n">cls</span><span class="o">.</span><span class="n">_get_z</span><span class="p">(</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s">&quot;Missing required key word argument.</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">cls</span><span class="o">.</span><span class="n">_get_usage</span><span class="p">())</span>
+        <span class="n">cls</span><span class="o">.</span><span class="n">_validate_xyz</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_lattice_match</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="c"># make sure the lattice constant is in range</span>
+            <span class="n">a1</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+            <span class="n">a2</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="p">),</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+            <span class="n">amin</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">)</span>
+            <span class="n">amax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">amin</span> <span class="ow">or</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">amax</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;a out of range [</span><span class="si">%.3f</span><span class="s">, </span><span class="si">%.3f</span><span class="s">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">amin</span><span class="p">,</span> <span class="n">amax</span><span class="p">))</span>
+            <span class="c"># find the correct y composition</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">bisect</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="k">lambda</span> <span class="n">y</span><span class="p">:</span> <span class="n">cls</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="p">))</span>
+            <span class="n">z</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span>
+        <span class="k">elif</span> <span class="n">y</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="c"># make sure the lattice constant is in range</span>
+            <span class="n">a1</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+            <span class="n">a2</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">y</span><span class="p">),</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+            <span class="n">amin</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">)</span>
+            <span class="n">amax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">amin</span> <span class="ow">or</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">amax</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;a out of range [</span><span class="si">%.3f</span><span class="s">, </span><span class="si">%.3f</span><span class="s">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">amin</span><span class="p">,</span> <span class="n">amax</span><span class="p">))</span>
+            <span class="c"># find the correct y composition</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">bisect</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">cls</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">y</span><span class="p">))</span>
+            <span class="n">z</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span>
+        <span class="k">elif</span> <span class="n">z</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="c"># make sure the lattice constant is in range</span>
+            <span class="n">a1</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="n">z</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+            <span class="n">a2</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">z</span><span class="p">),</span> <span class="n">z</span><span class="o">=</span><span class="n">z</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+            <span class="n">amin</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">)</span>
+            <span class="n">amax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">amin</span> <span class="ow">or</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">amax</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;a out of range [</span><span class="si">%.3f</span><span class="s">, </span><span class="si">%.3f</span><span class="s">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">amin</span><span class="p">,</span> <span class="n">amax</span><span class="p">))</span>
+            <span class="c"># find the correct y composition</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">bisect</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">cls</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="n">z</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">z</span><span class="p">))</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span> <span class="o">-</span> <span class="n">z</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Need x, y or z&#39;</span><span class="p">)</span>
+
+    <span class="nd">@classinstancemethod</span>
+    <span class="k">def</span> <span class="nf">_interpolate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cls</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y</span>
+            <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_z</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_get_xyz</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="n">vals</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="p">[</span><span class="n">cls</span><span class="o">.</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cls</span><span class="o">.</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">cls</span><span class="o">.</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">2</span><span class="p">]]:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">param</span><span class="p">))</span>
+            <span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">e</span><span class="o">.</span><span class="n">message</span> <span class="o">+=</span> <span class="s">&#39;. Ternary `</span><span class="si">%s</span><span class="s">`&#39;</span> <span class="o">%</span> <span class="n">t</span><span class="o">.</span><span class="n">name</span>
+                <span class="n">e</span><span class="o">.</span><span class="n">message</span> <span class="o">+=</span> <span class="s">&#39; missing param `</span><span class="si">%s</span><span class="s">`&#39;</span> <span class="o">%</span> <span class="n">param</span>
+                <span class="k">raise</span> <span class="n">e</span>
+        <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;_&#39;</span><span class="p">:</span>
+            <span class="c"># assume it&#39;s a hard coded parameter if it starts with &#39;_&#39;</span>
+            <span class="n">t12</span> <span class="o">=</span> <span class="n">vals</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">t13</span> <span class="o">=</span> <span class="n">vals</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">t23</span> <span class="o">=</span> <span class="n">vals</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c"># otherwise it&#39;s an accessor function.</span>
+            <span class="c"># See the reference in this class&#39;s docstring for more</span>
+            <span class="c"># information about the interpolation method.</span>
+            <span class="n">u</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">+</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">+</span> <span class="n">y</span> <span class="o">-</span> <span class="n">z</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.</span>
+            <span class="n">w</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">+</span> <span class="n">x</span> <span class="o">-</span> <span class="n">z</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.</span>
+            <span class="n">new_kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">new_kwargs</span><span class="p">[</span><span class="s">&#39;x&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span>
+            <span class="n">t12</span> <span class="o">=</span> <span class="n">vals</span><span class="p">[</span><span class="mi">0</span><span class="p">](</span><span class="o">**</span><span class="n">new_kwargs</span><span class="p">)</span>
+            <span class="n">new_kwargs</span><span class="p">[</span><span class="s">&#39;x&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">w</span>
+            <span class="n">t13</span> <span class="o">=</span> <span class="n">vals</span><span class="p">[</span><span class="mi">1</span><span class="p">](</span><span class="o">**</span><span class="n">new_kwargs</span><span class="p">)</span>
+            <span class="n">new_kwargs</span><span class="p">[</span><span class="s">&#39;x&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+            <span class="n">t23</span> <span class="o">=</span> <span class="n">vals</span><span class="p">[</span><span class="mi">2</span><span class="p">](</span><span class="o">**</span><span class="n">new_kwargs</span><span class="p">)</span>
+
+        <span class="c"># Calculate the weights, for use in the next step</span>
+        <span class="n">weight12</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span>
+        <span class="n">weight13</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">z</span>
+        <span class="n">weight23</span> <span class="o">=</span> <span class="n">y</span> <span class="o">*</span> <span class="n">z</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="n">weight12</span> <span class="o">*</span> <span class="n">t12</span> <span class="o">+</span> <span class="n">weight13</span> <span class="o">*</span> <span class="n">t13</span> <span class="o">+</span> <span class="n">weight23</span> <span class="o">*</span> <span class="n">t23</span>
+        <span class="n">denom</span> <span class="o">=</span> <span class="n">weight12</span> <span class="o">+</span> <span class="n">weight13</span> <span class="o">+</span> <span class="n">weight23</span>
+        <span class="c"># handle these cases explicitly, so there&#39;s no divide by zero</span>
+        <span class="k">if</span> <span class="n">denom</span> <span class="o">==</span> <span class="mf">0.</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mf">0.</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">t23</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">t13</span>
+
+        <span class="c"># Check if there are bowing parameters provided</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_get_bowing</span><span class="p">(</span><span class="n">param</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">C</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="c"># a bowing parameter exists - use it</span>
+            <span class="c"># Note: this is an experimental mixing formula for</span>
+            <span class="c"># adding additional quaternary-induced bowing</span>
+            <span class="k">return</span> <span class="n">num</span> <span class="o">/</span> <span class="n">denom</span> <span class="o">-</span> <span class="n">C</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">y</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="n">z</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">z</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c"># otherwise, use a weighted average of the ternary bowing</span>
+            <span class="c"># parameters</span>
+            <span class="k">return</span> <span class="n">num</span> <span class="o">/</span> <span class="n">denom</span>
+
+
+<span class="c"># Type 1: AB_{x}C_{y}D_{1-x-y}</span>
+<span class="c"># binaryies = (AB, AC, AD)</span>
+<span class="c"># ternaries = (ABC, ABD ,ACD)</span></div>
+<div class="viewcode-block" id="Quaternary1"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.quaternary.Quaternary1">[docs]</a><span class="k">class</span> <span class="nc">Quaternary1</span><span class="p">(</span><span class="n">Quaternary1or2</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    For alloys of the AB_{x}C_{y}D_{1-x-y} type [1], where A is the only</span>
+<span class="sd">    Group III element. These require only three ternaries for interpolation.</span>
+
+<span class="sd">    [1] C. K. Williams, T. H. Glisson, J. R. Hauser, and M. A. Littlejohn,</span>
+<span class="sd">    &quot;Energy bandgap and lattice constant contours of iii-v quaternary</span>
+<span class="sd">    alloys of the form Ax By Cz D or A Bx Cy Dz,&quot; JEM, vol. 7, no. 5,</span>
+<span class="sd">    pp. 639-646, Sep. 1978.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">e1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">e2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">e3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">e4</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="n">f2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elementFraction</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span>
+        <span class="n">f3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elementFraction</span><span class="p">(</span><span class="n">e3</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s">&quot;{A}{B}{C}{D}({B}={:g}, {C}={:g})&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span> <span class="n">f3</span><span class="p">,</span>
+                                                 <span class="n">A</span><span class="o">=</span><span class="n">e1</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="n">e2</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="n">e3</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="n">e4</span><span class="p">)</span>
+
+    <span class="nd">@classinstancemethod</span>
+<div class="viewcode-block" id="Quaternary1.LaTeX"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.quaternary.Quaternary1.LaTeX">[docs]</a>    <span class="k">def</span> <span class="nf">LaTeX</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cls</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">e1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">e2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">e3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">e4</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+            <span class="n">f2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elementFraction</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span>
+            <span class="n">f3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elementFraction</span><span class="p">(</span><span class="n">e3</span><span class="p">)</span>
+            <span class="n">f4</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elementFraction</span><span class="p">(</span><span class="n">e4</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s">&quot;{A}{B}_{{{:g}}}{C}_{{{:g}}}{D}_{{{:g}}}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                                  <span class="n">f2</span><span class="p">,</span> <span class="n">f3</span><span class="p">,</span> <span class="n">f4</span><span class="p">,</span>
+                                                  <span class="n">A</span><span class="o">=</span><span class="n">e1</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="n">e2</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="n">e3</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="n">e4</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">e1</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">e2</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">e3</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">e4</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+            <span class="k">return</span> <span class="s">&quot;{A}{B}_{{x}}{C}_{{y}}{D}_{{1-x-y}}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                                  <span class="n">A</span><span class="o">=</span><span class="n">e1</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="n">e2</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="n">e3</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="n">e4</span><span class="p">)</span>
+</div>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_has_x</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Returns True if x is explicitly defined in kwargs&#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s">&#39;x&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_get_x</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns x if it is explicitly defined in kwargs.</span>
+<span class="sd">        Otherwise, raises TypeError.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="s">&#39;x&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;x&#39;</span><span class="p">]),</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]]),</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;Neither &#39;x&#39; nor &#39;{}&#39; are in kwargs&quot;</span>
+                            <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_has_y</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Returns True if y is explicitly defined in kwargs&#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s">&#39;y&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_get_y</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns y if it is explicitly defined in kwargs.</span>
+<span class="sd">        Otherwise, raises TypeError.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="s">&#39;y&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;y&#39;</span><span class="p">]),</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]]),</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;Neither &#39;y&#39; nor &#39;{}&#39; are in kwargs&quot;</span>
+                            <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_has_z</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Returns True if z is explicitly defined in kwargs&#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s">&#39;z&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_get_z</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns z if it is explicitly defined in kwargs.</span>
+<span class="sd">        Otherwise, raises TypeError.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="s">&#39;z&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;z&#39;</span><span class="p">]),</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">3</span><span class="p">]]),</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;Neither &#39;z&#39; nor &#39;{}&#39; are in kwargs&quot;</span>
+                            <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_get_usage</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s">&quot;The  supported kwarg combinations are as follows:&quot;</span>
+                <span class="s">&quot;</span><span class="se">\n</span><span class="s">    - (&#39;x&#39; or &#39;{B}&#39;) and (&#39;y&#39; or &#39;{C}&#39;)&quot;</span>
+                <span class="s">&quot;</span><span class="se">\n</span><span class="s">    - (&#39;x&#39; or &#39;{B}&#39;) and (&#39;z&#39; or &#39;{D}&#39;)&quot;</span>
+                <span class="s">&quot;</span><span class="se">\n</span><span class="s">    - (&#39;y&#39; or &#39;{C}&#39;) and (&#39;z&#39; or &#39;{D}&#39;)&quot;</span>
+                <span class="s">&quot;</span><span class="se">\n</span><span class="s">    - &#39;a&#39; and (&#39;x&#39; or &#39;{B}&#39;)&quot;</span>
+                <span class="s">&quot;</span><span class="se">\n</span><span class="s">    - &#39;a&#39; and (&#39;y&#39; or &#39;{C}&#39;)&quot;</span>
+                <span class="s">&quot;</span><span class="se">\n</span><span class="s">    - &#39;a&#39; and (&#39;z&#39; or &#39;{D}&#39;)&quot;</span>
+                            <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">B</span><span class="o">=</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                      <span class="n">C</span><span class="o">=</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">D</span><span class="o">=</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span>
+
+    <span class="nd">@classinstancemethod</span>
+<div class="viewcode-block" id="Quaternary1.elementFraction"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.quaternary.Quaternary1.elementFraction">[docs]</a>    <span class="k">def</span> <span class="nf">elementFraction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cls</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+        <span class="c"># AB_{x}C_{y}D_{1-x-y}</span>
+        <span class="k">if</span> <span class="n">element</span> <span class="o">==</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">element</span> <span class="o">==</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x</span>
+        <span class="k">elif</span> <span class="n">element</span> <span class="o">==</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y</span>
+        <span class="k">elif</span> <span class="n">element</span> <span class="o">==</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_z</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+
+
+<span class="c"># Type 2: A_{x}B_{y}C_{1-x-y}D</span>
+<span class="c"># binaries = (AD, BD, CD)</span>
+<span class="c"># ternaries = (ABD, ACD, BCD)</span></div></div>
+<div class="viewcode-block" id="Quaternary2"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.quaternary.Quaternary2">[docs]</a><span class="k">class</span> <span class="nc">Quaternary2</span><span class="p">(</span><span class="n">Quaternary1or2</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    For alloys of the A_{x}B_{y}C_{1-x-y}D type [1], where D is the only</span>
+<span class="sd">    Group V element. These require only three ternaries for interpolation.</span>
+
+<span class="sd">    [1] C. K. Williams, T. H. Glisson, J. R. Hauser, and M. A. Littlejohn,</span>
+<span class="sd">    &quot;Energy bandgap and lattice constant contours of iii-v quaternary</span>
+<span class="sd">    alloys of the form Ax By Cz D or A Bx Cy Dz,&quot; JEM, vol. 7, no. 5,</span>
+<span class="sd">    pp. 639-646, Sep. 1978.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">e1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">e2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">e3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">e4</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="n">f1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elementFraction</span><span class="p">(</span><span class="n">e1</span><span class="p">)</span>
+        <span class="n">f2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elementFraction</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s">&quot;{A}{B}{C}{D}({A}={:g}, {B}={:g})&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">,</span>
+                                                 <span class="n">A</span><span class="o">=</span><span class="n">e1</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="n">e2</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="n">e3</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="n">e4</span><span class="p">)</span>
+
+    <span class="nd">@classinstancemethod</span>
+<div class="viewcode-block" id="Quaternary2.LaTeX"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.quaternary.Quaternary2.LaTeX">[docs]</a>    <span class="k">def</span> <span class="nf">LaTeX</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cls</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">e1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">e2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">e3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">e4</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+            <span class="n">f1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elementFraction</span><span class="p">(</span><span class="n">e1</span><span class="p">)</span>
+            <span class="n">f2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elementFraction</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span>
+            <span class="n">f3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elementFraction</span><span class="p">(</span><span class="n">e3</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s">&quot;{A}_{{{:g}}}{B}_{{{:g}}}{C}_{{{:g}}}{D}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                                  <span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">,</span> <span class="n">f3</span><span class="p">,</span>
+                                                  <span class="n">A</span><span class="o">=</span><span class="n">e1</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="n">e2</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="n">e3</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="n">e4</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">e1</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">e2</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">e3</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">e4</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+            <span class="k">return</span> <span class="s">&quot;{A}_{{x}}{B}_{{y}}{C}_{{1-x-y}}{D}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                                  <span class="n">A</span><span class="o">=</span><span class="n">e1</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="n">e2</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="n">e3</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="n">e4</span><span class="p">)</span>
+</div>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_has_x</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Returns True if x is explicitly defined in kwargs&#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s">&#39;x&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_get_x</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns x if it is explicitly defined in kwargs.</span>
+<span class="sd">        Otherwise, raises TypeError.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="s">&#39;x&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;x&#39;</span><span class="p">]),</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]]),</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;Neither &#39;x&#39; nor &#39;{}&#39; are in kwargs&quot;</span>
+                            <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_has_y</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Returns True if y is explicitly defined in kwargs&#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s">&#39;y&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_get_y</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns y if it is explicitly defined in kwargs.</span>
+<span class="sd">        Otherwise, raises TypeError.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="s">&#39;y&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;y&#39;</span><span class="p">]),</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]]),</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;Neither &#39;y&#39; nor &#39;{}&#39; are in kwargs&quot;</span>
+                            <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_has_z</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Returns True if z is explicitly defined in kwargs&#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s">&#39;z&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_get_z</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns z if it is explicitly defined in kwargs.</span>
+<span class="sd">        Otherwise, raises TypeError.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="s">&#39;z&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;z&#39;</span><span class="p">]),</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]]),</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;Neither &#39;z&#39; nor &#39;{}&#39; are in kwargs&quot;</span>
+                            <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_get_usage</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s">&quot;The  supported kwarg combinations are as follows:&quot;</span>
+                <span class="s">&quot;</span><span class="se">\n</span><span class="s">    - (&#39;x&#39; or &#39;{A}&#39;) and (&#39;y&#39; or &#39;{B}&#39;)&quot;</span>
+                <span class="s">&quot;</span><span class="se">\n</span><span class="s">    - (&#39;x&#39; or &#39;{A}&#39;) and (&#39;z&#39; or &#39;{C}&#39;)&quot;</span>
+                <span class="s">&quot;</span><span class="se">\n</span><span class="s">    - (&#39;y&#39; or &#39;{B}&#39;) and (&#39;z&#39; or &#39;{C}&#39;)&quot;</span>
+                <span class="s">&quot;</span><span class="se">\n</span><span class="s">    - &#39;a&#39; and (&#39;x&#39; or &#39;{A}&#39;)&quot;</span>
+                <span class="s">&quot;</span><span class="se">\n</span><span class="s">    - &#39;a&#39; and (&#39;y&#39; or &#39;{B}&#39;)&quot;</span>
+                <span class="s">&quot;</span><span class="se">\n</span><span class="s">    - &#39;a&#39; and (&#39;z&#39; or &#39;{C}&#39;)&quot;</span>
+                            <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">B</span><span class="o">=</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                      <span class="n">C</span><span class="o">=</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">D</span><span class="o">=</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span>
+
+    <span class="nd">@classinstancemethod</span>
+<div class="viewcode-block" id="Quaternary2.elementFraction"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.quaternary.Quaternary2.elementFraction">[docs]</a>    <span class="k">def</span> <span class="nf">elementFraction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cls</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+        <span class="c"># A_{x}B_{y}C_{1-x-y}D</span>
+        <span class="k">if</span> <span class="n">element</span> <span class="o">==</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x</span>
+        <span class="k">elif</span> <span class="n">element</span> <span class="o">==</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y</span>
+        <span class="k">elif</span> <span class="n">element</span> <span class="o">==</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_z</span>
+        <span class="k">elif</span> <span class="n">element</span> <span class="o">==</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+
+
+<span class="c"># Type 3: A_{x}B_{1-x}C_{y}D_{1-y}</span>
+<span class="c"># binaries = (AC, AD, BC, BD)</span>
+<span class="c"># ternaries = (ABC, ABD, ACD, BCD)</span></div></div>
+<div class="viewcode-block" id="Quaternary3"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.quaternary.Quaternary3">[docs]</a><span class="k">class</span> <span class="nc">Quaternary3</span><span class="p">(</span><span class="n">Quaternary</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    For alloys of the A_{x}B_{1-x}C_{y}D_{1-y} type [1-2]. Where A and B are</span>
+<span class="sd">    Group III elements, and C and D are Group V elements. These require</span>
+<span class="sd">    four ternaries for interpolation.</span>
+
+<span class="sd">    [1] T. H. Glisson, J. R. Hauser, M. A. Littlejohn, and C. K. Williams,</span>
+<span class="sd">    &quot;Energy bandgap and lattice constant contours of iii-v quaternary</span>
+<span class="sd">    alloys,&quot; JEM, vol. 7, no. 1, pp. 1-16, Jan. 1978.</span>
+
+<span class="sd">    [2] I. Vurgaftman, J. R. Meyer, and L. R. Ram-Mohan, &quot;Band parameters</span>
+<span class="sd">    for III-V compound semiconductors and their alloys,&quot; J. Appl. Phys.,</span>
+<span class="sd">    vol. 89, no. 11, pp. 5815-5875, Jun. 2001.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">__metaclass__</span> <span class="o">=</span> <span class="n">Quaternary3Type</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">Quaternary</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_xy</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">name</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">name</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">name</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">name</span><span class="p">)):</span>
+            <span class="k">def</span> <span class="nf">_param_accessor</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">_param_accessor</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">e1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">e2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">e3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">e4</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="n">f1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elementFraction</span><span class="p">(</span><span class="n">e1</span><span class="p">)</span>
+        <span class="n">f3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elementFraction</span><span class="p">(</span><span class="n">e3</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s">&quot;{A}{B}{C}{D}({A}={:g}, {C}={:g})&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="n">f3</span><span class="p">,</span>
+                                                 <span class="n">A</span><span class="o">=</span><span class="n">e1</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="n">e2</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="n">e3</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="n">e4</span><span class="p">)</span>
+
+    <span class="nd">@classinstancemethod</span>
+<div class="viewcode-block" id="Quaternary3.LaTeX"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.quaternary.Quaternary3.LaTeX">[docs]</a>    <span class="k">def</span> <span class="nf">LaTeX</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cls</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">e1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">e2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">e3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">e4</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+            <span class="n">f1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elementFraction</span><span class="p">(</span><span class="n">e1</span><span class="p">)</span>
+            <span class="n">f2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elementFraction</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span>
+            <span class="n">f3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elementFraction</span><span class="p">(</span><span class="n">e3</span><span class="p">)</span>
+            <span class="n">f4</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elementFraction</span><span class="p">(</span><span class="n">e4</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s">&quot;{A}_{{{:g}}}{B}_{{{:g}}}{C}_{{{:g}}}{D}_{{{:g}}}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                                  <span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">,</span> <span class="n">f3</span><span class="p">,</span> <span class="n">f4</span><span class="p">,</span>
+                                                  <span class="n">A</span><span class="o">=</span><span class="n">e1</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="n">e2</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="n">e3</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="n">e4</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">e1</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">e2</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">e3</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">e4</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+            <span class="k">return</span> <span class="s">&quot;{A}_{{x}}{B}_{{1-x}}{C}_{{y}}{D}_{{1-y}}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                                  <span class="n">A</span><span class="o">=</span><span class="n">e1</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="n">e2</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="n">e3</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="n">e4</span><span class="p">)</span>
+</div>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_has_x</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Returns True if x is explicitly defined in kwargs&#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="p">((</span><span class="s">&#39;x&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">)</span> <span class="ow">or</span>
+                <span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">))</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_get_x</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns x if it is explicitly defined in kwargs.</span>
+<span class="sd">        Otherwise, raises TypeError.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="s">&#39;x&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;x&#39;</span><span class="p">]),</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]]),</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]]),</span> <span class="mi">6</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;Neither &#39;x&#39;, &#39;{}&#39; nor &#39;{}&#39; are in kwargs&quot;</span>
+                            <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_has_y</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Returns True if y is explicitly defined in kwargs&#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="p">((</span><span class="s">&#39;y&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">)</span> <span class="ow">or</span>
+                <span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">))</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_get_y</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns y if it is explicitly defined in kwargs.</span>
+<span class="sd">        Otherwise, raises TypeError.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="s">&#39;y&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;y&#39;</span><span class="p">]),</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]]),</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">3</span><span class="p">]]),</span> <span class="mi">6</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;Neither &#39;y&#39; nor &#39;{}&#39; are in kwargs&quot;</span>
+                            <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_get_xy</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">cls</span><span class="o">.</span><span class="n">_has_x</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span> <span class="ow">and</span> <span class="n">cls</span><span class="o">.</span><span class="n">_has_y</span><span class="p">(</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_get_x</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_get_y</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="s">&#39;a&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="ow">and</span> <span class="n">cls</span><span class="o">.</span><span class="n">_has_x</span><span class="p">(</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">T</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;T&#39;</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_lattice_match</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">],</span> <span class="n">T</span><span class="p">,</span>
+                                      <span class="n">x</span><span class="o">=</span><span class="n">cls</span><span class="o">.</span><span class="n">_get_x</span><span class="p">(</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="s">&#39;a&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="ow">and</span> <span class="n">cls</span><span class="o">.</span><span class="n">_has_y</span><span class="p">(</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">T</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;T&#39;</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_lattice_match</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">],</span> <span class="n">T</span><span class="p">,</span>
+                                      <span class="n">y</span><span class="o">=</span><span class="n">cls</span><span class="o">.</span><span class="n">_get_y</span><span class="p">(</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s">&quot;Missing required key word argument.</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">cls</span><span class="o">.</span><span class="n">_get_usage</span><span class="p">())</span>
+        <span class="n">cls</span><span class="o">.</span><span class="n">_validate_xy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_lattice_match</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="c"># make sure the lattice constant is in range</span>
+            <span class="n">a1</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+            <span class="n">a2</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+            <span class="n">amin</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">)</span>
+            <span class="n">amax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">amin</span> <span class="ow">or</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">amax</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;a out of range [</span><span class="si">%.3f</span><span class="s">, </span><span class="si">%.3f</span><span class="s">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">amin</span><span class="p">,</span> <span class="n">amax</span><span class="p">))</span>
+            <span class="c"># find the correct y composition</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">bisect</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="k">lambda</span> <span class="n">y</span><span class="p">:</span> <span class="n">cls</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+        <span class="k">elif</span> <span class="n">y</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="c"># make sure the lattice constant is in range</span>
+            <span class="n">a1</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+            <span class="n">a2</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+            <span class="n">amin</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">)</span>
+            <span class="n">amax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">amin</span> <span class="ow">or</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">amax</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;a out of range [</span><span class="si">%.3f</span><span class="s">, </span><span class="si">%.3f</span><span class="s">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">amin</span><span class="p">,</span> <span class="n">amax</span><span class="p">))</span>
+            <span class="c"># find the correct y composition</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">bisect</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">cls</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Need x or y&#39;</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_validate_xy</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mf">0.</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mf">1.</span>
+        <span class="k">assert</span> <span class="n">y</span> <span class="o">&gt;=</span> <span class="mf">0.</span> <span class="ow">and</span> <span class="n">y</span> <span class="o">&lt;=</span> <span class="mf">1.</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_get_usage</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s">&quot;The supported kwargs combinations are as follows:&quot;</span>
+                <span class="s">&quot;</span><span class="se">\n</span><span class="s">    - (&#39;x&#39;, &#39;{A}&#39; or &#39;{B}&#39;) and (&#39;y&#39;, &#39;{C}&#39; or &#39;{D}&#39;)&quot;</span>
+                <span class="s">&quot;</span><span class="se">\n</span><span class="s">    - &#39;a&#39; and (&#39;x&#39;, &#39;{A}&#39; or &#39;{B}&#39;)&quot;</span>
+                <span class="s">&quot;</span><span class="se">\n</span><span class="s">    - &#39;a&#39; and (&#39;y&#39;, &#39;{C}&#39; or &#39;{D}&#39;)&quot;</span>
+                            <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">B</span><span class="o">=</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                      <span class="n">C</span><span class="o">=</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">D</span><span class="o">=</span><span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span>
+
+    <span class="nd">@classinstancemethod</span>
+    <span class="k">def</span> <span class="nf">_interpolate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cls</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_get_xy</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="n">vals</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="p">[</span><span class="n">cls</span><span class="o">.</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cls</span><span class="o">.</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                  <span class="n">cls</span><span class="o">.</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">cls</span><span class="o">.</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">3</span><span class="p">]]:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">param</span><span class="p">))</span>
+            <span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">e</span><span class="o">.</span><span class="n">message</span> <span class="o">+=</span> <span class="s">&#39;. Ternary `</span><span class="si">%s</span><span class="s">`&#39;</span> <span class="o">%</span> <span class="n">t</span><span class="o">.</span><span class="n">name</span>
+                <span class="n">e</span><span class="o">.</span><span class="n">message</span> <span class="o">+=</span> <span class="s">&#39; missing param `</span><span class="si">%s</span><span class="s">`&#39;</span> <span class="o">%</span> <span class="n">param</span>
+                <span class="k">raise</span> <span class="n">e</span>
+        <span class="c"># B1 = Q(0, 0) = BD = InSb</span>
+        <span class="c"># B2 = Q(1, 0) = BC = InAs</span>
+        <span class="c"># B3 = Q(1, 1) = AC = AlAs</span>
+        <span class="c"># B4 = Q(0, 1) = AD = AlSb</span>
+        <span class="c"># T12 = Q(x, 0) = ABD = AlInSb</span>
+        <span class="c"># T23 = Q(1, y) = ACD = AlAsSb</span>
+        <span class="c"># T43 = Q(x, 1) = ABC = AlInAs</span>
+        <span class="c"># T14 = Q(0, y) = BCD = InAsSb</span>
+        <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;_&#39;</span><span class="p">:</span>
+            <span class="c"># assume it&#39;s a hard coded parameter if it starts with &#39;_&#39;</span>
+            <span class="n">T43</span> <span class="o">=</span> <span class="n">vals</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">T12</span> <span class="o">=</span> <span class="n">vals</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">T23</span> <span class="o">=</span> <span class="n">vals</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">T14</span> <span class="o">=</span> <span class="n">vals</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c"># otherwise it&#39;s an accessor function</span>
+            <span class="n">new_kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">new_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;x&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+            <span class="n">T43</span> <span class="o">=</span> <span class="n">vals</span><span class="p">[</span><span class="mi">0</span><span class="p">](</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="o">**</span><span class="n">new_kwargs</span><span class="p">)</span>
+            <span class="n">T12</span> <span class="o">=</span> <span class="n">vals</span><span class="p">[</span><span class="mi">1</span><span class="p">](</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="o">**</span><span class="n">new_kwargs</span><span class="p">)</span>
+            <span class="n">T23</span> <span class="o">=</span> <span class="n">vals</span><span class="p">[</span><span class="mi">2</span><span class="p">](</span><span class="n">x</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="o">**</span><span class="n">new_kwargs</span><span class="p">)</span>
+            <span class="n">T14</span> <span class="o">=</span> <span class="n">vals</span><span class="p">[</span><span class="mi">3</span><span class="p">](</span><span class="n">x</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="o">**</span><span class="n">new_kwargs</span><span class="p">)</span>
+
+        <span class="c"># handle these cases explicitly, so there&#39;s no divide by zero</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mf">0.</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">T14</span>
+        <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="mf">1.</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">T23</span>
+        <span class="k">elif</span> <span class="n">y</span> <span class="o">==</span> <span class="mf">0.</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">T12</span>
+        <span class="k">elif</span> <span class="n">y</span> <span class="o">==</span> <span class="mf">1.</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">T43</span>
+        <span class="n">xinv</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">-</span> <span class="n">x</span>
+        <span class="n">yinv</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">-</span> <span class="n">y</span>
+        <span class="n">xweight</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">xinv</span>
+        <span class="n">yweight</span> <span class="o">=</span> <span class="n">y</span> <span class="o">*</span> <span class="n">yinv</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="p">(</span><span class="n">xweight</span> <span class="o">*</span> <span class="p">(</span><span class="n">yinv</span> <span class="o">*</span> <span class="n">T12</span> <span class="o">+</span> <span class="n">y</span> <span class="o">*</span> <span class="n">T43</span><span class="p">)</span> <span class="o">+</span> 
+               <span class="n">yweight</span> <span class="o">*</span> <span class="p">(</span><span class="n">xinv</span> <span class="o">*</span> <span class="n">T14</span> <span class="o">+</span> <span class="n">x</span> <span class="o">*</span> <span class="n">T23</span><span class="p">))</span>
+        <span class="n">denom</span> <span class="o">=</span> <span class="n">xweight</span> <span class="o">+</span> <span class="n">yweight</span>
+
+        <span class="c"># Check if there are bowing parameters provided</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_get_bowing</span><span class="p">(</span><span class="n">param</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">C</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="c"># a bowing parameter exists - use it</span>
+            <span class="c"># Note: this is a new, experimental mixing formula for</span>
+            <span class="c"># adding additional quaternary-induced bowing</span>
+            <span class="k">return</span> <span class="n">num</span> <span class="o">/</span> <span class="n">denom</span> <span class="o">-</span> <span class="n">C</span> <span class="o">*</span> <span class="n">xweight</span> <span class="o">*</span> <span class="n">yweight</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">num</span> <span class="o">/</span> <span class="n">denom</span>
+
+    <span class="nd">@classinstancemethod</span>
+<div class="viewcode-block" id="Quaternary3.elementFraction"><a class="viewcode-back" href="../../../openbandparams.iii_v.html#openbandparams.iii_v.quaternary.Quaternary3.elementFraction">[docs]</a>    <span class="k">def</span> <span class="nf">elementFraction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cls</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">element</span> <span class="o">==</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x</span>
+        <span class="k">elif</span> <span class="n">element</span> <span class="o">==</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">element</span> <span class="o">==</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y</span>
+        <span class="k">elif</span> <span class="n">element</span> <span class="o">==</span> <span class="n">cls</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">openbandparams 0.6 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../../openbandparams.html" >openbandparams</a> &raquo;</li>
+          <li><a href="../iii_v.html" >openbandparams.iii_v</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2014, Scott J Maddox.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

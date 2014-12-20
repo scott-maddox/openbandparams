@@ -1,0 +1,232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Plot Bandgap vs Lattice Constant &mdash; openbandparams 0.6 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.6',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="openbandparams 0.6 documentation" href="../index.html" />
+    <link rel="up" title="Examples" href="../examples.html" />
+    <link rel="next" title="Plot Bandgap vs Lattice Constant of Quaternary1or2" href="Plot_Bandgap_vs_Lattice_Constant_of_Quaternary1or2.html" />
+    <link rel="prev" title="Plot Bandgap vs Composition of Quaternary3" href="Plot_Bandgap_vs_Composition_of_Quaternary3.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Plot_Bandgap_vs_Lattice_Constant_of_Quaternary1or2.html" title="Plot Bandgap vs Lattice Constant of Quaternary1or2"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Plot_Bandgap_vs_Composition_of_Quaternary3.html" title="Plot Bandgap vs Composition of Quaternary3"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">openbandparams 0.6 documentation</a> &raquo;</li>
+          <li><a href="../examples.html" accesskey="U">Examples</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Plot_Bandgap_vs_Composition_of_Quaternary3.html"
+                        title="previous chapter">Plot Bandgap vs Composition of Quaternary3</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Plot_Bandgap_vs_Lattice_Constant_of_Quaternary1or2.html"
+                        title="next chapter">Plot Bandgap vs Lattice Constant of Quaternary1or2</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/examples/Plot_Bandgap_vs_Lattice_Constant.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="plot-bandgap-vs-lattice-constant">
+<h1>Plot Bandgap vs Lattice Constant<a class="headerlink" href="#plot-bandgap-vs-lattice-constant" title="Permalink to this headline">¶</a></h1>
+<p>Source:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#</span>
+<span class="c">#   Copyright (c) 2013-2014, Scott J Maddox</span>
+<span class="c">#</span>
+<span class="c">#   This file is part of openbandparams.</span>
+<span class="c">#</span>
+<span class="c">#   openbandparams is free software: you can redistribute it and/or modify</span>
+<span class="c">#   it under the terms of the GNU Affero General Public License as published</span>
+<span class="c">#   by the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c">#   (at your option) any later version.</span>
+<span class="c">#</span>
+<span class="c">#   openbandparams is distributed in the hope that it will be useful,</span>
+<span class="c">#   but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c">#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c">#   GNU Affero General Public License for more details.</span>
+<span class="c">#</span>
+<span class="c">#   You should have received a copy of the GNU Affero General Public License</span>
+<span class="c">#   along with openbandparams.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="c">#</span>
+<span class="c">#############################################################################</span>
+<span class="c"># Make sure we import the local openbandparams version</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> <span class="s">&#39;../..&#39;</span><span class="p">)))</span>
+<span class="kn">from</span> <span class="nn">openbandparams</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+
+
+<span class="n">T</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="n">T_lattice</span> <span class="o">=</span> <span class="mi">300</span>
+
+<span class="c"># initialize the plot</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;Lattice Parameter at </span><span class="si">%g</span><span class="s"> K ($\AA$)&#39;</span> <span class="o">%</span> <span class="n">T_lattice</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;Bandgap at </span><span class="si">%g</span><span class="s"> K (eV)&#39;</span> <span class="o">%</span> <span class="n">T</span><span class="p">)</span>
+
+<span class="c"># Define colors</span>
+<span class="n">red</span> <span class="o">=</span> <span class="s">&#39;#FE0303&#39;</span>
+<span class="n">green</span> <span class="o">=</span> <span class="s">&#39;#04A004&#39;</span>
+<span class="n">blue</span> <span class="o">=</span> <span class="s">&#39;#0404FF&#39;</span>
+<span class="n">red_green</span> <span class="o">=</span> <span class="s">&#39;#8D8D04&#39;</span>
+<span class="n">red_blue</span> <span class="o">=</span> <span class="s">&#39;#8D048D&#39;</span>
+<span class="n">green_blue</span> <span class="o">=</span> <span class="s">&#39;#04AEAE&#39;</span>
+
+<span class="c"># list the binaries</span>
+<span class="n">phosphide_binaries</span> <span class="o">=</span> <span class="p">[</span><span class="n">AlP</span><span class="p">,</span> <span class="n">GaP</span><span class="p">,</span> <span class="n">InP</span><span class="p">]</span>  <span class="c"># red</span>
+<span class="n">arsenide_binaries</span> <span class="o">=</span> <span class="p">[</span><span class="n">AlAs</span><span class="p">,</span> <span class="n">GaAs</span><span class="p">,</span> <span class="n">InAs</span><span class="p">]</span>  <span class="c"># green</span>
+<span class="n">antimonide_binaries</span> <span class="o">=</span> <span class="p">[</span><span class="n">AlSb</span><span class="p">,</span> <span class="n">GaSb</span><span class="p">,</span> <span class="n">InSb</span><span class="p">]</span>  <span class="c"># blue</span>
+
+<span class="c"># list the ternaries</span>
+<span class="n">phosphide_ternaries</span> <span class="o">=</span> <span class="p">[</span><span class="n">AlGaP</span><span class="p">,</span> <span class="n">AlInP</span><span class="p">,</span> <span class="n">GaInP</span><span class="p">]</span>  <span class="c"># red</span>
+<span class="n">arsenide_ternaries</span> <span class="o">=</span> <span class="p">[</span><span class="n">AlGaAs</span><span class="p">,</span> <span class="n">AlInAs</span><span class="p">,</span> <span class="n">GaInAs</span><span class="p">]</span>  <span class="c"># green</span>
+<span class="n">antimonide_ternaries</span> <span class="o">=</span> <span class="p">[</span><span class="n">AlGaSb</span><span class="p">,</span> <span class="n">AlInSb</span><span class="p">,</span> <span class="n">GaInSb</span><span class="p">]</span>  <span class="c"># blue</span>
+<span class="n">phosphide_arsenide_ternaries</span> <span class="o">=</span> <span class="p">[</span><span class="n">AlPAs</span><span class="p">,</span> <span class="n">GaPAs</span><span class="p">,</span> <span class="n">InPAs</span><span class="p">]</span>  <span class="c"># red + green</span>
+<span class="n">phosphide_antimonide_ternaries</span> <span class="o">=</span> <span class="p">[</span><span class="n">AlPSb</span><span class="p">,</span> <span class="n">GaPSb</span><span class="p">,</span> <span class="n">InPSb</span><span class="p">]</span>  <span class="c"># red + blue</span>
+<span class="n">arsenide_antimonide_ternaries</span> <span class="o">=</span> <span class="p">[</span><span class="n">AlAsSb</span><span class="p">,</span> <span class="n">GaAsSb</span><span class="p">,</span> <span class="n">InAsSb</span><span class="p">]</span>  <span class="c"># green + blue</span>
+
+<span class="c"># plot the ternaries</span>
+<span class="n">fractions</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ternaries</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">phosphide_ternaries</span><span class="p">,</span> <span class="n">red</span><span class="p">),</span>
+                         <span class="p">(</span><span class="n">arsenide_ternaries</span><span class="p">,</span> <span class="n">green</span><span class="p">),</span>
+                         <span class="p">(</span><span class="n">antimonide_ternaries</span><span class="p">,</span> <span class="n">blue</span><span class="p">),</span>
+                         <span class="p">(</span><span class="n">phosphide_arsenide_ternaries</span><span class="p">,</span> <span class="n">red_green</span><span class="p">),</span>
+                         <span class="p">(</span><span class="n">phosphide_antimonide_ternaries</span><span class="p">,</span> <span class="n">red_blue</span><span class="p">),</span>
+                         <span class="p">(</span><span class="n">arsenide_antimonide_ternaries</span><span class="p">,</span> <span class="n">green_blue</span><span class="p">)]:</span>
+    <span class="k">for</span> <span class="n">ternary</span> <span class="ow">in</span> <span class="n">ternaries</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">ternary</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">f</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T_lattice</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fractions</span><span class="p">],</span>
+                <span class="p">[</span><span class="n">ternary</span><span class="o">.</span><span class="n">Eg</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">f</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fractions</span><span class="p">],</span>
+                <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span>
+                <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
+
+<span class="c"># plot and label the binaries</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">label</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">binaries</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">phosphide_binaries</span><span class="p">,</span> <span class="n">red</span><span class="p">),</span>
+                         <span class="p">(</span><span class="n">arsenide_binaries</span><span class="p">,</span> <span class="n">green</span><span class="p">),</span>
+                         <span class="p">(</span><span class="n">antimonide_binaries</span><span class="p">,</span> <span class="n">blue</span><span class="p">)]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">b</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T_lattice</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">binaries</span><span class="p">],</span>
+            <span class="p">[</span><span class="n">b</span><span class="o">.</span><span class="n">Eg</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span><span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">binaries</span><span class="p">],</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span>
+            <span class="n">linestyle</span><span class="o">=</span><span class="s">&#39; &#39;</span><span class="p">,</span>
+            <span class="n">marker</span><span class="o">=</span><span class="s">&#39;o&#39;</span><span class="p">,</span>
+            <span class="n">markersize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+            <span class="n">markeredgecolor</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">b</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T_lattice</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">binaries</span><span class="p">])</span>
+    <span class="n">y</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">b</span><span class="o">.</span><span class="n">Eg</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">binaries</span><span class="p">])</span>
+    <span class="n">label</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">b</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">binaries</span><span class="p">])</span>
+
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">ha</span><span class="o">=</span><span class="s">&#39;right&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s">&#39;bottom&#39;</span><span class="p">,</span>
+                <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="s">&#39;white&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">),</span>
+                <span class="n">textcoords</span><span class="o">=</span><span class="s">&#39;offset points&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mf">5.35</span><span class="p">,</span> <span class="mf">6.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.7</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">output_filename</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">output_filename</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Result:</p>
+<img alt="../_images/Plot_Bandgap_vs_Lattice_Constant.png" src="../_images/Plot_Bandgap_vs_Lattice_Constant.png" />
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Plot_Bandgap_vs_Lattice_Constant_of_Quaternary1or2.html" title="Plot Bandgap vs Lattice Constant of Quaternary1or2"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Plot_Bandgap_vs_Composition_of_Quaternary3.html" title="Plot Bandgap vs Composition of Quaternary3"
+             >previous</a> |</li>
+        <li><a href="../index.html">openbandparams 0.6 documentation</a> &raquo;</li>
+          <li><a href="../examples.html" >Examples</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2014, Scott J Maddox.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>
