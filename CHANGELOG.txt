@@ -1,10 +1,35 @@
 Changed in 0.7:
-- Fixed bug with AlGaN, AlInN, and GaInN caused by having extraneous commas
 - Added several functions for calculating the effects of biaxial strain
-- Fixed the strained binaries bandgap vs lattice constant
-  example (the strain effects were reversed)
 - Added a strained binaries band offsets vs lattice constant example
 - Added several advanced examples
+- Fixed the strained binaries bandgap vs lattice constant
+  example (the strain effects were reversed)
+- Fixed bug with AlGaN, AlInN, and GaInN caused by having extraneous commas
 
 Changes in 0.6:
 - Fixed a packaging issue that prevented setup.py from working
+
+Changes in 0.5:
+- Lattice matching temperature is no longer required (defaults to 300 K)
+- Added the heavy and light hole effective mass parameters
+- Added some new example scripts
+- Added quaternary bowing
+- Adjusted the InAsSb VBO bowing parameter
+- Added some literature references as comments
+- Fixed examples not loading local openbandparams
+
+Changes in 0.4:
+- Added quaternaries
+- Added strained binaries example
+- Added 'elements' property and 'elementFraction' method
+- Implemented __all__, so that 'from openbandparams import *' works
+- Moved examples into the openbandparams package
+- Lots of internal changes (refactoring, documentation, etc.):
+
+Changes in 0.3:
+- Added ternary lattice matching
+
+Changes in 0.2:
+- Improved usability of ternaries
+- Changed all methods to require key word arguments
+- Added documentation
