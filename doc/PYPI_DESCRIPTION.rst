@@ -48,6 +48,7 @@ Parameters included in this version:
     - band deformation potentials
     - elastic constants
     - alloy bowing parameters
+    - effects of biaxial strain
 
 The `source code`_ and `documentation`_ are graciously hosted by GitHub.
 
