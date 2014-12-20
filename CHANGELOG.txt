@@ -1,2 +1,4 @@
+Changed in 0.7:
+- Fixed bug with AlGaN, AlInN, and GaInN caused by having extraneous commas
 Changes in 0.6:
 - Fixed a packaging issue that prevented setup.py from working
