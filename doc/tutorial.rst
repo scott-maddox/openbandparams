@@ -102,6 +102,8 @@ using the following syntax::
     GaInP(Ga=0.516340648855)
     >>> GaInP(a=GaAs.a()).Eg()
     1.9259077529765196
+    >>> GaInP.Eg(a=GaAs.a())
+    1.9259077529765196
 
 In the previous example, a lattice matching temperature of 300 K is assumed.
 To lattice match to a different lattice matching temperature use the
@@ -109,8 +111,8 @@ following syntax::
 
     >>> GaInP(a=GaAs.a(), T=300)
     GaInP(Ga=0.516340648855)
-    >>> GaInP(a=GaAs.a(), T=300).Eg()
-    1.9259077529765196
+    >>> GaInP(a=GaAs.a(), T=400)
+    GaInP(Ga=0.523158422221)
 
 Instancing can be used to get multiple parameters from an alloy::
 
