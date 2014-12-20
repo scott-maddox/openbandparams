@@ -1,2 +1,4 @@
 include README.txt
+include CHANGELOG.txt
 include doc/PYPI_DESCRIPTION.rst
+include LICENSE/*
