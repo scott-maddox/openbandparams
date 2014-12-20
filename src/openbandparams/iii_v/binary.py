@@ -80,7 +80,7 @@ class Binary(Base):
     def a(cls, **kwargs):
         '''
         Returns the lattice parameter, a, in Angstroms at a given
-        temperature, T, in Kelvin (default: 300 K).
+        temperature, `T`, in Kelvin (default: 300 K).
         '''
         T = cls._get_T(kwargs)
         return float(cls.a_300K() + cls.da_dT() * (T - 300))
@@ -113,7 +113,7 @@ class Binary(Base):
     def Eg_Gamma(cls, **kwargs):
         '''
         Returns the Gamma-valley bandgap, Eg_Gamma, in electron Volts at a
-        given temperature, T, in Kelvin (default: 300 K).
+        given temperature, `T`, in Kelvin (default: 300 K).
         '''
         T = cls._get_T(kwargs)
         return float(varshni(cls.Eg_Gamma_0(), cls.alpha_Gamma(),
@@ -147,7 +147,7 @@ class Binary(Base):
     def Eg_X(cls, **kwargs):
         '''
         Returns the X-valley bandgap, Eg_X, in electron Volts at a given
-        temperature, T, in Kelvin (default: 300 K).
+        temperature, `T`, in Kelvin (default: 300 K).
         '''
         T = cls._get_T(kwargs)
         return float(varshni(cls.Eg_X_0(), cls.alpha_X(),
@@ -181,7 +181,7 @@ class Binary(Base):
     def Eg_L(cls, **kwargs):
         '''
         Returns the L-valley bandgap, Eg_L, in electron Volts at a given
-        temperature, T, in Kelvin (default: 300 K).
+        temperature, `T`, in Kelvin (default: 300 K).
         '''
         T = cls._get_T(kwargs)
         return float(varshni(cls.Eg_L_0(), cls.alpha_L(),
@@ -191,7 +191,7 @@ class Binary(Base):
     def Eg(cls, **kwargs):
         '''
         Returns the bandgap, Eg, in electron Volts at a given
-        temperature, T, in Kelvin (default: 300 K).
+        temperature, `T`, in Kelvin (default: 300 K).
         '''
         return float(min(cls.Eg_Gamma(**kwargs), cls.Eg_X(**kwargs),
                          cls.Eg_L(**kwargs)))
@@ -410,3 +410,125 @@ class Binary(Base):
         Returns the c_44 elastic constant, in gigapascals.
         '''
         return float(cls._c_44)
+    
+    @classmethod
+    def biaxial_strained_a(cls, eps_xx, **kwargs):
+        '''
+        Returns the in-plane lattice constant required to induce the given
+        in-plane strain, `eps_xx`, assuming no lattice relaxation.
+        
+        Note: `eps_xx` should be negative for compressive in-plane strain, and
+        positive for tensile in-plane strain.
+        '''
+        return cls.a() / (1 - eps_xx)
+    
+    @classmethod
+    def biaxial_strained_eps_zz(cls, eps_xx, **kwargs):
+        '''
+        Returns the out-of-plane strain induced by the given in-plane
+        strain, `eps_xx`. This assumes no lattice relaxation.
+        
+        Note: `eps_xx` should be negative for compressive in-plane strain, and
+        positive for tensile in-plane strain.
+        '''
+        return -2 * cls.c_12() / cls.c_11() * eps_xx
+    
+    @classmethod
+    def biaxial_strained_dE_c(cls, eps_xx, **kwargs):
+        '''
+        Returns the conduction band-edge shift, in eV, induced by the
+        given in-plane strain, `eps_xx`.
+        
+        Note: `eps_xx` should be negative for compressive in-plane strain, and
+        positive for tensile in-plane strain.
+        '''
+        return cls.a_c() * (2 * eps_xx + 
+                            cls.biaxial_strained_eps_zz(eps_xx, **kwargs))
+
+    @classmethod
+    def biaxial_strained_P_eps(cls, eps_xx, **kwargs):
+        '''
+        Returns the hydrostatic component of the valance band-edge shift,
+        in eV, induced by the given in-plane strain, `eps_xx`.
+        
+        Note: `eps_xx` should be negative for compressive in-plane strain, and
+        positive for tensile in-plane strain.
+        '''
+        return cls.a_v() * (2 * eps_xx + 
+                            cls.biaxial_strained_eps_zz(eps_xx, **kwargs))
+    
+    @classmethod
+    def biaxial_strained_Q_eps(cls, eps_xx, **kwargs):
+        '''
+        Returns the uniaxial component of the valance band-edge shift,
+        in eV, induced by the given in-plane strain, `eps_xx`.
+        
+        Note: `eps_xx` should be negative for compressive in-plane strain, and
+        positive for tensile in-plane strain.
+        '''
+        return cls.b() * (cls.biaxial_strained_eps_zz(eps_xx, **kwargs) - eps_xx)
+    
+    @classmethod
+    def biaxial_strained_dE_hh(cls, eps_xx, **kwargs):
+        '''
+        Returns the heavy-hole band-edge shift, in eV, induced by the given
+        in-plane strain, `eps_xx`.
+        
+        Note: `eps_xx` should be negative for compressive in-plane strain, and
+        positive for tensile in-plane strain.
+        '''
+        return -(cls.biaxial_strained_P_eps(eps_xx, **kwargs)
+                 + cls.biaxial_strained_Q_eps(eps_xx, **kwargs))
+
+    @classmethod
+    def biaxial_strained_dE_lh(cls, eps_xx, **kwargs):
+        '''
+        Returns the light-hole band-edge shift, in eV, induced by the given
+        in-plane strain, `eps_xx`.
+        
+        Note: `eps_xx` should be negative for compressive in-plane strain, and
+        positive for tensile in-plane strain.
+        '''
+        return (-cls.biaxial_strained_P_eps(eps_xx, **kwargs)
+                + cls.biaxial_strained_Q_eps(eps_xx, **kwargs))
+    
+    @classmethod
+    def biaxial_strained_E_c_hh(cls, eps_xx, **kwargs):
+        '''
+        Returns the separation between the conduction band-edge and the
+        heavy-hole band-edge, in eV, at the given in-plane strain, `eps_xx`,
+        and temperature, `T`, in Kelvin (default: 300 K).
+        
+        Note: `eps_xx` should be negative for compressive in-plane strain, and
+        positive for tensile in-plane strain.
+        '''
+        return (cls.Eg(**kwargs)
+                + cls.biaxial_strained_dE_c(eps_xx, **kwargs)
+                - cls.biaxial_strained_dE_hh(eps_xx, **kwargs))
+    
+    @classmethod
+    def biaxial_strained_E_c_lh(cls, eps_xx, **kwargs):
+        '''
+        Returns the separation between the conduction band-edge and the
+        light-hole band-edge, in eV, at the given in-plane strain, `eps_xx`,
+        and temperature, `T`, in Kelvin (default: 300 K).
+        
+        Note: `eps_xx` should be negative for compressive in-plane strain, and
+        positive for tensile in-plane strain.
+        '''
+        return (cls.Eg(**kwargs)
+                + cls.biaxial_strained_dE_c(eps_xx, **kwargs)
+                - cls.biaxial_strained_dE_lh(eps_xx, **kwargs))
+    
+    @classmethod
+    def biaxial_strained_Eg(cls, eps_xx, **kwargs):
+        '''
+        Returns the minimum separation between the conduction band-edge and the
+        valance band-edge, in eV, at the given in-plane strain, `eps_xx`,
+        and temperature, `T`, in Kelvin (default: 300 K).
+        
+        Note: `eps_xx` should be negative for compressive in-plane strain, and
+        positive for tensile in-plane strain.
+        '''
+        return min(cls.biaxial_strained_E_c_hh(eps_xx, **kwargs),
+                   cls.biaxial_strained_E_c_lh(eps_xx, **kwargs))
