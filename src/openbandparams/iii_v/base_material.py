@@ -48,6 +48,80 @@ class Base(base_material.Base):
                    obj.Eg_L(**kwargs))
 
     @classinstancemethod
+    def meff_hh_100(self, cls, **kwargs):
+        '''
+        Returns the heavy hole band effective mass in the [100] direction,
+        meff_hh_100, in units of electron mass.
+        '''
+        if self is not None:
+            obj = self
+        else:
+            obj = cls
+        return 1. / (obj.Luttinger1(**kwargs) - 2 * obj.Luttinger2(**kwargs))
+
+    @classinstancemethod
+    def meff_hh_110(self, cls, **kwargs):
+        '''
+        Returns the heavy hole band effective mass in the [110] direction,
+        meff_hh_110, in units of electron mass.
+        '''
+        if self is not None:
+            obj = self
+        else:
+            obj = cls
+        return 2. / (2 * obj.Luttinger1(**kwargs) - obj.Luttinger2(**kwargs)
+                - 3 * obj.Luttinger3(**kwargs))
+
+    @classinstancemethod
+    def meff_hh_111(self, cls, **kwargs):
+        '''
+        Returns the heavy hole band effective mass in the [111] direction,
+        meff_hh_111, in units of electron mass.
+        '''
+        if self is not None:
+            obj = self
+        else:
+            obj = cls
+        return 1. / (obj.Luttinger1(**kwargs) - 2 * obj.Luttinger3(**kwargs))
+
+    @classinstancemethod
+    def meff_lh_100(self, cls, **kwargs):
+        '''
+        Returns the light hole band effective mass in the [100] direction,
+        meff_lh_100, in units of electron mass.
+        '''
+        if self is not None:
+            obj = self
+        else:
+            obj = cls
+        return 1. / (obj.Luttinger1(**kwargs) + 2 * obj.Luttinger2(**kwargs))
+
+    @classinstancemethod
+    def meff_lh_110(self, cls, **kwargs):
+        '''
+        Returns the light hole band effective mass in the [110] direction,
+        meff_lh_110, in units of electron mass.
+        '''
+        if self is not None:
+            obj = self
+        else:
+            obj = cls
+        return 2. / (2 * obj.Luttinger1(**kwargs) + obj.Luttinger2(**kwargs)
+                + 3 * obj.Luttinger3(**kwargs))
+
+    @classinstancemethod
+    def meff_lh_111(self, cls, **kwargs):
+        '''
+        Returns the light hole band effective mass in the [111] direction,
+        meff_lh_111, in units of electron mass.
+        '''
+        if self is not None:
+            obj = self
+        else:
+            obj = cls
+        return 1. / (obj.Luttinger1(**kwargs) + 2 * obj.Luttinger3(**kwargs))
+
+    @classinstancemethod
     def _get_eps_xx(self, cls, **kwargs):
         if 'a0' in kwargs:
             if self is not None:

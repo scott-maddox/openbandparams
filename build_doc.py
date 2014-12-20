@@ -24,6 +24,8 @@ import os
 import sys
 import subprocess
 
+CLEAN = len(sys.argv) > 1 and sys.argv[1].lower() == 'clean'
+
 CWD = os.getcwd()
 
 # sphinx-apidoc -f -o doc -d 4 src/openbandparams/
@@ -105,7 +107,8 @@ Result:
     result_path = os.path.join(BUILD_EXAMPLES_DIR, result)
 
     # check if changes have been made to the example script
-    if (os.path.exists(result_path) and
+    if (not CLEAN and
+        os.path.exists(result_path) and
         os.path.getmtime(example_path) < os.path.getmtime(result_path)):
         # no changes -- skip running it
         continue
