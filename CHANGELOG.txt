@@ -1,4 +1,9 @@
 Changed in 0.7:
 - Fixed bug with AlGaN, AlInN, and GaInN caused by having extraneous commas
+- Added several functions for calculating the effects of biaxial strain
+- Fixed the strained binaries bandgap vs lattice constant
+  example (the strain effects were reversed)
+- Added a strained binaries band offsets vs lattice constant example
+
 Changes in 0.6:
 - Fixed a packaging issue that prevented setup.py from working

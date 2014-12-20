@@ -34,7 +34,7 @@ T = 300
 fig = plt.figure()
 ax = fig.add_subplot(111)
 plt.xlabel('Strained Lattice Parameter at %g K ($\AA$)' % T)
-plt.ylabel('Bandgap at %g K (eV)' % T)
+plt.ylabel('Strained Bandgap at %g K (eV)' % T)
 
 # plot the binaries
 x = []
@@ -60,9 +60,9 @@ eps_xx = numpy.linspace(-0.02, 0.02, 100)
 for b in [AlP, GaP, InP,
           AlAs, GaAs, InAs,
           AlSb, GaSb, InSb]:
-    a_strained = [b.biaxial_strained_a(eps_xx_) for eps_xx_ in eps_xx]
-    E_c_hh = [b.biaxial_strained_E_c_hh(eps_xx_) for eps_xx_ in eps_xx]
-    E_c_lh = [b.biaxial_strained_E_c_lh(eps_xx_) for eps_xx_ in eps_xx]
+    a_strained = [b.biaxial_strained_a0(eps_xx=eps_xx_) for eps_xx_ in eps_xx]
+    E_c_hh = [b.biaxial_strained_E_c_hh(eps_xx=eps_xx_) for eps_xx_ in eps_xx]
+    E_c_lh = [b.biaxial_strained_E_c_lh(eps_xx=eps_xx_) for eps_xx_ in eps_xx]
     if first:
         plt.plot(a_strained, E_c_hh, 'r-', label='CB-HH gap')
         plt.plot(a_strained, E_c_lh, 'g-', label='CB-LH gap')
@@ -70,7 +70,6 @@ for b in [AlP, GaP, InP,
     else:
         plt.plot(a_strained, E_c_hh, 'r-')
         plt.plot(a_strained, E_c_lh, 'g-')
-    # TODO: check that this isn't BS
 
 plt.legend(loc='best')
 
