@@ -35,6 +35,8 @@ setup(
       packages=['openbandparams',
                 'openbandparams.tests',
                 'openbandparams.examples',
+                'openbandparams.examples.advanced',
+                'openbandparams.examples.advanced.GaInAsSb_on_GaSb',
                 'openbandparams.iii_v',
                 'openbandparams.iii_v.zinc_blende'],
       package_dir={'openbandparams': 'src/openbandparams'},

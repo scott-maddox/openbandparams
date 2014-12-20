@@ -21,7 +21,7 @@
 import os
 import sys
 sys.path.insert(0,
-    os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+    os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../..')))
 from openbandparams import *
 
 import matplotlib.pyplot as plt
@@ -34,7 +34,7 @@ T = 300
 # initialize the plot
 fig = plt.figure()
 ax = fig.add_subplot(111)
-plt.title('$%s/GaSb$ from 0 to -3%% strain' % (quaternary.LaTeX(), T))
+plt.title('$%s/GaSb$ from 0 to -3%% strain' % (quaternary.LaTeX()))
 plt.xlabel('Unstrained Lattice Parameter at %g K ($\AA$)' % T)
 plt.ylabel('Strained Bandgap at %g K (eV)' % T)
 

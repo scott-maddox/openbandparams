@@ -48,8 +48,12 @@ assert openbandparams.__file__ == OBP_FILE
 
 print ''
 print 'Building examples...'
-examples = [f for f in os.listdir(EXAMPLES_DIR) if
-            (f.endswith('.py') and not f.startswith('_'))]
+examples = []
+for root, dirs, files in os.walk(EXAMPLES_DIR):
+    for f in files:
+        if f.endswith('.py') and not f.startswith('_'):
+            examples.append(os.path.relpath(os.path.join(root, f),
+                                            EXAMPLES_DIR))
 
 # save a list of the examples
 with open(os.path.join(BUILD_EXAMPLES_DIR,'examples.txt'), 'w') as f:
@@ -58,16 +62,19 @@ with open(os.path.join(BUILD_EXAMPLES_DIR,'examples.txt'), 'w') as f:
 
 for example in examples:
     # build the result filename
-    root, ext = os.path.splitext(example)
-    if example.lower().startswith('plot'):
+    dir, filename = os.path.split(example)
+    root, ext = os.path.splitext(filename)
+    if filename.lower().startswith('plot'):
         result_type = 'image'
-        result = root+'.png'
+        result = os.path.join(dir, root+'.png')
     else:
         result_type = 'literalinclude'
-        result = root+'.txt' 
+        result = os.path.join(dir, root+'.txt')
 
     # output an rst file for each example
     rst_path = os.path.join(DOC_EXAMPLES_DIR, root+'.rst')
+    if not os.path.exists(os.path.dirname(rst_path)):
+        os.makedirs(os.path.dirname(rst_path))
     with open(rst_path, 'w') as f:
         title = root.replace('_', ' ')
         underline = '='*len(root)
@@ -101,12 +108,15 @@ Result:
     # run the script and save the result
     print '  Running "{}"\n    Saving result to "{}"'.format(
                                         example_relpath, result_relpath)
+    if not os.path.exists(os.path.dirname(result_path)):
+        os.makedirs(os.path.dirname(result_path))
     if result_type == 'image':
         try:
             subprocess.check_call(['python', example_path, result_path],
                                   env=os.environ)
         except Exception as e:
-            os.remove(result_path)
+            if os.path.exists(result_path):
+                os.remove(result_path)
             raise e
     elif result_type == 'literalinclude':
         try:
@@ -114,7 +124,8 @@ Result:
                 subprocess.check_call(['python', example_path], stdout=f,
                                       env=os.environ)
         except Exception as e:
-            os.remove(result_path)
+            if os.path.exists(result_path):
+                os.remove(result_path)
             raise e
     else:
         raise RuntimeError('Unknown result_type: {}'.format(result_type))
