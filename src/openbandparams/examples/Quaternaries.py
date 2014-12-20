@@ -17,8 +17,13 @@
 #   along with openbandparams.  If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
-
+# Make sure we import the local openbandparams version
+import os
+import sys
+sys.path.insert(0,
+    os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 from openbandparams import *
+
 
 # Some identities and inequalities
 print "Type 1 Quaternary:", AlPAsSb
@@ -53,11 +58,11 @@ print repr(GaInPAs(x=0, y=0)), "-->", GaInPAs(x=0, y=0)
 print repr(AlPAsSb(x=0, y=0)), "-->", AlPAsSb(x=0, y=0)
 assert eval(repr(GaInPAs(Ga=0, P=0))) == GaInPAs(x=0, P=0)
 print ''
-print "Some GaInPAs alloys lattice matched to InP:"
-print GaInPAs(Ga=0.1, a=InP.a(), T=300)
-print GaInPAs(As=0.1, a=InP.a(), T=300)
+print "Some GaInPAs alloys lattice matched to InP (at room temperature):"
+print GaInPAs(Ga=0.1, a=InP.a())
+print GaInPAs(As=0.1, a=InP.a())
 print ''
 print "Some AlPAsSb alloys lattice matched to InP (at room temperature):"
-print AlPAsSb(P=0.1, a=InP.a(), T=300)
-print AlPAsSb(As=0.1, a=InP.a(), T=300)
-print AlPAsSb(Sb=0.5, a=InP.a(), T=300)
+print AlPAsSb(P=0.1, a=InP.a())
+print AlPAsSb(As=0.1, a=InP.a())
+print AlPAsSb(Sb=0.5, a=InP.a())

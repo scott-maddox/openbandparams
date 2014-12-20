@@ -17,10 +17,16 @@
 #   along with openbandparams.  If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
+# Make sure we import the local openbandparams version
+import os
+import sys
+sys.path.insert(0,
+    os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+from openbandparams import *
 
 import matplotlib.pyplot as plt
 import numpy
-from openbandparams import *
+
 
 T = 300
 

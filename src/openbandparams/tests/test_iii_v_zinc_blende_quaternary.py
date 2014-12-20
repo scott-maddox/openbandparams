@@ -18,9 +18,7 @@
 #
 #############################################################################
 
-from openbandparams.iii_v.zinc_blende.binary import GaAs, AlAs
-from openbandparams.iii_v.zinc_blende.quaternary import (quaternaries,
-    AlGaInAs, AlPAsSb, AlGaAsSb, GaPAsSb, AlGaInSb, AlGaPAs)
+from openbandparams.iii_v.zinc_blende.binary import *
 from openbandparams.iii_v.zinc_blende.quaternary import *
 import unittest
 
@@ -98,7 +96,7 @@ class TestIIIVZincBlendeQuaternary(unittest.TestCase):
         with self.assertRaises(TypeError):
             AlPAsSb.Eg(y=0)
         with self.assertRaises(TypeError):
-            AlPAsSb.Eg(x=0, a=6.)
+            AlPAsSb.Eg(a=6.)
         with self.assertRaises(TypeError):
             AlPAsSb.Eg(a=6., T=300)
 
@@ -110,7 +108,7 @@ class TestIIIVZincBlendeQuaternary(unittest.TestCase):
         with self.assertRaises(TypeError):
             AlGaInAs.Eg(y=0)
         with self.assertRaises(TypeError):
-            AlGaInAs.Eg(x=0, a=6.)
+            AlGaInAs.Eg(a=6.)
         with self.assertRaises(TypeError):
             AlGaInAs.Eg(a=6., T=300)
 
@@ -122,7 +120,7 @@ class TestIIIVZincBlendeQuaternary(unittest.TestCase):
         with self.assertRaises(TypeError):
             AlGaAsSb.Eg(y=0)
         with self.assertRaises(TypeError):
-            AlGaAsSb.Eg(x=0, a=6.)
+            AlGaAsSb.Eg(a=6.)
         with self.assertRaises(TypeError):
             AlGaAsSb.Eg(a=6., T=300)
 
@@ -131,6 +129,12 @@ class TestIIIVZincBlendeQuaternary(unittest.TestCase):
         self.assertEqual(AlGaPAs(x=0, y=0).Eg(), GaAs.Eg())
         self.assertEqual(AlGaPAs.Eg(x=1, y=0), AlAs.Eg())
         self.assertEqual(AlGaPAs(x=1, y=0).Eg(), AlAs.Eg())
+
+    def test_non_instanced_lattice_matching(self):
+        mat = AlInAsSb(Al=0, a=GaSb.a(), T=300)
+        Eg1 = mat.Eg()
+        Eg2 = AlInAsSb.Eg(Al=0, a=GaSb.a(), T=300)
+        self.assertEqual(Eg1, Eg2)
 
 if __name__ == '__main__':
     unittest.main()

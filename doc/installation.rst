@@ -12,7 +12,7 @@ install `openbandparams`:
    (openbandparams is a pure-python library, so no compiling occurs
    during this installation).
 
-2. Install from pypi_ by running "pip install openbandparams" from the
+2. Install from pypi_ by running `pip install openbandparams` from the
    command line.
 
 Basic functionality has no prerequisites other than python, but several of

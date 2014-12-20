@@ -17,12 +17,17 @@
 #   along with openbandparams.  If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
+# Make sure we import the local openbandparams version
+import os
+import sys
+sys.path.insert(0,
+    os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+from openbandparams import *
 
 import matplotlib.pyplot as plt
 import numpy
-from openbandparams import *
 
-quaternary = GaInPAs
+quaternary = AlGaInAs
 T = 300
 
 # initialize the plot
@@ -63,14 +68,13 @@ for x, y, label in zip(xs, y_L, labels):
 
 # plot the quaternary
 indices = numpy.arange(100)
-fractions = numpy.linspace(0, 1, 100)
 x = numpy.empty(100, dtype=numpy.float)
 y_Gamma = numpy.empty(100, dtype=numpy.float)
 y_X = numpy.empty(100, dtype=numpy.float)
 y_L = numpy.empty(100, dtype=numpy.float)
 first = True
 for xfrac in numpy.linspace(0, 1, 10):
-    for i, yfrac in zip(indices, fractions):
+    for i, yfrac in zip(indices, numpy.linspace(0, 1 - xfrac, 100)):
         instance = quaternary(x=xfrac, y=yfrac)
         x[i] = instance.a(T=T)
         y_Gamma[i] = instance.Eg_Gamma(T=T)
@@ -86,7 +90,7 @@ for xfrac in numpy.linspace(0, 1, 10):
         ax.plot(x, y_X, 'b-')
         ax.plot(x, y_L, 'g-')
 for yfrac in numpy.linspace(0, 1, 10):
-    for i, xfrac in zip(indices, fractions):
+    for i, xfrac in zip(indices, numpy.linspace(0, 1 - yfrac, 100)):
         instance = quaternary(x=xfrac, y=yfrac)
         x[i] = instance.a(T=T)
         y_Gamma[i] = instance.Eg_Gamma(T=T)
@@ -95,7 +99,19 @@ for yfrac in numpy.linspace(0, 1, 10):
     ax.plot(x, y_Gamma, 'r--')
     ax.plot(x, y_X, 'b--')
     ax.plot(x, y_L, 'g--')
+for zfrac in numpy.linspace(0, 1, 10):
+    for i, xfrac in zip(indices, numpy.linspace(0, 1 - zfrac, 100)):
+        instance = quaternary(x=xfrac, z=zfrac)
+        x[i] = instance.a(T=T)
+        y_Gamma[i] = instance.Eg_Gamma(T=T)
+        y_X[i] = instance.Eg_X(T=T)
+        y_L[i] = instance.Eg_L(T=T)
+    ax.plot(x, y_Gamma, 'r:')
+    ax.plot(x, y_X, 'b:')
+    ax.plot(x, y_L, 'g:')
 
+xmin, xmax = plt.xlim()
+plt.xlim(xmin - 0.05, xmax)
 plt.legend(loc='best')
 
 if __name__ == '__main__':

@@ -17,16 +17,21 @@
 #   along with openbandparams.  If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
+# Make sure we import the local openbandparams version
+import os
+import sys
+sys.path.insert(0,
+    os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+from openbandparams import *
 
 import matplotlib.pyplot as plt
 import numpy
-from openbandparams import *
 
 alloy = AlGaAs
 
 # calculate the data
 xs = numpy.linspace(0, 1, 100)
-T = 0  # K
+T = 300  # K
 gamma = [alloy.Eg_Gamma(x=x, T=T) for x in xs]
 X = [alloy.Eg_X(x=x, T=T) for x in xs]
 L = [alloy.Eg_L(x=x, T=T) for x in xs]
@@ -35,7 +40,7 @@ L = [alloy.Eg_L(x=x, T=T) for x in xs]
 fig = plt.figure()
 ax = fig.add_subplot(111)
 plt.title('%s (T = %.2g K)' % (alloy.name, T))
-plt.xlabel('%s fraction' % alloy.elements[0])
+plt.xlabel('%s fraction' % alloy.elements[1])
 plt.ylabel('Bandgap (eV)')
 ax.plot(xs, gamma, 'r-', label='$\Gamma$')
 ax.plot(xs, X, 'g--', label='$X$')

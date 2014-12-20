@@ -17,8 +17,13 @@
 #   along with openbandparams.  If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
-
+# Make sure we import the local openbandparams version
+import os
+import sys
+sys.path.insert(0,
+    os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 from openbandparams import *
+
 
 print 'Lattice matching GaPSb to InP (at the growth temperature of 470 C):'
 Tg = 273.15 + 470
@@ -28,7 +33,8 @@ print '>>> GaPSb_on_InP = GaPSb(a=a_InP, T=Tg)\n',
 GaPSb_on_InP = GaInAs(a=a_InP, T=Tg)
 print '>>> InP.a(T=Tg)\n', InP.a(T=Tg)
 print '>>> GaPSb_on_InP.a()\n', GaPSb_on_InP.a(T=Tg)
-print '>>> GaPSb_on_InP._x\n', GaPSb_on_InP._x
+print '>>> GaPSb_on_InP.elementFraction("Ga")\n', \
+    GaPSb_on_InP.elementFraction("Ga")
 
 print '\nGet the properties at 70 C:'
 T = 273.15 + 70

@@ -17,53 +17,86 @@
 #   along with openbandparams.  If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
+# Make sure we import the local openbandparams version
+import os
+import sys
+sys.path.insert(0,
+    os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+from openbandparams import *
 
 import matplotlib.pyplot as plt
 import numpy
-from openbandparams import *
+
 
 T = 300
+T_lattice = 300
 
 # initialize the plot
 fig = plt.figure()
 ax = fig.add_subplot(111)
-plt.xlabel('Lattice Parameter at %g K ($\AA$)' % T)
-plt.ylabel('Valance Band Offset at %g K (eV)' % T)
+plt.xlabel('Lattice Parameter at %g K ($\AA$)' % T_lattice)
+plt.ylabel('Valance Band Offsets at %g K (eV)' % T)
 
-# plot the binaries
+# Define colors
+red = '#FE0303'
+green = '#04A004'
+blue = '#0404FF'
+red_green = '#8D8D04'
+red_blue = '#8D048D'
+green_blue = '#04AEAE'
+
+# list the binaries
+phosphide_binaries = [AlP, GaP, InP]  # red
+arsenide_binaries = [AlAs, GaAs, InAs]  # green
+antimonide_binaries = [AlSb, GaSb, InSb]  # blue
+
+# list the ternaries
+phosphide_ternaries = [AlGaP, AlInP, GaInP]  # red
+arsenide_ternaries = [AlGaAs, AlInAs, GaInAs]  # green
+antimonide_ternaries = [AlGaSb, AlInSb, GaInSb]  # blue
+phosphide_arsenide_ternaries = [AlPAs, GaPAs, InPAs]  # red + green
+phosphide_antimonide_ternaries = [AlPSb, GaPSb, InPSb]  # red + blue
+arsenide_antimonide_ternaries = [AlAsSb, GaAsSb, InAsSb]  # green + blue
+
+# plot the ternaries
+fractions = numpy.linspace(0, 1, 1000)
+for ternaries, color in [(phosphide_ternaries, red),
+                         (arsenide_ternaries, green),
+                         (antimonide_ternaries, blue),
+                         (phosphide_arsenide_ternaries, red_green),
+                         (phosphide_antimonide_ternaries, red_blue),
+                         (arsenide_antimonide_ternaries, green_blue)]:
+    for ternary in ternaries:
+        ax.plot([ternary.a(x=f, T=T_lattice) for f in fractions],
+                [ternary.VBO(x=f, T=T) for f in fractions],
+                color=color,
+                linewidth=1.2)
+
+# plot and label the binaries
 x = []
 y = []
 label = []
-for b in [AlP, GaP, InP,
-          AlAs, GaAs, InAs,
-          AlSb, GaSb, InSb]:
-    x.append(b.a(T=T))
-    y.append(b.VBO(T=T))
-    label.append(b.name)
-ax.plot(x, y, 'k.')
+for binaries, color in [(phosphide_binaries, red),
+                         (arsenide_binaries, green),
+                         (antimonide_binaries, blue)]:
+    ax.plot([b.a(T=T_lattice) for b in binaries],
+            [b.VBO(T=T) for b in binaries],
+            color=color,
+            linestyle=' ',
+            marker='o',
+            markersize=4,
+            markeredgecolor=color)
+    x.extend([b.a(T=T_lattice) for b in binaries])
+    y.extend([b.VBO(T=T) for b in binaries])
+    label.extend([b.name for b in binaries])
 
-# label the binaries
 for x, y, label in zip(x, y, label):
     ax.annotate(label, xy=(x, y), xytext=(-5, 5), ha='right', va='bottom',
                 bbox=dict(linewidth=0, fc='white', alpha=0.9),
                 textcoords='offset points')
 
-# plot the ternaries
-indices = numpy.arange(100)
-fractions = numpy.linspace(0, 1, 100)
-x = numpy.empty(100, dtype=numpy.float)
-y = numpy.empty(100, dtype=numpy.float)
-for tern in [AlGaP, AlInP, GaInP,
-             AlGaAs, AlInAs, GaInAs,
-             AlGaSb, AlInSb, GaInSb,
-             AlPAs, GaPAs, InPAs,
-             AlPSb, GaPSb, InPSb,
-             AlAsSb, GaAsSb, InAsSb]:
-    for i, f in zip(indices, fractions):
-        instance = tern(x=f)
-        x[i] = instance.a(T=T)
-        y[i] = instance.VBO(T=T)
-    ax.plot(x, y)
+plt.xlim(5.35, 6.6)
+plt.ylim(-1.8, 0.15)
 
 if __name__ == '__main__':
     import sys

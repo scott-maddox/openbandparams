@@ -35,7 +35,7 @@ T_lattice = 300
 fig = plt.figure()
 ax = fig.add_subplot(111)
 plt.xlabel('Lattice Parameter at %g K ($\AA$)' % T_lattice)
-plt.ylabel('Bandgap at %g K (eV)' % T)
+plt.ylabel('Conduction Band Offsets at %g K (eV)' % T)
 
 # Define colors
 red = '#FE0303'
@@ -68,7 +68,8 @@ for ternaries, color in [(phosphide_ternaries, red),
                          (arsenide_antimonide_ternaries, green_blue)]:
     for ternary in ternaries:
         ax.plot([ternary.a(x=f, T=T_lattice) for f in fractions],
-                [ternary.Eg(x=f, T=T) for f in fractions],
+                [ternary.VBO(x=f, T=T) + ternary.Eg(x=f, T=T)
+                 for f in fractions],
                 color=color,
                 linewidth=1.2)
 
@@ -80,14 +81,14 @@ for binaries, color in [(phosphide_binaries, red),
                          (arsenide_binaries, green),
                          (antimonide_binaries, blue)]:
     ax.plot([b.a(T=T_lattice) for b in binaries],
-            [b.Eg(T=T)for b in binaries],
+            [b.VBO(T=T) + b.Eg(T=T) for b in binaries],
             color=color,
             linestyle=' ',
             marker='o',
             markersize=4,
             markeredgecolor=color)
     x.extend([b.a(T=T_lattice) for b in binaries])
-    y.extend([b.Eg(T=T) for b in binaries])
+    y.extend([b.VBO(T=T) + b.Eg(T=T) for b in binaries])
     label.extend([b.name for b in binaries])
 
 for x, y, label in zip(x, y, label):
@@ -95,8 +96,8 @@ for x, y, label in zip(x, y, label):
                 bbox=dict(linewidth=0, fc='white', alpha=0.9),
                 textcoords='offset points')
 
-plt.xlim(5.35, 6.5)
-plt.ylim(0, 2.7)
+xmin, xmax = plt.xlim()
+plt.xlim(xmin - 0.05, xmax)
 
 if __name__ == '__main__':
     import sys

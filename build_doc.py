@@ -21,14 +21,16 @@
 #############################################################################
 
 import os
-import os.path
+import sys
 import subprocess
 
 CWD = os.getcwd()
 
 # sphinx-apidoc -f -o doc -d 4 src/openbandparams/
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
+SRC_DIR = os.path.abspath(os.path.join(SCRIPT_DIR, 'src'))
 EXAMPLES_DIR = os.path.join(SCRIPT_DIR, 'src/openbandparams/examples')
+OBP_FILE = os.path.join(SCRIPT_DIR, 'src/openbandparams/__init__.pyc')
 DOC_DIR = os.path.join(SCRIPT_DIR, 'doc')
 DOC_EXAMPLES_DIR = os.path.join(SCRIPT_DIR, 'doc/examples')
 BUILD_EXAMPLES_DIR = os.path.join(SCRIPT_DIR, 'doc/_build_examples')
@@ -38,9 +40,11 @@ if not os.path.exists(DOC_EXAMPLES_DIR):
 if not os.path.exists(BUILD_EXAMPLES_DIR):
     os.mkdir(BUILD_EXAMPLES_DIR)
 
-# change to the src dir so that python imports the current openbandparams
-# version
-os.chdir(os.path.join(SCRIPT_DIR, 'src'))
+# make sure that python imports the local openbandparams version
+os.chdir(SRC_DIR)
+sys.path.insert(0, SRC_DIR)
+import openbandparams
+assert openbandparams.__file__ == OBP_FILE
 
 print ''
 print 'Building examples...'
@@ -83,7 +87,7 @@ Result:
     # get the absolute paths
     example_path = os.path.join(EXAMPLES_DIR, example)
     result_path = os.path.join(BUILD_EXAMPLES_DIR, result)   
-    
+
     # check if changes have been made to the example script
     if (os.path.exists(result_path) and
         os.path.getmtime(example_path) < os.path.getmtime(result_path)):
@@ -98,10 +102,20 @@ Result:
     print '  Running "{}"\n    Saving result to "{}"'.format(
                                         example_relpath, result_relpath)
     if result_type == 'image':
-        subprocess.check_call(['python', example_path, result_path])
+        try:
+            subprocess.check_call(['python', example_path, result_path],
+                                  env=os.environ)
+        except Exception as e:
+            os.remove(result_path)
+            raise e
     elif result_type == 'literalinclude':
-        with open(result_path, 'w') as f:
-            subprocess.check_call(['python', example_path], stdout=f)
+        try:
+            with open(result_path, 'w') as f:
+                subprocess.check_call(['python', example_path], stdout=f,
+                                      env=os.environ)
+        except Exception as e:
+            os.remove(result_path)
+            raise e
     else:
         raise RuntimeError('Unknown result_type: {}'.format(result_type))
 

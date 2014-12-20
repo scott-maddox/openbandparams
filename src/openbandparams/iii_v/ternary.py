@@ -110,13 +110,11 @@ class Ternary(AlloyBase):
         temperature, T, in Kelvin (default: 300 K).
         '''
         if self is not None:
-            T = self._get_T(kwargs)
-            return min(self.Eg_Gamma(T=T), self.Eg_X(T=T), self.Eg_L(T=T))
+            return min(self.Eg_Gamma(**kwargs), self.Eg_X(**kwargs),
+                       self.Eg_L(**kwargs))
         else:
-            x = cls._get_x(kwargs)
-            T = cls._get_T(kwargs)
-            return min(cls.Eg_Gamma(x=x, T=T), cls.Eg_X(x=x, T=T),
-                       cls.Eg_L(x=x, T=T))
+            return min(cls.Eg_Gamma(**kwargs), cls.Eg_X(**kwargs),
+                       cls.Eg_L(**kwargs))
 
 
 class Ternary1(Ternary):
@@ -150,10 +148,8 @@ class Ternary1(Ternary):
             return 1 - float(kwargs[cls.elements[1]])
         elif 'a' in kwargs:
             # lattice match to the given lattice constant
-            if 'T' not in kwargs:
-                raise TypeError('Lattice matching temperature, T, missing.')
             a = kwargs['a']
-            T = kwargs['T']
+            T = kwargs.get('T', 300)
             # make sure the lattice constant is available
             b1a = cls.binaries[0].a(T=T)
             b2a = cls.binaries[1].a(T=T)

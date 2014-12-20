@@ -193,9 +193,8 @@ class Binary(Base):
         Returns the bandgap, Eg, in electron Volts at a given
         temperature, T, in Kelvin (default: 300 K).
         '''
-        T = cls._get_T(kwargs)
-        return float(min(cls.Eg_Gamma(T=T), cls.Eg_X(T=T),
-                         cls.Eg_L(T=T)))
+        return float(min(cls.Eg_Gamma(**kwargs), cls.Eg_X(**kwargs),
+                         cls.Eg_L(**kwargs)))
 
     @classmethod
     def Delta_SO(cls, **kwargs):
@@ -280,6 +279,56 @@ class Binary(Base):
         Returns the second Luttinger parameter (unitless).
         '''
         return float(cls._Luttinger3)
+
+    @classmethod
+    def meff_hh_100(cls, **kwargs):
+        '''
+        Returns the heavy hole band effective mass in the [100] direction,
+        meff_hh_100, in units of electron mass.
+        '''
+        return 1. / (cls.Luttinger1() - 2 * cls.Luttinger2())
+
+    @classmethod
+    def meff_hh_110(cls, **kwargs):
+        '''
+        Returns the heavy hole band effective mass in the [110] direction,
+        meff_hh_110, in units of electron mass.
+        '''
+        return 2. / (2 * cls.Luttinger1() - cls.Luttinger2()
+                - 3 * cls.Luttinger3())
+
+    @classmethod
+    def meff_hh_111(cls, **kwargs):
+        '''
+        Returns the heavy hole band effective mass in the [111] direction,
+        meff_hh_111, in units of electron mass.
+        '''
+        return 1. / (cls.Luttinger1() - 2 * cls.Luttinger3())
+
+    @classmethod
+    def meff_lh_100(cls, **kwargs):
+        '''
+        Returns the light hole band effective mass in the [100] direction,
+        meff_lh_100, in units of electron mass.
+        '''
+        return 1. / (cls.Luttinger1() + 2 * cls.Luttinger2())
+
+    @classmethod
+    def meff_lh_110(cls, **kwargs):
+        '''
+        Returns the light hole band effective mass in the [110] direction,
+        meff_lh_110, in units of electron mass.
+        '''
+        return 2. / (2 * cls.Luttinger1() + cls.Luttinger2()
+                + 3 * cls.Luttinger3())
+
+    @classmethod
+    def meff_lh_111(cls, **kwargs):
+        '''
+        Returns the light hole band effective mass in the [111] direction,
+        meff_lh_111, in units of electron mass.
+        '''
+        return 1. / (cls.Luttinger1() + 2 * cls.Luttinger3())
 
     @classmethod
     def meff_SO(cls, **kwargs):
