@@ -101,29 +101,29 @@ class TestIIIVZincBlendeBinary(unittest.TestCase):
     def test_compressive_biaxial_strained(self):
         eps_xx = -0.01
         b = GaAs
-        self.assertGreater(b.biaxial_strained_eps_zz(eps_xx), 0)
+        self.assertGreater(b.biaxial_strained_eps_zz(eps_xx=eps_xx), 0)
         self.assertLess(b.a_c(), 0)
         self.assertLess(b.a_v(), 0)
         self.assertLess(b.b(), 0)
-        self.assertGreater(b.biaxial_strained_dE_c(eps_xx), 0)
-        self.assertGreater(b.biaxial_strained_P_eps(eps_xx), 0)
-        self.assertLess(b.biaxial_strained_Q_eps(eps_xx), 0)
-        self.assertLess(b.biaxial_strained_dE_lh(eps_xx), 0)
-        self.assertGreater(b.biaxial_strained_Eg(eps_xx),
+        self.assertGreater(b.biaxial_strained_dE_c(eps_xx=eps_xx), 0)
+        self.assertGreater(b.biaxial_strained_P_eps(eps_xx=eps_xx), 0)
+        self.assertLess(b.biaxial_strained_Q_eps(eps_xx=eps_xx), 0)
+        self.assertLess(b.biaxial_strained_dE_lh(eps_xx=eps_xx), 0)
+        self.assertGreater(b.biaxial_strained_Eg(eps_xx=eps_xx),
                            b.Eg(), b)
     
     def test_tensile_biaxial_strained(self):
         eps_xx = 0.01
         b = GaAs
-        self.assertLess(b.biaxial_strained_eps_zz(eps_xx), 0)
+        self.assertLess(b.biaxial_strained_eps_zz(eps_xx=eps_xx), 0)
         self.assertLess(b.a_c(), 0)
         self.assertLess(b.a_v(), 0)
         self.assertLess(b.b(), 0)
-        self.assertLess(b.biaxial_strained_dE_c(eps_xx), 0)
-        self.assertLess(b.biaxial_strained_P_eps(eps_xx), 0)
-        self.assertGreater(b.biaxial_strained_Q_eps(eps_xx), 0)
-        self.assertGreater(b.biaxial_strained_dE_lh(eps_xx), 0)
-        self.assertLess(b.biaxial_strained_Eg(eps_xx),
+        self.assertLess(b.biaxial_strained_dE_c(eps_xx=eps_xx), 0)
+        self.assertLess(b.biaxial_strained_P_eps(eps_xx=eps_xx), 0)
+        self.assertGreater(b.biaxial_strained_Q_eps(eps_xx=eps_xx), 0)
+        self.assertGreater(b.biaxial_strained_dE_lh(eps_xx=eps_xx), 0)
+        self.assertLess(b.biaxial_strained_Eg(eps_xx=eps_xx),
                         b.Eg())
         
 
