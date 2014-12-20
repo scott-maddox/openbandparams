@@ -110,13 +110,11 @@ class Ternary(AlloyBase):
         temperature, T, in Kelvin (default: 300 K).
         '''
         if self is not None:
-            T = self._get_T(kwargs)
-            return min(self.Eg_Gamma(T=T), self.Eg_X(T=T), self.Eg_L(T=T))
+            return min(self.Eg_Gamma(**kwargs), self.Eg_X(**kwargs),
+                       self.Eg_L(**kwargs))
         else:
-            x = cls._get_x(kwargs)
-            T = cls._get_T(kwargs)
-            return min(cls.Eg_Gamma(x=x, T=T), cls.Eg_X(x=x, T=T),
-                       cls.Eg_L(x=x, T=T))
+            return min(cls.Eg_Gamma(**kwargs), cls.Eg_X(**kwargs),
+                       cls.Eg_L(**kwargs))
 
 
 class Ternary1(Ternary):

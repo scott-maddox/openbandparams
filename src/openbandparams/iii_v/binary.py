@@ -193,9 +193,8 @@ class Binary(Base):
         Returns the bandgap, Eg, in electron Volts at a given
         temperature, T, in Kelvin (default: 300 K).
         '''
-        T = cls._get_T(kwargs)
-        return float(min(cls.Eg_Gamma(T=T), cls.Eg_X(T=T),
-                         cls.Eg_L(T=T)))
+        return float(min(cls.Eg_Gamma(**kwargs), cls.Eg_X(**kwargs),
+                         cls.Eg_L(**kwargs)))
 
     @classmethod
     def Delta_SO(cls, **kwargs):
