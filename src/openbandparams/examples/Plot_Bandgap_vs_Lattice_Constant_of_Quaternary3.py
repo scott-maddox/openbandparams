@@ -28,7 +28,7 @@ import matplotlib.pyplot as plt
 import numpy
 
 
-quaternary = AlGaNAs
+quaternary = GaInPAs
 T = 300
 
 # initialize the plot
