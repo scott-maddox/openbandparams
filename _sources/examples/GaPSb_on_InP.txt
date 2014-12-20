@@ -1,0 +1,10 @@
+GaPSb on InP
+============
+
+Source:
+
+.. literalinclude:: ../../src/openbandparams/examples/GaPSb_on_InP.py
+
+Result:
+
+.. literalinclude:: ../_build_examples/GaPSb_on_InP.txt

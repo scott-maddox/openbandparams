@@ -1,0 +1,406 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>openbandparams.iii_v.zinc_blende.ternary &mdash; openbandparams 0.4 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="openbandparams 0.4 documentation" href="../../../../index.html" />
+    <link rel="up" title="openbandparams.iii_v.zinc_blende" href="../zinc_blende.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">openbandparams 0.4 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../../../openbandparams.html" >openbandparams</a> &raquo;</li>
+          <li><a href="../../iii_v.html" >openbandparams.iii_v</a> &raquo;</li>
+          <li><a href="../zinc_blende.html" accesskey="U">openbandparams.iii_v.zinc_blende</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for openbandparams.iii_v.zinc_blende.ternary</h1><div class="highlight"><pre>
+<span class="c">#</span>
+<span class="c">#   Copyright (c) 2013-2014, Scott J Maddox</span>
+<span class="c">#</span>
+<span class="c">#   This file is part of openbandparams.</span>
+<span class="c">#</span>
+<span class="c">#   openbandparams is free software: you can redistribute it and/or modify</span>
+<span class="c">#   it under the terms of the GNU Affero General Public License as published</span>
+<span class="c">#   by the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c">#   (at your option) any later version.</span>
+<span class="c">#</span>
+<span class="c">#   openbandparams is distributed in the hope that it will be useful,</span>
+<span class="c">#   but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c">#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c">#   GNU Affero General Public License for more details.</span>
+<span class="c">#</span>
+<span class="c">#   You should have received a copy of the GNU Affero General Public License</span>
+<span class="c">#   along with openbandparams.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="c">#</span>
+<span class="c">#############################################################################</span>
+
+<span class="kn">from</span> <span class="nn">openbandparams.iii_v.ternary</span> <span class="kn">import</span> <span class="n">Ternary1</span><span class="p">,</span> <span class="n">Ternary2</span>
+<span class="kn">from</span> <span class="nn">openbandparams.iii_v.zinc_blende.binary</span> <span class="kn">import</span> <span class="p">(</span><span class="n">AlN</span><span class="p">,</span> <span class="n">GaN</span><span class="p">,</span> <span class="n">InN</span><span class="p">,</span> <span class="n">AlP</span><span class="p">,</span> <span class="n">GaP</span><span class="p">,</span>
+    <span class="n">InP</span><span class="p">,</span> <span class="n">AlAs</span><span class="p">,</span> <span class="n">GaAs</span><span class="p">,</span> <span class="n">InAs</span><span class="p">,</span> <span class="n">AlSb</span><span class="p">,</span> <span class="n">GaSb</span><span class="p">,</span> <span class="n">InSb</span><span class="p">)</span>
+
+
+<span class="c"># Each ternary below is dynamically created as a new class or type.</span>
+<span class="c"># An instance of the class must be created, and the alloy fraction passed in,</span>
+<span class="c"># before it can be used. See `openbandparams.examples.ternaries` for examples.</span>
+
+<span class="c"># Nitrides</span>
+<div class="viewcode-block" id="AlGaN"><a class="viewcode-back" href="../../../../openbandparams.iii_v.zinc_blende.html#openbandparams.iii_v.zinc_blende.ternary.AlGaN">[docs]</a><span class="k">class</span> <span class="nc">AlGaN</span><span class="p">(</span><span class="n">Ternary1</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;AlGaN&#39;</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Al&#39;</span><span class="p">,</span> <span class="s">&#39;Ga&#39;</span><span class="p">,</span> <span class="s">&#39;N&#39;</span><span class="p">)</span>
+    <span class="n">binaries</span> <span class="o">=</span> <span class="p">(</span><span class="n">AlN</span><span class="p">,</span> <span class="n">GaN</span><span class="p">)</span>
+    <span class="n">_bowing_Eg_Gamma</span> <span class="o">=</span> <span class="mf">0.76</span><span class="p">,</span>  <span class="c"># eV    lin_band_2002</span>
+    <span class="n">_bowing_Eg_X</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span>  <span class="c"># eV    lin_band_2002</span>
+
+</div>
+<div class="viewcode-block" id="AlInN"><a class="viewcode-back" href="../../../../openbandparams.iii_v.zinc_blende.html#openbandparams.iii_v.zinc_blende.ternary.AlInN">[docs]</a><span class="k">class</span> <span class="nc">AlInN</span><span class="p">(</span><span class="n">Ternary1</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;AlInN&#39;</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Al&#39;</span><span class="p">,</span> <span class="s">&#39;In&#39;</span><span class="p">,</span> <span class="s">&#39;N&#39;</span><span class="p">)</span>
+    <span class="n">binaries</span> <span class="o">=</span> <span class="p">(</span><span class="n">AlN</span><span class="p">,</span> <span class="n">InN</span><span class="p">)</span>
+    <span class="n">_bowing_Eg_Gamma</span> <span class="o">=</span> <span class="mf">2.73</span><span class="p">,</span>  <span class="c"># eV    lin_band_2002</span>
+    <span class="n">_bowing_Eg_X</span> <span class="o">=</span> <span class="mf">3.62</span><span class="p">,</span>  <span class="c"># eV    lin_band_2002</span>
+
+</div>
+<div class="viewcode-block" id="GaInN"><a class="viewcode-back" href="../../../../openbandparams.iii_v.zinc_blende.html#openbandparams.iii_v.zinc_blende.ternary.GaInN">[docs]</a><span class="k">class</span> <span class="nc">GaInN</span><span class="p">(</span><span class="n">Ternary1</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;GaInN&#39;</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Ga&#39;</span><span class="p">,</span> <span class="s">&#39;In&#39;</span><span class="p">,</span> <span class="s">&#39;N&#39;</span><span class="p">)</span>
+    <span class="n">binaries</span> <span class="o">=</span> <span class="p">(</span><span class="n">GaN</span><span class="p">,</span> <span class="n">InN</span><span class="p">)</span>
+    <span class="n">_bowing_Eg_Gamma</span> <span class="o">=</span> <span class="mf">1.38</span><span class="p">,</span>  <span class="c"># eV    lin_band_2002</span>
+    <span class="n">_bowing_Eg_X</span> <span class="o">=</span> <span class="mf">1.67</span><span class="p">,</span>  <span class="c"># eV    lin_band_2002</span>
+
+
+<span class="c"># Phosphides</span></div>
+<div class="viewcode-block" id="AlGaP"><a class="viewcode-back" href="../../../../openbandparams.iii_v.zinc_blende.html#openbandparams.iii_v.zinc_blende.ternary.AlGaP">[docs]</a><span class="k">class</span> <span class="nc">AlGaP</span><span class="p">(</span><span class="n">Ternary1</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;AlGaP&#39;</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Al&#39;</span><span class="p">,</span> <span class="s">&#39;Ga&#39;</span><span class="p">,</span> <span class="s">&#39;P&#39;</span><span class="p">)</span>
+    <span class="n">binaries</span> <span class="o">=</span> <span class="p">(</span><span class="n">AlP</span><span class="p">,</span> <span class="n">GaP</span><span class="p">)</span>
+    <span class="n">_bowing_Eg_X</span> <span class="o">=</span> <span class="mf">0.13</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+
+</div>
+<div class="viewcode-block" id="AlInP"><a class="viewcode-back" href="../../../../openbandparams.iii_v.zinc_blende.html#openbandparams.iii_v.zinc_blende.ternary.AlInP">[docs]</a><span class="k">class</span> <span class="nc">AlInP</span><span class="p">(</span><span class="n">Ternary1</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;AlInP&#39;</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Al&#39;</span><span class="p">,</span> <span class="s">&#39;In&#39;</span><span class="p">,</span> <span class="s">&#39;P&#39;</span><span class="p">)</span>
+    <span class="n">binaries</span> <span class="o">=</span> <span class="p">(</span><span class="n">AlP</span><span class="p">,</span> <span class="n">InP</span><span class="p">)</span>
+    <span class="n">_bowing_Eg_Gamma</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.48</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Eg_X</span> <span class="o">=</span> <span class="mf">0.38</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Delta_SO</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.19</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_meff_e_Gamma</span> <span class="o">=</span> <span class="mf">0.22</span>  <span class="c"># m_e    vurgaftman_band_2001</span>
+
+</div>
+<div class="viewcode-block" id="GaInP"><a class="viewcode-back" href="../../../../openbandparams.iii_v.zinc_blende.html#openbandparams.iii_v.zinc_blende.ternary.GaInP">[docs]</a><span class="k">class</span> <span class="nc">GaInP</span><span class="p">(</span><span class="n">Ternary1</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;GaInP&#39;</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Ga&#39;</span><span class="p">,</span> <span class="s">&#39;In&#39;</span><span class="p">,</span> <span class="s">&#39;P&#39;</span><span class="p">)</span>
+    <span class="n">binaries</span> <span class="o">=</span> <span class="p">(</span><span class="n">GaP</span><span class="p">,</span> <span class="n">InP</span><span class="p">)</span>
+    <span class="n">_bowing_Eg_Gamma</span> <span class="o">=</span> <span class="mf">0.65</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Eg_X</span> <span class="o">=</span> <span class="mf">0.2</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Eg_L</span> <span class="o">=</span> <span class="mf">1.03</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_meff_e_Gamma</span> <span class="o">=</span> <span class="mf">0.051</span>  <span class="c"># m_e    vurgaftman_band_2001</span>
+    <span class="n">_bowing_F</span> <span class="o">=</span> <span class="mf">0.78</span>  <span class="c"># vurgaftman_band_2001</span>
+
+
+<span class="c"># Arsenides</span></div>
+<div class="viewcode-block" id="AlGaAs"><a class="viewcode-back" href="../../../../openbandparams.iii_v.zinc_blende.html#openbandparams.iii_v.zinc_blende.ternary.AlGaAs">[docs]</a><span class="k">class</span> <span class="nc">AlGaAs</span><span class="p">(</span><span class="n">Ternary1</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;AlGaAs&#39;</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Al&#39;</span><span class="p">,</span> <span class="s">&#39;Ga&#39;</span><span class="p">,</span> <span class="s">&#39;As&#39;</span><span class="p">)</span>
+    <span class="n">binaries</span> <span class="o">=</span> <span class="p">(</span><span class="n">AlAs</span><span class="p">,</span> <span class="n">GaAs</span><span class="p">)</span>
+    <span class="n">_bowing_Eg_X</span> <span class="o">=</span> <span class="mf">0.055</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_bowing_Eg_Gamma</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mf">1.31</span> <span class="o">*</span> <span class="n">x</span> <span class="o">-</span> <span class="mf">0.127</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+
+</div>
+<div class="viewcode-block" id="AlInAs"><a class="viewcode-back" href="../../../../openbandparams.iii_v.zinc_blende.html#openbandparams.iii_v.zinc_blende.ternary.AlInAs">[docs]</a><span class="k">class</span> <span class="nc">AlInAs</span><span class="p">(</span><span class="n">Ternary1</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;AlInAs&#39;</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Al&#39;</span><span class="p">,</span> <span class="s">&#39;In&#39;</span><span class="p">,</span> <span class="s">&#39;As&#39;</span><span class="p">)</span>
+    <span class="n">binaries</span> <span class="o">=</span> <span class="p">(</span><span class="n">AlAs</span><span class="p">,</span> <span class="n">InAs</span><span class="p">)</span>
+    <span class="n">_bowing_Eg_Gamma</span> <span class="o">=</span> <span class="mf">0.7</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Delta_SO</span> <span class="o">=</span> <span class="mf">0.15</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_meff_e_Gamma</span> <span class="o">=</span> <span class="mf">0.049</span>  <span class="c"># m_e    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Ep</span> <span class="o">=</span> <span class="o">-</span><span class="mf">4.81</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_F</span> <span class="o">=</span> <span class="o">-</span><span class="mf">4.44</span>  <span class="c"># vurgaftman_band_2001</span>
+    <span class="n">_bowing_VBO</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.64</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_a_c</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.4</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+
+</div>
+<div class="viewcode-block" id="GaInAs"><a class="viewcode-back" href="../../../../openbandparams.iii_v.zinc_blende.html#openbandparams.iii_v.zinc_blende.ternary.GaInAs">[docs]</a><span class="k">class</span> <span class="nc">GaInAs</span><span class="p">(</span><span class="n">Ternary1</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;GaInAs&#39;</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Ga&#39;</span><span class="p">,</span> <span class="s">&#39;In&#39;</span><span class="p">,</span> <span class="s">&#39;As&#39;</span><span class="p">)</span>
+    <span class="n">binaries</span> <span class="o">=</span> <span class="p">(</span><span class="n">GaAs</span><span class="p">,</span> <span class="n">InAs</span><span class="p">)</span>
+    <span class="n">_bowing_Eg_Gamma</span> <span class="o">=</span> <span class="mf">0.477</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Eg_X</span> <span class="o">=</span> <span class="mf">1.4</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Eg_L</span> <span class="o">=</span> <span class="mf">0.33</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Delta_SO</span> <span class="o">=</span> <span class="mf">0.15</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_meff_e_Gamma</span> <span class="o">=</span> <span class="mf">0.0091</span>  <span class="c"># m_e    vurgaftman_band_2001</span>
+    <span class="n">_bowing_meff_HH_DOS</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.145</span>  <span class="c"># m_e    vurgaftman_band_2001</span>
+    <span class="n">_bowing_meff_LH_DOS</span> <span class="o">=</span> <span class="mf">0.0202</span>  <span class="c"># m_e    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Ep</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.48</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_F</span> <span class="o">=</span> <span class="mf">1.77</span>  <span class="c"># vurgaftman_band_2001</span>
+    <span class="n">_bowing_VBO</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.38</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_a_c</span> <span class="o">=</span> <span class="mf">2.61</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+
+
+<span class="c"># Antimonides</span></div>
+<div class="viewcode-block" id="AlGaSb"><a class="viewcode-back" href="../../../../openbandparams.iii_v.zinc_blende.html#openbandparams.iii_v.zinc_blende.ternary.AlGaSb">[docs]</a><span class="k">class</span> <span class="nc">AlGaSb</span><span class="p">(</span><span class="n">Ternary1</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;AlGaSb&#39;</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Al&#39;</span><span class="p">,</span> <span class="s">&#39;Ga&#39;</span><span class="p">,</span> <span class="s">&#39;Sb&#39;</span><span class="p">)</span>
+    <span class="n">binaries</span> <span class="o">=</span> <span class="p">(</span><span class="n">AlSb</span><span class="p">,</span> <span class="n">GaSb</span><span class="p">)</span>
+    <span class="n">_bowing_Delta_SO</span> <span class="o">=</span> <span class="mf">0.3</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_bowing_Eg_Gamma</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mf">1.22</span> <span class="o">*</span> <span class="n">x</span> <span class="o">-</span> <span class="mf">0.044</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+
+</div>
+<div class="viewcode-block" id="AlInSb"><a class="viewcode-back" href="../../../../openbandparams.iii_v.zinc_blende.html#openbandparams.iii_v.zinc_blende.ternary.AlInSb">[docs]</a><span class="k">class</span> <span class="nc">AlInSb</span><span class="p">(</span><span class="n">Ternary1</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;AlInSb&#39;</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Al&#39;</span><span class="p">,</span> <span class="s">&#39;In&#39;</span><span class="p">,</span> <span class="s">&#39;Sb&#39;</span><span class="p">)</span>
+    <span class="n">binaries</span> <span class="o">=</span> <span class="p">(</span><span class="n">AlSb</span><span class="p">,</span> <span class="n">InSb</span><span class="p">)</span>
+    <span class="n">_bowing_Eg_Gamma</span> <span class="o">=</span> <span class="mf">0.43</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Delta_SO</span> <span class="o">=</span> <span class="mf">0.25</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+
+</div>
+<div class="viewcode-block" id="GaInSb"><a class="viewcode-back" href="../../../../openbandparams.iii_v.zinc_blende.html#openbandparams.iii_v.zinc_blende.ternary.GaInSb">[docs]</a><span class="k">class</span> <span class="nc">GaInSb</span><span class="p">(</span><span class="n">Ternary1</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;GaInSb&#39;</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Ga&#39;</span><span class="p">,</span> <span class="s">&#39;In&#39;</span><span class="p">,</span> <span class="s">&#39;Sb&#39;</span><span class="p">)</span>
+    <span class="n">binaries</span> <span class="o">=</span> <span class="p">(</span><span class="n">GaSb</span><span class="p">,</span> <span class="n">InSb</span><span class="p">)</span>
+    <span class="n">_bowing_Eg_Gamma</span> <span class="o">=</span> <span class="mf">0.415</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Eg_X</span> <span class="o">=</span> <span class="mf">0.33</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Eg_L</span> <span class="o">=</span> <span class="mf">0.4</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Delta_SO</span> <span class="o">=</span> <span class="mf">0.1</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_meff_e_Gamma</span> <span class="o">=</span> <span class="mf">0.0092</span>  <span class="c"># m_e    vurgaftman_band_2001</span>
+    <span class="n">_bowing_meff_LH_DOS</span> <span class="o">=</span> <span class="mf">0.011</span>  <span class="c"># m_e    vurgaftman_band_2001</span>
+    <span class="n">_bowing_F</span> <span class="o">=</span> <span class="o">-</span><span class="mf">6.84</span>  <span class="c"># vurgaftman_band_2001</span>
+
+
+<span class="c"># Nitride Phosphides</span></div>
+<div class="viewcode-block" id="AlNP"><a class="viewcode-back" href="../../../../openbandparams.iii_v.zinc_blende.html#openbandparams.iii_v.zinc_blende.ternary.AlNP">[docs]</a><span class="k">class</span> <span class="nc">AlNP</span><span class="p">(</span><span class="n">Ternary2</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;AlNP&#39;</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Al&#39;</span><span class="p">,</span> <span class="s">&#39;N&#39;</span><span class="p">,</span> <span class="s">&#39;P&#39;</span><span class="p">)</span>
+    <span class="n">binaries</span> <span class="o">=</span> <span class="p">(</span><span class="n">AlN</span><span class="p">,</span> <span class="n">AlP</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="GaNP"><a class="viewcode-back" href="../../../../openbandparams.iii_v.zinc_blende.html#openbandparams.iii_v.zinc_blende.ternary.GaNP">[docs]</a><span class="k">class</span> <span class="nc">GaNP</span><span class="p">(</span><span class="n">Ternary2</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;GaNP&#39;</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Ga&#39;</span><span class="p">,</span> <span class="s">&#39;N&#39;</span><span class="p">,</span> <span class="s">&#39;P&#39;</span><span class="p">)</span>
+    <span class="n">binaries</span> <span class="o">=</span> <span class="p">(</span><span class="n">GaN</span><span class="p">,</span> <span class="n">GaP</span><span class="p">)</span>
+    <span class="n">_bowing_Eg_Gamma</span> <span class="o">=</span> <span class="mf">3.9</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Eg_X</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+
+</div>
+<div class="viewcode-block" id="InNP"><a class="viewcode-back" href="../../../../openbandparams.iii_v.zinc_blende.html#openbandparams.iii_v.zinc_blende.ternary.InNP">[docs]</a><span class="k">class</span> <span class="nc">InNP</span><span class="p">(</span><span class="n">Ternary2</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;InNP&#39;</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;In&#39;</span><span class="p">,</span> <span class="s">&#39;N&#39;</span><span class="p">,</span> <span class="s">&#39;P&#39;</span><span class="p">)</span>
+    <span class="n">binaries</span> <span class="o">=</span> <span class="p">(</span><span class="n">InN</span><span class="p">,</span> <span class="n">InP</span><span class="p">)</span>
+    <span class="n">_bowing_Eg_Gamma</span> <span class="o">=</span> <span class="mi">15</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+
+
+<span class="c"># Nitride Arsenides</span></div>
+<div class="viewcode-block" id="AlNAs"><a class="viewcode-back" href="../../../../openbandparams.iii_v.zinc_blende.html#openbandparams.iii_v.zinc_blende.ternary.AlNAs">[docs]</a><span class="k">class</span> <span class="nc">AlNAs</span><span class="p">(</span><span class="n">Ternary2</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;AlNAs&#39;</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Al&#39;</span><span class="p">,</span> <span class="s">&#39;N&#39;</span><span class="p">,</span> <span class="s">&#39;As&#39;</span><span class="p">)</span>
+    <span class="n">binaries</span> <span class="o">=</span> <span class="p">(</span><span class="n">AlN</span><span class="p">,</span> <span class="n">AlAs</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="GaNAs"><a class="viewcode-back" href="../../../../openbandparams.iii_v.zinc_blende.html#openbandparams.iii_v.zinc_blende.ternary.GaNAs">[docs]</a><span class="k">class</span> <span class="nc">GaNAs</span><span class="p">(</span><span class="n">Ternary2</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;GaNAs&#39;</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Ga&#39;</span><span class="p">,</span> <span class="s">&#39;N&#39;</span><span class="p">,</span> <span class="s">&#39;As&#39;</span><span class="p">)</span>
+    <span class="n">binaries</span> <span class="o">=</span> <span class="p">(</span><span class="n">GaN</span><span class="p">,</span> <span class="n">GaAs</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_bowing_Eg_Gamma</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mf">120.4</span> <span class="o">-</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">x</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+
+</div>
+<div class="viewcode-block" id="InNAs"><a class="viewcode-back" href="../../../../openbandparams.iii_v.zinc_blende.html#openbandparams.iii_v.zinc_blende.ternary.InNAs">[docs]</a><span class="k">class</span> <span class="nc">InNAs</span><span class="p">(</span><span class="n">Ternary2</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;InNAs&#39;</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;In&#39;</span><span class="p">,</span> <span class="s">&#39;N&#39;</span><span class="p">,</span> <span class="s">&#39;As&#39;</span><span class="p">)</span>
+    <span class="n">binaries</span> <span class="o">=</span> <span class="p">(</span><span class="n">InN</span><span class="p">,</span> <span class="n">InAs</span><span class="p">)</span>
+    <span class="n">_bowing_Eg_Gamma</span> <span class="o">=</span> <span class="mf">4.22</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+
+
+<span class="c"># Phosphide Arsenides</span></div>
+<div class="viewcode-block" id="AlPAs"><a class="viewcode-back" href="../../../../openbandparams.iii_v.zinc_blende.html#openbandparams.iii_v.zinc_blende.ternary.AlPAs">[docs]</a><span class="k">class</span> <span class="nc">AlPAs</span><span class="p">(</span><span class="n">Ternary2</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;AlPAs&#39;</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Al&#39;</span><span class="p">,</span> <span class="s">&#39;P&#39;</span><span class="p">,</span> <span class="s">&#39;As&#39;</span><span class="p">)</span>
+    <span class="n">binaries</span> <span class="o">=</span> <span class="p">(</span><span class="n">AlP</span><span class="p">,</span> <span class="n">AlAs</span><span class="p">)</span>
+    <span class="n">_bowing_Eg_Gamma</span> <span class="o">=</span> <span class="mf">0.22</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Eg_X</span> <span class="o">=</span> <span class="mf">0.22</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Eg_L</span> <span class="o">=</span> <span class="mf">0.22</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+
+</div>
+<div class="viewcode-block" id="GaPAs"><a class="viewcode-back" href="../../../../openbandparams.iii_v.zinc_blende.html#openbandparams.iii_v.zinc_blende.ternary.GaPAs">[docs]</a><span class="k">class</span> <span class="nc">GaPAs</span><span class="p">(</span><span class="n">Ternary2</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;GaPAs&#39;</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Ga&#39;</span><span class="p">,</span> <span class="s">&#39;P&#39;</span><span class="p">,</span> <span class="s">&#39;As&#39;</span><span class="p">)</span>
+    <span class="n">binaries</span> <span class="o">=</span> <span class="p">(</span><span class="n">GaP</span><span class="p">,</span> <span class="n">GaAs</span><span class="p">)</span>
+    <span class="n">_bowing_Eg_Gamma</span> <span class="o">=</span> <span class="mf">0.19</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Eg_X</span> <span class="o">=</span> <span class="mf">0.24</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Eg_L</span> <span class="o">=</span> <span class="mf">0.16</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+
+</div>
+<div class="viewcode-block" id="InPAs"><a class="viewcode-back" href="../../../../openbandparams.iii_v.zinc_blende.html#openbandparams.iii_v.zinc_blende.ternary.InPAs">[docs]</a><span class="k">class</span> <span class="nc">InPAs</span><span class="p">(</span><span class="n">Ternary2</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;InPAs&#39;</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;In&#39;</span><span class="p">,</span> <span class="s">&#39;P&#39;</span><span class="p">,</span> <span class="s">&#39;As&#39;</span><span class="p">)</span>
+    <span class="n">binaries</span> <span class="o">=</span> <span class="p">(</span><span class="n">InP</span><span class="p">,</span> <span class="n">InAs</span><span class="p">)</span>
+    <span class="n">_bowing_Eg_Gamma</span> <span class="o">=</span> <span class="mf">0.1</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Eg_X</span> <span class="o">=</span> <span class="mf">0.27</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Eg_L</span> <span class="o">=</span> <span class="mf">0.27</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Delta_SO</span> <span class="o">=</span> <span class="mf">0.16</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+
+
+<span class="c"># Phosphide Antimonides</span></div>
+<div class="viewcode-block" id="AlPSb"><a class="viewcode-back" href="../../../../openbandparams.iii_v.zinc_blende.html#openbandparams.iii_v.zinc_blende.ternary.AlPSb">[docs]</a><span class="k">class</span> <span class="nc">AlPSb</span><span class="p">(</span><span class="n">Ternary2</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;AlPSb&#39;</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Al&#39;</span><span class="p">,</span> <span class="s">&#39;P&#39;</span><span class="p">,</span> <span class="s">&#39;Sb&#39;</span><span class="p">)</span>
+    <span class="n">binaries</span> <span class="o">=</span> <span class="p">(</span><span class="n">AlP</span><span class="p">,</span> <span class="n">AlSb</span><span class="p">)</span>
+    <span class="n">_bowing_Eg_Gamma</span> <span class="o">=</span> <span class="mf">2.7</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Eg_X</span> <span class="o">=</span> <span class="mf">2.7</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Eg_L</span> <span class="o">=</span> <span class="mf">2.7</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+
+</div>
+<div class="viewcode-block" id="GaPSb"><a class="viewcode-back" href="../../../../openbandparams.iii_v.zinc_blende.html#openbandparams.iii_v.zinc_blende.ternary.GaPSb">[docs]</a><span class="k">class</span> <span class="nc">GaPSb</span><span class="p">(</span><span class="n">Ternary2</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;GaPSb&#39;</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Ga&#39;</span><span class="p">,</span> <span class="s">&#39;P&#39;</span><span class="p">,</span> <span class="s">&#39;Sb&#39;</span><span class="p">)</span>
+    <span class="n">binaries</span> <span class="o">=</span> <span class="p">(</span><span class="n">GaP</span><span class="p">,</span> <span class="n">GaSb</span><span class="p">)</span>
+    <span class="n">_bowing_Eg_Gamma</span> <span class="o">=</span> <span class="mf">2.7</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Eg_X</span> <span class="o">=</span> <span class="mf">2.7</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Eg_L</span> <span class="o">=</span> <span class="mf">2.7</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+
+</div>
+<div class="viewcode-block" id="InPSb"><a class="viewcode-back" href="../../../../openbandparams.iii_v.zinc_blende.html#openbandparams.iii_v.zinc_blende.ternary.InPSb">[docs]</a><span class="k">class</span> <span class="nc">InPSb</span><span class="p">(</span><span class="n">Ternary2</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;InPSb&#39;</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;In&#39;</span><span class="p">,</span> <span class="s">&#39;P&#39;</span><span class="p">,</span> <span class="s">&#39;Sb&#39;</span><span class="p">)</span>
+    <span class="n">binaries</span> <span class="o">=</span> <span class="p">(</span><span class="n">InP</span><span class="p">,</span> <span class="n">InSb</span><span class="p">)</span>
+    <span class="n">_bowing_Eg_Gamma</span> <span class="o">=</span> <span class="mf">1.9</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Eg_X</span> <span class="o">=</span> <span class="mf">1.9</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Eg_L</span> <span class="o">=</span> <span class="mf">1.9</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Delta_SO</span> <span class="o">=</span> <span class="mf">0.75</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+
+
+<span class="c"># Arsenide Antimonides</span></div>
+<div class="viewcode-block" id="AlAsSb"><a class="viewcode-back" href="../../../../openbandparams.iii_v.zinc_blende.html#openbandparams.iii_v.zinc_blende.ternary.AlAsSb">[docs]</a><span class="k">class</span> <span class="nc">AlAsSb</span><span class="p">(</span><span class="n">Ternary2</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;AlAsSb&#39;</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Al&#39;</span><span class="p">,</span> <span class="s">&#39;As&#39;</span><span class="p">,</span> <span class="s">&#39;Sb&#39;</span><span class="p">)</span>
+    <span class="n">binaries</span> <span class="o">=</span> <span class="p">(</span><span class="n">AlAs</span><span class="p">,</span> <span class="n">AlSb</span><span class="p">)</span>
+    <span class="n">_bowing_Eg_Gamma</span> <span class="o">=</span> <span class="mf">0.8</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Eg_X</span> <span class="o">=</span> <span class="mf">0.28</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Eg_L</span> <span class="o">=</span> <span class="mf">0.28</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Delta_SO</span> <span class="o">=</span> <span class="mf">0.15</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_VBO</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.71</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+
+</div>
+<div class="viewcode-block" id="GaAsSb"><a class="viewcode-back" href="../../../../openbandparams.iii_v.zinc_blende.html#openbandparams.iii_v.zinc_blende.ternary.GaAsSb">[docs]</a><span class="k">class</span> <span class="nc">GaAsSb</span><span class="p">(</span><span class="n">Ternary2</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;GaAsSb&#39;</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Ga&#39;</span><span class="p">,</span> <span class="s">&#39;As&#39;</span><span class="p">,</span> <span class="s">&#39;Sb&#39;</span><span class="p">)</span>
+    <span class="n">binaries</span> <span class="o">=</span> <span class="p">(</span><span class="n">GaAs</span><span class="p">,</span> <span class="n">GaSb</span><span class="p">)</span>
+    <span class="n">_bowing_Eg_Gamma</span> <span class="o">=</span> <span class="mf">1.43</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Eg_X</span> <span class="o">=</span> <span class="mf">1.2</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Eg_L</span> <span class="o">=</span> <span class="mf">1.2</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Delta_SO</span> <span class="o">=</span> <span class="mf">0.6</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_VBO</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.06</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+
+</div>
+<div class="viewcode-block" id="InAsSb"><a class="viewcode-back" href="../../../../openbandparams.iii_v.zinc_blende.html#openbandparams.iii_v.zinc_blende.ternary.InAsSb">[docs]</a><span class="k">class</span> <span class="nc">InAsSb</span><span class="p">(</span><span class="n">Ternary2</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;InAsSb&#39;</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;In&#39;</span><span class="p">,</span> <span class="s">&#39;As&#39;</span><span class="p">,</span> <span class="s">&#39;Sb&#39;</span><span class="p">)</span>
+    <span class="n">binaries</span> <span class="o">=</span> <span class="p">(</span><span class="n">InAs</span><span class="p">,</span> <span class="n">InSb</span><span class="p">)</span>
+    <span class="n">_bowing_Eg_Gamma</span> <span class="o">=</span> <span class="mf">0.67</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Eg_X</span> <span class="o">=</span> <span class="mf">0.6</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Eg_L</span> <span class="o">=</span> <span class="mf">0.6</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_Delta_SO</span> <span class="o">=</span> <span class="mf">1.2</span>  <span class="c"># eV    vurgaftman_band_2001</span>
+    <span class="n">_bowing_meff_e_Gamma</span> <span class="o">=</span> <span class="mf">0.035</span>  <span class="c"># m_e    vurgaftman_band_2001</span>
+</div>
+<span class="n">ternaries</span> <span class="o">=</span> <span class="p">[</span><span class="n">AlGaN</span><span class="p">,</span> <span class="n">AlInN</span><span class="p">,</span> <span class="n">GaInN</span><span class="p">,</span>
+             <span class="n">AlGaP</span><span class="p">,</span> <span class="n">AlInP</span><span class="p">,</span> <span class="n">GaInP</span><span class="p">,</span>
+             <span class="n">AlGaAs</span><span class="p">,</span> <span class="n">AlInAs</span><span class="p">,</span> <span class="n">GaInAs</span><span class="p">,</span>
+             <span class="n">AlGaSb</span><span class="p">,</span> <span class="n">AlInSb</span><span class="p">,</span> <span class="n">GaInSb</span><span class="p">,</span>
+             <span class="n">AlNP</span><span class="p">,</span> <span class="n">GaNP</span><span class="p">,</span> <span class="n">InNP</span><span class="p">,</span>
+             <span class="n">AlNAs</span><span class="p">,</span> <span class="n">GaNAs</span><span class="p">,</span> <span class="n">InNAs</span><span class="p">,</span>
+             <span class="n">AlPAs</span><span class="p">,</span> <span class="n">GaPAs</span><span class="p">,</span> <span class="n">InPAs</span><span class="p">,</span>
+             <span class="n">AlPSb</span><span class="p">,</span> <span class="n">GaPSb</span><span class="p">,</span> <span class="n">InPSb</span><span class="p">,</span>
+             <span class="n">AlAsSb</span><span class="p">,</span> <span class="n">GaAsSb</span><span class="p">,</span> <span class="n">InAsSb</span><span class="p">]</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;ternaries&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">+=</span> <span class="p">[</span><span class="n">ternary</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">ternary</span> <span class="ow">in</span> <span class="n">ternaries</span><span class="p">]</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">openbandparams 0.4 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../../../openbandparams.html" >openbandparams</a> &raquo;</li>
+          <li><a href="../../iii_v.html" >openbandparams.iii_v</a> &raquo;</li>
+          <li><a href="../zinc_blende.html" >openbandparams.iii_v.zinc_blende</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2014, Scott J Maddox.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b3.
+    </div>
+  </body>
+</html>

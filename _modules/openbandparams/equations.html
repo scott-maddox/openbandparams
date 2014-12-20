@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>openbandparams.equations &mdash; openbandparams 0.4 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="openbandparams 0.4 documentation" href="../../index.html" />
+    <link rel="up" title="openbandparams" href="../openbandparams.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">openbandparams 0.4 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../openbandparams.html" accesskey="U">openbandparams</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for openbandparams.equations</h1><div class="highlight"><pre>
+<span class="c">#</span>
+<span class="c">#   Copyright (c) 2013-2014, Scott J Maddox</span>
+<span class="c">#</span>
+<span class="c">#   This file is part of openbandparams.</span>
+<span class="c">#</span>
+<span class="c">#   openbandparams is free software: you can redistribute it and/or modify</span>
+<span class="c">#   it under the terms of the GNU Affero General Public License as published</span>
+<span class="c">#   by the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c">#   (at your option) any later version.</span>
+<span class="c">#</span>
+<span class="c">#   openbandparams is distributed in the hope that it will be useful,</span>
+<span class="c">#   but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c">#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c">#   GNU Affero General Public License for more details.</span>
+<span class="c">#</span>
+<span class="c">#   You should have received a copy of the GNU Affero General Public License</span>
+<span class="c">#   along with openbandparams.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="c">#</span>
+<span class="c">#############################################################################</span>
+
+
+<div class="viewcode-block" id="varshni"><a class="viewcode-back" href="../../openbandparams.html#openbandparams.equations.varshni">[docs]</a><span class="k">def</span> <span class="nf">varshni</span><span class="p">(</span><span class="n">Eg_0</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">Eg_0</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">T</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="n">T</span> <span class="o">+</span> <span class="n">beta</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">openbandparams 0.4 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../openbandparams.html" >openbandparams</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2014, Scott J Maddox.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b3.
+    </div>
+  </body>
+</html>
