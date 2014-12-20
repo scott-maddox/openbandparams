@@ -194,10 +194,8 @@ class Ternary2(Ternary):
             return 1 - float(kwargs[cls.elements[2]])
         elif 'a' in kwargs:
             # lattice match to the given lattice constant
-            if 'T' not in kwargs:
-                raise TypeError('Lattice matching temperature, T, missing.')
             a = kwargs['a']
-            T = kwargs['T']
+            T = kwargs.get('T', 300)
             # make sure the lattice constant is available
             b1a = cls.binaries[0].a(T=T)
             b2a = cls.binaries[1].a(T=T)
