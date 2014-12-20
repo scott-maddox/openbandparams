@@ -1,0 +1,2 @@
+Changes in 0.6:
+- Fixed a packaging issue that prevented setup.py from working
