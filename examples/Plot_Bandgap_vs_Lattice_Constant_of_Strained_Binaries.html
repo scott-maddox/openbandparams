@@ -121,8 +121,8 @@
 <span class="c"># initialize the plot</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;Lattice Parameter at </span><span class="si">%g</span><span class="s"> K ($\AA$)&#39;</span> <span class="o">%</span> <span class="n">T</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;Bandgap at </span><span class="si">%g</span><span class="s"> K (eV)&#39;</span> <span class="o">%</span> <span class="n">T</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;Strained Lattice Parameter at </span><span class="si">%g</span><span class="s"> K ($\AA$)&#39;</span> <span class="o">%</span> <span class="n">T</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;Strained Bandgap at </span><span class="si">%g</span><span class="s"> K (eV)&#39;</span> <span class="o">%</span> <span class="n">T</span><span class="p">)</span>
 
 <span class="c"># plot the binaries</span>
 <span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>
@@ -138,65 +138,26 @@
 
 <span class="c"># label the binaries</span>
 <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">ha</span><span class="o">=</span><span class="s">&#39;right&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s">&#39;bottom&#39;</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">ha</span><span class="o">=</span><span class="s">&#39;left&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s">&#39;bottom&#39;</span><span class="p">,</span>
                 <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="s">&#39;white&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">),</span>
                 <span class="n">textcoords</span><span class="o">=</span><span class="s">&#39;offset points&#39;</span><span class="p">)</span>
 
 <span class="c"># plot the strained binaries</span>
 <span class="n">first</span> <span class="o">=</span> <span class="bp">True</span>
-<span class="k">for</span> <span class="n">binary</span> <span class="ow">in</span> <span class="p">[</span><span class="n">AlP</span><span class="p">,</span> <span class="n">GaP</span><span class="p">,</span> <span class="n">InP</span><span class="p">,</span>
+<span class="n">eps_xx</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="p">[</span><span class="n">AlP</span><span class="p">,</span> <span class="n">GaP</span><span class="p">,</span> <span class="n">InP</span><span class="p">,</span>
           <span class="n">AlAs</span><span class="p">,</span> <span class="n">GaAs</span><span class="p">,</span> <span class="n">InAs</span><span class="p">,</span>
           <span class="n">AlSb</span><span class="p">,</span> <span class="n">GaSb</span><span class="p">,</span> <span class="n">InSb</span><span class="p">]:</span>
-    <span class="n">Eg</span> <span class="o">=</span> <span class="n">binary</span><span class="o">.</span><span class="n">Eg</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
-    <span class="n">a_0</span> <span class="o">=</span> <span class="n">binary</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
-    <span class="n">c_12</span> <span class="o">=</span> <span class="n">binary</span><span class="o">.</span><span class="n">c_12</span><span class="p">()</span>
-    <span class="n">c_11</span> <span class="o">=</span> <span class="n">binary</span><span class="o">.</span><span class="n">c_11</span><span class="p">()</span>
-    <span class="n">a_c</span> <span class="o">=</span> <span class="n">binary</span><span class="o">.</span><span class="n">a_c</span><span class="p">()</span>
-    <span class="n">a_v</span> <span class="o">=</span> <span class="n">binary</span><span class="o">.</span><span class="n">a_v</span><span class="p">()</span>
-    <span class="n">b</span> <span class="o">=</span> <span class="n">binary</span><span class="o">.</span><span class="n">b</span><span class="p">()</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">y_c</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">y_lh</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">y_hh</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="c"># Plot from -2% to +2% strain</span>
-    <span class="k">for</span> <span class="n">eps_xx</span> <span class="ow">in</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mi">100</span><span class="p">):</span>
-        <span class="c"># The strain can be defined in either of the two following</span>
-        <span class="c"># ways. The first seems more appropriate to me, at least in</span>
-        <span class="c"># this instance.</span>
-        <span class="c"># 1. relative to a_0 [ eps = ( a0 - ax ) / a0 ]:</span>
-        <span class="n">a_strained</span> <span class="o">=</span> <span class="n">a_0</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">eps_xx</span><span class="p">)</span>
-        <span class="c"># 2. relative to a_strianed [ eps = ( a0 - ax ) / ax ]:</span>
-        <span class="c"># a_strained = a_0 / ( eps_xx + 1 )</span>
-        <span class="c"># Note: I&#39;m implicitly assuming growth is on the (100) surface.</span>
-        <span class="c"># Growth on other surfaces will have different strain effects.</span>
-        <span class="c"># This is approach is probably also not directly applicable to</span>
-        <span class="c"># ternaries or quaternaries near transitions to indirect gap,</span>
-        <span class="c"># since the various conduction band valleys react differently</span>
-        <span class="c"># to strain.</span>
-        <span class="n">eps_zz</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.</span> <span class="o">*</span> <span class="n">c_12</span> <span class="o">/</span> <span class="n">c_11</span> <span class="o">*</span> <span class="n">eps_xx</span>
-        <span class="n">dE_c</span> <span class="o">=</span> <span class="n">a_c</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">eps_xx</span> <span class="o">+</span> <span class="n">eps_zz</span><span class="p">)</span>
-        <span class="n">P_eps</span> <span class="o">=</span> <span class="o">-</span><span class="n">a_v</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">eps_xx</span> <span class="o">+</span> <span class="n">eps_zz</span><span class="p">)</span>
-        <span class="n">Q_eps</span> <span class="o">=</span> <span class="o">-</span><span class="n">b</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">eps_xx</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">eps_zz</span><span class="p">)</span>
-        <span class="n">dE_hh</span> <span class="o">=</span> <span class="o">-</span><span class="n">P_eps</span> <span class="o">-</span> <span class="n">Q_eps</span>
-        <span class="n">dE_lh</span> <span class="o">=</span> <span class="o">-</span><span class="n">P_eps</span> <span class="o">+</span> <span class="n">Q_eps</span>
-        <span class="n">E_c</span> <span class="o">=</span> <span class="n">Eg</span> <span class="o">+</span> <span class="n">dE_c</span>
-        <span class="n">E_c_hh</span> <span class="o">=</span> <span class="n">Eg</span> <span class="o">+</span> <span class="n">dE_c</span> <span class="o">-</span> <span class="n">dE_hh</span>
-        <span class="n">E_c_lh</span> <span class="o">=</span> <span class="n">Eg</span> <span class="o">+</span> <span class="n">dE_c</span> <span class="o">-</span> <span class="n">dE_lh</span>
-        <span class="n">Eg_strained</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">E_c_hh</span><span class="p">,</span> <span class="n">E_c_lh</span><span class="p">)</span>
-        <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a_strained</span><span class="p">)</span>
-        <span class="n">y_c</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">E_c</span><span class="p">)</span>
-        <span class="n">y_lh</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">E_c_lh</span><span class="p">)</span>
-        <span class="n">y_hh</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">E_c_hh</span><span class="p">)</span>
+    <span class="n">a_strained</span> <span class="o">=</span> <span class="p">[</span><span class="n">b</span><span class="o">.</span><span class="n">biaxial_strained_a0</span><span class="p">(</span><span class="n">eps_xx</span><span class="o">=</span><span class="n">eps_xx_</span><span class="p">)</span> <span class="k">for</span> <span class="n">eps_xx_</span> <span class="ow">in</span> <span class="n">eps_xx</span><span class="p">]</span>
+    <span class="n">E_c_hh</span> <span class="o">=</span> <span class="p">[</span><span class="n">b</span><span class="o">.</span><span class="n">biaxial_strained_E_c_hh</span><span class="p">(</span><span class="n">eps_xx</span><span class="o">=</span><span class="n">eps_xx_</span><span class="p">)</span> <span class="k">for</span> <span class="n">eps_xx_</span> <span class="ow">in</span> <span class="n">eps_xx</span><span class="p">]</span>
+    <span class="n">E_c_lh</span> <span class="o">=</span> <span class="p">[</span><span class="n">b</span><span class="o">.</span><span class="n">biaxial_strained_E_c_lh</span><span class="p">(</span><span class="n">eps_xx</span><span class="o">=</span><span class="n">eps_xx_</span><span class="p">)</span> <span class="k">for</span> <span class="n">eps_xx_</span> <span class="ow">in</span> <span class="n">eps_xx</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">first</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_c</span><span class="p">,</span> <span class="s">&#39;b--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;Hydrostatic&#39;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_lh</span><span class="p">,</span> <span class="s">&#39;r-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;Biaxial HH&#39;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_hh</span><span class="p">,</span> <span class="s">&#39;g-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;Biaxial LH&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a_strained</span><span class="p">,</span> <span class="n">E_c_hh</span><span class="p">,</span> <span class="s">&#39;r-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;CB-HH gap&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a_strained</span><span class="p">,</span> <span class="n">E_c_lh</span><span class="p">,</span> <span class="s">&#39;g-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;CB-LH gap&#39;</span><span class="p">)</span>
         <span class="n">first</span> <span class="o">=</span> <span class="bp">False</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_c</span><span class="p">,</span> <span class="s">&#39;b--&#39;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_lh</span><span class="p">,</span> <span class="s">&#39;r-&#39;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_hh</span><span class="p">,</span> <span class="s">&#39;g-&#39;</span><span class="p">)</span>
-    <span class="c"># TODO: check that this isn&#39;t BS</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a_strained</span><span class="p">,</span> <span class="n">E_c_hh</span><span class="p">,</span> <span class="s">&#39;r-&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a_strained</span><span class="p">,</span> <span class="n">E_c_lh</span><span class="p">,</span> <span class="s">&#39;g-&#39;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">&#39;best&#39;</span><span class="p">)</span>
 

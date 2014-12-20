@@ -1,0 +1,10 @@
+Plot Strained Bandgap vs Lattice Constant of Quaternary3
+========================================================
+
+Source:
+
+.. literalinclude:: ../../src/openbandparams/examples/advanced/GaInAsSb_on_GaSb/Plot_Strained_Bandgap_vs_Lattice_Constant_of_Quaternary3.py
+
+Result:
+
+.. image:: ../_build_examples/advanced/GaInAsSb_on_GaSb/Plot_Strained_Bandgap_vs_Lattice_Constant_of_Quaternary3.png

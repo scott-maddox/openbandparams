@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Welcome to openbandparams’s documentation! &mdash; openbandparams 0.6 documentation</title>
+    <title>Welcome to openbandparams’s documentation! &mdash; openbandparams 0.7 documentation</title>
     
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.6',
+        VERSION:     '0.7',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="openbandparams 0.6 documentation" href="#" />
+    <link rel="top" title="openbandparams 0.7 documentation" href="#" />
     <link rel="next" title="Installation" href="installation.html" /> 
   </head>
   <body>
@@ -40,7 +40,7 @@
         <li class="right" >
           <a href="installation.html" title="Installation"
              accesskey="N">next</a> |</li>
-        <li><a href="#">openbandparams 0.6 documentation</a> &raquo;</li> 
+        <li><a href="#">openbandparams 0.7 documentation</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar">
@@ -165,6 +165,7 @@ AlGaAsSb, AlInAsSb, GaInAsSb</li>
 <li>band deformation potentials</li>
 <li>elastic constants</li>
 <li>alloy bowing parameters</li>
+<li>effects of biaxial strain</li>
 </ul>
 </dd>
 </dl>
@@ -177,21 +178,32 @@ AlGaAsSb, AlInAsSb, GaInAsSb</li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="examples/Binaries.html">Binaries</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/Ternaries.html">Ternaries</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/Quaternaries.html">Quaternaries</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/GaPSb_on_InP.html">GaPSb on InP</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/Plot_Bandgap_vs_Composition_of_Ternary.html">Plot Bandgap vs Composition of Ternary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/Plot_Band_Offset_vs_Composition_of_Ternary.html">Plot Band Offset vs Composition of Ternary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/Plot_Bandgap_vs_Composition_of_Quaternary3.html">Plot Bandgap vs Composition of Quaternary3</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/Plot_Bandgap_vs_Lattice_Constant.html">Plot Bandgap vs Lattice Constant</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/Plot_Bandgap_vs_Lattice_Constant_of_Quaternary1or2.html">Plot Bandgap vs Lattice Constant of Quaternary1or2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/Plot_Bandgap_vs_Lattice_Constant_of_Quaternary3.html">Plot Bandgap vs Lattice Constant of Quaternary3</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/Plot_Bandgap_vs_Lattice_Constant_of_Strained_Binaries.html">Plot Bandgap vs Lattice Constant of Strained Binaries</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/Plot_Valance_Band_Offset_vs_Lattice_Constant.html">Plot Valance Band Offset vs Lattice Constant</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/Plot_Conduction_Band_Offset_vs_Lattice_Constant.html">Plot Conduction Band Offset vs Lattice Constant</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/Plot_Band_Offset_vs_Lattice_Constant.html">Plot Band Offset vs Lattice Constant</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/Plot_Band_Offset_vs_Lattice_Constant_No_Phosphides.html">Plot Band Offset vs Lattice Constant No Phosphides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/_Binaries.html">Binaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/_Ternaries.html">Ternaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/_Quaternaries.html">Quaternaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/_GaPSb_on_InP.html">GaPSb on InP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/_Plot_Bandgap_vs_Composition_of_Ternary.html">Plot Bandgap vs Composition of Ternary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/_Plot_Bandgap_vs_Composition_of_Quaternary3.html">Plot Bandgap vs Composition of Quaternary3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/_Plot_Band_Offset_vs_Composition_of_Ternary.html">Plot Band Offset vs Composition of Ternary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/_Plot_Bandgap_vs_Lattice_Constant.html">Plot Bandgap vs Lattice Constant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/_Plot_Bandgap_vs_Lattice_Constant_of_Quaternary1or2.html">Plot Bandgap vs Lattice Constant of Quaternary1or2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/_Plot_Bandgap_vs_Lattice_Constant_of_Quaternary3.html">Plot Bandgap vs Lattice Constant of Quaternary3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/_Plot_Bandgap_vs_Lattice_Constant_of_Strained_Binaries.html">Plot Bandgap vs Lattice Constant of Strained Binaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/_Plot_Valance_Band_Offset_vs_Lattice_Constant.html">Plot Valance Band Offset vs Lattice Constant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/_Plot_Conduction_Band_Offset_vs_Lattice_Constant.html">Plot Conduction Band Offset vs Lattice Constant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/_Plot_Band_Offset_vs_Lattice_Constant.html">Plot Band Offset vs Lattice Constant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/_Plot_Band_Offset_vs_Lattice_Constant_No_Phosphides.html">Plot Band Offset vs Lattice Constant No Phosphides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/advanced.html">Advanced Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/advanced/GaInAsSb_on_GaSb.html">GaInAsSb on GaSb</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="examples/advanced/GaInAsSb_on_GaSb/_Plot_Bandgap_vs_Lattice_Constant_of_Quaternary3.html">Plot Bandgap vs Lattice Constant of Quaternary3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="examples/advanced/GaInAsSb_on_GaSb/_Plot_Strained_Band_Offset_vs_Composition_of_Quaternary3.html">Plot Strained Band Offset vs Composition of Quaternary3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="examples/advanced/GaInAsSb_on_GaSb/_Plot_Strained_Band_Offset_vs_Lattice_Constant_of_Quaternary3.html">Plot Strained Band Offset vs Lattice Constant of Quaternary3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="examples/advanced/GaInAsSb_on_GaSb/_Plot_Strained_Bandgap_vs_Lattice_Constant_of_Quaternary3.html">Plot Strained Bandgap vs Lattice Constant of Quaternary3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="examples/advanced/GaInAsSb_on_GaSb/_Plot_Strained_Eg_and_VBO_vs_Composition_of_Quaternary3.html">Plot Strained Eg and VBO vs Composition of Quaternary3</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="supported_parameters.html">Supported Parameters</a></li>
@@ -225,7 +237,7 @@ AlGaAsSb, AlInAsSb, GaInAsSb</li>
         <li class="right" >
           <a href="installation.html" title="Installation"
              >next</a> |</li>
-        <li><a href="#">openbandparams 0.6 documentation</a> &raquo;</li> 
+        <li><a href="#">openbandparams 0.7 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
