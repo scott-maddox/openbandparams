@@ -1,6 +1,7 @@
 Changed in 0.8:
 - Fixed Ternary2 requiring lattice matching temperature
 - Ternary and TernaryType can now use lattice matched ternaries as binaries
+- Added meff_e_DOS
 
 Changed in 0.7:
 - Added several functions for calculating the effects of biaxial strain

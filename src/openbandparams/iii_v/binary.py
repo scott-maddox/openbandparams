@@ -254,6 +254,26 @@ class Binary(Base):
         return float(cls._meff_e_X_DOS)
 
     @classmethod
+    def meff_e_DOS(cls, **kwargs):
+        '''
+        Returns the electron density of states effective mass,
+        meff_e_DOS, in units of electron mass.
+        '''
+        Eg_Gamma = cls.Eg_Gamma(**kwargs)
+        Eg_X = cls.Eg_X(**kwargs)
+        Eg_L = cls.Eg_L(**kwargs)
+        if Eg_Gamma < Eg_X:
+            if Eg_Gamma < Eg_L:
+                return self.meff_e_Gamma()
+            else:
+                return self.meff_e_L_DOS()
+        else:
+            if Eg_X < Eg_L:
+                return self.meff_e_X_DOS()
+            else:
+                return self.meff_e_L_DOS()
+
+    @classmethod
     def Luttinger1(cls, **kwargs):
         '''
         Returns the first Luttinger parameter (unitless).
