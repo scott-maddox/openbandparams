@@ -163,8 +163,11 @@ class Base(base_material.Base):
         given in-plane strain, `eps_xx`, assuming no lattice relaxation.
 
         This assumes growth in the [100] direction.
+        
+        Note 1: Specifying `eps_xx` results in less overhead than
+        specifying `a0`.
 
-        Note: `eps_xx` should be negative for compressive in-plane strain, and
+        Note 2: `eps_xx` should be negative for compressive in-plane strain, and
         positive for tensile in-plane strain.
         '''
         if self is not None:
@@ -182,8 +185,11 @@ class Base(base_material.Base):
         constant, `a0`, assuming no lattice relaxation.
 
         This assumes growth in the [100] direction.
+        
+        Note 1: Specifying `eps_xx` results in less overhead than
+        specifying `a0`.
 
-        Note: `eps_xx` should be negative for compressive in-plane strain, and
+        Note 2: `eps_xx` should be negative for compressive in-plane strain, and
         positive for tensile in-plane strain.
         '''
         if self is not None:
@@ -201,8 +207,11 @@ class Base(base_material.Base):
         the given lattice constant, `a0`, assuming no lattice relaxation.
 
         This assumes growth in the [100] direction.
+        
+        Note 1: Specifying `eps_xx` results in less overhead than
+        specifying `a0`.
 
-        Note: `eps_xx` should be negative for compressive in-plane strain, and
+        Note 2: `eps_xx` should be negative for compressive in-plane strain, and
         positive for tensile in-plane strain.
         '''
         if self is not None:
@@ -222,8 +231,11 @@ class Base(base_material.Base):
         lattice relaxation.
 
         This assumes growth in the [100] direction.
+        
+        Note 1: Specifying `eps_xx` results in less overhead than
+        specifying `a0`.
 
-        Note: `eps_xx` should be negative for compressive in-plane strain, and
+        Note 2: `eps_xx` should be negative for compressive in-plane strain, and
         positive for tensile in-plane strain.
         '''
         if self is not None:
@@ -243,8 +255,11 @@ class Base(base_material.Base):
         lattice relaxation.
 
         This assumes growth in the [100] direction.
+        
+        Note 1: Specifying `eps_xx` results in less overhead than
+        specifying `a0`.
 
-        Note: `eps_xx` should be negative for compressive in-plane strain, and
+        Note 2: `eps_xx` should be negative for compressive in-plane strain, and
         positive for tensile in-plane strain.
         '''
         if self is not None:
@@ -263,8 +278,11 @@ class Base(base_material.Base):
         lattice constant, `a0`, assuming no lattice relaxation.
 
         This assumes growth in the [100] direction.
+        
+        Note 1: Specifying `eps_xx` results in less overhead than
+        specifying `a0`.
 
-        Note: `eps_xx` should be negative for compressive in-plane strain, and
+        Note 2: `eps_xx` should be negative for compressive in-plane strain, and
         positive for tensile in-plane strain.
         '''
         if self is not None:
@@ -282,8 +300,11 @@ class Base(base_material.Base):
         lattice constant, `a0`, assuming no lattice relaxation.
 
         This assumes growth in the [100] direction.
+        
+        Note 1: Specifying `eps_xx` results in less overhead than
+        specifying `a0`.
 
-        Note: `eps_xx` should be negative for compressive in-plane strain, and
+        Note 2: `eps_xx` should be negative for compressive in-plane strain, and
         positive for tensile in-plane strain.
         '''
         if self is not None:
@@ -301,8 +322,11 @@ class Base(base_material.Base):
         lattice constant, `a0`, assuming no lattice relaxation.
 
         This assumes growth in the [100] direction.
+        
+        Note 1: Specifying `eps_xx` results in less overhead than
+        specifying `a0`.
 
-        Note: `eps_xx` should be negative for compressive in-plane strain, and
+        Note 2: `eps_xx` should be negative for compressive in-plane strain, and
         positive for tensile in-plane strain.
         '''
         if self is not None:
@@ -320,8 +344,11 @@ class Base(base_material.Base):
         lattice constant, `a0`, assuming no lattice relaxation.
 
         This assumes growth in the [100] direction.
+        
+        Note 1: Specifying `eps_xx` results in less overhead than
+        specifying `a0`.
 
-        Note: `eps_xx` should be negative for compressive in-plane strain, and
+        Note 2: `eps_xx` should be negative for compressive in-plane strain, and
         positive for tensile in-plane strain.
         '''
         if self is not None:
@@ -339,8 +366,11 @@ class Base(base_material.Base):
         lattice constant, `a0`, assuming no lattice relaxation.
 
         This assumes growth in the [100] direction.
+        
+        Note 1: Specifying `eps_xx` results in less overhead than
+        specifying `a0`.
 
-        Note: `eps_xx` should be negative for compressive in-plane strain, and
+        Note 2: `eps_xx` should be negative for compressive in-plane strain, and
         positive for tensile in-plane strain.
         '''
         if self is not None:
@@ -360,8 +390,11 @@ class Base(base_material.Base):
         Kelvin (default: 300 K).
 
         This assumes growth in the [100] direction.
+        
+        Note 1: Specifying `eps_xx` results in less overhead than
+        specifying `a0`.
 
-        Note: `eps_xx` should be negative for compressive in-plane strain, and
+        Note 2: `eps_xx` should be negative for compressive in-plane strain, and
         positive for tensile in-plane strain.
         '''
         if self is not None:
@@ -382,8 +415,11 @@ class Base(base_material.Base):
         Kelvin (default: 300 K).
 
         This assumes growth in the [100] direction.
+        
+        Note 1: Specifying `eps_xx` results in less overhead than
+        specifying `a0`.
 
-        Note: `eps_xx` should be negative for compressive in-plane strain, and
+        Note 2: `eps_xx` should be negative for compressive in-plane strain, and
         positive for tensile in-plane strain.
         '''
         if self is not None:
@@ -404,8 +440,11 @@ class Base(base_material.Base):
         Kelvin (default: 300 K).
 
         This assumes growth in the [100] direction.
+        
+        Note 1: Specifying `eps_xx` results in less overhead than
+        specifying `a0`.
 
-        Note: `eps_xx` should be negative for compressive in-plane strain, and
+        Note 2: `eps_xx` should be negative for compressive in-plane strain, and
         positive for tensile in-plane strain.
         '''
         if self is not None:
