@@ -324,10 +324,12 @@ class InAs(Binary):
     _Eg_Gamma_0 = 0.417  # eV    vurgaftman_band_2001
     _alpha_Gamma = 0.000276  # eV/K    vurgaftman_band_2001
     _beta_Gamma = 93  # K    vurgaftman_band_2001
-    _Eg_X_0 = 1.9  # eV    williams_experimental_1986
+    _Eg_X_0 = 1.433  # eV    vurgaftman_band_2001
+#     _Eg_X_0 = 1.9  # eV    drube_inverse_1987
     _alpha_X = 0.000276  # eV/K    vurgaftman_band_2001
     _beta_X = 93  # K    vurgaftman_band_2001
-    _Eg_L_0 = 1.53  # eV    kim_towards_2010
+    _Eg_L_0 = 1.133  # eV    vurgaftman_band_2001
+#     _Eg_L_0 = 1.53  # eV    kim_towards_2010
     _alpha_L = 0.000276  # eV/K    vurgaftman_band_2001
     _beta_L = 93  # K    vurgaftman_band_2001
     _Delta_SO = 0.39  # eV    vurgaftman_band_2001
