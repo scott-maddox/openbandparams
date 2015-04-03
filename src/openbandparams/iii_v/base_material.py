@@ -48,6 +48,18 @@ class Base(base_material.Base):
                    obj.Eg_L(**kwargs))
 
     @classinstancemethod
+    def electron_affinity(self, cls, **kwargs):
+        '''
+        Returns the electron affinity in electron Volts at a given
+        temperature, T, in Kelvin (default: 300 K).
+        '''
+        if self is not None:
+            obj = self
+        else:
+            obj = cls
+        return 4.66-obj.Eg_Gamma(**kwargs)-obj.VBO(**kwargs)
+
+    @classinstancemethod
     def meff_hh_100(self, cls, **kwargs):
         '''
         Returns the heavy hole band effective mass in the [100] direction,
