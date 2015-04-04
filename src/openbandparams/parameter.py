@@ -19,18 +19,21 @@
 #############################################################################
 
 class Parameter(object):
-    def __init__(self, name, aliases=None, references=None):
+    def __init__(self, name, units=None, aliases=None, references=None):
         '''
         Parameters
         ----------
         name : string
             name of the parameter
+        units : string (default=None)
+            units
         aliases : list of strings (default=None)
             list of alternate names
         references : list of Reference objects (default=None)
             literature references
         '''
         self.name = name
+        self.units = units
         self.aliases = aliases
         self.references = references
     
@@ -39,7 +42,7 @@ class Parameter(object):
 
 
 class ValueParameter(Parameter):
-    def __init__(self, name, value,
+    def __init__(self, name, value, units=None,
                  aliases=None, references=None):
         '''
         Parameters
@@ -48,12 +51,15 @@ class ValueParameter(Parameter):
             name of the parameter
         value : object (default=None)
             value of the parameter
+        units : string (default=None)
+            units
         aliases : list of strings (default=None)
             list of alternate names
         references : list of Reference objects (default=None)
             literature references
         '''
         super(ValueParameter, self).__init__(name=name,
+                                             units=units,
                                              aliases=aliases,
                                              references=references)
         self.value = value
@@ -63,7 +69,7 @@ class ValueParameter(Parameter):
 
 
 class FunctionParameter(Parameter):
-    def __init__(self, name, function,
+    def __init__(self, name, function, units=None,
                  aliases=None, references=None):
         '''
         Parameters
@@ -72,14 +78,17 @@ class FunctionParameter(Parameter):
             name of the parameter
         function : callable function
             function that returns the value of the parameter
+        units : string (default=None)
+            units
         aliases : list of strings (default=None)
             list of alternate names
         references : list of Reference objects (default=None)
             literature references
         '''
         super(FunctionParameter, self).__init__(name=name,
-                                             aliases=aliases,
-                                             references=references)
+                                                units=units,
+                                                aliases=aliases,
+                                                references=references)
         self.function = function
     
     def __call__(self, *args, **kwargs):
@@ -87,7 +96,7 @@ class FunctionParameter(Parameter):
 
 
 class MethodParameter(Parameter):
-    def __init__(self, name, method, dependencies,
+    def __init__(self, name, method, dependencies, units=None,
                  aliases=None, references=None):
         '''
         Parameters
@@ -99,12 +108,15 @@ class MethodParameter(Parameter):
             returns the value of the parameter
         dependencies : list of strings (default=None)
             list of parameter names that this parameter depends on
+        units : string (default=None)
+            units
         aliases : list of strings (default=None)
             list of alternate names
         references : list of Reference objects (default=None)
             literature references
         '''
         super(MethodParameter, self).__init__(name=name,
+                                              units=units,
                                               aliases=aliases,
                                               references=references)
         self.method = method
