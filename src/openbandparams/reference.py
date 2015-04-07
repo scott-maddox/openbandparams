@@ -27,4 +27,12 @@ class Reference(object):
         self.pages = pages
         self.year = year
         self.title = title
-        self.number=number
+        self.number = number
+        self.bibtex = None
+    
+    @classmethod
+    def from_bibtex(cls, bibtex):
+        #TODO: parse this into the various fields
+        result = cls(None, None, None, None, None, None)
+        result.bibtex = bibtex
+        return result
