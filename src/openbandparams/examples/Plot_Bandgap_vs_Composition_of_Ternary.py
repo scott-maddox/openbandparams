@@ -32,9 +32,9 @@ alloy = AlGaAs
 # calculate the data
 xs = numpy.linspace(0, 1, 100)
 T = 300  # K
-gamma = [alloy.Eg_Gamma(x=x, T=T) for x in xs]
-X = [alloy.Eg_X(x=x, T=T) for x in xs]
-L = [alloy.Eg_L(x=x, T=T) for x in xs]
+gamma = [alloy(x=x).Eg_Gamma(T=T) for x in xs]
+X = [alloy(x=x).Eg_X(T=T) for x in xs]
+L = [alloy(x=x).Eg_L(T=T) for x in xs]
 
 # plot it
 fig = plt.figure()

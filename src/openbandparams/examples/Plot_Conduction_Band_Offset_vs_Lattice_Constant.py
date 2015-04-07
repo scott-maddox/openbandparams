@@ -67,8 +67,8 @@ for ternaries, color in [(phosphide_ternaries, red),
                          (phosphide_antimonide_ternaries, red_blue),
                          (arsenide_antimonide_ternaries, green_blue)]:
     for ternary in ternaries:
-        ax.plot([ternary.a(x=f, T=T_lattice) for f in fractions],
-                [ternary.VBO(x=f, T=T) + ternary.Eg(x=f, T=T)
+        ax.plot([ternary(x=f).a(T=T_lattice) for f in fractions],
+                [ternary(x=f).VBO(T=T) + ternary(x=f).Eg(T=T)
                  for f in fractions],
                 color=color,
                 linewidth=1.2)
