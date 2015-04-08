@@ -26,6 +26,6 @@ class IIIVAlloy(Alloy):
     The base class for all III-V alloys.
     '''
     
-    @method_parameter(dependencies=['Eg', 'VBO'], units='eV')
+    @method_parameter(dependencies=['CBO'], units='eV')
     def electron_affinity(self, **kwargs):
-        return 4.66-self.Eg(**kwargs)-self.VBO(**kwargs)
+        return 4.66-self.CBO(**kwargs)
