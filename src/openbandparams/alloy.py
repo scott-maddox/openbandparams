@@ -110,6 +110,12 @@ class Alloy(object):
                                  ''.format(parameter.name))
         self._add_parameter(parameter)
     
+    def set_parameter(self, parameter):
+        '''
+        Same as calling ``add_parameter`` with ``overload=True``
+        '''
+        self.add_parameter(parameter, overload=True)
+    
     def has_parameter(self, name):
         '''
         Returns True if the named parameter is present, or False, otherwise.
