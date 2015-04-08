@@ -194,6 +194,10 @@ def method_parameter(dependencies, units,
     return decorator
 
 descriptions = {
+    'CBO' : 'conduction band offset energy relative to InSb VBO',
+    'CBO_Gamma' : 'Gamma-valley conduction band offset energy relative to InSb VBO',
+    'CBO_L' : 'L-valley conduction band offset energy relative to InSb VBO',
+    'CBO_X' : 'X-valley conduction band offset energy relative to InSb VBO',
     'Delta_SO' : 'split-off energy',
     'Eg' : 'bandgap energy',
     'Eg_Gamma' : 'Gamma-valley bandgap energy',
@@ -204,7 +208,7 @@ descriptions = {
     'Eg_X_0' : 'X-valley bandgap energy at 0 K',
     'Ep' : 'Ep interband matrix element',
     'F' : 'F Kane remote-band parameter',
-    'VBO' : 'valance band offset energy relative to InSb',
+    'VBO' : 'valance band offset energy relative to InSb VBO',
     'a' : 'lattice parameter',
     'a_300K' : 'lattice parameter at 300 K',
     'a_c' : 'conduction band deformation potential',
@@ -224,6 +228,7 @@ descriptions = {
     'luttinger1' : 'first Luttinger parameter',
     'luttinger2' : 'second Luttinger parameter',
     'luttinger3' : 'third Luttinger parameter',
+    'luttinger32' : 'difference between third and second Luttinger parameters (luttinger3 - luttinger2)',
     'meff_SO' : 'split-off band effective mass',
     'meff_SO_0' : 'split-off band effective mass at 0 K',
     'meff_e_Gamma' : 'electron effective mass in the Gamma-valley',
