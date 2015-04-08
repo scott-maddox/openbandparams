@@ -40,6 +40,38 @@ class IIIVZincBlendeAlloy(IIIVAlloy):
         return (self.a_300K(**kwargs) +
                 self.thermal_expansion(**kwargs) * (T - 300.))
         
+    @method_parameter(dependencies=['VBO', 'Eg'], units='eV')
+    def CBO(self, **kwargs):
+        '''
+        Returns the conduction band offset (CBO), in eV at a given
+        temperature, T, in K (default=300.).
+        '''
+        return self.VBO(**kwargs) + self.Eg(**kwargs)
+        
+    @method_parameter(dependencies=['VBO', 'Eg_Gamma'], units='eV')
+    def CBO_Gamma(self, **kwargs):
+        '''
+        Returns the Gamma-valley conduction band offset (CBO), in eV at a given
+        temperature, T, in K (default=300.).
+        '''
+        return self.VBO(**kwargs) + self.Eg_Gamma(**kwargs)
+        
+    @method_parameter(dependencies=['VBO', 'Eg_L'], units='eV')
+    def CBO_L(self, **kwargs):
+        '''
+        Returns the L-valley conduction band offset (CBO), in eV at a given
+        temperature, T, in K (default=300.).
+        '''
+        return self.VBO(**kwargs) + self.Eg_L(**kwargs)
+        
+    @method_parameter(dependencies=['VBO', 'Eg_X'], units='eV')
+    def CBO_X(self, **kwargs):
+        '''
+        Returns the X-valley conduction band offset (CBO), in eV at a given
+        temperature, T, in K (default=300.).
+        '''
+        return self.VBO(**kwargs) + self.Eg_X(**kwargs)
+        
     @method_parameter(dependencies=['Eg_Gamma_0', 'alpha_Gamma', 'beta_Gamma'],
                       units='eV')
     def Eg_Gamma(self, **kwargs):
