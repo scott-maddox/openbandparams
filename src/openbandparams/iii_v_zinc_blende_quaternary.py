@@ -236,40 +236,49 @@ class IIIVZincBlendeQuaternary(IIIVZincBlendeMixedAlloy):
             # make sure the lattice constant is available
             if self._has_x(kwargs):
                 x = self._get_x(kwargs)
+                ymax = round(1. - x, 6)
                 z = None
                 a0 = self(x=x, y=0.).a(T=T)
-                a1 = self(x=x, y=1.).a(T=T)
+                a1 = self(x=x, y=ymax).a(T=T)
                 amin = min(a0, a1)
                 amax = max(a0, a1)
+                print 'x', a, amin, amax
                 if not (amin <= a <= amax):
                     raise ValueError('a of {:g} out of range [{:g}, {:g}]'
                                      ''.format(a, amin, amax))
                 # find the correct composition, x
-                y = bisect(func=lambda y: self(x=x, y=y).a(T=T) - a, a=0, b=1)
+                y = bisect(func=lambda y: self(x=x, y=y).a(T=T) - a,
+                           a=0, b=ymax)
             elif self._has_y(kwargs):
                 y = self._get_y(kwargs)
+                xmax = round(1. - y, 6)
                 z = None
                 a0 = self(x=0., y=y).a(T=T)
-                a1 = self(x=1., y=y).a(T=T)
+                a1 = self(x=xmax, y=y).a(T=T)
                 amin = min(a0, a1)
                 amax = max(a0, a1)
+                print 'y', a, amin, amax
                 if not (amin <= a <= amax):
                     raise ValueError('a of {:g} out of range [{:g}, {:g}]'
                                      ''.format(a, amin, amax))
                 # find the correct composition, x
-                x = bisect(func=lambda x: self(x=x, y=y).a(T=T) - a, a=0, b=1)
+                x = bisect(func=lambda x: self(x=x, y=y).a(T=T) - a,
+                           a=0, b=xmax)
             elif self._has_z(kwargs):
                 y = None
                 z = self._get_z(kwargs)
+                xmax = round(1. - z, 6)
                 a0 = self(x=0., z=z).a(T=T)
-                a1 = self(x=1., z=z).a(T=T)
+                a1 = self(x=xmax, z=z).a(T=T)
                 amin = min(a0, a1)
                 amax = max(a0, a1)
+                print 'z', a, amin, amax
                 if not (amin <= a <= amax):
                     raise ValueError('a of {:g} out of range [{:g}, {:g}]'
                                      ''.format(a, amin, amax))
                 # find the correct composition, x
-                x = bisect(func=lambda x: self(x=x, z=z).a(T=T) - a, a=0, b=1)
+                x = bisect(func=lambda x: self(x=x, z=z).a(T=T) - a,
+                           a=0, b=xmax)
         else:
             raise TypeError(
                 "Missing required key word argument.\n" + self._get_usage())
