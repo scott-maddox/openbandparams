@@ -29,3 +29,7 @@ from .iii_v_zinc_blende_binaries import *
 from . import iii_v_zinc_blende_ternaries
 __all__ += iii_v_zinc_blende_ternaries.__all__
 from .iii_v_zinc_blende_ternaries import *
+
+from . import iii_v_zinc_blende_quaternaries
+__all__ += iii_v_zinc_blende_quaternaries.__all__
+from .iii_v_zinc_blende_quaternaries import *
