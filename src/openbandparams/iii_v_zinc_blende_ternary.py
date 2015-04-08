@@ -18,12 +18,10 @@
 #
 #############################################################################
 
-from .iii_v_zinc_blende_alloy import IIIVZincBlendeAlloy
+from .iii_v_zinc_blende_mixed_alloy import IIIVZincBlendeMixedAlloy
 from .algorithms import bisect
-from .parameter import method_parameter
-from .references import vurgaftman_2001
 
-class IIIVZincBlendeTernary(IIIVZincBlendeAlloy):
+class IIIVZincBlendeTernary(IIIVZincBlendeMixedAlloy):
     '''
     The base class for all III-V zinc blende ternary alloys.
     '''
@@ -34,16 +32,16 @@ class IIIVZincBlendeTernary(IIIVZincBlendeAlloy):
             self._element_1mx = binaries[1].elements[0]
             self._element_y = binaries[0].elements[1]
             calc_elements = (binaries[0].elements[0],
-                        binaries[1].elements[0],
-                        binaries[0].elements[1])
+                             binaries[1].elements[0],
+                             binaries[0].elements[1])
         elif binaries[0].elements[0] == binaries[1].elements[0]:
             self._type = 2
             self._element_x = binaries[0].elements[1]
             self._element_1mx = binaries[1].elements[1]
             self._element_y = binaries[0].elements[0]
             calc_elements = (binaries[0].elements[0],
-                        binaries[0].elements[1],
-                        binaries[1].elements[1])
+                             binaries[0].elements[1],
+                             binaries[1].elements[1])
         else:
             raise ValueError()
 #         name = ''.join(elements)
@@ -91,7 +89,7 @@ class IIIVZincBlendeTernary(IIIVZincBlendeAlloy):
         return self._instance(x=x)
 
     def _get_usage(self):
-        return ("The  supported kwarg combinations are as follows:"
+        return ("The supported kwarg combinations are as follows:"
                 "\n    - 'x' or '{A}' or '{B}'"
                 "\n    - 'a' [and 'T']"
                 "".format(A=self._element_x, B=self._element_1mx))
@@ -99,10 +97,8 @@ class IIIVZincBlendeTernary(IIIVZincBlendeAlloy):
     def __repr__(self):
         if self._x is None:
             return '{}'.format(self.name)
-        if self._type == 1:
-            return '{}({}={})'.format(self.name, self.elements[0], self._x)
-        elif self._type == 2:
-            return '{}({}={})'.format(self.name, self.elements[1], self._x)
+        elif self._type == 1 or self._type == 2:
+            return '{}({}={})'.format(self.name, self._element_x, self._x)
         else:
             raise RuntimeError()
     
@@ -155,7 +151,7 @@ class IIIVZincBlendeTernary(IIIVZincBlendeAlloy):
                 return 0
         else:
             raise RuntimeError()
-    
+     
     def _get_bowing(self, name, kwargs):
         p = self.get_parameter(name+'_bowing', default=None)
         if p is None:
@@ -185,198 +181,3 @@ class IIIVZincBlendeTernary(IIIVZincBlendeAlloy):
         else:
             # otherwise, use linear interpolation
             return A * x + B * (1 - x)
-        
-    @method_parameter(dependencies=['Delta_SO'],
-                      units='eV')
-    def Delta_SO(self, **kwargs):
-        return self._interpolate('Delta_SO', kwargs)
-        
-    @method_parameter(dependencies=['Eg_Gamma'],
-                      units='eV')
-    def Eg_Gamma(self, **kwargs):
-        return self._interpolate('Eg_Gamma', kwargs)
-        
-    @method_parameter(dependencies=['Eg_L'],
-                      units='eV')
-    def Eg_L(self, **kwargs):
-        return self._interpolate('Eg_L', kwargs)
-        
-    @method_parameter(dependencies=['Eg_X'],
-                      units='eV')
-    def Eg_X(self, **kwargs):
-        return self._interpolate('Eg_X', kwargs)
-    
-    @method_parameter(dependencies=['Ep'],
-                      units='eV', references=[vurgaftman_2001])
-    def Ep(self, **kwargs):
-        '''
-        Linear interpolation is recommended for alloys.
-        '''
-        return self._interpolate('Ep', kwargs)
-    
-    @method_parameter(dependencies=['F'],
-                      units='dimensionless', references=[vurgaftman_2001])
-    def F(self, **kwargs):
-        '''
-        Linear interpolation is recommended for alloys.
-        '''
-        return self._interpolate('F', kwargs)
-    
-    @method_parameter(dependencies=['VBO'],
-                      units='eV')
-    def VBO(self, **kwargs):
-        return self._interpolate('VBO', kwargs)
-
-    @method_parameter(dependencies=['a_300K'],
-                      units='angstrom')
-    def a_300K(self, **kwargs):
-        '''
-        Returns the lattice parameter, a, in Angstroms at 300 K.
-        '''
-        return self._interpolate('a_300K', kwargs)
-    
-    @method_parameter(dependencies=['a_c'],
-                      units='eV')
-    def a_c(self, **kwargs):
-        return self._interpolate('a_c', kwargs)
-    
-    @method_parameter(dependencies=['a_v'],
-                      units='eV')
-    def a_v(self, **kwargs):
-        return self._interpolate('a_v', kwargs)
-    
-    @method_parameter(dependencies=['b'],
-                      units='eV')
-    def b(self, **kwargs):
-        return self._interpolate('b', kwargs)
-    
-    @method_parameter(dependencies=['c11'],
-                      units='eV')
-    def c11(self, **kwargs):
-        return self._interpolate('c11', kwargs)
-    
-    @method_parameter(dependencies=['c12'],
-                      units='eV')
-    def c12(self, **kwargs):
-        return self._interpolate('c12', kwargs)
-    
-    @method_parameter(dependencies=['c44'],
-                      units='eV')
-    def c44(self, **kwargs):
-        return self._interpolate('c44', kwargs)
-    
-    @method_parameter(dependencies=['d'],
-                      units='eV')
-    def d(self, **kwargs):
-        return self._interpolate('d', kwargs)
-    
-    @method_parameter(dependencies=['meff_hh_100', 'meff_lh_100'],
-                      units='dimensionless')
-    def luttinger1(self, **kwargs):
-        return (1. / self.meff_lh_100(**kwargs) + 1. / self.meff_hh_100(**kwargs)) / 2.
-    
-    @method_parameter(dependencies=['meff_hh_100', 'meff_lh_100'],
-                      units='dimensionless')
-    def luttinger2(self, **kwargs):
-        return (1. / self.meff_lh_100(**kwargs) - 1. / self.meff_hh_100(**kwargs)) / 4.
-    
-    @method_parameter(dependencies=['luttinger2', 'luttinger32'],
-                      units='dimensionless')
-    def luttinger3(self, **kwargs):
-        return self.luttinger32(**kwargs) + self.luttinger2(**kwargs)
-    
-    @method_parameter(dependencies=['luttinger32'],
-                      units='dimensionless')
-    def luttinger32(self, **kwargs):
-        '''
-        Returns the difference between the third and second Luttinger
-        parameters, i.e. `luttinger3 - luttinger2`.
-        
-        Linear interpolation of luttinger32 is the recommended way to
-        estimate the valance band warping in alloys.
-        '''
-        return self._interpolate('luttinger32', kwargs)
-    
-    @method_parameter(dependencies=['meff_e_L_DOS'],
-                      units='m_e', references=[vurgaftman_2001])
-    def meff_e_L_DOS(self, **kwargs):
-        '''
-        Linear interpolation of meff_e_L_DOS is recommended for alloys.
-        '''
-        return self._interpolate('meff_e_L_DOS', kwargs)
-    
-    @method_parameter(dependencies=['meff_e_L_long'],
-                      units='m_e', references=[vurgaftman_2001])
-    def meff_e_L_long(self, **kwargs):
-        '''
-        Linear interpolation of meff_e_L_long is recommended for alloys.
-        '''
-        return self._interpolate('meff_e_L_long', kwargs)
-    
-    @method_parameter(dependencies=['meff_e_L_trans'],
-                      units='m_e', references=[vurgaftman_2001])
-    def meff_e_L_trans(self, **kwargs):
-        '''
-        Linear interpolation of meff_e_L_trans is recommended for alloys.
-        '''
-        return self._interpolate('meff_e_L_trans', kwargs)
-    
-    @method_parameter(dependencies=['meff_e_X_DOS'],
-                      units='m_e', references=[vurgaftman_2001])
-    def meff_e_X_DOS(self, **kwargs):
-        '''
-        Linear interpolation of meff_e_X_DOS is recommended for alloys.
-        '''
-        return self._interpolate('meff_e_X_DOS', kwargs)
-    
-    @method_parameter(dependencies=['meff_e_X_long'],
-                      units='m_e', references=[vurgaftman_2001])
-    def meff_e_X_long(self, **kwargs):
-        '''
-        Linear interpolation of meff_e_X_long is recommended for alloys.
-        '''
-        return self._interpolate('meff_e_X_long', kwargs)
-    
-    @method_parameter(dependencies=['meff_e_X_trans'],
-                      units='m_e', references=[vurgaftman_2001])
-    def meff_e_X_trans(self, **kwargs):
-        '''
-        Linear interpolation of meff_e_X_trans is recommended for alloys.
-        '''
-        return self._interpolate('meff_e_X_trans', kwargs)
-    
-    @method_parameter(dependencies=['meff_hh_100'], units='m_e')
-    def meff_hh_100(self, **kwargs):
-        '''
-        Returns the light-hole band effective mass in the [100] direction,
-        meff_hh_100, in units of electron mass.
-
-        Linear interpolation of meff_hh_100 is recommended for alloys.
-        '''
-        return self._interpolate('meff_hh_100', kwargs)
-    
-    @method_parameter(dependencies=['meff_lh_100'], units='m_e')
-    def meff_lh_100(self, **kwargs):
-        '''
-        Returns the heavy-hole band effective mass in the [100] direction,
-        meff_hh_100, in units of electron mass.
-
-        Linear interpolation of meff_lh_100 is recommended for alloys.
-        '''
-        return self._interpolate('meff_lh_100', kwargs)
-    
-    @method_parameter(dependencies=['meff_SO'],
-                      units='m_e', references=[vurgaftman_2001])
-    def meff_SO(self, **kwargs):
-        '''
-        Linear interpolation of meff_SO is recommended for alloys.
-        '''
-        return self._interpolate('meff_SO', kwargs)
-
-    @method_parameter(dependencies=['thermal_expansion'],
-                      units='angstrom/K')
-    def thermal_expansion(self, **kwargs):
-        '''
-        Returns the thermal expansion coefficient.
-        '''
-        return self._interpolate('thermal_expansion', kwargs)
