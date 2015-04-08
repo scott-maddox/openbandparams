@@ -28,17 +28,6 @@ class IIIVZincBlendeAlloy(IIIVAlloy):
     '''
     The base class for all III-V zinc blende alloys.
     '''
-
-    @method_parameter(dependencies=['a_300K', 'thermal_expansion'],
-                      units='angstrom')
-    def a(self, **kwargs):
-        '''
-        Returns the lattice parameter, a, in Angstroms at a given
-        temperature, `T`, in Kelvin (default: 300 K).
-        '''
-        T = kwargs.get('T', 300.)
-        return (self.a_300K(**kwargs) +
-                self.thermal_expansion(**kwargs) * (T - 300.))
         
     @method_parameter(dependencies=['VBO', 'Eg'], units='eV')
     def CBO(self, **kwargs):
@@ -72,6 +61,17 @@ class IIIVZincBlendeAlloy(IIIVAlloy):
         '''
         return self.VBO(**kwargs) + self.Eg_X(**kwargs)
         
+    @method_parameter(dependencies=['Eg_Gamma', 'Eg_L', 'Eg_X'], units='eV',
+                      aliases=['bandgap'])
+    def Eg(self, **kwargs):
+        '''
+        Returns the bandgap, Eg, in eV at a given
+        temperature, T, in K (default=300.).
+        '''
+        return min(self.Eg_Gamma(**kwargs),
+                   self.Eg_L(**kwargs),
+                   self.Eg_X(**kwargs))
+        
     @method_parameter(dependencies=['Eg_Gamma_0', 'alpha_Gamma', 'beta_Gamma'],
                       units='eV')
     def Eg_Gamma(self, **kwargs):
@@ -98,27 +98,6 @@ class IIIVZincBlendeAlloy(IIIVAlloy):
         beta = self.beta_X(**kwargs)
         T = kwargs.get('T', 300.)
         return varshni(Eg_0, alpha, beta, T)
-        
-    @method_parameter(dependencies=['Eg_Gamma', 'Eg_L', 'Eg_X'], units='eV',
-                      aliases=['bandgap'])
-    def Eg(self, **kwargs):
-        '''
-        Returns the bandgap, Eg, in eV at a given
-        temperature, T, in K (default=300.).
-        '''
-        return min(self.Eg_Gamma(**kwargs),
-                   self.Eg_L(**kwargs),
-                   self.Eg_X(**kwargs))
-    
-    @method_parameter(dependencies=['Eg_Gamma', 'meff_e_Gamma'],
-                      units='dimensionless', references=[kane_1956])
-    def nonparabolicity(self, **kwargs):
-        '''
-        Returns the Kane band nonparabolicity parameter for the Gamma-valley.
-        '''
-        Eg = self.Eg_Gamma(**kwargs)
-        meff = self.meff_e_Gamma(**kwargs)
-        return 1/Eg * (1 - meff)**2
     
     @method_parameter(dependencies=['Eg_Gamma_0', 'Delta_SO', 'Ep',
                                     'meff_e_Gamma_0'],
@@ -133,22 +112,29 @@ class IIIVZincBlendeAlloy(IIIVAlloy):
         Ep = self.Ep(**kwargs)
         meff = self.meff_e_Gamma_0(**kwargs)
         return (1./meff-1-(Ep*(Eg+2.*Delta_SO/3.))/(Eg*(Eg+Delta_SO)))/2
+
+    @method_parameter(dependencies=['a_300K', 'thermal_expansion'],
+                      units='angstrom')
+    def a(self, **kwargs):
+        '''
+        Returns the lattice parameter, a, in Angstroms at a given
+        temperature, `T`, in Kelvin (default: 300 K).
+        '''
+        T = kwargs.get('T', 300.)
+        return (self.a_300K(**kwargs) +
+                self.thermal_expansion(**kwargs) * (T - 300.))
     
-    @method_parameter(dependencies=['Eg_Gamma', 'Delta_SO', 'Ep', 'F'],
-                      units='m_e', references=[vurgaftman_2001])
-    def meff_e_Gamma(self, **kwargs):
+    @method_parameter(dependencies=['luttinger2', 'luttinger3'],
+                      units='dimensionless')
+    def luttinger32(self, **kwargs):
         '''
-        Returns the electron effective mass in the Gamma-valley
-        calculated from Eg_Gamma(T), Delta_SO, Ep and F.
+        Returns the difference between the third and second Luttinger
+        parameters, i.e. `luttinger3 - luttinger2`.
         
-        Interpolation of Eg_Gamma(T), Delta_SO, Ep and F, and
-        then calculation of meff_e_Gamma is recommended for alloys.
+        Linear interpolation of luttinger32 is the recommended way to
+        estimate the valance band warping in alloys.
         '''
-        Eg = self.Eg_Gamma(**kwargs)
-        Delta_SO = self.Delta_SO(**kwargs)
-        Ep = self.Ep(**kwargs)
-        F = self.F(**kwargs)
-        return 1./((1.+2.*F)+(Ep*(Eg+2.*Delta_SO/3.))/(Eg*(Eg+Delta_SO)))
+        return 1. / (self.luttinger1(**kwargs) - 2 * self.luttinger2(**kwargs))
     
     @method_parameter(dependencies=['luttinger1', 'Eg_Gamma', 'Delta_SO', 'Ep'],
                       units='m_e', references=[vurgaftman_2001])
@@ -166,17 +152,21 @@ class IIIVZincBlendeAlloy(IIIVAlloy):
         luttinger1 = self.luttinger1(**kwargs)
         return 1./(luttinger1 - (Ep*Delta_SO)/(3*Eg*(Eg+Delta_SO)))
     
-    @method_parameter(dependencies=['luttinger2', 'luttinger3'],
-                      units='dimensionless')
-    def luttinger32(self, **kwargs):
+    @method_parameter(dependencies=['Eg_Gamma', 'Delta_SO', 'Ep', 'F'],
+                      units='m_e', references=[vurgaftman_2001])
+    def meff_e_Gamma(self, **kwargs):
         '''
-        Returns the difference between the third and second Luttinger
-        parameters, i.e. `luttinger3 - luttinger2`.
+        Returns the electron effective mass in the Gamma-valley
+        calculated from Eg_Gamma(T), Delta_SO, Ep and F.
         
-        Linear interpolation of luttinger32 is the recommended way to
-        estimate the valance band warping in alloys.
+        Interpolation of Eg_Gamma(T), Delta_SO, Ep and F, and
+        then calculation of meff_e_Gamma is recommended for alloys.
         '''
-        return 1. / (self.luttinger1(**kwargs) - 2 * self.luttinger2(**kwargs))
+        Eg = self.Eg_Gamma(**kwargs)
+        Delta_SO = self.Delta_SO(**kwargs)
+        Ep = self.Ep(**kwargs)
+        F = self.F(**kwargs)
+        return 1./((1.+2.*F)+(Ep*(Eg+2.*Delta_SO/3.))/(Eg*(Eg+Delta_SO)))
     
     @method_parameter(dependencies=['luttinger1', 'luttinger2'], units='m_e')
     def meff_hh_100(self, **kwargs):
@@ -229,6 +219,16 @@ class IIIVZincBlendeAlloy(IIIVAlloy):
         meff_lh_111, in units of electron mass.
         '''
         return 1. / (self.luttinger1(**kwargs) + 2 * self.luttinger3(**kwargs))
+    
+    @method_parameter(dependencies=['Eg_Gamma', 'meff_e_Gamma'],
+                      units='dimensionless', references=[kane_1956])
+    def nonparabolicity(self, **kwargs):
+        '''
+        Returns the Kane band nonparabolicity parameter for the Gamma-valley.
+        '''
+        Eg = self.Eg_Gamma(**kwargs)
+        meff = self.meff_e_Gamma(**kwargs)
+        return 1/Eg * (1 - meff)**2
 
 #     def _get_eps_xx(self, **kwargs):
 #         if 'a0' in kwargs:
