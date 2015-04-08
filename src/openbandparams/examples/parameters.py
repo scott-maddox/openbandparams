@@ -25,6 +25,10 @@ sys.path.insert(0,
 from openbandparams import *
 import string
 
+# Print a parameter's description and units
+print GaAs.Eg.description, ',', GaAs.Eg.units
+print
+
 # Print all parameters of all III-V zinc blende alloys
 params = {}
 for binary in iii_v_zinc_blende_binaries:
