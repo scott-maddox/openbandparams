@@ -59,10 +59,10 @@ print repr(AlPAsSb(x=0, y=0)), "-->", AlPAsSb(x=0, y=0)
 assert eval(repr(GaInPAs(Ga=0, P=0))) == GaInPAs(x=0, P=0)
 print ''
 print "Some GaInPAs alloys lattice matched to InP (at room temperature):"
-print GaInPAs(Ga=0.1, a=InP.a())
-print GaInPAs(As=0.1, a=InP.a())
+print repr(GaInPAs(Ga=0.1, a=InP.a()))
+print repr(GaInPAs(As=0.1, a=InP.a()))
 print ''
 print "Some AlPAsSb alloys lattice matched to InP (at room temperature):"
-print AlPAsSb(P=0.1, a=InP.a())
-print AlPAsSb(As=0.1, a=InP.a())
-print AlPAsSb(Sb=0.5, a=InP.a())
+print repr(AlPAsSb(P=0.1, a=InP.a()))
+print repr(AlPAsSb(As=0.1, a=InP.a()))
+print repr(AlPAsSb(Sb=0.5, a=InP.a()))
