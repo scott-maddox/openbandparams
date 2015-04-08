@@ -139,3 +139,21 @@ klipstein_2014 = Reference.from_bibtex('''
     pages = {2984--2990},
 }
 ''')
+
+arent_1989 = Reference.from_bibtex('''
+@article{arent_1989,
+    title = {Strain effects and band offsets in {GaAs}/{InGaAs} strained layered quantum structures},
+    volume = {66},
+    issn = {0021-8979, 1089-7550},
+    url = {http://scitation.aip.org.ezproxy.lib.utexas.edu/content/aip/journal/jap/66/4/10.1063/1.344395},
+    doi = {10.1063/1.344395},
+    number = {4},
+    urldate = {2014-04-04},
+    journal = {Journal of Applied Physics},
+    author = {Arent, D. J. and Deneffe, K. and Hoof, C. Van and Boeck, J. De and Borghs, G.},
+    month = aug,
+    year = {1989},
+    keywords = {Epitaxy, Exciton mediated interactions, Heterojunctions, Hydrostatics, Materials analysis},
+    pages = {1739--1747},
+}
+''')
