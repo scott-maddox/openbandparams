@@ -28,25 +28,21 @@ class IIIVZincBlendeTernary(IIIVZincBlendeMixedAlloy):
     '''
     def __init__(self, name, elements, binaries, parameters=None, x=None):
         if binaries[0].elements[1] == binaries[1].elements[1]:
+            # A_{x}B_{1-x}C
+            # e.g. AlGaAs
             self._type = 1
-            self._element_x = binaries[0].elements[0]
-            self._element_1mx = binaries[1].elements[0]
-            self._element_y = binaries[0].elements[1]
-            calc_elements = (binaries[0].elements[0],
-                             binaries[1].elements[0],
-                             binaries[0].elements[1])
+            self._element_x = elements[0]
+            self._element_1mx = elements[1]
+            self._element_y = elements[2]
         elif binaries[0].elements[0] == binaries[1].elements[0]:
+            # AB_{x}C_{1-x}
+            # e.g. GaAsSb
             self._type = 2
-            self._element_x = binaries[0].elements[1]
-            self._element_1mx = binaries[1].elements[1]
-            self._element_y = binaries[0].elements[0]
-            calc_elements = (binaries[0].elements[0],
-                             binaries[0].elements[1],
-                             binaries[1].elements[1])
+            self._element_y = elements[0]
+            self._element_x = elements[1]
+            self._element_1mx = elements[2]
         else:
             raise ValueError()
-#         name = ''.join(elements)
-        assert elements == calc_elements
         super(IIIVZincBlendeTernary, self).__init__(name, elements,
                                                     parameters=parameters)
         self.binaries = binaries
