@@ -33,9 +33,40 @@ AlGaInAs_InP = IIIVZincBlendeTernary(
     binaries=(AlInAs_InP, GaInAs_InP),
     parameters=[])
 
-print AlGaInAs_InP.latex()
-print 'Eg =', AlGaInAs_InP(Al=0).Eg()
+instance1 = AlGaInAs_InP(Al=0.5)
+print instance1.latex()
+print 'instance1.Eg =', instance1.Eg()
 
-# Change a parameter in this instance, but no other instances
-GaInAs_InP.set_parameter(ValueParameter('Eg_Gamma', 2., 'eV'))
-print 'Customized Eg =', AlGaInAs_InP(Al=0).Eg()
+# Change a parameter in the GaInAs_InP instance, which propogates to all
+# AlGaInAs_InP instances, due to lazy evaluation.
+GaInAs_InP.set_parameter(ValueParameter('Eg_Gamma', 1., 'eV'))
+print 'instance1.Eg =', instance1.Eg()
+
+# Change a bowing parameter in the AlGaInAs_InP instance.
+instance1.set_parameter(ValueParameter('Eg_Gamma_bowing', 1., 'eV'))
+print 'instance1.Eg =', instance1.Eg()
+
+# Other instances of AlGaInAs_InP are not affected.
+instance2 = AlGaInAs_InP(Al=0.5)
+print 'instance2.Eg =', instance2.Eg()
+
+# However, we can adopt the altered parameter in a new instance, by
+# instancing off of the altered instance. This is possible due to
+# shallow copying on instancing.
+instance1_copy = instance1(Al=0.5)
+print 'instance1_copy.Eg =', instance1_copy.Eg()
+
+# Once split, they each have their own list of parameters, though.
+instance1.set_parameter(ValueParameter('Eg_Gamma_bowing', 2., 'eV'))
+print 'instance1.Eg =', instance1.Eg()
+print 'instance1_copy.Eg =', instance1_copy.Eg()
+
+# Changing a parameter in AlGaInAs_InP, directly, alters all future instances,
+# but not existing instances.
+AlGaInAs_InP.set_parameter(ValueParameter('Eg_Gamma_bowing', 3., 'eV'))
+print 'instance1.Eg =', instance1.Eg()
+print 'instance2.Eg =', instance2.Eg()
+instance3 = AlGaInAs_InP(Al=0.5)
+print 'instance3.Eg =', instance3.Eg()
+instance4 = AlGaInAs_InP(Al=0.5)
+print 'instance4.Eg =', instance4.Eg()
