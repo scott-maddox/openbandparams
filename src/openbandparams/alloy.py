@@ -53,6 +53,18 @@ class Alloy(object):
     
 #     def __repr__(self):
 #         return self.name
+    
+    def latex(self):
+        '''
+        Returns a LaTeX representation of the alloy.
+        '''
+        raise NotImplementedError()
+
+    def element_fraction(self, element):
+        '''
+        Returns the atomic fraction of the given ``element``.
+        '''
+        raise NotImplementedError()
 
     def _add_parameter(self, parameter):
         '''
