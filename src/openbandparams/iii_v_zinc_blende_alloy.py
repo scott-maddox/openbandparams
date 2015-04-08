@@ -17,17 +17,39 @@
 #   along with openbandparams.  If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
+from .alloy import Alloy
 from .iii_v_alloy import IIIVAlloy
+from .iii_v_zinc_blende_strained import IIIVZincBlendeStrained001
 from .parameter import method_parameter
 from .references import vurgaftman_2001, kane_1956
 from .equations import varshni
-from math import sqrt
 
 
 class IIIVZincBlendeAlloy(IIIVAlloy):
     '''
     The base class for all III-V zinc blende alloys.
     '''
+
+    def strained_001(self, target):
+        '''
+        Returns an instance of ``IIIVZincBlendeStrained001``, which is a
+        biaxial-strained III-V zinc blende binary alloy grown on a (001)
+        surface.
+        
+        Parameters
+        ----------
+        target : Alloy with ``a`` parameter or float
+            Growth substrate, assumed to have a (001) surface, or out-of-plane
+            strain, which is negative for tensile strain and positive for
+            compressive strain. This is the strain measured by X-ray
+            diffraction (XRD) symmetric omega-2theta scans.
+        '''
+        if isinstance(target, Alloy):
+            return IIIVZincBlendeStrained001(unstrained=self,
+                                             substrate=target)
+        else:
+            return IIIVZincBlendeStrained001(unstrained=self,
+                                             strain_out_of_plane=target)
         
     @method_parameter(dependencies=['VBO', 'Eg'], units='eV')
     def CBO(self, **kwargs):
