@@ -86,6 +86,8 @@ class IIIVZincBlendeTernary(IIIVZincBlendeAlloy):
         else:
             raise TypeError(
                 "Missing required key word argument.\n" + self._get_usage())
+        if not (0. <= x <= 1.):
+            raise ValueError('The alloy fraction must be between 0 and 1')
         return self._instance(x=x)
 
     def _get_usage(self):
