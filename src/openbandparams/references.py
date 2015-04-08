@@ -18,10 +18,10 @@
 #
 #############################################################################
 
-from .reference import Reference
+from .reference import BibtexReference
 
 
-vurgaftman_2001 = Reference.from_bibtex('''
+vurgaftman_2001 = BibtexReference('''
 @article{vurgaftman_2001,
     title = {Band parameters for {III}-{V} compound semiconductors and their
              alloys},
@@ -39,7 +39,7 @@ vurgaftman_2001 = Reference.from_bibtex('''
 }
 ''')
 
-kane_1956 = Reference.from_bibtex('''
+kane_1956 = BibtexReference('''
 @article{kane_energy_1956,
     title = {Energy band structure in p-type germanium and silicon},
     volume = {1},
@@ -57,7 +57,7 @@ kane_1956 = Reference.from_bibtex('''
 }
 ''')
 
-kim_2010 = Reference.from_bibtex('''
+kim_2010 = BibtexReference('''
 @article{kim_towards_2010,
     title = {Towards efficient band structure and effective mass calculations for {III}-{V} direct band-gap semiconductors},
     volume = {82},
@@ -73,7 +73,7 @@ kim_2010 = Reference.from_bibtex('''
 }
 ''')
 
-drube_1987 = Reference.from_bibtex('''
+drube_1987 = BibtexReference('''
 @article{kim_towards_2010,
     title = {Towards efficient band structure and effective mass calculations for {III}-{V} direct band-gap semiconductors},
     volume = {82},
@@ -89,7 +89,7 @@ drube_1987 = Reference.from_bibtex('''
 }
 ''')
 
-adachi_1987 = Reference.from_bibtex('''
+adachi_1987 = BibtexReference('''
 @article{adachi_band_1987,
     title = {Band gaps and refractive indices of {AlGaAsSb}, {GaInAsSb}, and {InPAsSb}: {Key} properties for a variety of the 2--4-$\mu$m optoelectronic device applications},
     volume = {61},
@@ -107,7 +107,7 @@ adachi_1987 = Reference.from_bibtex('''
 }
 ''')
 
-lin_2002 = Reference.from_bibtex('''
+lin_2002 = BibtexReference('''
 @inproceedings{lin_band_2002,
     title = {Band structures and bandgap bowing parameters of wurtzite and zincblende {III}-nitrides},
     volume = {4913},
@@ -122,7 +122,7 @@ lin_2002 = Reference.from_bibtex('''
 }
 ''')
 
-klipstein_2014 = Reference.from_bibtex('''
+klipstein_2014 = BibtexReference('''
 @article{klipstein_modeling_2014,
     title = {Modeling {InAs}/{GaSb} and {InAs}/{InAsSb} {Superlattice} {Infrared} {Detectors}},
     volume = {43},
@@ -140,7 +140,7 @@ klipstein_2014 = Reference.from_bibtex('''
 }
 ''')
 
-arent_1989 = Reference.from_bibtex('''
+arent_1989 = BibtexReference('''
 @article{arent_1989,
     title = {Strain effects and band offsets in {GaAs}/{InGaAs} strained layered quantum structures},
     volume = {66},

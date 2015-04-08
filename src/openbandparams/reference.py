@@ -19,20 +19,12 @@
 #############################################################################
 
 class Reference(object):
-    def __init__(self, author, journal, volume, pages, year,
-                 title=None, number=None):
-        self.author = author
-        self.journal = journal
-        self.volume = volume
-        self.pages = pages
-        self.year = year
-        self.title = title
-        self.number = number
-        self.bibtex = None
-    
-    @classmethod
-    def from_bibtex(cls, bibtex):
-        #TODO: parse this into the various fields
-        result = cls(None, None, None, None, None, None)
-        result.bibtex = bibtex
-        return result
+    pass
+
+class BibtexReference(Reference):
+
+    def __init__(self, bibtex):
+        self.bibtex = bibtex
+
+    def __str__(self):
+        return self.bibtex
