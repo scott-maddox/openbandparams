@@ -40,29 +40,25 @@ Z = numpy.empty(shape=(N, N), dtype=numpy.double)
 W = numpy.empty(shape=(N, N), dtype=numpy.double)
 for i in xrange(N):
     for j in xrange(N):
-        eps_xx = alloy.biaxial_strained_eps_xx(x=X[i, j], y=Y[i, j],
-                                               a0=GaSb.a(), T=T)
-        if eps_xx < -0.03 or eps_xx > 0:
+        strained = alloy(x=X[i, j], y=Y[i, j]).strained_001(GaSb)
+        strain = strained.strain_out_of_plane(T=T)
+        if not (0. <= strain <= 0.03):
             Z[i, j] = numpy.nan
             W[i, j] = numpy.nan
         else:
-            E_hh = alloy.biaxial_strained_E_hh(x=X[i, j], y=Y[i, j],
-                                               a0=GaSb.a(), T=T)
-            E_c = alloy.biaxial_strained_E_c(x=X[i, j], y=Y[i, j],
-                                             a0=GaSb.a(), T=T)
-            Z[i, j] = E_hh - GaSb.VBO()
-            W[i, j] = GaSb.VBO() +GaSb.Eg(T=T) - E_c
+            Z[i, j] = strained.VBO_hh(T=T) - GaSb.VBO()
+            W[i, j] = GaSb.CBO() - strained.CBO(T=T)
 
 # plot it
 fig = plt.figure()
 CS = plt.contour(1-X, 1-Y, Z, 14, colors='r')
 plt.clabel(CS, inline=True, fontsize=10)
-CS2 = plt.contour(1-X, 1-Y, W, 12, colors='g')
+CS2 = plt.contour(1-X, 1-Y, W, 12, colors='b')
 plt.clabel(CS2, inline=True, fontsize=10)
-plt.title('$%s/GaSb$ from 0 to -3%% strain (T = %.0f K)' % (alloy.LaTeX(), T))
+plt.title('$%s/GaSb$ from 0 to 3%% strain (T = %.0f K)' % (alloy.latex(), T))
 plt.xlabel('%s fraction' % alloy.elements[1])
 plt.ylabel('%s fraction' % alloy.elements[3])
-plt.plot([numpy.nan], [numpy.nan], 'g-', label='Conduction Band Offset')
+plt.plot([numpy.nan], [numpy.nan], 'b-', label='Conduction Band Offset')
 plt.plot([numpy.nan], [numpy.nan], 'r-', label='Valance Band Offset')
 plt.legend(loc='lower left')
 

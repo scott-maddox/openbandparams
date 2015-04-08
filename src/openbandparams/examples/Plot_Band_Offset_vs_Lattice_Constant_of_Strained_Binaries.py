@@ -33,7 +33,7 @@ T = 300
 # initialize the plot
 fig = plt.figure()
 ax = fig.add_subplot(111)
-plt.xlabel('Strained Lattice Parameter at %g K ($\AA$)' % T)
+plt.xlabel('Substrate Lattice Parameter at %g K ($\AA$)' % T)
 plt.ylabel('Strained Band Offsets at %g K (eV)' % T)
 
 # plot the binaries
@@ -59,26 +59,24 @@ for x, y, label in zip(x, y, label):
 
 # plot the strained binaries
 first = True
-eps_xx = numpy.linspace(-0.02, 0.02, 100)
-for b in [AlP, GaP, InP,
-          AlAs, GaAs, InAs,
-          AlSb, GaSb, InSb]:
-    a_strained = [b.biaxial_strained_a0(eps_xx=eps_xx_) for eps_xx_ in eps_xx]
-    E_c = [b.biaxial_strained_E_c(eps_xx=eps_xx_)
-           for eps_xx_ in eps_xx]
-    E_hh = [b.biaxial_strained_E_hh(eps_xx=eps_xx_)
-            for eps_xx_ in eps_xx]
-    E_lh = [b.biaxial_strained_E_lh(eps_xx=eps_xx_)
-            for eps_xx_ in eps_xx]
+strains = numpy.linspace(-0.02, 0.02, 100)
+for unstrained in [AlP, GaP, InP,
+                   AlAs, GaAs, InAs,
+                   AlSb, GaSb, InSb]:
+    straineds = [unstrained.strained_001(strain) for strain in strains]
+    substrate_a = [strained.substrate_a() for strained in straineds]
+    CBO = [strained.CBO() for strained in straineds]
+    VBO_hh = [strained.VBO_hh() for strained in straineds]
+    VBO_lh = [strained.VBO_lh() for strained in straineds]
     if first:
-        plt.plot(a_strained, E_c, 'r-', label='Conduction band-edge')
-        plt.plot(a_strained, E_hh, 'b-', label='Heavy-hole band-edge')
-        plt.plot(a_strained, E_lh, 'g-', label='Light-hole band-edge')
+        plt.plot(substrate_a, CBO, 'r-', label='Conduction band-edge')
+        plt.plot(substrate_a, VBO_hh, 'b-', label='Heavy-hole band-edge')
+        plt.plot(substrate_a, VBO_lh, 'g-', label='Light-hole band-edge')
         first = False
     else:
-        plt.plot(a_strained, E_c, 'r-')
-        plt.plot(a_strained, E_hh, 'b-')
-        plt.plot(a_strained, E_lh, 'g-')
+        plt.plot(substrate_a, CBO, 'r-')
+        plt.plot(substrate_a, VBO_hh, 'b-')
+        plt.plot(substrate_a, VBO_lh, 'g-')
 
 plt.legend(loc='best')
 
