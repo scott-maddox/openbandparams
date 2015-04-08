@@ -18,6 +18,9 @@
 #
 #############################################################################
 
+__all__ = ['Parameter', 'ValueParameter',
+           'FunctionParameter', 'method_parameter']
+
 
 class Parameter(object):
     def __init__(self, name, units, aliases=[], references=[]):

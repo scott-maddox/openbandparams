@@ -17,6 +17,7 @@
 #   along with openbandparams.  If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
+__all__ = ['IIIVZincBlendeQuaternary']
 
 from .iii_v_zinc_blende_mixed_alloy import IIIVZincBlendeMixedAlloy
 from .algorithms import bisect

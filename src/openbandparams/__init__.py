@@ -22,6 +22,22 @@ from . import version
 from .version import __version__
 __all__ = ['__version__']
 
+from . import parameter
+__all__ += parameter.__all__
+from .parameter import *
+
+from . import iii_v_zinc_blende_binary
+__all__ += iii_v_zinc_blende_binary.__all__
+from .iii_v_zinc_blende_binary import *
+
+from . import iii_v_zinc_blende_ternary
+__all__ += iii_v_zinc_blende_ternary.__all__
+from .iii_v_zinc_blende_ternary import *
+
+from . import iii_v_zinc_blende_quaternary
+__all__ += iii_v_zinc_blende_quaternary.__all__
+from .iii_v_zinc_blende_quaternary import *
+
 from . import iii_v_zinc_blende_binaries
 __all__ += iii_v_zinc_blende_binaries.__all__
 from .iii_v_zinc_blende_binaries import *

@@ -17,6 +17,7 @@
 #   along with openbandparams.  If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
+__all__ = ['IIIVZincBlendeBinary']
 
 from .iii_v_zinc_blende_alloy import IIIVZincBlendeAlloy
 
