@@ -39,13 +39,13 @@ X, Y = numpy.meshgrid(xs, ys)
 Z = numpy.empty(shape=(N, N), dtype=numpy.double)
 for i in xrange(N):
     for j in xrange(N):
-        Z[i, j] = alloy.Eg(x=X[i, j], y=Y[i, j], T=T)
+        Z[i, j] = alloy(x=X[i, j], y=Y[i, j]).Eg(T=T)
 
 # plot it
 fig = plt.figure()
 CS = plt.contour(1-X, 1-Y, Z, 10, colors='k')
 plt.clabel(CS, inline=True, fontsize=10)
-plt.title('$%s$ (T = %.0f K)' % (alloy.LaTeX(), T))
+plt.title('$%s$ (T = %.0f K)' % (alloy.latex(), T))
 plt.xlabel('%s fraction' % alloy.elements[1])
 plt.ylabel('%s fraction' % alloy.elements[3])
 
