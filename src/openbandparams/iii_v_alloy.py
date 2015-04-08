@@ -19,10 +19,13 @@
 #############################################################################
 
 from .alloy import Alloy
-
+from .parameter import method_parameter
 
 class IIIVAlloy(Alloy):
     '''
     The base class for all III-V alloys.
     '''
-    pass
+    
+    @method_parameter(dependencies=['Eg', 'VBO'], units='eV')
+    def electron_affinity(self, **kwargs):
+        return 4.66-self.Eg(**kwargs)-self.VBO(**kwargs)

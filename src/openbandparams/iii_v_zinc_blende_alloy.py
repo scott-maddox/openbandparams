@@ -78,10 +78,6 @@ class IIIVZincBlendeAlloy(IIIVAlloy):
                    self.Eg_L(**kwargs),
                    self.Eg_X(**kwargs))
     
-    @method_parameter(dependencies=['Eg', 'VBO'], units='eV')
-    def electron_affinity(self, **kwargs):
-        return 4.66-self.Eg(**kwargs)-self.VBO(**kwargs)
-    
     @method_parameter(dependencies=['Eg_Gamma', 'meff_e_Gamma'],
                       units='dimensionless', references=[kane_1956])
     def nonparabolicity(self, **kwargs):
