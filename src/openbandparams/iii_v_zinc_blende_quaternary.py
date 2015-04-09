@@ -154,9 +154,11 @@ class IIIVZincBlendeQuaternary(IIIVZincBlendeMixedAlloy):
         return x, y, z
     
     def _instance(self, x=None, y=None, z=None):
-        return IIIVZincBlendeQuaternary(self.name, self.elements,
-            self.ternaries, parameters=self._parameters.values(),
-            x=x, y=y, z=z)
+        instance = IIIVZincBlendeQuaternary(self.name, self.elements,
+                                            self.ternaries, x=x, y=y, z=z)
+        for parameter in self._parameters.values():
+            instance.set_parameter(parameter)
+        return instance
 
     def _has_x(self, kwargs):
         '''Returns True if x is explicitly defined in kwargs'''
