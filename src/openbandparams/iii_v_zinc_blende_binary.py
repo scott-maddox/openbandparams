@@ -26,6 +26,8 @@ class IIIVZincBlendeBinary(IIIVZincBlendeAlloy):
     '''
     The base class for all III-V zinc blende binary alloys.
     '''
+    def __repr__(self):
+        return self.name
     
     def latex(self):
         return self.name
