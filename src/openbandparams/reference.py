@@ -1,5 +1,5 @@
 #
-#   Copyright (c) 2013-2014, Scott J Maddox
+#   Copyright (c) 2013-2015, Scott J Maddox
 #
 #   This file is part of openbandparams.
 #
@@ -18,8 +18,13 @@
 #
 #############################################################################
 
-from . import zinc_blende
-from .zinc_blende import *
+class Reference(object):
+    pass
 
-__all__ = []
-__all__ += zinc_blende.__all__
+class BibtexReference(Reference):
+
+    def __init__(self, bibtex):
+        self.bibtex = bibtex
+
+    def __str__(self):
+        return self.bibtex

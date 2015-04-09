@@ -1,5 +1,5 @@
 #
-#   Copyright (c) 2013-2014, Scott J Maddox
+#   Copyright (c) 2013-2015, Scott J Maddox
 #
 #   This file is part of openbandparams.
 #
@@ -23,6 +23,23 @@ import sys
 sys.path.insert(0,
     os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 from openbandparams import *
+import string
 
-# Print an unformatted temperature dependent parameters
-print 'electron_affinity=', GaAs.electron_affinity(), 'eV'
+# Print a parameter's description and units
+print GaAs.Eg.description, ',', GaAs.Eg.units
+print
+
+# Print all parameters of all III-V zinc blende alloys
+params = {}
+for binary in iii_v_zinc_blende_binaries:
+    for param in binary.get_unique_parameters():
+        if param.name not in params:
+            params[param.name] = param
+names = [n for n,p in sorted(params.items())]
+descriptions = [p.description for n,p in sorted(params.items())]
+max_name_width = max([len(name) for name in names])
+max_desc_width = max([len(desc) for desc in descriptions])
+print '{} | {}'.format(string.ljust('Parameter', max_name_width),'Description')
+print '-'*(max_name_width+max_desc_width+3)
+for name, desc in zip(names, descriptions):
+    print '{} | {}'.format(string.ljust(name, max_name_width),desc)

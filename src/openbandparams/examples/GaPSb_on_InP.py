@@ -33,8 +33,8 @@ print '>>> GaPSb_on_InP = GaPSb(a=a_InP, T=Tg)\n',
 GaPSb_on_InP = GaInAs(a=a_InP, T=Tg)
 print '>>> InP.a(T=Tg)\n', InP.a(T=Tg)
 print '>>> GaPSb_on_InP.a()\n', GaPSb_on_InP.a(T=Tg)
-print '>>> GaPSb_on_InP.elementFraction("Ga")\n', \
-    GaPSb_on_InP.elementFraction("Ga")
+print '>>> GaPSb_on_InP.element_fraction("Ga")\n', \
+    GaPSb_on_InP.element_fraction("Ga")
 
 print '\nGet the properties at 70 C:'
 T = 273.15 + 70
@@ -58,4 +58,4 @@ meff_e_L_DOS = (GaPSb_on_InP.meff_e_L_long(T=T) ** (1. / 3) *
                 GaPSb_on_InP.meff_e_L_trans(T=T) ** (2. / 3))
 print 'meff_e_L_DOS', meff_e_L_DOS
 DOS_ratio = (meff_e_L_DOS) ** (3. / 2) / (meff_e_Gamma) ** (3. / 2)
-print 'eff_DOS_ratio', DOS_ratio
+print 'meff_DOS_ratio', DOS_ratio

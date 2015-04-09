@@ -1,5 +1,5 @@
 #
-#   Copyright (c) 2013-2014, Scott J Maddox
+#   Copyright (c) 2013-2015, Scott J Maddox
 #
 #   This file is part of openbandparams.
 #
@@ -24,35 +24,7 @@ sys.path.insert(0,
     os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 from openbandparams import *
 
-import matplotlib.pyplot as plt
-import numpy
-
-# Type 3 Quaternary
-alloy = GaInPAs
-
-# calculate the data
-T = 300  # K
-N = 100
-xs = numpy.linspace(0, 1, N)
-ys = numpy.linspace(0, 1, N)
-X, Y = numpy.meshgrid(xs, ys)
-Z = numpy.empty(shape=(N, N), dtype=numpy.double)
-for i in xrange(N):
-    for j in xrange(N):
-        Z[i, j] = alloy(x=X[i, j], y=Y[i, j]).Eg(T=T)
-
-# plot it
-fig = plt.figure()
-CS = plt.contour(1-X, 1-Y, Z, 10, colors='k')
-plt.clabel(CS, inline=True, fontsize=10)
-plt.title('$%s$ (T = %.0f K)' % (alloy.latex(), T))
-plt.xlabel('%s fraction' % alloy.elements[1])
-plt.ylabel('%s fraction' % alloy.elements[3])
-
-if __name__ == '__main__':
-    import sys
-    if len(sys.argv) > 1:
-        output_filename = sys.argv[1]
-        plt.savefig(output_filename)
-    else:
-        plt.show()
+# Print all references used to calculate a parameter
+parameter = InAsSb.Eg
+for ref in parameter.get_references():
+    print ref

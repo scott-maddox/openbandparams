@@ -1,5 +1,5 @@
 #
-#   Copyright (c) 2013-2014, Scott J Maddox
+#   Copyright (c) 2013-2015, Scott J Maddox
 #
 #   This file is part of openbandparams.
 #
@@ -23,36 +23,22 @@ import sys
 sys.path.insert(0,
     os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 from openbandparams import *
+import string
 
-import matplotlib.pyplot as plt
-import numpy
+# Print all parameters of all strained III-V zinc blende alloys
+params = {}
+for binary in iii_v_zinc_blende_binaries:
+    for param in binary.strained_001(0).get_unique_parameters():
+        if param.name not in params:
+            params[param.name] = param
+names = [n for n,p in sorted(params.items())]
+descriptions = [p.description for n,p in sorted(params.items())]
+max_name_width = max([len(name) for name in names])
+max_desc_width = max([len(desc) for desc in descriptions])
 
-# Type 3 Quaternary
-alloy = GaInPAs
-
-# calculate the data
-T = 300  # K
-N = 100
-xs = numpy.linspace(0, 1, N)
-ys = numpy.linspace(0, 1, N)
-X, Y = numpy.meshgrid(xs, ys)
-Z = numpy.empty(shape=(N, N), dtype=numpy.double)
-for i in xrange(N):
-    for j in xrange(N):
-        Z[i, j] = alloy(x=X[i, j], y=Y[i, j]).Eg(T=T)
-
-# plot it
-fig = plt.figure()
-CS = plt.contour(1-X, 1-Y, Z, 10, colors='k')
-plt.clabel(CS, inline=True, fontsize=10)
-plt.title('$%s$ (T = %.0f K)' % (alloy.latex(), T))
-plt.xlabel('%s fraction' % alloy.elements[1])
-plt.ylabel('%s fraction' % alloy.elements[3])
-
-if __name__ == '__main__':
-    import sys
-    if len(sys.argv) > 1:
-        output_filename = sys.argv[1]
-        plt.savefig(output_filename)
-    else:
-        plt.show()
+print '='*max_name_width+'   '+'='*max_desc_width
+print '{}   {}'.format(string.ljust('Parameter', max_name_width),'Description')
+print '='*max_name_width+'   '+'='*max_desc_width
+for name, desc in zip(names, descriptions):
+    print '{}   {}'.format(string.ljust(name, max_name_width),desc)
+print '='*max_name_width+'   '+'='*max_desc_width

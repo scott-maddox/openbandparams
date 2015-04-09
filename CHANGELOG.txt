@@ -1,8 +1,14 @@
 Changed in 0.8:
-- Fixed Ternary2 requiring lattice matching temperature
-- Ternary and TernaryType can now use lattice matched ternaries as binaries
-- Added meff_e_DOS
-- Added electron_affinity
+- Near complete rewrite of internals
+- Parameters now have units, aliases, descriptions and references
+- Strained alloy interface is much cleaner
+  (see `examples/Strained_Ternaries`)
+- Ternaries of ternaries are now possible
+  (see `examples/Ternaries_of_Ternaries`)
+- Alloy interpolation now follows the recommendations from
+  Vurgaftman, et al. (2001).
+- Added and renamed several parameters and methods
+- Fixed Ternaries requiring lattice matching temperature
 
 Changed in 0.7:
 - Added several functions for calculating the effects of biaxial strain
