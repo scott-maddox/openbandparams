@@ -1,6 +1,6 @@
-Advanced Examples
-=================
+Advanced
+========
 
 .. toctree::
 
-    advanced/GaInAsSb_on_GaSb.rst
+    advanced/GaInAsSb_on_GaSb

@@ -16,7 +16,7 @@ Contents
 
     installation.rst
     tutorial.rst
-    supported_materials.rst
+    supported_parameters.rst
     examples.rst
     changelog.rst
 
