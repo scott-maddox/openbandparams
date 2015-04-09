@@ -80,11 +80,11 @@ Starting from the `code` directory, execute these commands to copy the html file
 
 Now, if 0.8 didn't exist yet, we need to add it to the front page index. Open `openbandparams-gh-pages/index.html` and find the following line:
 
-    <li class="toctree-l1"><a class="reference internal" href="0.7/index.html">0.8</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="0.7">0.7</a></li>
 
 Copy and paste this line just above it:
 
-    <li class="toctree-l1"><a class="reference internal" href="0.8/index.html">0.8</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="0.8">0.8</a></li>
 
 Now, commit the changes and push them to github:
 
