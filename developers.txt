@@ -71,6 +71,16 @@ missed any bugs:
     python test.py
     python build_doc.py clean
 
+Also build, install, and test in a virtualenv:
+
+    virtualenv venv
+    source venv/bin/activate
+    python setup.py build
+    python setup.py install
+    python -m openbandparams.tests
+    deactivate
+    rm -rf venv
+
 Go ahead and fix any bugs you find in the release branch, and we'll merge them
 back into the develop branch later.
 
@@ -128,8 +138,8 @@ tag the release:
 Then run the following commands from the root of the git repository to build
 and upload the release to PyPI:
 
-    python setup.py build
-    python setup.py register sdist bdist_egg upload
+    python setup.py build sdist bdist_egg
+    python setup.py register upload
 
 Now go to the github page to "create a release" and upload the 'egg', 'zip',
 and 'tar.gz' files from the 'dist' directory.
