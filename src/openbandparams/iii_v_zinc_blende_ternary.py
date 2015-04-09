@@ -138,7 +138,7 @@ class IIIVZincBlendeTernary(IIIVZincBlendeMixedAlloy):
 
     def element_fraction(self, element):
         if self._x is None:
-            raise RuntimeError('Alloy composition has not been specified.')
+            raise TypeError('Alloy composition has not been specified.')
         if self._type == 1:
             if element == self.elements[0]:
                 return self._x
@@ -168,7 +168,7 @@ class IIIVZincBlendeTernary(IIIVZincBlendeMixedAlloy):
     
     def _interpolate(self, name, kwargs):
         if self._x is None:
-            raise RuntimeError('Alloy composition has not been specified.')
+            raise TypeError('Alloy composition has not been specified.')
         x = self._x
         pA = self.binaries[0].get_parameter(name)
         if pA is None:
