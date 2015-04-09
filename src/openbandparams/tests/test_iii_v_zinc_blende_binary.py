@@ -117,9 +117,10 @@ class TestIIIVZincBlendeBinary(unittest.TestCase):
         self.assert_(strained.VBO_lh_strain_shift() < 0)
         self.assert_(strained.VBO_strain_shift() > 0)
         self.assert_(strained.Eg_strain_shift() > 0)
+        self.assert_(strained.Eg() > unstrained.Eg())
     
     def test_tensile_biaxial_strained(self):
-        strain = -0.01 # compressive
+        strain = -0.01 # tensile
         unstrained = GaAs
         strained = GaAs.strained_001(strain)
         self.assert_(strained.strain_out_of_plane() == strain)
@@ -132,6 +133,7 @@ class TestIIIVZincBlendeBinary(unittest.TestCase):
         self.assert_(strained.VBO_lh_strain_shift() > 0)
         self.assert_(strained.VBO_strain_shift() > 0)
         self.assert_(strained.Eg_strain_shift() < 0)
+        self.assert_(strained.Eg() < unstrained.Eg())
         
 
 if __name__ == '__main__':
