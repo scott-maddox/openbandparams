@@ -17,9 +17,16 @@
 #   along with openbandparams.  If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
+# Make sure we import the local package
+import os
+import sys
+sys.path.insert(0,
+    os.path.abspath(os.path.join(os.path.dirname(__file__), 'src')))
 
-from openbandparams.iii_v.zinc_blende.binary import *
-from openbandparams.iii_v.zinc_blende.quaternary import *
+from openbandparams import (iii_v_zinc_blende_quaternaries, GaAs, AlAs, GaSb,
+                            AlGaInAs, AlPAsSb, AlGaAsSb, GaPAsSb, AlGaInSb,
+                            AlGaPAs, AlInAsSb)
+from openbandparams import *
 import unittest
 
 
@@ -27,13 +34,13 @@ class TestIIIVZincBlendeQuaternary(unittest.TestCase):
 
     def test_str(self):
         self.assertEqual(str(AlGaInAs), 'AlGaInAs')
-        for quaternary in quaternaries:
+        for quaternary in iii_v_zinc_blende_quaternaries:
             self.assertEqual(str(quaternary), quaternary.name)
 
     def test_repr(self):
         self.assertEqual(eval(repr(AlGaInAs(x=0, y=0))),
                          AlGaInAs(x=0, y=0))
-        for quaternary in quaternaries:
+        for quaternary in iii_v_zinc_blende_quaternaries:
             self.assertEqual(eval(repr(quaternary)), quaternary)
             self.assertEqual(eval(repr(quaternary(x=0, y=0))),
                              quaternary(x=0, y=0))
@@ -44,19 +51,19 @@ class TestIIIVZincBlendeQuaternary(unittest.TestCase):
             self.assertEqual(eval(repr(quaternary(x=0.1, y=0.1))),
                              quaternary(x=0.1, y=0.1))
 
-    def test_quaternary1_LaTeX(self):
-        self.assertEqual(AlPAsSb.LaTeX(), 'AlP_{x}As_{y}Sb_{1-x-y}')
-        self.assertEqual(AlPAsSb(x=0, y=0).LaTeX(),
+    def test_quaternary1_latex(self):
+        self.assertEqual(AlPAsSb.latex(), 'AlP_{x}As_{y}Sb_{1-x-y}')
+        self.assertEqual(AlPAsSb(x=0, y=0).latex(),
                          'AlP_{0}As_{0}Sb_{1}')
 
-    def test_quaternary2_LaTeX(self):
-        self.assertEqual(AlGaInAs.LaTeX(), 'Al_{x}Ga_{y}In_{1-x-y}As')
-        self.assertEqual(AlGaInAs(x=0, y=0).LaTeX(),
+    def test_quaternary2_latex(self):
+        self.assertEqual(AlGaInAs.latex(), 'Al_{x}Ga_{y}In_{1-x-y}As')
+        self.assertEqual(AlGaInAs(x=0, y=0).latex(),
                          'Al_{0}Ga_{0}In_{1}As')
 
-    def test_quaternary3_LaTeX(self):
-        self.assertEqual(AlGaAsSb.LaTeX(), 'Al_{x}Ga_{1-x}As_{y}Sb_{1-y}')
-        self.assertEqual(AlGaAsSb(x=0, y=0).LaTeX(),
+    def test_quaternary3_latex(self):
+        self.assertEqual(AlGaAsSb.latex(), 'Al_{x}Ga_{1-x}As_{y}Sb_{1-y}')
+        self.assertEqual(AlGaAsSb(x=0, y=0).latex(),
                          'Al_{0}Ga_{1}As_{0}Sb_{1}')
 
     def test_quaternary1_eq(self):
@@ -125,15 +132,12 @@ class TestIIIVZincBlendeQuaternary(unittest.TestCase):
             AlGaAsSb.Eg(a=6., T=300)
 
     def test_Eg(self):
-        self.assertEqual(AlGaPAs.Eg(x=0, y=0), GaAs.Eg())
         self.assertEqual(AlGaPAs(x=0, y=0).Eg(), GaAs.Eg())
-        self.assertEqual(AlGaPAs.Eg(x=1, y=0), AlAs.Eg())
         self.assertEqual(AlGaPAs(x=1, y=0).Eg(), AlAs.Eg())
 
     def test_non_instanced_lattice_matching(self):
-        mat = AlInAsSb(Al=0, a=GaSb.a(), T=300)
-        Eg1 = mat.Eg()
-        Eg2 = AlInAsSb.Eg(Al=0, a=GaSb.a(), T=300)
+        Eg1 = AlInAsSb(Al=0, a=GaSb.a()).Eg()
+        Eg2 = AlInAsSb(Al=0, a=GaSb.a(), T=300.).Eg()
         self.assertEqual(Eg1, Eg2)
 
 if __name__ == '__main__':
