@@ -7,7 +7,7 @@ Changed in 0.8:
   (see `examples/Ternaries_of_Ternaries`)
 - Alloy interpolation now follows the recommendations from
   Vurgaftman, et al. (2001).
-- Added electron_affinity parameter
+- Added and renamed several parameters and methods
 - Fixed Ternaries requiring lattice matching temperature
 
 Changed in 0.7:
