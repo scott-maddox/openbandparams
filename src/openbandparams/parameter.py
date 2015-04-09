@@ -228,7 +228,8 @@ descriptions = {
     'luttinger1' : 'first Luttinger parameter',
     'luttinger2' : 'second Luttinger parameter',
     'luttinger3' : 'third Luttinger parameter',
-    'luttinger32' : 'difference between third and second Luttinger parameters (luttinger3 - luttinger2)',
+    'luttinger32' : 'difference between third and second Luttinger parameters '
+                    '(luttinger3 - luttinger2)',
     'meff_SO' : 'split-off band effective mass',
     'meff_SO_0' : 'split-off band effective mass at 0 K',
     'meff_e_Gamma' : 'electron effective mass in the Gamma-valley',
@@ -247,4 +248,30 @@ descriptions = {
     'meff_lh_111' : 'light-hole effective mass in the <111> direction',
     'nonparabolicity' : 'Kane band nonparabolicity parameter for the Gamma-valley',
     'thermal_expansion' : 'lattice parameter thermal expansion coefficient',
+    # strained
+    'CBO_hydrostatic_strain_shift' : 'shift in the conduction band offset '
+                                     'energy due to the hydrostatic strain '
+                                     'component',
+    'CBO_strain_shift' : 'total shift in the conduction band offset energy due to strain',
+    'Eg_hh' : 'bandgap energy between the conduction band and the heavy-hole band',
+    'Eg_lh' : 'bandgap energy between the conduction band and the light-hole band',
+    'Eg_strain_shift' : 'total shift in the bandgap energy due to strain',
+    'VBO_hh' : 'heavy-hole valance band offset energy',
+    'VBO_lh' : 'light-hole valance band offset energy',
+    'VBO_hh_strain_shift' : 'total shift in the heavy-hole valance band offset '
+                            'energy due to strain',
+    'VBO_lh_strain_shift' : 'total shift in the light-hole valance band offset '
+                            'energy due to strain',
+    'VBO_strain_shift' : 'total shift in the valance band offset energy due to strain',
+    'VBO_hydrostatic_strain_shift' : 'shift in the valance band offset '
+                                     'energy due to the hydrostatic strain '
+                                     'component',
+    'VBO_uniaxial_strain_shift' : 'shift in the valance band offset '
+                                  'energy due to the uniaxial strain '
+                                  'component',
+    'substrate_a' : 'substrate lattice parameter',
+    'strain_in_plane' : 'strain in the in-plane directions',
+    'strain_out_of_plane' : 'strain in the out-of-plane direction '
+                            '(the strain measured by X-ray diffraction '
+                            'symmetric omega-2theta scans)',
 }
