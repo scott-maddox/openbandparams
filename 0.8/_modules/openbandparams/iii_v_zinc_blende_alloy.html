@@ -1,0 +1,610 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>openbandparams.iii_v_zinc_blende_alloy &mdash; openbandparams 0.8 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.8',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="openbandparams 0.8 documentation" href="../../index.html" />
+    <link rel="up" title="openbandparams" href="../openbandparams.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">openbandparams 0.8 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../openbandparams.html" accesskey="U">openbandparams</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for openbandparams.iii_v_zinc_blende_alloy</h1><div class="highlight"><pre>
+<span class="c">#</span>
+<span class="c">#   Copyright (c) 2013-2015, Scott J Maddox</span>
+<span class="c">#</span>
+<span class="c">#   This file is part of openbandparams.</span>
+<span class="c">#</span>
+<span class="c">#   openbandparams is free software: you can redistribute it and/or modify</span>
+<span class="c">#   it under the terms of the GNU Affero General Public License as published</span>
+<span class="c">#   by the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c">#   (at your option) any later version.</span>
+<span class="c">#</span>
+<span class="c">#   openbandparams is distributed in the hope that it will be useful,</span>
+<span class="c">#   but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c">#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c">#   GNU Affero General Public License for more details.</span>
+<span class="c">#</span>
+<span class="c">#   You should have received a copy of the GNU Affero General Public License</span>
+<span class="c">#   along with openbandparams.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="c">#</span>
+<span class="c">#############################################################################</span>
+<span class="kn">from</span> <span class="nn">.alloy</span> <span class="kn">import</span> <span class="n">Alloy</span>
+<span class="kn">from</span> <span class="nn">.iii_v_alloy</span> <span class="kn">import</span> <span class="n">IIIVAlloy</span>
+<span class="kn">from</span> <span class="nn">.iii_v_zinc_blende_strained</span> <span class="kn">import</span> <span class="n">IIIVZincBlendeStrained001</span>
+<span class="kn">from</span> <span class="nn">.parameter</span> <span class="kn">import</span> <span class="n">method_parameter</span>
+<span class="kn">from</span> <span class="nn">.references</span> <span class="kn">import</span> <span class="n">vurgaftman_2001</span><span class="p">,</span> <span class="n">kane_1956</span>
+<span class="kn">from</span> <span class="nn">.equations</span> <span class="kn">import</span> <span class="n">varshni</span>
+
+
+<div class="viewcode-block" id="IIIVZincBlendeAlloy"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy">[docs]</a><span class="k">class</span> <span class="nc">IIIVZincBlendeAlloy</span><span class="p">(</span><span class="n">IIIVAlloy</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    The base class for all III-V zinc blende alloys.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+<div class="viewcode-block" id="IIIVZincBlendeAlloy.strained_001"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.strained_001">[docs]</a>    <span class="k">def</span> <span class="nf">strained_001</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns an instance of ``IIIVZincBlendeStrained001``, which is a</span>
+<span class="sd">        biaxial-strained III-V zinc blende binary alloy grown on a (001)</span>
+<span class="sd">        surface.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        target : Alloy with ``a`` parameter or float</span>
+<span class="sd">            Growth substrate, assumed to have a (001) surface, or out-of-plane</span>
+<span class="sd">            strain, which is negative for tensile strain and positive for</span>
+<span class="sd">            compressive strain. This is the strain measured by X-ray</span>
+<span class="sd">            diffraction (XRD) symmetric omega-2theta scans.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">Alloy</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">IIIVZincBlendeStrained001</span><span class="p">(</span><span class="n">unstrained</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
+                                             <span class="n">substrate</span><span class="o">=</span><span class="n">target</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">IIIVZincBlendeStrained001</span><span class="p">(</span><span class="n">unstrained</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
+                                             <span class="n">strain_out_of_plane</span><span class="o">=</span><span class="n">target</span><span class="p">)</span>
+        </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;VBO&#39;</span><span class="p">,</span> <span class="s">&#39;Eg&#39;</span><span class="p">],</span> <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeAlloy.CBO"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.CBO">[docs]</a>    <span class="k">def</span> <span class="nf">CBO</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the conduction band offset (CBO), in eV at a given</span>
+<span class="sd">        temperature, T, in K (default=300.).</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">VBO</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">Eg</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;VBO&#39;</span><span class="p">,</span> <span class="s">&#39;Eg_Gamma&#39;</span><span class="p">],</span> <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeAlloy.CBO_Gamma"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.CBO_Gamma">[docs]</a>    <span class="k">def</span> <span class="nf">CBO_Gamma</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the Gamma-valley conduction band offset (CBO), in eV at a given</span>
+<span class="sd">        temperature, T, in K (default=300.).</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">VBO</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">Eg_Gamma</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;VBO&#39;</span><span class="p">,</span> <span class="s">&#39;Eg_L&#39;</span><span class="p">],</span> <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeAlloy.CBO_L"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.CBO_L">[docs]</a>    <span class="k">def</span> <span class="nf">CBO_L</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the L-valley conduction band offset (CBO), in eV at a given</span>
+<span class="sd">        temperature, T, in K (default=300.).</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">VBO</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">Eg_L</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;VBO&#39;</span><span class="p">,</span> <span class="s">&#39;Eg_X&#39;</span><span class="p">],</span> <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeAlloy.CBO_X"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.CBO_X">[docs]</a>    <span class="k">def</span> <span class="nf">CBO_X</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the X-valley conduction band offset (CBO), in eV at a given</span>
+<span class="sd">        temperature, T, in K (default=300.).</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">VBO</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">Eg_X</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;Eg_Gamma&#39;</span><span class="p">,</span> <span class="s">&#39;Eg_L&#39;</span><span class="p">,</span> <span class="s">&#39;Eg_X&#39;</span><span class="p">],</span> <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">,</span>
+                      <span class="n">aliases</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;bandgap&#39;</span><span class="p">])</span>
+<div class="viewcode-block" id="IIIVZincBlendeAlloy.Eg"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.Eg">[docs]</a>    <span class="k">def</span> <span class="nf">Eg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the bandgap, Eg, in eV at a given</span>
+<span class="sd">        temperature, T, in K (default=300.).</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Eg_Gamma</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">Eg_L</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">Eg_X</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+        </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;Eg_Gamma_0&#39;</span><span class="p">,</span> <span class="s">&#39;alpha_Gamma&#39;</span><span class="p">,</span> <span class="s">&#39;beta_Gamma&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeAlloy.Eg_Gamma"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.Eg_Gamma">[docs]</a>    <span class="k">def</span> <span class="nf">Eg_Gamma</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">Eg_0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Eg_Gamma_0</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha_Gamma</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">beta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_Gamma</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">T</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;T&#39;</span><span class="p">,</span> <span class="mf">300.</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">varshni</span><span class="p">(</span><span class="n">Eg_0</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+        </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;Eg_L_0&#39;</span><span class="p">,</span> <span class="s">&#39;alpha_L&#39;</span><span class="p">,</span> <span class="s">&#39;beta_L&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeAlloy.Eg_L"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.Eg_L">[docs]</a>    <span class="k">def</span> <span class="nf">Eg_L</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">Eg_0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Eg_L_0</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha_L</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">beta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_L</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">T</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;T&#39;</span><span class="p">,</span> <span class="mf">300.</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">varshni</span><span class="p">(</span><span class="n">Eg_0</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+        </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;Eg_X_0&#39;</span><span class="p">,</span> <span class="s">&#39;alpha_X&#39;</span><span class="p">,</span> <span class="s">&#39;beta_X&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeAlloy.Eg_X"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.Eg_X">[docs]</a>    <span class="k">def</span> <span class="nf">Eg_X</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">Eg_0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Eg_X_0</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha_X</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">beta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_X</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">T</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;T&#39;</span><span class="p">,</span> <span class="mf">300.</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">varshni</span><span class="p">(</span><span class="n">Eg_0</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;Eg_Gamma_0&#39;</span><span class="p">,</span> <span class="s">&#39;Delta_SO&#39;</span><span class="p">,</span> <span class="s">&#39;Ep&#39;</span><span class="p">,</span>
+                                    <span class="s">&#39;meff_e_Gamma_0&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;dimensionless&#39;</span><span class="p">,</span> <span class="n">references</span><span class="o">=</span><span class="p">[</span><span class="n">vurgaftman_2001</span><span class="p">])</span>
+<div class="viewcode-block" id="IIIVZincBlendeAlloy.F"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.F">[docs]</a>    <span class="k">def</span> <span class="nf">F</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the Kane remote-band parameter, `F`, calculated from</span>
+<span class="sd">        `Eg_Gamma_0`, `Delta_SO`, `Ep`, and `meff_e_Gamma_0`.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">Eg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Eg_Gamma_0</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">Delta_SO</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Delta_SO</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">Ep</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ep</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">meff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">meff_e_Gamma_0</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="mf">1.</span><span class="o">/</span><span class="n">meff</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="n">Ep</span><span class="o">*</span><span class="p">(</span><span class="n">Eg</span><span class="o">+</span><span class="mf">2.</span><span class="o">*</span><span class="n">Delta_SO</span><span class="o">/</span><span class="mf">3.</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">Eg</span><span class="o">*</span><span class="p">(</span><span class="n">Eg</span><span class="o">+</span><span class="n">Delta_SO</span><span class="p">)))</span><span class="o">/</span><span class="mi">2</span>
+</div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;a_300K&#39;</span><span class="p">,</span> <span class="s">&#39;thermal_expansion&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;angstrom&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeAlloy.a"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.a">[docs]</a>    <span class="k">def</span> <span class="nf">a</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the lattice parameter, a, in Angstroms at a given</span>
+<span class="sd">        temperature, `T`, in Kelvin (default: 300 K).</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">T</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;T&#39;</span><span class="p">,</span> <span class="mf">300.</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">a_300K</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">+</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">thermal_expansion</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">T</span> <span class="o">-</span> <span class="mf">300.</span><span class="p">))</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;luttinger2&#39;</span><span class="p">,</span> <span class="s">&#39;luttinger3&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;dimensionless&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeAlloy.luttinger32"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.luttinger32">[docs]</a>    <span class="k">def</span> <span class="nf">luttinger32</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the difference between the third and second Luttinger</span>
+<span class="sd">        parameters, i.e. `luttinger3 - luttinger2`.</span>
+<span class="sd">        </span>
+<span class="sd">        Linear interpolation of luttinger32 is the recommended way to</span>
+<span class="sd">        estimate the valance band warping in alloys.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">luttinger1</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">luttinger2</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;luttinger1&#39;</span><span class="p">,</span> <span class="s">&#39;Eg_Gamma&#39;</span><span class="p">,</span> <span class="s">&#39;Delta_SO&#39;</span><span class="p">,</span> <span class="s">&#39;Ep&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;m_e&#39;</span><span class="p">,</span> <span class="n">references</span><span class="o">=</span><span class="p">[</span><span class="n">vurgaftman_2001</span><span class="p">])</span>
+<div class="viewcode-block" id="IIIVZincBlendeAlloy.meff_SO"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_SO">[docs]</a>    <span class="k">def</span> <span class="nf">meff_SO</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the electron effective mass in the Gamma-valley</span>
+<span class="sd">        calculated from Eg_Gamma(T), Delta_SO, Ep and F.</span>
+<span class="sd">        </span>
+<span class="sd">        Interpolation of Eg_Gamma(T), Delta_SO, Ep and F, and</span>
+<span class="sd">        then calculation of meff_e_Gamma is recommended for alloys.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">Eg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Eg_Gamma</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">Delta_SO</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Delta_SO</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">Ep</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ep</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">luttinger1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">luttinger1</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mf">1.</span><span class="o">/</span><span class="p">(</span><span class="n">luttinger1</span> <span class="o">-</span> <span class="p">(</span><span class="n">Ep</span><span class="o">*</span><span class="n">Delta_SO</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">Eg</span><span class="o">*</span><span class="p">(</span><span class="n">Eg</span><span class="o">+</span><span class="n">Delta_SO</span><span class="p">)))</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;Eg_Gamma&#39;</span><span class="p">,</span> <span class="s">&#39;Delta_SO&#39;</span><span class="p">,</span> <span class="s">&#39;Ep&#39;</span><span class="p">,</span> <span class="s">&#39;F&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;m_e&#39;</span><span class="p">,</span> <span class="n">references</span><span class="o">=</span><span class="p">[</span><span class="n">vurgaftman_2001</span><span class="p">])</span>
+<div class="viewcode-block" id="IIIVZincBlendeAlloy.meff_e_Gamma"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_e_Gamma">[docs]</a>    <span class="k">def</span> <span class="nf">meff_e_Gamma</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the electron effective mass in the Gamma-valley</span>
+<span class="sd">        calculated from Eg_Gamma(T), Delta_SO, Ep and F.</span>
+<span class="sd">        </span>
+<span class="sd">        Interpolation of Eg_Gamma(T), Delta_SO, Ep and F, and</span>
+<span class="sd">        then calculation of meff_e_Gamma is recommended for alloys.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">Eg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Eg_Gamma</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">Delta_SO</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Delta_SO</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">Ep</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ep</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">F</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">F</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mf">1.</span><span class="o">/</span><span class="p">((</span><span class="mf">1.</span><span class="o">+</span><span class="mf">2.</span><span class="o">*</span><span class="n">F</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">Ep</span><span class="o">*</span><span class="p">(</span><span class="n">Eg</span><span class="o">+</span><span class="mf">2.</span><span class="o">*</span><span class="n">Delta_SO</span><span class="o">/</span><span class="mf">3.</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">Eg</span><span class="o">*</span><span class="p">(</span><span class="n">Eg</span><span class="o">+</span><span class="n">Delta_SO</span><span class="p">)))</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;luttinger1&#39;</span><span class="p">,</span> <span class="s">&#39;luttinger2&#39;</span><span class="p">],</span> <span class="n">units</span><span class="o">=</span><span class="s">&#39;m_e&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeAlloy.meff_hh_100"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_hh_100">[docs]</a>    <span class="k">def</span> <span class="nf">meff_hh_100</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the heavy-hole band effective mass in the [100] direction,</span>
+<span class="sd">        meff_hh_100, in units of electron mass.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">luttinger1</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">luttinger2</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;luttinger1&#39;</span><span class="p">,</span> <span class="s">&#39;luttinger2&#39;</span><span class="p">,</span> <span class="s">&#39;luttinger3&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;m_e&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeAlloy.meff_hh_110"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_hh_110">[docs]</a>    <span class="k">def</span> <span class="nf">meff_hh_110</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the heavy-hole band effective mass in the [110] direction,</span>
+<span class="sd">        meff_hh_110, in units of electron mass.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="mf">2.</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">luttinger1</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">luttinger2</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">luttinger3</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;luttinger1&#39;</span><span class="p">,</span> <span class="s">&#39;luttinger3&#39;</span><span class="p">],</span> <span class="n">units</span><span class="o">=</span><span class="s">&#39;m_e&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeAlloy.meff_hh_111"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_hh_111">[docs]</a>    <span class="k">def</span> <span class="nf">meff_hh_111</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the heavy-hole band effective mass in the [111] direction,</span>
+<span class="sd">        meff_hh_111, in units of electron mass.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">luttinger1</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">luttinger3</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;luttinger1&#39;</span><span class="p">,</span> <span class="s">&#39;luttinger2&#39;</span><span class="p">],</span> <span class="n">units</span><span class="o">=</span><span class="s">&#39;m_e&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeAlloy.meff_lh_100"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_lh_100">[docs]</a>    <span class="k">def</span> <span class="nf">meff_lh_100</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the light-hole band effective mass in the [100] direction,</span>
+<span class="sd">        meff_lh_100, in units of electron mass.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">luttinger1</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">luttinger2</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;luttinger1&#39;</span><span class="p">,</span> <span class="s">&#39;luttinger2&#39;</span><span class="p">,</span> <span class="s">&#39;luttinger3&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;m_e&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeAlloy.meff_lh_110"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_lh_110">[docs]</a>    <span class="k">def</span> <span class="nf">meff_lh_110</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the light-hole band effective mass in the [110] direction,</span>
+<span class="sd">        meff_lh_110, in units of electron mass.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="mf">2.</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">luttinger1</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">luttinger2</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">luttinger3</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;luttinger1&#39;</span><span class="p">,</span> <span class="s">&#39;luttinger3&#39;</span><span class="p">],</span> <span class="n">units</span><span class="o">=</span><span class="s">&#39;m_e&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeAlloy.meff_lh_111"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_lh_111">[docs]</a>    <span class="k">def</span> <span class="nf">meff_lh_111</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the light-hole band effective mass in the [111] direction,</span>
+<span class="sd">        meff_lh_111, in units of electron mass.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">luttinger1</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">luttinger3</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;Eg_Gamma&#39;</span><span class="p">,</span> <span class="s">&#39;meff_e_Gamma&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;dimensionless&#39;</span><span class="p">,</span> <span class="n">references</span><span class="o">=</span><span class="p">[</span><span class="n">kane_1956</span><span class="p">])</span>
+<div class="viewcode-block" id="IIIVZincBlendeAlloy.nonparabolicity"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.nonparabolicity">[docs]</a>    <span class="k">def</span> <span class="nf">nonparabolicity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the Kane band nonparabolicity parameter for the Gamma-valley.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">Eg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Eg_Gamma</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">meff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">meff_e_Gamma</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="o">/</span><span class="n">Eg</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">meff</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="c">#     def _get_eps_xx(self, **kwargs):</span>
+<span class="c">#         if &#39;a0&#39; in kwargs:</span>
+<span class="c">#             if self is not None:</span>
+<span class="c">#                 self = self</span>
+<span class="c">#             else:</span>
+<span class="c">#                 self = cls</span>
+<span class="c">#             return self.biaxial_strained_eps_xx(**kwargs)</span>
+<span class="c">#         elif &#39;eps_xx&#39; in kwargs:</span>
+<span class="c">#             return kwargs[&#39;eps_xx&#39;]</span>
+<span class="c">#         else:</span>
+<span class="c">#             raise ValueError(&#39;Missing required keyword argument&#39;</span>
+<span class="c">#                              &#39; `eps_xx` or `a0`&#39;)</span>
+<span class="c">#</span>
+<span class="c">#     def biaxial_strained_eps_xx(self, **kwargs):</span>
+<span class="c">#         &#39;&#39;&#39;</span>
+<span class="c">#         Returns the in-plane strain, `eps_xx`, induced by growing</span>
+<span class="c">#         on a substrate with the given lattice constant, `a0`, assuming no</span>
+<span class="c">#         lattice relaxation.</span>
+<span class="c"># </span>
+<span class="c">#         This assumes growth in the [100] direction.</span>
+<span class="c"># </span>
+<span class="c">#         Note: `eps_xx` should be negative for compressive in-plane strain, and</span>
+<span class="c">#         positive for tensile in-plane strain.</span>
+<span class="c">#         &#39;&#39;&#39;</span>
+<span class="c">#         if &#39;a0&#39; in kwargs:</span>
+<span class="c">#             return 1 - self.a(**kwargs) / kwargs[&#39;a0&#39;]</span>
+<span class="c">#         else:</span>
+<span class="c">#             raise ValueError(&#39;Missing required keyword argument `a0`&#39;)</span>
+<span class="c"># </span>
+<span class="c">#     def biaxial_strained_a0(self, **kwargs):</span>
+<span class="c">#         &#39;&#39;&#39;</span>
+<span class="c">#         Returns the substrate lattice constant, `a0`, required to induce the</span>
+<span class="c">#         given in-plane strain, `eps_xx`, assuming no lattice relaxation.</span>
+<span class="c"># </span>
+<span class="c">#         This assumes growth in the [100] direction.</span>
+<span class="c">#         </span>
+<span class="c">#         Note 1: Specifying `eps_xx` results in less overhead than</span>
+<span class="c">#         specifying `a0`.</span>
+<span class="c"># </span>
+<span class="c">#         Note 2: `eps_xx` should be negative for compressive in-plane strain, and</span>
+<span class="c">#         positive for tensile in-plane strain.</span>
+<span class="c">#         &#39;&#39;&#39;</span>
+<span class="c">#         eps_xx = self._get_eps_xx(**kwargs)</span>
+<span class="c">#         return self.a(**kwargs) / (1 - eps_xx)</span>
+<span class="c"># </span>
+<span class="c">#     def biaxial_strained_eps_zz(self, **kwargs):</span>
+<span class="c">#         &#39;&#39;&#39;</span>
+<span class="c">#         Returns the out-of-plane strain induced by the given in-plane</span>
+<span class="c">#         strain, `eps_xx`, or by growth on a substrate with the given lattice</span>
+<span class="c">#         constant, `a0`, assuming no lattice relaxation.</span>
+<span class="c"># </span>
+<span class="c">#         This assumes growth in the [100] direction.</span>
+<span class="c">#         </span>
+<span class="c">#         Note 1: Specifying `eps_xx` results in less overhead than</span>
+<span class="c">#         specifying `a0`.</span>
+<span class="c"># </span>
+<span class="c">#         Note 2: `eps_xx` should be negative for compressive in-plane strain, and</span>
+<span class="c">#         positive for tensile in-plane strain.</span>
+<span class="c">#         &#39;&#39;&#39;</span>
+<span class="c">#         eps_xx = self._get_eps_xx(**kwargs)</span>
+<span class="c">#         return -2 * self.c_12(**kwargs) / self.c_11(**kwargs) * eps_xx</span>
+<span class="c"># </span>
+<span class="c">#     def biaxial_strained_dE_c(self, **kwargs):</span>
+<span class="c">#         &#39;&#39;&#39;</span>
+<span class="c">#         Returns the conduction band-edge shift, in eV, induced by the</span>
+<span class="c">#         given in-plane strain, `eps_xx`, or by growth on a substrate with</span>
+<span class="c">#         the given lattice constant, `a0`, assuming no lattice relaxation.</span>
+<span class="c"># </span>
+<span class="c">#         This assumes growth in the [100] direction.</span>
+<span class="c">#         </span>
+<span class="c">#         Note 1: Specifying `eps_xx` results in less overhead than</span>
+<span class="c">#         specifying `a0`.</span>
+<span class="c"># </span>
+<span class="c">#         Note 2: `eps_xx` should be negative for compressive in-plane strain, and</span>
+<span class="c">#         positive for tensile in-plane strain.</span>
+<span class="c">#         &#39;&#39;&#39;</span>
+<span class="c">#         eps_xx = self._get_eps_xx(**kwargs)</span>
+<span class="c">#         return self.a_c(**kwargs) * (2 * eps_xx +</span>
+<span class="c">#                             self.biaxial_strained_eps_zz(**kwargs))</span>
+<span class="c"># </span>
+<span class="c">#     def biaxial_strained_P_eps(self, **kwargs):</span>
+<span class="c">#         &#39;&#39;&#39;</span>
+<span class="c">#         Returns the hydrostatic component of the valance band-edge shift,</span>
+<span class="c">#         in eV, induced by the given in-plane strain, `eps_xx`, or by growth</span>
+<span class="c">#         on a substrate with the given lattice constant, `a0`, assuming no</span>
+<span class="c">#         lattice relaxation.</span>
+<span class="c"># </span>
+<span class="c">#         This assumes growth in the [100] direction.</span>
+<span class="c">#         </span>
+<span class="c">#         Note 1: Specifying `eps_xx` results in less overhead than</span>
+<span class="c">#         specifying `a0`.</span>
+<span class="c"># </span>
+<span class="c">#         Note 2: `eps_xx` should be negative for compressive in-plane strain, and</span>
+<span class="c">#         positive for tensile in-plane strain.</span>
+<span class="c">#         &#39;&#39;&#39;</span>
+<span class="c">#         eps_xx = self._get_eps_xx(**kwargs)</span>
+<span class="c">#         return self.a_v(**kwargs) * (2 * eps_xx +</span>
+<span class="c">#                             self.biaxial_strained_eps_zz(**kwargs))</span>
+<span class="c"># </span>
+<span class="c">#     def biaxial_strained_Q_eps(self, **kwargs):</span>
+<span class="c">#         &#39;&#39;&#39;</span>
+<span class="c">#         Returns the uniaxial component of the valance band-edge shift,</span>
+<span class="c">#         in eV, induced by the given in-plane strain, `eps_xx`, or by growth</span>
+<span class="c">#         on a substrate with the given lattice constant, `a0`, assuming no</span>
+<span class="c">#         lattice relaxation.</span>
+<span class="c"># </span>
+<span class="c">#         This assumes growth in the [100] direction.</span>
+<span class="c">#         </span>
+<span class="c">#         Note 1: Specifying `eps_xx` results in less overhead than</span>
+<span class="c">#         specifying `a0`.</span>
+<span class="c"># </span>
+<span class="c">#         Note 2: `eps_xx` should be negative for compressive in-plane strain, and</span>
+<span class="c">#         positive for tensile in-plane strain.</span>
+<span class="c">#         &#39;&#39;&#39;</span>
+<span class="c">#         eps_xx = self._get_eps_xx(**kwargs)</span>
+<span class="c">#         return self.b(**kwargs) * (self.biaxial_strained_eps_zz(**kwargs)</span>
+<span class="c">#                                   - eps_xx)</span>
+<span class="c"># </span>
+<span class="c">#     def biaxial_strained_dE_hh(self, **kwargs):</span>
+<span class="c">#         &#39;&#39;&#39;</span>
+<span class="c">#         Returns the heavy-hole band-edge shift, in eV, induced by the given</span>
+<span class="c">#         in-plane strain, `eps_xx`, or by growth on a substrate with the given</span>
+<span class="c">#         lattice constant, `a0`, assuming no lattice relaxation.</span>
+<span class="c"># </span>
+<span class="c">#         This assumes growth in the [100] direction.</span>
+<span class="c">#         </span>
+<span class="c">#         Note 1: Specifying `eps_xx` results in less overhead than</span>
+<span class="c">#         specifying `a0`.</span>
+<span class="c"># </span>
+<span class="c">#         Note 2: `eps_xx` should be negative for compressive in-plane strain, and</span>
+<span class="c">#         positive for tensile in-plane strain.</span>
+<span class="c">#         &#39;&#39;&#39;</span>
+<span class="c">#         return -(self.biaxial_strained_P_eps(**kwargs)</span>
+<span class="c">#                  + self.biaxial_strained_Q_eps(**kwargs))</span>
+<span class="c"># </span>
+<span class="c">#     def biaxial_strained_dE_lh(self, **kwargs):</span>
+<span class="c">#         &#39;&#39;&#39;</span>
+<span class="c">#         Returns the light-hole band-edge shift, in eV, induced by the given</span>
+<span class="c">#         in-plane strain, `eps_xx`, or by growth on a substrate with the given</span>
+<span class="c">#         lattice constant, `a0`, assuming no lattice relaxation.</span>
+<span class="c"># </span>
+<span class="c">#         This assumes growth in the [100] direction.</span>
+<span class="c">#         </span>
+<span class="c">#         Note 1: Specifying `eps_xx` results in less overhead than</span>
+<span class="c">#         specifying `a0`.</span>
+<span class="c"># </span>
+<span class="c">#         Note 2: `eps_xx` should be negative for compressive in-plane strain, and</span>
+<span class="c">#         positive for tensile in-plane strain.</span>
+<span class="c">#         &#39;&#39;&#39;</span>
+<span class="c">#         return (-self.biaxial_strained_P_eps(**kwargs)</span>
+<span class="c">#                 + self.biaxial_strained_Q_eps(**kwargs))</span>
+<span class="c"># </span>
+<span class="c">#     def biaxial_strained_E_c(self, **kwargs):</span>
+<span class="c">#         &#39;&#39;&#39;</span>
+<span class="c">#         Returns the conduction band-edge offset, in eV, at the given</span>
+<span class="c">#         in-plane strain, `eps_xx`, or for growth on a substrate with the given</span>
+<span class="c">#         lattice constant, `a0`, assuming no lattice relaxation.</span>
+<span class="c"># </span>
+<span class="c">#         This assumes growth in the [100] direction.</span>
+<span class="c">#         </span>
+<span class="c">#         Note 1: Specifying `eps_xx` results in less overhead than</span>
+<span class="c">#         specifying `a0`.</span>
+<span class="c"># </span>
+<span class="c">#         Note 2: `eps_xx` should be negative for compressive in-plane strain, and</span>
+<span class="c">#         positive for tensile in-plane strain.</span>
+<span class="c">#         &#39;&#39;&#39;</span>
+<span class="c">#         return (self.VBO(**kwargs) + self.Eg(**kwargs)</span>
+<span class="c">#                 + self.biaxial_strained_dE_c(**kwargs))</span>
+<span class="c"># </span>
+<span class="c">#     def biaxial_strained_E_hh(self, **kwargs):</span>
+<span class="c">#         &#39;&#39;&#39;</span>
+<span class="c">#         Returns the heavy-hole band-edge offset, in eV, at the given</span>
+<span class="c">#         in-plane strain, `eps_xx`, or for growth on a substrate with the given</span>
+<span class="c">#         lattice constant, `a0`, assuming no lattice relaxation.</span>
+<span class="c"># </span>
+<span class="c">#         This assumes growth in the [100] direction.</span>
+<span class="c">#         </span>
+<span class="c">#         Note 1: Specifying `eps_xx` results in less overhead than</span>
+<span class="c">#         specifying `a0`.</span>
+<span class="c"># </span>
+<span class="c">#         Note 2: `eps_xx` should be negative for compressive in-plane strain, and</span>
+<span class="c">#         positive for tensile in-plane strain.</span>
+<span class="c">#         &#39;&#39;&#39;</span>
+<span class="c">#         return (self.VBO(**kwargs)</span>
+<span class="c">#                 + self.biaxial_strained_dE_hh(**kwargs))</span>
+<span class="c"># </span>
+<span class="c">#     def biaxial_strained_E_lh(self, **kwargs):</span>
+<span class="c">#         &#39;&#39;&#39;</span>
+<span class="c">#         Returns the light-hole band-edge offset, in eV, at the given</span>
+<span class="c">#         in-plane strain, `eps_xx`, or for growth on a substrate with the given</span>
+<span class="c">#         lattice constant, `a0`, assuming no lattice relaxation.</span>
+<span class="c"># </span>
+<span class="c">#         This assumes growth in the [100] direction.</span>
+<span class="c">#         </span>
+<span class="c">#         Note 1: Specifying `eps_xx` results in less overhead than</span>
+<span class="c">#         specifying `a0`.</span>
+<span class="c"># </span>
+<span class="c">#         Note 2: `eps_xx` should be negative for compressive in-plane strain, and</span>
+<span class="c">#         positive for tensile in-plane strain.</span>
+<span class="c">#         &#39;&#39;&#39;</span>
+<span class="c">#         return (self.VBO(**kwargs)</span>
+<span class="c">#                 + self.biaxial_strained_dE_lh(**kwargs))</span>
+<span class="c"># </span>
+<span class="c">#     def biaxial_strained_E_c_hh(self, **kwargs):</span>
+<span class="c">#         &#39;&#39;&#39;</span>
+<span class="c">#         Returns the separation between the conduction band-edge and the</span>
+<span class="c">#         heavy-hole band-edge, in eV, at the given in-plane strain, `eps_xx`,</span>
+<span class="c">#         or for growth on a substrate with the given lattice constant, `a0`,</span>
+<span class="c">#         assuming no lattice relaxation, and at temperature, `T`, in</span>
+<span class="c">#         Kelvin (default: 300 K).</span>
+<span class="c"># </span>
+<span class="c">#         This assumes growth in the [100] direction.</span>
+<span class="c">#         </span>
+<span class="c">#         Note 1: Specifying `eps_xx` results in less overhead than</span>
+<span class="c">#         specifying `a0`.</span>
+<span class="c"># </span>
+<span class="c">#         Note 2: `eps_xx` should be negative for compressive in-plane strain, and</span>
+<span class="c">#         positive for tensile in-plane strain.</span>
+<span class="c">#         &#39;&#39;&#39;</span>
+<span class="c">#         return (self.Eg(**kwargs)</span>
+<span class="c">#                 + self.biaxial_strained_dE_c(**kwargs)</span>
+<span class="c">#                 - self.biaxial_strained_dE_hh(**kwargs))</span>
+<span class="c"># </span>
+<span class="c">#     def biaxial_strained_E_c_lh(self, **kwargs):</span>
+<span class="c">#         &#39;&#39;&#39;</span>
+<span class="c">#         Returns the separation between the conduction band-edge and the</span>
+<span class="c">#         light-hole band-edge, in eV, at the given in-plane strain, `eps_xx`,</span>
+<span class="c">#         or for growth on a substrate with the given lattice constant, `a0`,</span>
+<span class="c">#         assuming no lattice relaxation, and at temperature, `T`, in</span>
+<span class="c">#         Kelvin (default: 300 K).</span>
+<span class="c"># </span>
+<span class="c">#         This assumes growth in the [100] direction.</span>
+<span class="c">#         </span>
+<span class="c">#         Note 1: Specifying `eps_xx` results in less overhead than</span>
+<span class="c">#         specifying `a0`.</span>
+<span class="c"># </span>
+<span class="c">#         Note 2: `eps_xx` should be negative for compressive in-plane strain, and</span>
+<span class="c">#         positive for tensile in-plane strain.</span>
+<span class="c">#         &#39;&#39;&#39;</span>
+<span class="c">#         return (self.Eg(**kwargs)</span>
+<span class="c">#                 + self.biaxial_strained_dE_c(**kwargs)</span>
+<span class="c">#                 - self.biaxial_strained_dE_lh(**kwargs))</span>
+<span class="c"># </span>
+<span class="c">#     def biaxial_strained_Eg(self, **kwargs):</span>
+<span class="c">#         &#39;&#39;&#39;</span>
+<span class="c">#         Returns the minimum separation between the conduction band-edge and the</span>
+<span class="c">#         valance band-edge, in eV, at the given in-plane strain, `eps_xx`,</span>
+<span class="c">#         or for growth on a substrate with the given lattice constant, `a0`,</span>
+<span class="c">#         assuming no lattice relaxation, and at temperature, `T`, in</span>
+<span class="c">#         Kelvin (default: 300 K).</span>
+<span class="c"># </span>
+<span class="c">#         This assumes growth in the [100] direction.</span>
+<span class="c">#         </span>
+<span class="c">#         Note 1: Specifying `eps_xx` results in less overhead than</span>
+<span class="c">#         specifying `a0`.</span>
+<span class="c"># </span>
+<span class="c">#         Note 2: `eps_xx` should be negative for compressive in-plane strain, and</span>
+<span class="c">#         positive for tensile in-plane strain.</span>
+<span class="c">#         &#39;&#39;&#39;</span>
+<span class="c">#         return min(self.biaxial_strained_E_c_hh(**kwargs),</span>
+<span class="c">#                    self.biaxial_strained_E_c_lh(**kwargs))</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">openbandparams 0.8 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../openbandparams.html" >openbandparams</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2015, Scott J Maddox.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

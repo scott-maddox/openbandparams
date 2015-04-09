@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Ternaries of Ternaries &mdash; openbandparams 0.8 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.8',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="openbandparams 0.8 documentation" href="../index.html" />
+    <link rel="up" title="Examples" href="../examples.html" />
+    <link rel="next" title="Strained Ternaries" href="_Strained_Ternaries.html" />
+    <link rel="prev" title="Ternaries" href="_Ternaries.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="_Strained_Ternaries.html" title="Strained Ternaries"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="_Ternaries.html" title="Ternaries"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">openbandparams 0.8 documentation</a> &raquo;</li>
+          <li><a href="../examples.html" accesskey="U">Examples</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="_Ternaries.html"
+                        title="previous chapter">Ternaries</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="_Strained_Ternaries.html"
+                        title="next chapter">Strained Ternaries</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/examples/_Ternaries_of_Ternaries.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ternaries-of-ternaries">
+<h1>Ternaries of Ternaries<a class="headerlink" href="#ternaries-of-ternaries" title="Permalink to this headline">¶</a></h1>
+<p>Source:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#</span>
+<span class="c">#   Copyright (c) 2013-2014, Scott J Maddox</span>
+<span class="c">#</span>
+<span class="c">#   This file is part of openbandparams.</span>
+<span class="c">#</span>
+<span class="c">#   openbandparams is free software: you can redistribute it and/or modify</span>
+<span class="c">#   it under the terms of the GNU Affero General Public License as published</span>
+<span class="c">#   by the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c">#   (at your option) any later version.</span>
+<span class="c">#</span>
+<span class="c">#   openbandparams is distributed in the hope that it will be useful,</span>
+<span class="c">#   but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c">#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c">#   GNU Affero General Public License for more details.</span>
+<span class="c">#</span>
+<span class="c">#   You should have received a copy of the GNU Affero General Public License</span>
+<span class="c">#   along with openbandparams.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="c">#</span>
+<span class="c">#############################################################################</span>
+<span class="c"># Make sure we import the local openbandparams version</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> <span class="s">&#39;../..&#39;</span><span class="p">)))</span>
+<span class="kn">from</span> <span class="nn">openbandparams</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">AlInAs_InP</span> <span class="o">=</span> <span class="n">AlInAs</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">InP</span><span class="o">.</span><span class="n">a</span><span class="p">())</span>
+<span class="n">GaInAs_InP</span> <span class="o">=</span> <span class="n">GaInAs</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">InP</span><span class="o">.</span><span class="n">a</span><span class="p">())</span>
+
+<span class="n">AlGaInAs_InP</span> <span class="o">=</span> <span class="n">IIIVZincBlendeTernary</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s">&#39;AlGaInAs/InP&#39;</span><span class="p">,</span>
+    <span class="n">elements</span><span class="o">=</span><span class="p">(</span><span class="s">&#39;Al&#39;</span><span class="p">,</span> <span class="s">&#39;Ga&#39;</span><span class="p">,</span> <span class="s">&#39;InAs&#39;</span><span class="p">),</span>
+    <span class="n">binaries</span><span class="o">=</span><span class="p">(</span><span class="n">AlInAs_InP</span><span class="p">,</span> <span class="n">GaInAs_InP</span><span class="p">),</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">[])</span>
+
+<span class="n">instance1</span> <span class="o">=</span> <span class="n">AlGaInAs_InP</span><span class="p">(</span><span class="n">Al</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">instance1</span><span class="o">.</span><span class="n">latex</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&#39;instance1.Eg =&#39;</span><span class="p">,</span> <span class="n">instance1</span><span class="o">.</span><span class="n">Eg</span><span class="p">()</span>
+
+<span class="c"># Change a parameter in the GaInAs_InP instance, which propogates to all</span>
+<span class="c"># AlGaInAs_InP instances, due to lazy evaluation.</span>
+<span class="n">GaInAs_InP</span><span class="o">.</span><span class="n">set_parameter</span><span class="p">(</span><span class="n">ValueParameter</span><span class="p">(</span><span class="s">&#39;Eg_Gamma&#39;</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="s">&#39;eV&#39;</span><span class="p">))</span>
+<span class="k">print</span> <span class="s">&#39;instance1.Eg =&#39;</span><span class="p">,</span> <span class="n">instance1</span><span class="o">.</span><span class="n">Eg</span><span class="p">()</span>
+
+<span class="c"># Change a bowing parameter in the AlGaInAs_InP instance.</span>
+<span class="n">instance1</span><span class="o">.</span><span class="n">set_parameter</span><span class="p">(</span><span class="n">ValueParameter</span><span class="p">(</span><span class="s">&#39;Eg_Gamma_bowing&#39;</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="s">&#39;eV&#39;</span><span class="p">))</span>
+<span class="k">print</span> <span class="s">&#39;instance1.Eg =&#39;</span><span class="p">,</span> <span class="n">instance1</span><span class="o">.</span><span class="n">Eg</span><span class="p">()</span>
+
+<span class="c"># Other instances of AlGaInAs_InP are not affected.</span>
+<span class="n">instance2</span> <span class="o">=</span> <span class="n">AlGaInAs_InP</span><span class="p">(</span><span class="n">Al</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&#39;instance2.Eg =&#39;</span><span class="p">,</span> <span class="n">instance2</span><span class="o">.</span><span class="n">Eg</span><span class="p">()</span>
+
+<span class="c"># However, we can adopt the altered parameter in a new instance, by</span>
+<span class="c"># instancing off of the altered instance. This is possible due to</span>
+<span class="c"># shallow copying on instancing.</span>
+<span class="n">instance1_copy</span> <span class="o">=</span> <span class="n">instance1</span><span class="p">(</span><span class="n">Al</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&#39;instance1_copy.Eg =&#39;</span><span class="p">,</span> <span class="n">instance1_copy</span><span class="o">.</span><span class="n">Eg</span><span class="p">()</span>
+
+<span class="c"># Once split, they each have their own list of parameters, though.</span>
+<span class="n">instance1</span><span class="o">.</span><span class="n">set_parameter</span><span class="p">(</span><span class="n">ValueParameter</span><span class="p">(</span><span class="s">&#39;Eg_Gamma_bowing&#39;</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="s">&#39;eV&#39;</span><span class="p">))</span>
+<span class="k">print</span> <span class="s">&#39;instance1.Eg =&#39;</span><span class="p">,</span> <span class="n">instance1</span><span class="o">.</span><span class="n">Eg</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&#39;instance1_copy.Eg =&#39;</span><span class="p">,</span> <span class="n">instance1_copy</span><span class="o">.</span><span class="n">Eg</span><span class="p">()</span>
+
+<span class="c"># Changing a parameter in AlGaInAs_InP, directly, alters all future instances,</span>
+<span class="c"># but not existing instances.</span>
+<span class="n">AlGaInAs_InP</span><span class="o">.</span><span class="n">set_parameter</span><span class="p">(</span><span class="n">ValueParameter</span><span class="p">(</span><span class="s">&#39;Eg_Gamma_bowing&#39;</span><span class="p">,</span> <span class="mf">3.</span><span class="p">,</span> <span class="s">&#39;eV&#39;</span><span class="p">))</span>
+<span class="k">print</span> <span class="s">&#39;instance1.Eg =&#39;</span><span class="p">,</span> <span class="n">instance1</span><span class="o">.</span><span class="n">Eg</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&#39;instance2.Eg =&#39;</span><span class="p">,</span> <span class="n">instance2</span><span class="o">.</span><span class="n">Eg</span><span class="p">()</span>
+<span class="n">instance3</span> <span class="o">=</span> <span class="n">AlGaInAs_InP</span><span class="p">(</span><span class="n">Al</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&#39;instance3.Eg =&#39;</span><span class="p">,</span> <span class="n">instance3</span><span class="o">.</span><span class="n">Eg</span><span class="p">()</span>
+<span class="n">instance4</span> <span class="o">=</span> <span class="n">AlGaInAs_InP</span><span class="p">(</span><span class="n">Al</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&#39;instance4.Eg =&#39;</span><span class="p">,</span> <span class="n">instance4</span><span class="o">.</span><span class="n">Eg</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Result:</p>
+<div class="highlight-python"><div class="highlight"><pre>Al_{0.5}Ga_{0.5}InAs
+instance1.Eg = 1.08493633624
+instance1.Eg = 1.21858038345
+instance1.Eg = 0.968580383447
+instance2.Eg = 1.21858038345
+instance1_copy.Eg = 0.968580383447
+instance1.Eg = 0.718580383447
+instance1_copy.Eg = 0.968580383447
+instance1.Eg = 0.718580383447
+instance2.Eg = 1.21858038345
+instance3.Eg = 0.468580383447
+instance4.Eg = 0.468580383447
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="_Strained_Ternaries.html" title="Strained Ternaries"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="_Ternaries.html" title="Ternaries"
+             >previous</a> |</li>
+        <li><a href="../index.html">openbandparams 0.8 documentation</a> &raquo;</li>
+          <li><a href="../examples.html" >Examples</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2015, Scott J Maddox.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

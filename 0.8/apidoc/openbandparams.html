@@ -1,0 +1,2235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>openbandparams package &mdash; openbandparams 0.8 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.8',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="openbandparams 0.8 documentation" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">openbandparams 0.8 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">openbandparams package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-openbandparams.algorithms">openbandparams.algorithms module</a></li>
+<li><a class="reference internal" href="#module-openbandparams.alloy">openbandparams.alloy module</a></li>
+<li><a class="reference internal" href="#module-openbandparams.equations">openbandparams.equations module</a></li>
+<li><a class="reference internal" href="#module-openbandparams.iii_v_alloy">openbandparams.iii_v_alloy module</a></li>
+<li><a class="reference internal" href="#module-openbandparams.iii_v_zinc_blende_alloy">openbandparams.iii_v_zinc_blende_alloy module</a></li>
+<li><a class="reference internal" href="#module-openbandparams.iii_v_zinc_blende_binaries">openbandparams.iii_v_zinc_blende_binaries module</a></li>
+<li><a class="reference internal" href="#module-openbandparams.iii_v_zinc_blende_binary">openbandparams.iii_v_zinc_blende_binary module</a></li>
+<li><a class="reference internal" href="#module-openbandparams.iii_v_zinc_blende_mixed_alloy">openbandparams.iii_v_zinc_blende_mixed_alloy module</a></li>
+<li><a class="reference internal" href="#module-openbandparams.iii_v_zinc_blende_quaternaries">openbandparams.iii_v_zinc_blende_quaternaries module</a></li>
+<li><a class="reference internal" href="#module-openbandparams.iii_v_zinc_blende_quaternary">openbandparams.iii_v_zinc_blende_quaternary module</a></li>
+<li><a class="reference internal" href="#module-openbandparams.iii_v_zinc_blende_strained">openbandparams.iii_v_zinc_blende_strained module</a></li>
+<li><a class="reference internal" href="#module-openbandparams.iii_v_zinc_blende_ternaries">openbandparams.iii_v_zinc_blende_ternaries module</a></li>
+<li><a class="reference internal" href="#module-openbandparams.iii_v_zinc_blende_ternary">openbandparams.iii_v_zinc_blende_ternary module</a></li>
+<li><a class="reference internal" href="#module-openbandparams.parameter">openbandparams.parameter module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-openbandparams.reference">openbandparams.reference module</a></li>
+<li><a class="reference internal" href="#module-openbandparams.references">openbandparams.references module</a></li>
+<li><a class="reference internal" href="#module-openbandparams.version">openbandparams.version module</a></li>
+<li><a class="reference internal" href="#module-openbandparams">Module contents</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/apidoc/openbandparams.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="openbandparams-package">
+<h1>openbandparams package<a class="headerlink" href="#openbandparams-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-openbandparams.algorithms">
+<span id="openbandparams-algorithms-module"></span><h2>openbandparams.algorithms module<a class="headerlink" href="#module-openbandparams.algorithms" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="openbandparams.algorithms.bisect">
+<tt class="descclassname">openbandparams.algorithms.</tt><tt class="descname">bisect</tt><big>(</big><em>func</em>, <em>a</em>, <em>b</em>, <em>xtol=1e-12</em>, <em>maxiter=100</em><big>)</big><a class="reference internal" href="../_modules/openbandparams/algorithms.html#bisect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.algorithms.bisect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds the root of <cite>func</cite> using the bisection method.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>func</strong> : function</p>
+<blockquote>
+<div><p>the function that we want to find the root of</p>
+</div></blockquote>
+<p><strong>a</strong> : number</p>
+<blockquote>
+<div><p>one of the bounds on the input</p>
+</div></blockquote>
+<p><strong>b</strong> : number</p>
+<blockquote>
+<div><p>the other bound on the input</p>
+</div></blockquote>
+<p><strong>xtol</strong> : number, optional</p>
+<blockquote>
+<div><p>the solution tolerance of the input value. The algorithm is
+considered converged if <cite>abs(b-a)2. &lt; xtol</cite></p>
+</div></blockquote>
+<p><strong>maxiter</strong> : number, optional</p>
+<blockquote class="last">
+<div><p>the maximum number of iterations allowed for convergence</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="openbandparams.algorithms.sign">
+<tt class="descclassname">openbandparams.algorithms.</tt><tt class="descname">sign</tt><big>(</big><em>x</em><big>)</big><a class="reference internal" href="../_modules/openbandparams/algorithms.html#sign"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.algorithms.sign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns -1, 0, or 1 if <cite>x</cite> is negative, zero, or positive, respectively.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-openbandparams.alloy">
+<span id="openbandparams-alloy-module"></span><h2>openbandparams.alloy module<a class="headerlink" href="#module-openbandparams.alloy" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openbandparams.alloy.Alloy">
+<em class="property">class </em><tt class="descclassname">openbandparams.alloy.</tt><tt class="descname">Alloy</tt><big>(</big><em>name</em>, <em>elements</em>, <em>parameters=None</em><big>)</big><a class="reference internal" href="../_modules/openbandparams/alloy.html#Alloy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.alloy.Alloy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.alloy.Alloy.add_parameter" title="openbandparams.alloy.Alloy.add_parameter"><tt class="xref py py-obj docutils literal"><span class="pre">add_parameter</span></tt></a>(parameter[,&nbsp;overload])</td>
+<td>Adds a <cite>Parameter</cite> object to the instance.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.alloy.Alloy.element_fraction" title="openbandparams.alloy.Alloy.element_fraction"><tt class="xref py py-obj docutils literal"><span class="pre">element_fraction</span></tt></a>(element)</td>
+<td>Returns the atomic fraction of the given <tt class="docutils literal"><span class="pre">element</span></tt>.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.alloy.Alloy.get_parameter" title="openbandparams.alloy.Alloy.get_parameter"><tt class="xref py py-obj docutils literal"><span class="pre">get_parameter</span></tt></a>(name[,&nbsp;default])</td>
+<td>Returns the named parameter if present, or the value of <cite>default</cite>, otherwise.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.alloy.Alloy.get_unique_parameters" title="openbandparams.alloy.Alloy.get_unique_parameters"><tt class="xref py py-obj docutils literal"><span class="pre">get_unique_parameters</span></tt></a>()</td>
+<td>Returns a list of the unique parameters (no duplicates).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.alloy.Alloy.has_parameter" title="openbandparams.alloy.Alloy.has_parameter"><tt class="xref py py-obj docutils literal"><span class="pre">has_parameter</span></tt></a>(name)</td>
+<td>Returns True if the named parameter is present, or False, otherwise.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.alloy.Alloy.latex" title="openbandparams.alloy.Alloy.latex"><tt class="xref py py-obj docutils literal"><span class="pre">latex</span></tt></a>()</td>
+<td>Returns a LaTeX representation of the alloy.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.alloy.Alloy.set_parameter" title="openbandparams.alloy.Alloy.set_parameter"><tt class="xref py py-obj docutils literal"><span class="pre">set_parameter</span></tt></a>(parameter)</td>
+<td>Same as calling <tt class="docutils literal"><span class="pre">add_parameter</span></tt> with <tt class="docutils literal"><span class="pre">overload=True</span></tt></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="openbandparams.alloy.Alloy.add_parameter">
+<tt class="descname">add_parameter</tt><big>(</big><em>parameter</em>, <em>overload=False</em><big>)</big><a class="reference internal" href="../_modules/openbandparams/alloy.html#Alloy.add_parameter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.alloy.Alloy.add_parameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a <cite>Parameter</cite> object to the instance.</p>
+<p>If a <cite>Parameter</cite> with the same name or alias has already been added
+and <cite>overload</cite> is False (the default), a <cite>ValueError</cite> is thrown.</p>
+<p>If a class member or method with the same name or alias is already
+defined, a <cite>ValueError</cite> is thrown, regardless of the value of overload.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="openbandparams.alloy.Alloy.element_fraction">
+<tt class="descname">element_fraction</tt><big>(</big><em>element</em><big>)</big><a class="reference internal" href="../_modules/openbandparams/alloy.html#Alloy.element_fraction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.alloy.Alloy.element_fraction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the atomic fraction of the given <tt class="docutils literal"><span class="pre">element</span></tt>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="openbandparams.alloy.Alloy.get_parameter">
+<tt class="descname">get_parameter</tt><big>(</big><em>name</em>, <em>default=None</em><big>)</big><a class="reference internal" href="../_modules/openbandparams/alloy.html#Alloy.get_parameter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.alloy.Alloy.get_parameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the named parameter if present, or the value of <cite>default</cite>,
+otherwise.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="openbandparams.alloy.Alloy.get_unique_parameters">
+<tt class="descname">get_unique_parameters</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/openbandparams/alloy.html#Alloy.get_unique_parameters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.alloy.Alloy.get_unique_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of the unique parameters (no duplicates).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="openbandparams.alloy.Alloy.has_parameter">
+<tt class="descname">has_parameter</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="../_modules/openbandparams/alloy.html#Alloy.has_parameter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.alloy.Alloy.has_parameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the named parameter is present, or False, otherwise.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="openbandparams.alloy.Alloy.latex">
+<tt class="descname">latex</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/openbandparams/alloy.html#Alloy.latex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.alloy.Alloy.latex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a LaTeX representation of the alloy.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="openbandparams.alloy.Alloy.set_parameter">
+<tt class="descname">set_parameter</tt><big>(</big><em>parameter</em><big>)</big><a class="reference internal" href="../_modules/openbandparams/alloy.html#Alloy.set_parameter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.alloy.Alloy.set_parameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Same as calling <tt class="docutils literal"><span class="pre">add_parameter</span></tt> with <tt class="docutils literal"><span class="pre">overload=True</span></tt></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-openbandparams.equations">
+<span id="openbandparams-equations-module"></span><h2>openbandparams.equations module<a class="headerlink" href="#module-openbandparams.equations" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="openbandparams.equations.varshni">
+<tt class="descclassname">openbandparams.equations.</tt><tt class="descname">varshni</tt><big>(</big><em>Eg_0</em>, <em>alpha</em>, <em>beta</em>, <em>T</em><big>)</big><a class="reference internal" href="../_modules/openbandparams/equations.html#varshni"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.equations.varshni" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-openbandparams.iii_v_alloy">
+<span id="openbandparams-iii-v-alloy-module"></span><h2>openbandparams.iii_v_alloy module<a class="headerlink" href="#module-openbandparams.iii_v_alloy" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openbandparams.iii_v_alloy.IIIVAlloy">
+<em class="property">class </em><tt class="descclassname">openbandparams.iii_v_alloy.</tt><tt class="descname">IIIVAlloy</tt><big>(</big><em>name</em>, <em>elements</em>, <em>parameters=None</em><big>)</big><a class="reference internal" href="../_modules/openbandparams/iii_v_alloy.html#IIIVAlloy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_alloy.IIIVAlloy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openbandparams.alloy.Alloy" title="openbandparams.alloy.Alloy"><tt class="xref py py-class docutils literal"><span class="pre">openbandparams.alloy.Alloy</span></tt></a></p>
+<p>The base class for all III-V alloys.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_parameter</span></tt>(parameter[,&nbsp;overload])</td>
+<td>Adds a <cite>Parameter</cite> object to the instance.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_alloy.IIIVAlloy.electron_affinity" title="openbandparams.iii_v_alloy.IIIVAlloy.electron_affinity"><tt class="xref py py-obj docutils literal"><span class="pre">electron_affinity</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">element_fraction</span></tt>(element)</td>
+<td>Returns the atomic fraction of the given <tt class="docutils literal"><span class="pre">element</span></tt>.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_parameter</span></tt>(name[,&nbsp;default])</td>
+<td>Returns the named parameter if present, or the value of <cite>default</cite>, otherwise.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_unique_parameters</span></tt>()</td>
+<td>Returns a list of the unique parameters (no duplicates).</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">has_parameter</span></tt>(name)</td>
+<td>Returns True if the named parameter is present, or False, otherwise.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">latex</span></tt>()</td>
+<td>Returns a LaTeX representation of the alloy.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_parameter</span></tt>(parameter)</td>
+<td>Same as calling <tt class="docutils literal"><span class="pre">add_parameter</span></tt> with <tt class="docutils literal"><span class="pre">overload=True</span></tt></td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="openbandparams.iii_v_alloy.IIIVAlloy.electron_affinity">
+<tt class="descname">electron_affinity</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e45310&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_alloy.html#IIIVAlloy.electron_affinity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_alloy.IIIVAlloy.electron_affinity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-openbandparams.iii_v_zinc_blende_alloy">
+<span id="openbandparams-iii-v-zinc-blende-alloy-module"></span><h2>openbandparams.iii_v_zinc_blende_alloy module<a class="headerlink" href="#module-openbandparams.iii_v_zinc_blende_alloy" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy">
+<em class="property">class </em><tt class="descclassname">openbandparams.iii_v_zinc_blende_alloy.</tt><tt class="descname">IIIVZincBlendeAlloy</tt><big>(</big><em>name</em>, <em>elements</em>, <em>parameters=None</em><big>)</big><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_alloy.html#IIIVZincBlendeAlloy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openbandparams.iii_v_alloy.IIIVAlloy" title="openbandparams.iii_v_alloy.IIIVAlloy"><tt class="xref py py-class docutils literal"><span class="pre">openbandparams.iii_v_alloy.IIIVAlloy</span></tt></a></p>
+<p>The base class for all III-V zinc blende alloys.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.CBO" title="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.CBO"><tt class="xref py py-obj docutils literal"><span class="pre">CBO</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.CBO_Gamma" title="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.CBO_Gamma"><tt class="xref py py-obj docutils literal"><span class="pre">CBO_Gamma</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.CBO_L" title="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.CBO_L"><tt class="xref py py-obj docutils literal"><span class="pre">CBO_L</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.CBO_X" title="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.CBO_X"><tt class="xref py py-obj docutils literal"><span class="pre">CBO_X</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.Eg" title="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.Eg"><tt class="xref py py-obj docutils literal"><span class="pre">Eg</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.Eg_Gamma" title="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.Eg_Gamma"><tt class="xref py py-obj docutils literal"><span class="pre">Eg_Gamma</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.Eg_L" title="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.Eg_L"><tt class="xref py py-obj docutils literal"><span class="pre">Eg_L</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.Eg_X" title="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.Eg_X"><tt class="xref py py-obj docutils literal"><span class="pre">Eg_X</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.F" title="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.F"><tt class="xref py py-obj docutils literal"><span class="pre">F</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.a" title="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.a"><tt class="xref py py-obj docutils literal"><span class="pre">a</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_parameter</span></tt>(parameter[,&nbsp;overload])</td>
+<td>Adds a <cite>Parameter</cite> object to the instance.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">electron_affinity</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">element_fraction</span></tt>(element)</td>
+<td>Returns the atomic fraction of the given <tt class="docutils literal"><span class="pre">element</span></tt>.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_parameter</span></tt>(name[,&nbsp;default])</td>
+<td>Returns the named parameter if present, or the value of <cite>default</cite>, otherwise.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_unique_parameters</span></tt>()</td>
+<td>Returns a list of the unique parameters (no duplicates).</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">has_parameter</span></tt>(name)</td>
+<td>Returns True if the named parameter is present, or False, otherwise.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">latex</span></tt>()</td>
+<td>Returns a LaTeX representation of the alloy.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.luttinger32" title="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.luttinger32"><tt class="xref py py-obj docutils literal"><span class="pre">luttinger32</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_SO" title="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_SO"><tt class="xref py py-obj docutils literal"><span class="pre">meff_SO</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_e_Gamma" title="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_e_Gamma"><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_Gamma</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_hh_100" title="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_hh_100"><tt class="xref py py-obj docutils literal"><span class="pre">meff_hh_100</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_hh_110" title="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_hh_110"><tt class="xref py py-obj docutils literal"><span class="pre">meff_hh_110</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_hh_111" title="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_hh_111"><tt class="xref py py-obj docutils literal"><span class="pre">meff_hh_111</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_lh_100" title="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_lh_100"><tt class="xref py py-obj docutils literal"><span class="pre">meff_lh_100</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_lh_110" title="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_lh_110"><tt class="xref py py-obj docutils literal"><span class="pre">meff_lh_110</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_lh_111" title="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_lh_111"><tt class="xref py py-obj docutils literal"><span class="pre">meff_lh_111</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.nonparabolicity" title="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.nonparabolicity"><tt class="xref py py-obj docutils literal"><span class="pre">nonparabolicity</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_parameter</span></tt>(parameter)</td>
+<td>Same as calling <tt class="docutils literal"><span class="pre">add_parameter</span></tt> with <tt class="docutils literal"><span class="pre">overload=True</span></tt></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.strained_001" title="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.strained_001"><tt class="xref py py-obj docutils literal"><span class="pre">strained_001</span></tt></a>(target)</td>
+<td>Returns an instance of <tt class="docutils literal"><span class="pre">IIIVZincBlendeStrained001</span></tt>, which is a biaxial-strained III-V zinc blende binary alloy grown on a (001) surface.</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.CBO">
+<tt class="descname">CBO</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b550&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_alloy.html#IIIVZincBlendeAlloy.CBO"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.CBO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.CBO_Gamma">
+<tt class="descname">CBO_Gamma</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b590&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_alloy.html#IIIVZincBlendeAlloy.CBO_Gamma"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.CBO_Gamma" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.CBO_L">
+<tt class="descname">CBO_L</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b5d0&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_alloy.html#IIIVZincBlendeAlloy.CBO_L"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.CBO_L" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.CBO_X">
+<tt class="descname">CBO_X</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b610&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_alloy.html#IIIVZincBlendeAlloy.CBO_X"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.CBO_X" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.Eg">
+<tt class="descname">Eg</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b650&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_alloy.html#IIIVZincBlendeAlloy.Eg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.Eg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.Eg_Gamma">
+<tt class="descname">Eg_Gamma</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b690&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_alloy.html#IIIVZincBlendeAlloy.Eg_Gamma"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.Eg_Gamma" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.Eg_L">
+<tt class="descname">Eg_L</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b6d0&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_alloy.html#IIIVZincBlendeAlloy.Eg_L"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.Eg_L" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.Eg_X">
+<tt class="descname">Eg_X</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b710&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_alloy.html#IIIVZincBlendeAlloy.Eg_X"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.Eg_X" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.F">
+<tt class="descname">F</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b750&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_alloy.html#IIIVZincBlendeAlloy.F"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.F" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.a">
+<tt class="descname">a</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b790&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_alloy.html#IIIVZincBlendeAlloy.a"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.a" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.luttinger32">
+<tt class="descname">luttinger32</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b7d0&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_alloy.html#IIIVZincBlendeAlloy.luttinger32"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.luttinger32" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_SO">
+<tt class="descname">meff_SO</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b810&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_alloy.html#IIIVZincBlendeAlloy.meff_SO"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_SO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_e_Gamma">
+<tt class="descname">meff_e_Gamma</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b850&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_alloy.html#IIIVZincBlendeAlloy.meff_e_Gamma"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_e_Gamma" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_hh_100">
+<tt class="descname">meff_hh_100</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b890&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_alloy.html#IIIVZincBlendeAlloy.meff_hh_100"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_hh_100" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_hh_110">
+<tt class="descname">meff_hh_110</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b8d0&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_alloy.html#IIIVZincBlendeAlloy.meff_hh_110"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_hh_110" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_hh_111">
+<tt class="descname">meff_hh_111</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b910&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_alloy.html#IIIVZincBlendeAlloy.meff_hh_111"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_hh_111" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_lh_100">
+<tt class="descname">meff_lh_100</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b950&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_alloy.html#IIIVZincBlendeAlloy.meff_lh_100"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_lh_100" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_lh_110">
+<tt class="descname">meff_lh_110</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b990&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_alloy.html#IIIVZincBlendeAlloy.meff_lh_110"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_lh_110" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_lh_111">
+<tt class="descname">meff_lh_111</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b9d0&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_alloy.html#IIIVZincBlendeAlloy.meff_lh_111"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.meff_lh_111" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.nonparabolicity">
+<tt class="descname">nonparabolicity</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4ba10&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_alloy.html#IIIVZincBlendeAlloy.nonparabolicity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.nonparabolicity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.strained_001">
+<tt class="descname">strained_001</tt><big>(</big><em>target</em><big>)</big><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_alloy.html#IIIVZincBlendeAlloy.strained_001"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy.strained_001" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an instance of <tt class="docutils literal"><span class="pre">IIIVZincBlendeStrained001</span></tt>, which is a
+biaxial-strained III-V zinc blende binary alloy grown on a (001)
+surface.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>target</strong> : Alloy with <tt class="docutils literal"><span class="pre">a</span></tt> parameter or float</p>
+<blockquote class="last">
+<div><p>Growth substrate, assumed to have a (001) surface, or out-of-plane
+strain, which is negative for tensile strain and positive for
+compressive strain. This is the strain measured by X-ray
+diffraction (XRD) symmetric omega-2theta scans.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-openbandparams.iii_v_zinc_blende_binaries">
+<span id="openbandparams-iii-v-zinc-blende-binaries-module"></span><h2>openbandparams.iii_v_zinc_blende_binaries module<a class="headerlink" href="#module-openbandparams.iii_v_zinc_blende_binaries" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-openbandparams.iii_v_zinc_blende_binary">
+<span id="openbandparams-iii-v-zinc-blende-binary-module"></span><h2>openbandparams.iii_v_zinc_blende_binary module<a class="headerlink" href="#module-openbandparams.iii_v_zinc_blende_binary" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openbandparams.iii_v_zinc_blende_binary.IIIVZincBlendeBinary">
+<em class="property">class </em><tt class="descclassname">openbandparams.iii_v_zinc_blende_binary.</tt><tt class="descname">IIIVZincBlendeBinary</tt><big>(</big><em>name</em>, <em>elements</em>, <em>parameters=None</em><big>)</big><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_binary.html#IIIVZincBlendeBinary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_binary.IIIVZincBlendeBinary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy" title="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy"><tt class="xref py py-class docutils literal"><span class="pre">openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy</span></tt></a></p>
+<p>The base class for all III-V zinc blende binary alloys.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">CBO</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">CBO_Gamma</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">CBO_L</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">CBO_X</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">Eg</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">Eg_Gamma</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">Eg_L</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">Eg_X</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">F</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">a</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_parameter</span></tt>(parameter[,&nbsp;overload])</td>
+<td>Adds a <cite>Parameter</cite> object to the instance.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">electron_affinity</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_binary.IIIVZincBlendeBinary.element_fraction" title="openbandparams.iii_v_zinc_blende_binary.IIIVZincBlendeBinary.element_fraction"><tt class="xref py py-obj docutils literal"><span class="pre">element_fraction</span></tt></a>(element)</td>
+<td>Returns the fractional concentration of <cite>element</cite> with respect to its sublattice.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_parameter</span></tt>(name[,&nbsp;default])</td>
+<td>Returns the named parameter if present, or the value of <cite>default</cite>, otherwise.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_unique_parameters</span></tt>()</td>
+<td>Returns a list of the unique parameters (no duplicates).</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">has_parameter</span></tt>(name)</td>
+<td>Returns True if the named parameter is present, or False, otherwise.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_binary.IIIVZincBlendeBinary.latex" title="openbandparams.iii_v_zinc_blende_binary.IIIVZincBlendeBinary.latex"><tt class="xref py py-obj docutils literal"><span class="pre">latex</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">luttinger32</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_SO</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_Gamma</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_hh_100</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_hh_110</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_hh_111</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_lh_100</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_lh_110</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_lh_111</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">nonparabolicity</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_parameter</span></tt>(parameter)</td>
+<td>Same as calling <tt class="docutils literal"><span class="pre">add_parameter</span></tt> with <tt class="docutils literal"><span class="pre">overload=True</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">strained_001</span></tt>(target)</td>
+<td>Returns an instance of <tt class="docutils literal"><span class="pre">IIIVZincBlendeStrained001</span></tt>, which is a biaxial-strained III-V zinc blende binary alloy grown on a (001) surface.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="openbandparams.iii_v_zinc_blende_binary.IIIVZincBlendeBinary.element_fraction">
+<tt class="descname">element_fraction</tt><big>(</big><em>element</em><big>)</big><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_binary.html#IIIVZincBlendeBinary.element_fraction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_binary.IIIVZincBlendeBinary.element_fraction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the fractional concentration of <cite>element</cite> with respect
+to its sublattice. In a III-V binary, the fraction is either 1 if
+<cite>element</cite> is present, or 0 if it is not.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="openbandparams.iii_v_zinc_blende_binary.IIIVZincBlendeBinary.latex">
+<tt class="descname">latex</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_binary.html#IIIVZincBlendeBinary.latex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_binary.IIIVZincBlendeBinary.latex" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-openbandparams.iii_v_zinc_blende_mixed_alloy">
+<span id="openbandparams-iii-v-zinc-blende-mixed-alloy-module"></span><h2>openbandparams.iii_v_zinc_blende_mixed_alloy module<a class="headerlink" href="#module-openbandparams.iii_v_zinc_blende_mixed_alloy" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy">
+<em class="property">class </em><tt class="descclassname">openbandparams.iii_v_zinc_blende_mixed_alloy.</tt><tt class="descname">IIIVZincBlendeMixedAlloy</tt><big>(</big><em>name</em>, <em>elements</em>, <em>parameters=None</em><big>)</big><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_mixed_alloy.html#IIIVZincBlendeMixedAlloy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy" title="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy"><tt class="xref py py-class docutils literal"><span class="pre">openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy</span></tt></a></p>
+<p>The base class for all III-V zinc blende mixed alloys, i.e. ternaries,
+quaternaries, quinaries, etc.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">CBO</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">CBO_Gamma</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">CBO_L</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">CBO_X</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.Delta_SO" title="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.Delta_SO"><tt class="xref py py-obj docutils literal"><span class="pre">Delta_SO</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">Eg</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.Eg_Gamma" title="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.Eg_Gamma"><tt class="xref py py-obj docutils literal"><span class="pre">Eg_Gamma</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.Eg_L" title="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.Eg_L"><tt class="xref py py-obj docutils literal"><span class="pre">Eg_L</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.Eg_X" title="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.Eg_X"><tt class="xref py py-obj docutils literal"><span class="pre">Eg_X</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.Ep" title="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.Ep"><tt class="xref py py-obj docutils literal"><span class="pre">Ep</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.F" title="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.F"><tt class="xref py py-obj docutils literal"><span class="pre">F</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.VBO" title="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.VBO"><tt class="xref py py-obj docutils literal"><span class="pre">VBO</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">__call__</span></tt>(**kwargs)</td>
+<td>Used to specify the alloy composition.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">a</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.a_300K" title="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.a_300K"><tt class="xref py py-obj docutils literal"><span class="pre">a_300K</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.a_c" title="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.a_c"><tt class="xref py py-obj docutils literal"><span class="pre">a_c</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.a_v" title="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.a_v"><tt class="xref py py-obj docutils literal"><span class="pre">a_v</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_parameter</span></tt>(parameter[,&nbsp;overload])</td>
+<td>Adds a <cite>Parameter</cite> object to the instance.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.b" title="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.b"><tt class="xref py py-obj docutils literal"><span class="pre">b</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.c11" title="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.c11"><tt class="xref py py-obj docutils literal"><span class="pre">c11</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.c12" title="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.c12"><tt class="xref py py-obj docutils literal"><span class="pre">c12</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.c44" title="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.c44"><tt class="xref py py-obj docutils literal"><span class="pre">c44</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.d" title="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.d"><tt class="xref py py-obj docutils literal"><span class="pre">d</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">electron_affinity</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">element_fraction</span></tt>(element)</td>
+<td>Returns the atomic fraction of the given <tt class="docutils literal"><span class="pre">element</span></tt>.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_parameter</span></tt>(name[,&nbsp;default])</td>
+<td>Returns the named parameter if present, or the value of <cite>default</cite>, otherwise.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_unique_parameters</span></tt>()</td>
+<td>Returns a list of the unique parameters (no duplicates).</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">has_parameter</span></tt>(name)</td>
+<td>Returns True if the named parameter is present, or False, otherwise.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">latex</span></tt>()</td>
+<td>Returns a LaTeX representation of the alloy.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.luttinger1" title="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.luttinger1"><tt class="xref py py-obj docutils literal"><span class="pre">luttinger1</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.luttinger2" title="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.luttinger2"><tt class="xref py py-obj docutils literal"><span class="pre">luttinger2</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.luttinger3" title="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.luttinger3"><tt class="xref py py-obj docutils literal"><span class="pre">luttinger3</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.luttinger32" title="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.luttinger32"><tt class="xref py py-obj docutils literal"><span class="pre">luttinger32</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_SO" title="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_SO"><tt class="xref py py-obj docutils literal"><span class="pre">meff_SO</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_Gamma</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_e_L_DOS" title="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_e_L_DOS"><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_L_DOS</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_e_L_long" title="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_e_L_long"><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_L_long</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_e_L_trans" title="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_e_L_trans"><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_L_trans</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_e_X_DOS" title="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_e_X_DOS"><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_X_DOS</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_e_X_long" title="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_e_X_long"><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_X_long</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_e_X_trans" title="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_e_X_trans"><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_X_trans</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_hh_100" title="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_hh_100"><tt class="xref py py-obj docutils literal"><span class="pre">meff_hh_100</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_hh_110</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_hh_111</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_lh_100" title="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_lh_100"><tt class="xref py py-obj docutils literal"><span class="pre">meff_lh_100</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_lh_110</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_lh_111</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">nonparabolicity</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_parameter</span></tt>(parameter)</td>
+<td>Same as calling <tt class="docutils literal"><span class="pre">add_parameter</span></tt> with <tt class="docutils literal"><span class="pre">overload=True</span></tt></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">strained_001</span></tt>(target)</td>
+<td>Returns an instance of <tt class="docutils literal"><span class="pre">IIIVZincBlendeStrained001</span></tt>, which is a biaxial-strained III-V zinc blende binary alloy grown on a (001) surface.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.thermal_expansion" title="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.thermal_expansion"><tt class="xref py py-obj docutils literal"><span class="pre">thermal_expansion</span></tt></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.Delta_SO">
+<tt class="descname">Delta_SO</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e3d5d0&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_mixed_alloy.html#IIIVZincBlendeMixedAlloy.Delta_SO"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.Delta_SO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.Eg_Gamma">
+<tt class="descname">Eg_Gamma</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e3d610&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_mixed_alloy.html#IIIVZincBlendeMixedAlloy.Eg_Gamma"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.Eg_Gamma" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.Eg_L">
+<tt class="descname">Eg_L</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e3d650&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_mixed_alloy.html#IIIVZincBlendeMixedAlloy.Eg_L"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.Eg_L" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.Eg_X">
+<tt class="descname">Eg_X</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e3d690&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_mixed_alloy.html#IIIVZincBlendeMixedAlloy.Eg_X"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.Eg_X" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.Ep">
+<tt class="descname">Ep</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e3d6d0&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_mixed_alloy.html#IIIVZincBlendeMixedAlloy.Ep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.Ep" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.F">
+<tt class="descname">F</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e3d710&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_mixed_alloy.html#IIIVZincBlendeMixedAlloy.F"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.F" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.VBO">
+<tt class="descname">VBO</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e3d750&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_mixed_alloy.html#IIIVZincBlendeMixedAlloy.VBO"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.VBO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.a_300K">
+<tt class="descname">a_300K</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e3d790&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_mixed_alloy.html#IIIVZincBlendeMixedAlloy.a_300K"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.a_300K" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.a_c">
+<tt class="descname">a_c</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e3d7d0&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_mixed_alloy.html#IIIVZincBlendeMixedAlloy.a_c"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.a_c" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.a_v">
+<tt class="descname">a_v</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e3d810&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_mixed_alloy.html#IIIVZincBlendeMixedAlloy.a_v"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.a_v" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.b">
+<tt class="descname">b</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e3d850&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_mixed_alloy.html#IIIVZincBlendeMixedAlloy.b"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.b" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.c11">
+<tt class="descname">c11</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e3d890&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_mixed_alloy.html#IIIVZincBlendeMixedAlloy.c11"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.c11" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.c12">
+<tt class="descname">c12</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e3d8d0&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_mixed_alloy.html#IIIVZincBlendeMixedAlloy.c12"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.c12" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.c44">
+<tt class="descname">c44</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e3d910&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_mixed_alloy.html#IIIVZincBlendeMixedAlloy.c44"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.c44" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.d">
+<tt class="descname">d</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e3d950&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_mixed_alloy.html#IIIVZincBlendeMixedAlloy.d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.d" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.luttinger1">
+<tt class="descname">luttinger1</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e3d990&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_mixed_alloy.html#IIIVZincBlendeMixedAlloy.luttinger1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.luttinger1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.luttinger2">
+<tt class="descname">luttinger2</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e3d9d0&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_mixed_alloy.html#IIIVZincBlendeMixedAlloy.luttinger2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.luttinger2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.luttinger3">
+<tt class="descname">luttinger3</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e3da10&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_mixed_alloy.html#IIIVZincBlendeMixedAlloy.luttinger3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.luttinger3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.luttinger32">
+<tt class="descname">luttinger32</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e3da50&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_mixed_alloy.html#IIIVZincBlendeMixedAlloy.luttinger32"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.luttinger32" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_SO">
+<tt class="descname">meff_SO</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e3dc90&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_mixed_alloy.html#IIIVZincBlendeMixedAlloy.meff_SO"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_SO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_e_L_DOS">
+<tt class="descname">meff_e_L_DOS</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e3da90&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_mixed_alloy.html#IIIVZincBlendeMixedAlloy.meff_e_L_DOS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_e_L_DOS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_e_L_long">
+<tt class="descname">meff_e_L_long</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e3dad0&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_mixed_alloy.html#IIIVZincBlendeMixedAlloy.meff_e_L_long"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_e_L_long" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_e_L_trans">
+<tt class="descname">meff_e_L_trans</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e3db10&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_mixed_alloy.html#IIIVZincBlendeMixedAlloy.meff_e_L_trans"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_e_L_trans" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_e_X_DOS">
+<tt class="descname">meff_e_X_DOS</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e3db50&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_mixed_alloy.html#IIIVZincBlendeMixedAlloy.meff_e_X_DOS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_e_X_DOS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_e_X_long">
+<tt class="descname">meff_e_X_long</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e3db90&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_mixed_alloy.html#IIIVZincBlendeMixedAlloy.meff_e_X_long"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_e_X_long" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_e_X_trans">
+<tt class="descname">meff_e_X_trans</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e3dbd0&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_mixed_alloy.html#IIIVZincBlendeMixedAlloy.meff_e_X_trans"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_e_X_trans" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_hh_100">
+<tt class="descname">meff_hh_100</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e3dc10&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_mixed_alloy.html#IIIVZincBlendeMixedAlloy.meff_hh_100"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_hh_100" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_lh_100">
+<tt class="descname">meff_lh_100</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e3dc50&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_mixed_alloy.html#IIIVZincBlendeMixedAlloy.meff_lh_100"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_lh_100" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.thermal_expansion">
+<tt class="descname">thermal_expansion</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e3dcd0&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_mixed_alloy.html#IIIVZincBlendeMixedAlloy.thermal_expansion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.thermal_expansion" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-openbandparams.iii_v_zinc_blende_quaternaries">
+<span id="openbandparams-iii-v-zinc-blende-quaternaries-module"></span><h2>openbandparams.iii_v_zinc_blende_quaternaries module<a class="headerlink" href="#module-openbandparams.iii_v_zinc_blende_quaternaries" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-openbandparams.iii_v_zinc_blende_quaternary">
+<span id="openbandparams-iii-v-zinc-blende-quaternary-module"></span><h2>openbandparams.iii_v_zinc_blende_quaternary module<a class="headerlink" href="#module-openbandparams.iii_v_zinc_blende_quaternary" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openbandparams.iii_v_zinc_blende_quaternary.IIIVZincBlendeQuaternary">
+<em class="property">class </em><tt class="descclassname">openbandparams.iii_v_zinc_blende_quaternary.</tt><tt class="descname">IIIVZincBlendeQuaternary</tt><big>(</big><em>name</em>, <em>elements</em>, <em>ternaries</em>, <em>parameters=None</em>, <em>x=None</em>, <em>y=None</em>, <em>z=None</em><big>)</big><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_quaternary.html#IIIVZincBlendeQuaternary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_quaternary.IIIVZincBlendeQuaternary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy" title="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy"><tt class="xref py py-class docutils literal"><span class="pre">openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy</span></tt></a></p>
+<p>The base class for all III-V zinc blende quaternary alloys.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">CBO</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">CBO_Gamma</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">CBO_L</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">CBO_X</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">Delta_SO</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">Eg</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">Eg_Gamma</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">Eg_L</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">Eg_X</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">Ep</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">F</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">VBO</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">__call__</span></tt>(**kwargs)</td>
+<td>Used to specify the alloy composition.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">a</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">a_300K</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">a_c</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">a_v</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_parameter</span></tt>(parameter[,&nbsp;overload])</td>
+<td>Adds a <cite>Parameter</cite> object to the instance.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">b</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">c11</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">c12</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">c44</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">d</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">electron_affinity</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_quaternary.IIIVZincBlendeQuaternary.element_fraction" title="openbandparams.iii_v_zinc_blende_quaternary.IIIVZincBlendeQuaternary.element_fraction"><tt class="xref py py-obj docutils literal"><span class="pre">element_fraction</span></tt></a>(element)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_parameter</span></tt>(name[,&nbsp;default])</td>
+<td>Returns the named parameter if present, or the value of <cite>default</cite>, otherwise.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_unique_parameters</span></tt>()</td>
+<td>Returns a list of the unique parameters (no duplicates).</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">has_parameter</span></tt>(name)</td>
+<td>Returns True if the named parameter is present, or False, otherwise.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_quaternary.IIIVZincBlendeQuaternary.latex" title="openbandparams.iii_v_zinc_blende_quaternary.IIIVZincBlendeQuaternary.latex"><tt class="xref py py-obj docutils literal"><span class="pre">latex</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">luttinger1</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">luttinger2</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">luttinger3</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">luttinger32</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_SO</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_Gamma</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_L_DOS</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_L_long</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_L_trans</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_X_DOS</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_X_long</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_X_trans</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_hh_100</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_hh_110</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_hh_111</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_lh_100</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_lh_110</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_lh_111</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">nonparabolicity</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_parameter</span></tt>(parameter)</td>
+<td>Same as calling <tt class="docutils literal"><span class="pre">add_parameter</span></tt> with <tt class="docutils literal"><span class="pre">overload=True</span></tt></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">strained_001</span></tt>(target)</td>
+<td>Returns an instance of <tt class="docutils literal"><span class="pre">IIIVZincBlendeStrained001</span></tt>, which is a biaxial-strained III-V zinc blende binary alloy grown on a (001) surface.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">thermal_expansion</span></tt></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="openbandparams.iii_v_zinc_blende_quaternary.IIIVZincBlendeQuaternary.element_fraction">
+<tt class="descname">element_fraction</tt><big>(</big><em>element</em><big>)</big><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_quaternary.html#IIIVZincBlendeQuaternary.element_fraction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_quaternary.IIIVZincBlendeQuaternary.element_fraction" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="openbandparams.iii_v_zinc_blende_quaternary.IIIVZincBlendeQuaternary.latex">
+<tt class="descname">latex</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_quaternary.html#IIIVZincBlendeQuaternary.latex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_quaternary.IIIVZincBlendeQuaternary.latex" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-openbandparams.iii_v_zinc_blende_strained">
+<span id="openbandparams-iii-v-zinc-blende-strained-module"></span><h2>openbandparams.iii_v_zinc_blende_strained module<a class="headerlink" href="#module-openbandparams.iii_v_zinc_blende_strained" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001">
+<em class="property">class </em><tt class="descclassname">openbandparams.iii_v_zinc_blende_strained.</tt><tt class="descname">IIIVZincBlendeStrained001</tt><big>(</big><em>unstrained</em>, <em>substrate=None</em>, <em>strain_out_of_plane=None</em><big>)</big><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_strained.html#IIIVZincBlendeStrained001"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openbandparams.iii_v_alloy.IIIVAlloy" title="openbandparams.iii_v_alloy.IIIVAlloy"><tt class="xref py py-class docutils literal"><span class="pre">openbandparams.iii_v_alloy.IIIVAlloy</span></tt></a></p>
+<p>The base class for biaxial-strained III-V zinc blende binary alloys
+grown on a (001) surface.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.CBO" title="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.CBO"><tt class="xref py py-obj docutils literal"><span class="pre">CBO</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.CBO_Gamma" title="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.CBO_Gamma"><tt class="xref py py-obj docutils literal"><span class="pre">CBO_Gamma</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.CBO_L" title="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.CBO_L"><tt class="xref py py-obj docutils literal"><span class="pre">CBO_L</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.CBO_X" title="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.CBO_X"><tt class="xref py py-obj docutils literal"><span class="pre">CBO_X</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.CBO_hydrostatic_strain_shift" title="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.CBO_hydrostatic_strain_shift"><tt class="xref py py-obj docutils literal"><span class="pre">CBO_hydrostatic_strain_shift</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.CBO_strain_shift" title="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.CBO_strain_shift"><tt class="xref py py-obj docutils literal"><span class="pre">CBO_strain_shift</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.Eg" title="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.Eg"><tt class="xref py py-obj docutils literal"><span class="pre">Eg</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.Eg_hh" title="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.Eg_hh"><tt class="xref py py-obj docutils literal"><span class="pre">Eg_hh</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.Eg_lh" title="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.Eg_lh"><tt class="xref py py-obj docutils literal"><span class="pre">Eg_lh</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.Eg_strain_shift" title="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.Eg_strain_shift"><tt class="xref py py-obj docutils literal"><span class="pre">Eg_strain_shift</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO" title="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO"><tt class="xref py py-obj docutils literal"><span class="pre">VBO</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_hh" title="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_hh"><tt class="xref py py-obj docutils literal"><span class="pre">VBO_hh</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_hh_strain_shift" title="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_hh_strain_shift"><tt class="xref py py-obj docutils literal"><span class="pre">VBO_hh_strain_shift</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_hydrostatic_strain_shift" title="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_hydrostatic_strain_shift"><tt class="xref py py-obj docutils literal"><span class="pre">VBO_hydrostatic_strain_shift</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_lh" title="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_lh"><tt class="xref py py-obj docutils literal"><span class="pre">VBO_lh</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_lh_strain_shift" title="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_lh_strain_shift"><tt class="xref py py-obj docutils literal"><span class="pre">VBO_lh_strain_shift</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_strain_shift" title="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_strain_shift"><tt class="xref py py-obj docutils literal"><span class="pre">VBO_strain_shift</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_uniaxial_strain_shift" title="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_uniaxial_strain_shift"><tt class="xref py py-obj docutils literal"><span class="pre">VBO_uniaxial_strain_shift</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_parameter</span></tt>(parameter[,&nbsp;overload])</td>
+<td>Adds a <cite>Parameter</cite> object to the instance.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">electron_affinity</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.element_fraction" title="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.element_fraction"><tt class="xref py py-obj docutils literal"><span class="pre">element_fraction</span></tt></a>(element)</td>
+<td>Returns the fractional concentration of <tt class="docutils literal"><span class="pre">element</span></tt> with respect to its sublattice.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_parameter</span></tt>(name[,&nbsp;default])</td>
+<td>Returns the named parameter if present, or the value of <cite>default</cite>, otherwise.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_unique_parameters</span></tt>()</td>
+<td>Returns a list of the unique parameters (no duplicates).</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">has_parameter</span></tt>(name)</td>
+<td>Returns True if the named parameter is present, or False, otherwise.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.latex" title="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.latex"><tt class="xref py py-obj docutils literal"><span class="pre">latex</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.meff_e_Gamma" title="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.meff_e_Gamma"><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_Gamma</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_parameter</span></tt>(parameter)</td>
+<td>Same as calling <tt class="docutils literal"><span class="pre">add_parameter</span></tt> with <tt class="docutils literal"><span class="pre">overload=True</span></tt></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.strain_in_plane" title="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.strain_in_plane"><tt class="xref py py-obj docutils literal"><span class="pre">strain_in_plane</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.strain_out_of_plane" title="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.strain_out_of_plane"><tt class="xref py py-obj docutils literal"><span class="pre">strain_out_of_plane</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.substrate_a" title="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.substrate_a"><tt class="xref py py-obj docutils literal"><span class="pre">substrate_a</span></tt></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.CBO">
+<tt class="descname">CBO</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b050&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_strained.html#IIIVZincBlendeStrained001.CBO"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.CBO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.CBO_Gamma">
+<tt class="descname">CBO_Gamma</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b090&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_strained.html#IIIVZincBlendeStrained001.CBO_Gamma"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.CBO_Gamma" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.CBO_L">
+<tt class="descname">CBO_L</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b0d0&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_strained.html#IIIVZincBlendeStrained001.CBO_L"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.CBO_L" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.CBO_X">
+<tt class="descname">CBO_X</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b110&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_strained.html#IIIVZincBlendeStrained001.CBO_X"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.CBO_X" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.CBO_hydrostatic_strain_shift">
+<tt class="descname">CBO_hydrostatic_strain_shift</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e45f90&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_strained.html#IIIVZincBlendeStrained001.CBO_hydrostatic_strain_shift"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.CBO_hydrostatic_strain_shift" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.CBO_strain_shift">
+<tt class="descname">CBO_strain_shift</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e45fd0&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_strained.html#IIIVZincBlendeStrained001.CBO_strain_shift"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.CBO_strain_shift" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.Eg">
+<tt class="descname">Eg</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b150&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_strained.html#IIIVZincBlendeStrained001.Eg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.Eg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.Eg_hh">
+<tt class="descname">Eg_hh</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b190&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_strained.html#IIIVZincBlendeStrained001.Eg_hh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.Eg_hh" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.Eg_lh">
+<tt class="descname">Eg_lh</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b1d0&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_strained.html#IIIVZincBlendeStrained001.Eg_lh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.Eg_lh" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.Eg_strain_shift">
+<tt class="descname">Eg_strain_shift</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b210&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_strained.html#IIIVZincBlendeStrained001.Eg_strain_shift"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.Eg_strain_shift" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO">
+<tt class="descname">VBO</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b3d0&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_strained.html#IIIVZincBlendeStrained001.VBO"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_hh">
+<tt class="descname">VBO_hh</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b350&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_strained.html#IIIVZincBlendeStrained001.VBO_hh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_hh" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_hh_strain_shift">
+<tt class="descname">VBO_hh_strain_shift</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b2d0&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_strained.html#IIIVZincBlendeStrained001.VBO_hh_strain_shift"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_hh_strain_shift" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_hydrostatic_strain_shift">
+<tt class="descname">VBO_hydrostatic_strain_shift</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b250&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_strained.html#IIIVZincBlendeStrained001.VBO_hydrostatic_strain_shift"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_hydrostatic_strain_shift" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_lh">
+<tt class="descname">VBO_lh</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b390&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_strained.html#IIIVZincBlendeStrained001.VBO_lh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_lh" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_lh_strain_shift">
+<tt class="descname">VBO_lh_strain_shift</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b310&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_strained.html#IIIVZincBlendeStrained001.VBO_lh_strain_shift"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_lh_strain_shift" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_strain_shift">
+<tt class="descname">VBO_strain_shift</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b410&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_strained.html#IIIVZincBlendeStrained001.VBO_strain_shift"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_strain_shift" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_uniaxial_strain_shift">
+<tt class="descname">VBO_uniaxial_strain_shift</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b290&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_strained.html#IIIVZincBlendeStrained001.VBO_uniaxial_strain_shift"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_uniaxial_strain_shift" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.element_fraction">
+<tt class="descname">element_fraction</tt><big>(</big><em>element</em><big>)</big><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_strained.html#IIIVZincBlendeStrained001.element_fraction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.element_fraction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the fractional concentration of <tt class="docutils literal"><span class="pre">element</span></tt> with respect
+to its sublattice. In a III-V binary, the fraction is either 1 if
+<tt class="docutils literal"><span class="pre">element</span></tt> is present, or 0 if it is not.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.latex">
+<tt class="descname">latex</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_strained.html#IIIVZincBlendeStrained001.latex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.latex" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.meff_e_Gamma">
+<tt class="descname">meff_e_Gamma</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e4b450&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_strained.html#IIIVZincBlendeStrained001.meff_e_Gamma"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.meff_e_Gamma" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.strain_in_plane">
+<tt class="descname">strain_in_plane</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e45ed0&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_strained.html#IIIVZincBlendeStrained001.strain_in_plane"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.strain_in_plane" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.strain_out_of_plane">
+<tt class="descname">strain_out_of_plane</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e45f10&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_strained.html#IIIVZincBlendeStrained001.strain_out_of_plane"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.strain_out_of_plane" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.substrate_a">
+<tt class="descname">substrate_a</tt><em class="property"> = &lt;openbandparams.parameter.MethodParameter object at 0x104e45f50&gt;</em><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_strained.html#IIIVZincBlendeStrained001.substrate_a"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.substrate_a" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-openbandparams.iii_v_zinc_blende_ternaries">
+<span id="openbandparams-iii-v-zinc-blende-ternaries-module"></span><h2>openbandparams.iii_v_zinc_blende_ternaries module<a class="headerlink" href="#module-openbandparams.iii_v_zinc_blende_ternaries" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-openbandparams.iii_v_zinc_blende_ternary">
+<span id="openbandparams-iii-v-zinc-blende-ternary-module"></span><h2>openbandparams.iii_v_zinc_blende_ternary module<a class="headerlink" href="#module-openbandparams.iii_v_zinc_blende_ternary" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openbandparams.iii_v_zinc_blende_ternary.IIIVZincBlendeTernary">
+<em class="property">class </em><tt class="descclassname">openbandparams.iii_v_zinc_blende_ternary.</tt><tt class="descname">IIIVZincBlendeTernary</tt><big>(</big><em>name</em>, <em>elements</em>, <em>binaries</em>, <em>parameters=None</em>, <em>x=None</em><big>)</big><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_ternary.html#IIIVZincBlendeTernary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_ternary.IIIVZincBlendeTernary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy" title="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy"><tt class="xref py py-class docutils literal"><span class="pre">openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy</span></tt></a></p>
+<p>The base class for all III-V zinc blende ternary alloys.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">CBO</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">CBO_Gamma</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">CBO_L</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">CBO_X</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">Delta_SO</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">Eg</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">Eg_Gamma</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">Eg_L</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">Eg_X</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">Ep</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">F</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">VBO</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">__call__</span></tt>(**kwargs)</td>
+<td>Used to specify the alloy composition.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">a</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">a_300K</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">a_c</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">a_v</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_parameter</span></tt>(parameter[,&nbsp;overload])</td>
+<td>Adds a <cite>Parameter</cite> object to the instance.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">b</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">c11</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">c12</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">c44</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">d</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">electron_affinity</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_ternary.IIIVZincBlendeTernary.element_fraction" title="openbandparams.iii_v_zinc_blende_ternary.IIIVZincBlendeTernary.element_fraction"><tt class="xref py py-obj docutils literal"><span class="pre">element_fraction</span></tt></a>(element)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_parameter</span></tt>(name[,&nbsp;default])</td>
+<td>Returns the named parameter if present, or the value of <cite>default</cite>, otherwise.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_unique_parameters</span></tt>()</td>
+<td>Returns a list of the unique parameters (no duplicates).</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">has_parameter</span></tt>(name)</td>
+<td>Returns True if the named parameter is present, or False, otherwise.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.iii_v_zinc_blende_ternary.IIIVZincBlendeTernary.latex" title="openbandparams.iii_v_zinc_blende_ternary.IIIVZincBlendeTernary.latex"><tt class="xref py py-obj docutils literal"><span class="pre">latex</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">luttinger1</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">luttinger2</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">luttinger3</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">luttinger32</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_SO</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_Gamma</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_L_DOS</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_L_long</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_L_trans</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_X_DOS</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_X_long</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_X_trans</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_hh_100</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_hh_110</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_hh_111</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_lh_100</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_lh_110</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_lh_111</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">nonparabolicity</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_parameter</span></tt>(parameter)</td>
+<td>Same as calling <tt class="docutils literal"><span class="pre">add_parameter</span></tt> with <tt class="docutils literal"><span class="pre">overload=True</span></tt></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">strained_001</span></tt>(target)</td>
+<td>Returns an instance of <tt class="docutils literal"><span class="pre">IIIVZincBlendeStrained001</span></tt>, which is a biaxial-strained III-V zinc blende binary alloy grown on a (001) surface.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">thermal_expansion</span></tt></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="openbandparams.iii_v_zinc_blende_ternary.IIIVZincBlendeTernary.element_fraction">
+<tt class="descname">element_fraction</tt><big>(</big><em>element</em><big>)</big><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_ternary.html#IIIVZincBlendeTernary.element_fraction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_ternary.IIIVZincBlendeTernary.element_fraction" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="openbandparams.iii_v_zinc_blende_ternary.IIIVZincBlendeTernary.latex">
+<tt class="descname">latex</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/openbandparams/iii_v_zinc_blende_ternary.html#IIIVZincBlendeTernary.latex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.iii_v_zinc_blende_ternary.IIIVZincBlendeTernary.latex" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-openbandparams.parameter">
+<span id="openbandparams-parameter-module"></span><h2>openbandparams.parameter module<a class="headerlink" href="#module-openbandparams.parameter" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openbandparams.parameter.Parameter">
+<em class="property">class </em><tt class="descclassname">openbandparams.parameter.</tt><tt class="descname">Parameter</tt><big>(</big><em>name</em>, <em>units</em>, <em>aliases=[]</em>, <em>references=[]</em><big>)</big><a class="reference internal" href="../_modules/openbandparams/parameter.html#Parameter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.parameter.Parameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">__call__</span></tt>(*args,&nbsp;**kwargs)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.parameter.Parameter.get_references" title="openbandparams.parameter.Parameter.get_references"><tt class="xref py py-obj docutils literal"><span class="pre">get_references</span></tt></a>()</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="openbandparams.parameter.Parameter.get_references">
+<tt class="descname">get_references</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/openbandparams/parameter.html#Parameter.get_references"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.parameter.Parameter.get_references" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="openbandparams.parameter.ValueParameter">
+<em class="property">class </em><tt class="descclassname">openbandparams.parameter.</tt><tt class="descname">ValueParameter</tt><big>(</big><em>name</em>, <em>value</em>, <em>units</em>, <em>aliases=[]</em>, <em>references=[]</em><big>)</big><a class="reference internal" href="../_modules/openbandparams/parameter.html#ValueParameter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.parameter.ValueParameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openbandparams.parameter.Parameter" title="openbandparams.parameter.Parameter"><tt class="xref py py-class docutils literal"><span class="pre">openbandparams.parameter.Parameter</span></tt></a></p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">__call__</span></tt>(*args,&nbsp;**kwargs)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_references</span></tt>()</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="openbandparams.parameter.FunctionParameter">
+<em class="property">class </em><tt class="descclassname">openbandparams.parameter.</tt><tt class="descname">FunctionParameter</tt><big>(</big><em>name</em>, <em>function</em>, <em>units</em>, <em>aliases=[]</em>, <em>references=[]</em><big>)</big><a class="reference internal" href="../_modules/openbandparams/parameter.html#FunctionParameter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.parameter.FunctionParameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openbandparams.parameter.Parameter" title="openbandparams.parameter.Parameter"><tt class="xref py py-class docutils literal"><span class="pre">openbandparams.parameter.Parameter</span></tt></a></p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">__call__</span></tt>(*args,&nbsp;**kwargs)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_references</span></tt>()</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="openbandparams.parameter.method_parameter">
+<tt class="descclassname">openbandparams.parameter.</tt><tt class="descname">method_parameter</tt><big>(</big><em>dependencies</em>, <em>units</em>, <em>aliases=[]</em>, <em>references=[]</em><big>)</big><a class="reference internal" href="../_modules/openbandparams/parameter.html#method_parameter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.parameter.method_parameter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-openbandparams.reference">
+<span id="openbandparams-reference-module"></span><h2>openbandparams.reference module<a class="headerlink" href="#module-openbandparams.reference" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openbandparams.reference.BibtexReference">
+<em class="property">class </em><tt class="descclassname">openbandparams.reference.</tt><tt class="descname">BibtexReference</tt><big>(</big><em>bibtex</em><big>)</big><a class="reference internal" href="../_modules/openbandparams/reference.html#BibtexReference"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.reference.BibtexReference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openbandparams.reference.Reference" title="openbandparams.reference.Reference"><tt class="xref py py-class docutils literal"><span class="pre">openbandparams.reference.Reference</span></tt></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="openbandparams.reference.Reference">
+<em class="property">class </em><tt class="descclassname">openbandparams.reference.</tt><tt class="descname">Reference</tt><a class="reference internal" href="../_modules/openbandparams/reference.html#Reference"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openbandparams.reference.Reference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-openbandparams.references">
+<span id="openbandparams-references-module"></span><h2>openbandparams.references module<a class="headerlink" href="#module-openbandparams.references" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-openbandparams.version">
+<span id="openbandparams-version-module"></span><h2>openbandparams.version module<a class="headerlink" href="#module-openbandparams.version" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-openbandparams">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-openbandparams" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openbandparams.Parameter">
+<em class="property">class </em><tt class="descclassname">openbandparams.</tt><tt class="descname">Parameter</tt><big>(</big><em>name</em>, <em>units</em>, <em>aliases=[]</em>, <em>references=[]</em><big>)</big><a class="headerlink" href="#openbandparams.Parameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">__call__</span></tt>(*args,&nbsp;**kwargs)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#openbandparams.Parameter.get_references" title="openbandparams.Parameter.get_references"><tt class="xref py py-obj docutils literal"><span class="pre">get_references</span></tt></a>()</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="openbandparams.Parameter.get_references">
+<tt class="descname">get_references</tt><big>(</big><big>)</big><a class="headerlink" href="#openbandparams.Parameter.get_references" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="openbandparams.ValueParameter">
+<em class="property">class </em><tt class="descclassname">openbandparams.</tt><tt class="descname">ValueParameter</tt><big>(</big><em>name</em>, <em>value</em>, <em>units</em>, <em>aliases=[]</em>, <em>references=[]</em><big>)</big><a class="headerlink" href="#openbandparams.ValueParameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openbandparams.parameter.Parameter" title="openbandparams.parameter.Parameter"><tt class="xref py py-class docutils literal"><span class="pre">openbandparams.parameter.Parameter</span></tt></a></p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">__call__</span></tt>(*args,&nbsp;**kwargs)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_references</span></tt>()</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="openbandparams.FunctionParameter">
+<em class="property">class </em><tt class="descclassname">openbandparams.</tt><tt class="descname">FunctionParameter</tt><big>(</big><em>name</em>, <em>function</em>, <em>units</em>, <em>aliases=[]</em>, <em>references=[]</em><big>)</big><a class="headerlink" href="#openbandparams.FunctionParameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openbandparams.parameter.Parameter" title="openbandparams.parameter.Parameter"><tt class="xref py py-class docutils literal"><span class="pre">openbandparams.parameter.Parameter</span></tt></a></p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">__call__</span></tt>(*args,&nbsp;**kwargs)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_references</span></tt>()</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="openbandparams.method_parameter">
+<tt class="descclassname">openbandparams.</tt><tt class="descname">method_parameter</tt><big>(</big><em>dependencies</em>, <em>units</em>, <em>aliases=[]</em>, <em>references=[]</em><big>)</big><a class="headerlink" href="#openbandparams.method_parameter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="openbandparams.IIIVZincBlendeBinary">
+<em class="property">class </em><tt class="descclassname">openbandparams.</tt><tt class="descname">IIIVZincBlendeBinary</tt><big>(</big><em>name</em>, <em>elements</em>, <em>parameters=None</em><big>)</big><a class="headerlink" href="#openbandparams.IIIVZincBlendeBinary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy" title="openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy"><tt class="xref py py-class docutils literal"><span class="pre">openbandparams.iii_v_zinc_blende_alloy.IIIVZincBlendeAlloy</span></tt></a></p>
+<p>The base class for all III-V zinc blende binary alloys.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">CBO</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">CBO_Gamma</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">CBO_L</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">CBO_X</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">Eg</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">Eg_Gamma</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">Eg_L</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">Eg_X</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">F</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">a</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_parameter</span></tt>(parameter[,&nbsp;overload])</td>
+<td>Adds a <cite>Parameter</cite> object to the instance.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">electron_affinity</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.IIIVZincBlendeBinary.element_fraction" title="openbandparams.IIIVZincBlendeBinary.element_fraction"><tt class="xref py py-obj docutils literal"><span class="pre">element_fraction</span></tt></a>(element)</td>
+<td>Returns the fractional concentration of <cite>element</cite> with respect to its sublattice.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_parameter</span></tt>(name[,&nbsp;default])</td>
+<td>Returns the named parameter if present, or the value of <cite>default</cite>, otherwise.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_unique_parameters</span></tt>()</td>
+<td>Returns a list of the unique parameters (no duplicates).</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">has_parameter</span></tt>(name)</td>
+<td>Returns True if the named parameter is present, or False, otherwise.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.IIIVZincBlendeBinary.latex" title="openbandparams.IIIVZincBlendeBinary.latex"><tt class="xref py py-obj docutils literal"><span class="pre">latex</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">luttinger32</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_SO</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_Gamma</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_hh_100</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_hh_110</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_hh_111</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_lh_100</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_lh_110</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_lh_111</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">nonparabolicity</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_parameter</span></tt>(parameter)</td>
+<td>Same as calling <tt class="docutils literal"><span class="pre">add_parameter</span></tt> with <tt class="docutils literal"><span class="pre">overload=True</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">strained_001</span></tt>(target)</td>
+<td>Returns an instance of <tt class="docutils literal"><span class="pre">IIIVZincBlendeStrained001</span></tt>, which is a biaxial-strained III-V zinc blende binary alloy grown on a (001) surface.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="openbandparams.IIIVZincBlendeBinary.element_fraction">
+<tt class="descname">element_fraction</tt><big>(</big><em>element</em><big>)</big><a class="headerlink" href="#openbandparams.IIIVZincBlendeBinary.element_fraction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the fractional concentration of <cite>element</cite> with respect
+to its sublattice. In a III-V binary, the fraction is either 1 if
+<cite>element</cite> is present, or 0 if it is not.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="openbandparams.IIIVZincBlendeBinary.latex">
+<tt class="descname">latex</tt><big>(</big><big>)</big><a class="headerlink" href="#openbandparams.IIIVZincBlendeBinary.latex" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="openbandparams.IIIVZincBlendeTernary">
+<em class="property">class </em><tt class="descclassname">openbandparams.</tt><tt class="descname">IIIVZincBlendeTernary</tt><big>(</big><em>name</em>, <em>elements</em>, <em>binaries</em>, <em>parameters=None</em>, <em>x=None</em><big>)</big><a class="headerlink" href="#openbandparams.IIIVZincBlendeTernary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy" title="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy"><tt class="xref py py-class docutils literal"><span class="pre">openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy</span></tt></a></p>
+<p>The base class for all III-V zinc blende ternary alloys.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">CBO</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">CBO_Gamma</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">CBO_L</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">CBO_X</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">Delta_SO</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">Eg</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">Eg_Gamma</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">Eg_L</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">Eg_X</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">Ep</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">F</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">VBO</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">__call__</span></tt>(**kwargs)</td>
+<td>Used to specify the alloy composition.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">a</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">a_300K</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">a_c</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">a_v</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_parameter</span></tt>(parameter[,&nbsp;overload])</td>
+<td>Adds a <cite>Parameter</cite> object to the instance.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">b</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">c11</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">c12</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">c44</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">d</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">electron_affinity</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.IIIVZincBlendeTernary.element_fraction" title="openbandparams.IIIVZincBlendeTernary.element_fraction"><tt class="xref py py-obj docutils literal"><span class="pre">element_fraction</span></tt></a>(element)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_parameter</span></tt>(name[,&nbsp;default])</td>
+<td>Returns the named parameter if present, or the value of <cite>default</cite>, otherwise.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_unique_parameters</span></tt>()</td>
+<td>Returns a list of the unique parameters (no duplicates).</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">has_parameter</span></tt>(name)</td>
+<td>Returns True if the named parameter is present, or False, otherwise.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.IIIVZincBlendeTernary.latex" title="openbandparams.IIIVZincBlendeTernary.latex"><tt class="xref py py-obj docutils literal"><span class="pre">latex</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">luttinger1</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">luttinger2</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">luttinger3</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">luttinger32</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_SO</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_Gamma</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_L_DOS</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_L_long</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_L_trans</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_X_DOS</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_X_long</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_X_trans</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_hh_100</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_hh_110</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_hh_111</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_lh_100</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_lh_110</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_lh_111</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">nonparabolicity</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_parameter</span></tt>(parameter)</td>
+<td>Same as calling <tt class="docutils literal"><span class="pre">add_parameter</span></tt> with <tt class="docutils literal"><span class="pre">overload=True</span></tt></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">strained_001</span></tt>(target)</td>
+<td>Returns an instance of <tt class="docutils literal"><span class="pre">IIIVZincBlendeStrained001</span></tt>, which is a biaxial-strained III-V zinc blende binary alloy grown on a (001) surface.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">thermal_expansion</span></tt></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="openbandparams.IIIVZincBlendeTernary.element_fraction">
+<tt class="descname">element_fraction</tt><big>(</big><em>element</em><big>)</big><a class="headerlink" href="#openbandparams.IIIVZincBlendeTernary.element_fraction" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="openbandparams.IIIVZincBlendeTernary.latex">
+<tt class="descname">latex</tt><big>(</big><big>)</big><a class="headerlink" href="#openbandparams.IIIVZincBlendeTernary.latex" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="openbandparams.IIIVZincBlendeQuaternary">
+<em class="property">class </em><tt class="descclassname">openbandparams.</tt><tt class="descname">IIIVZincBlendeQuaternary</tt><big>(</big><em>name</em>, <em>elements</em>, <em>ternaries</em>, <em>parameters=None</em>, <em>x=None</em>, <em>y=None</em>, <em>z=None</em><big>)</big><a class="headerlink" href="#openbandparams.IIIVZincBlendeQuaternary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy" title="openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy"><tt class="xref py py-class docutils literal"><span class="pre">openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy</span></tt></a></p>
+<p>The base class for all III-V zinc blende quaternary alloys.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">CBO</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">CBO_Gamma</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">CBO_L</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">CBO_X</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">Delta_SO</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">Eg</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">Eg_Gamma</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">Eg_L</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">Eg_X</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">Ep</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">F</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">VBO</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">__call__</span></tt>(**kwargs)</td>
+<td>Used to specify the alloy composition.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">a</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">a_300K</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">a_c</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">a_v</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_parameter</span></tt>(parameter[,&nbsp;overload])</td>
+<td>Adds a <cite>Parameter</cite> object to the instance.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">b</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">c11</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">c12</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">c44</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">d</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">electron_affinity</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.IIIVZincBlendeQuaternary.element_fraction" title="openbandparams.IIIVZincBlendeQuaternary.element_fraction"><tt class="xref py py-obj docutils literal"><span class="pre">element_fraction</span></tt></a>(element)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_parameter</span></tt>(name[,&nbsp;default])</td>
+<td>Returns the named parameter if present, or the value of <cite>default</cite>, otherwise.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_unique_parameters</span></tt>()</td>
+<td>Returns a list of the unique parameters (no duplicates).</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">has_parameter</span></tt>(name)</td>
+<td>Returns True if the named parameter is present, or False, otherwise.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#openbandparams.IIIVZincBlendeQuaternary.latex" title="openbandparams.IIIVZincBlendeQuaternary.latex"><tt class="xref py py-obj docutils literal"><span class="pre">latex</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">luttinger1</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">luttinger2</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">luttinger3</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">luttinger32</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_SO</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_Gamma</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_L_DOS</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_L_long</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_L_trans</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_X_DOS</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_X_long</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_e_X_trans</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_hh_100</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_hh_110</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_hh_111</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_lh_100</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_lh_110</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">meff_lh_111</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">nonparabolicity</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_parameter</span></tt>(parameter)</td>
+<td>Same as calling <tt class="docutils literal"><span class="pre">add_parameter</span></tt> with <tt class="docutils literal"><span class="pre">overload=True</span></tt></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">strained_001</span></tt>(target)</td>
+<td>Returns an instance of <tt class="docutils literal"><span class="pre">IIIVZincBlendeStrained001</span></tt>, which is a biaxial-strained III-V zinc blende binary alloy grown on a (001) surface.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">thermal_expansion</span></tt></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="openbandparams.IIIVZincBlendeQuaternary.element_fraction">
+<tt class="descname">element_fraction</tt><big>(</big><em>element</em><big>)</big><a class="headerlink" href="#openbandparams.IIIVZincBlendeQuaternary.element_fraction" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="openbandparams.IIIVZincBlendeQuaternary.latex">
+<tt class="descname">latex</tt><big>(</big><big>)</big><a class="headerlink" href="#openbandparams.IIIVZincBlendeQuaternary.latex" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">openbandparams 0.8 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2015, Scott J Maddox.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>
