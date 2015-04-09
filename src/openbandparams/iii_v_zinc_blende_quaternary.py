@@ -150,7 +150,6 @@ class IIIVZincBlendeQuaternary(IIIVZincBlendeMixedAlloy):
             raise RuntimeError()
         if (not (0. <= x <= 1.) or not (0. <= y <= 1.) or
             z is not None and not (0. <= z <= 1.)        ):
-            print x, y, z
             raise ValueError('The alloy fractions must be between 0 and 1')
         return x, y, z
     
@@ -247,7 +246,6 @@ class IIIVZincBlendeQuaternary(IIIVZincBlendeMixedAlloy):
                 a1 = self(x=x, y=ymax).a(T=T)
                 amin = min(a0, a1)
                 amax = max(a0, a1)
-                print 'x', a, amin, amax
                 if not (amin <= a <= amax):
                     raise ValueError('a of {:g} out of range [{:g}, {:g}]'
                                      ''.format(a, amin, amax))
@@ -262,7 +260,6 @@ class IIIVZincBlendeQuaternary(IIIVZincBlendeMixedAlloy):
                 a1 = self(x=xmax, y=y).a(T=T)
                 amin = min(a0, a1)
                 amax = max(a0, a1)
-                print 'y', a, amin, amax
                 if not (amin <= a <= amax):
                     raise ValueError('a of {:g} out of range [{:g}, {:g}]'
                                      ''.format(a, amin, amax))
@@ -277,7 +274,6 @@ class IIIVZincBlendeQuaternary(IIIVZincBlendeMixedAlloy):
                 a1 = self(x=xmax, z=z).a(T=T)
                 amin = min(a0, a1)
                 amax = max(a0, a1)
-                print 'z', a, amin, amax
                 if not (amin <= a <= amax):
                     raise ValueError('a of {:g} out of range [{:g}, {:g}]'
                                      ''.format(a, amin, amax))
