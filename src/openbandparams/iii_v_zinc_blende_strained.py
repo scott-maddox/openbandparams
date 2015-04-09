@@ -175,13 +175,13 @@ class IIIVZincBlendeStrained001(IIIVAlloy):
         return (self.unstrained.CBO_X(**kwargs) +
                 self.CBO_strain_shift(**kwargs))
     
-    @method_parameter(dependencies=['VBO', 'CBO'],
+    @method_parameter(dependencies=['Eg', 'Eg_strain_shift'],
                       units='eV')
     def Eg(self, **kwargs):
         '''
         Returns the strain-shifted bandgap, ``Eg``.
         '''
-        return self.CBO(**kwargs) - self.VBO(**kwargs)
+        return self.unstrained.Eg(**kwargs) + self.Eg_strain_shift(**kwargs)
     
     @method_parameter(dependencies=['VBO_hh', 'CBO'],
                       units='eV')
@@ -198,6 +198,11 @@ class IIIVZincBlendeStrained001(IIIVAlloy):
         Returns the strain-shifted light-hole bandgap, ``Eg_lh``.
         '''
         return self.CBO(**kwargs) - self.VBO_lh(**kwargs)
+    
+    @method_parameter(dependencies=['CBO_strain_shift', 'VBO_strain_shift'],
+                      units='eV', references=[arent_1989])
+    def Eg_strain_shift(self, **kwargs):
+        return self.CBO_strain_shift(**kwargs) - self.VBO_strain_shift(**kwargs)
     
     @method_parameter(dependencies=['a_v', 'strain_in_plane',
                                     'strain_out_of_plane'],
@@ -245,6 +250,13 @@ class IIIVZincBlendeStrained001(IIIVAlloy):
                       units='eV')
     def VBO(self, **kwargs):
         return max(self.VBO_hh(**kwargs), self.VBO_lh(**kwargs))
+    
+    @method_parameter(dependencies=['VBO_hh_strain_shift',
+                                    'VBO_lh_strain_shift'],
+                      units='eV')
+    def VBO_strain_shift(self, **kwargs):
+        return max(self.VBO_hh_strain_shift(**kwargs),
+                   self.VBO_lh_strain_shift(**kwargs))
     
     @method_parameter(dependencies=['Eg_Gamma', 'Delta_SO', 'Ep', 'F'],
                       units='m_e', references=[vurgaftman_2001])
