@@ -56,14 +56,14 @@ When you want release a new version, follow these directions. First, create a
 release branch by branching off of the develop branch (substitute in the
 appropriate version number):
 
-    git checkout -b release-?.? develop
+    git checkout -b release-0.8 develop
 
 Next, bump the version number, if it hasn't already been bumped. From the root
 of the git repository run these commands (again, substituting the appropriate
 version number):
 
-    echo "__version__ = '?.?'" > src/openbandparams/version.py
-    git commit -am "Bumbed version number to ?.?"
+    echo "__version__ = '0.8'" > src/openbandparams/version.py
+    git commit -am "Bumbed version number to 0.8"
 
 Now is a good time to run the unit tests and examples, to make sure you haven't
 missed any bugs:
@@ -131,15 +131,15 @@ Next, merge the changes from the release branch into the master branch, and
 tag the release:
 
     git checkout master
-    git merge --no-ff release-?.?
-    git tag -a v?.?
+    git merge --no-ff release-0.8
+    git tag -a v0.8
     git push origin
 
 Then run the following commands from the root of the git repository to build
 and upload the release to PyPI:
 
     python setup.py build sdist bdist_egg
-    python setup.py register upload
+    python setup.py register sdist bdist_egg upload
 
 Now go to the github page to "create a release" and upload the 'egg', 'zip',
 and 'tar.gz' files from the 'dist' directory.
@@ -149,12 +149,16 @@ If any changes were made during the release branche, merge the release branch
 into the develop branch, and then delete the release branch:
 
     git checkout develop
-    git merge --no-ff release-?.?
-    git branch -d release-?.?
-    git push origin
+    git merge --no-ff release-0.8
+    git branch -d release-0.8
+
+You might want to make a doc-0.8 branch, in case you find errors in the
+documentation you want to correct.
+
+    git branch doc-0.8 develop
 
 You can also go ahead and bump the version number now, so that future builds
 of the documentation already have the correct version number:
 
-    echo "__version__ = '?.?'" > src/openbandparams/version.py
-    git commit -am "Bumbed version number to ?.?"
+    echo "__version__ = '0.9'" > src/openbandparams/version.py
+    git commit -am "Bumbed version number to 0.9"
