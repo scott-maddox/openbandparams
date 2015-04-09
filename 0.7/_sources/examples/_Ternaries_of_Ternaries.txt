@@ -1,0 +1,10 @@
+Ternaries of Ternaries
+======================
+
+Source:
+
+.. literalinclude:: ../../src/openbandparams/examples/Ternaries_of_Ternaries.py
+
+Result:
+
+.. literalinclude:: ../_build_examples/Ternaries_of_Ternaries.txt

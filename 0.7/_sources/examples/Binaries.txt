@@ -1,0 +1,10 @@
+Binaries
+========
+
+Source:
+
+.. literalinclude:: ../../src/openbandparams/examples/Binaries.py
+
+Result:
+
+.. literalinclude:: ../_build_examples/Binaries.txt

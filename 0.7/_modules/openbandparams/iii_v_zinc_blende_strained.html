@@ -1,0 +1,373 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>openbandparams.iii_v_zinc_blende_strained &mdash; openbandparams 0.7 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.7',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="openbandparams 0.7 documentation" href="../../index.html" />
+    <link rel="up" title="openbandparams" href="../openbandparams.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">openbandparams 0.7 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../openbandparams.html" accesskey="U">openbandparams</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for openbandparams.iii_v_zinc_blende_strained</h1><div class="highlight"><pre>
+<span class="c">#</span>
+<span class="c">#   Copyright (c) 2013-2015, Scott J Maddox</span>
+<span class="c">#</span>
+<span class="c">#   This file is part of openbandparams.</span>
+<span class="c">#</span>
+<span class="c">#   openbandparams is free software: you can redistribute it and/or modify</span>
+<span class="c">#   it under the terms of the GNU Affero General Public License as published</span>
+<span class="c">#   by the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c">#   (at your option) any later version.</span>
+<span class="c">#</span>
+<span class="c">#   openbandparams is distributed in the hope that it will be useful,</span>
+<span class="c">#   but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c">#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c">#   GNU Affero General Public License for more details.</span>
+<span class="c">#</span>
+<span class="c">#   You should have received a copy of the GNU Affero General Public License</span>
+<span class="c">#   along with openbandparams.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="c">#</span>
+<span class="c">#############################################################################</span>
+
+<span class="kn">from</span> <span class="nn">.iii_v_alloy</span> <span class="kn">import</span> <span class="n">IIIVAlloy</span>
+<span class="kn">from</span> <span class="nn">.parameter</span> <span class="kn">import</span> <span class="n">method_parameter</span>
+<span class="kn">from</span> <span class="nn">.references</span> <span class="kn">import</span> <span class="n">arent_1989</span><span class="p">,</span> <span class="n">vurgaftman_2001</span>
+
+
+<div class="viewcode-block" id="IIIVZincBlendeStrained001"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001">[docs]</a><span class="k">class</span> <span class="nc">IIIVZincBlendeStrained001</span><span class="p">(</span><span class="n">IIIVAlloy</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    The base class for biaxial-strained III-V zinc blende binary alloys</span>
+<span class="sd">    grown on a (001) surface.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unstrained</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">strain_out_of_plane</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Either ``substrate`` or ``strain_out_of_plane`` must be specified,</span>
+<span class="sd">        but not both.</span>
+<span class="sd">        </span>
+<span class="sd">        Paramters</span>
+<span class="sd">        ---------</span>
+<span class="sd">        unstrained : IIIVZincBlendeAlloy</span>
+<span class="sd">            Unstrained III-V zinc blende alloy</span>
+
+<span class="sd">        substrate : Alloy with ``a`` parameter (default=None)</span>
+<span class="sd">            Growth substrate, assumed to have a (001) surface</span>
+
+<span class="sd">        strain_out_of_plane : float (default=None)</span>
+<span class="sd">            Out-of-plane strain [dimensionless], which is negative for tensile</span>
+<span class="sd">            strain and positive for compressive strain. This is the strain</span>
+<span class="sd">            measured by X-ray diffraction (XRD) symmetric omega-2theta scans.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">substrate</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">strain_out_of_plane</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">substrate</span> <span class="o">=</span> <span class="n">substrate</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_strain_out_of_plane</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;{}/{}(001)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unstrained</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">substrate</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">strain_out_of_plane</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">substrate</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_strain_out_of_plane</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">strain_out_of_plane</span><span class="p">)</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;{} strained {:g}% along [001]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unstrained</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                                            <span class="nb">float</span><span class="p">(</span><span class="n">strain_out_of_plane</span><span class="p">)</span><span class="o">*</span><span class="mf">100.</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Either `substrate` or `strain_out_of_plane` &#39;</span>
+                             <span class="s">&#39;must be specified, but not both.&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">unstrained</span> <span class="o">=</span> <span class="n">unstrained</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">IIIVZincBlendeStrained001</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span>
+                                                        <span class="n">unstrained</span><span class="o">.</span><span class="n">elements</span><span class="p">,</span>
+                                                        <span class="n">parameters</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+        <span class="c">#TODO: have get_references also search `unstrained` and `substrate`</span>
+    
+<div class="viewcode-block" id="IIIVZincBlendeStrained001.latex"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.latex">[docs]</a>    <span class="k">def</span> <span class="nf">latex</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_strain_out_of_plane</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">&#39;{} strained {:g}% along [001]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                                <span class="bp">self</span><span class="o">.</span><span class="n">unstrained</span><span class="o">.</span><span class="n">latex</span><span class="p">(),</span>
+                                                <span class="bp">self</span><span class="o">.</span><span class="n">_strain_out_of_plane</span><span class="o">*</span><span class="mf">100.</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">&#39;{}/{}(001)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unstrained</span><span class="o">.</span><span class="n">latex</span><span class="p">(),</span>
+                                  <span class="bp">self</span><span class="o">.</span><span class="n">substrate</span><span class="o">.</span><span class="n">latex</span><span class="p">())</span>
+    </div>
+<div class="viewcode-block" id="IIIVZincBlendeStrained001.element_fraction"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.element_fraction">[docs]</a>    <span class="k">def</span> <span class="nf">element_fraction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the fractional concentration of ``element`` with respect</span>
+<span class="sd">        to its sublattice. In a III-V binary, the fraction is either 1 if</span>
+<span class="sd">        ``element`` is present, or 0 if it is not.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">unstrained</span><span class="o">.</span><span class="n">element_fraction</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;dimensionless&#39;</span><span class="p">,</span> <span class="n">references</span><span class="o">=</span><span class="p">[</span><span class="n">arent_1989</span><span class="p">])</span>
+<div class="viewcode-block" id="IIIVZincBlendeStrained001.strain_in_plane"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.strain_in_plane">[docs]</a>    <span class="k">def</span> <span class="nf">strain_in_plane</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the in-plane strain assuming no lattice relaxation, which</span>
+<span class="sd">        is positive for tensile strain and negative for compressive strain.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_strain_out_of_plane</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">_strain_out_of_plane</span> <span class="o">/</span> <span class="o">-</span><span class="mf">2.</span><span class="p">)</span> <span class="o">*</span>
+                    <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unstrained</span><span class="o">.</span><span class="n">c11</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">/</span>
+                     <span class="bp">self</span><span class="o">.</span><span class="n">unstrained</span><span class="o">.</span><span class="n">c12</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="p">)</span>  <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">unstrained</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">substrate</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;c12&#39;</span><span class="p">,</span> <span class="s">&#39;c11&#39;</span><span class="p">,</span> <span class="s">&#39;strain_in_plane&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;dimensionless&#39;</span><span class="p">,</span> <span class="n">references</span><span class="o">=</span><span class="p">[</span><span class="n">arent_1989</span><span class="p">])</span>
+<div class="viewcode-block" id="IIIVZincBlendeStrained001.strain_out_of_plane"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.strain_out_of_plane">[docs]</a>    <span class="k">def</span> <span class="nf">strain_out_of_plane</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the out-of-plane strain assuming no lattice relaxation, which</span>
+<span class="sd">        is negative for tensile strain and positive for compressive strain.</span>
+<span class="sd">        This is the strain measured by X-ray diffraction (XRD) symmetric</span>
+<span class="sd">        omega-2theta scans.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_strain_out_of_plane</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_strain_out_of_plane</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">unstrained</span><span class="o">.</span><span class="n">c12</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">/</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">unstrained</span><span class="o">.</span><span class="n">c11</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">*</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">strain_in_plane</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>      <span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;strain_in_plane&#39;</span><span class="p">,</span> <span class="s">&#39;a&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;angstrom&#39;</span><span class="p">,</span> <span class="n">references</span><span class="o">=</span><span class="p">[</span><span class="n">arent_1989</span><span class="p">])</span>
+<div class="viewcode-block" id="IIIVZincBlendeStrained001.substrate_a"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.substrate_a">[docs]</a>    <span class="k">def</span> <span class="nf">substrate_a</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the substrate&#39;s lattice parameter.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">substrate</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">substrate</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unstrained</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">/</span>
+                    <span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">strain_in_plane</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)))</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;a_c&#39;</span><span class="p">,</span> <span class="s">&#39;strain_in_plane&#39;</span><span class="p">,</span>
+                                    <span class="s">&#39;strain_out_of_plane&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">,</span> <span class="n">references</span><span class="o">=</span><span class="p">[</span><span class="n">arent_1989</span><span class="p">])</span>
+<div class="viewcode-block" id="IIIVZincBlendeStrained001.CBO_hydrostatic_strain_shift"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.CBO_hydrostatic_strain_shift">[docs]</a>    <span class="k">def</span> <span class="nf">CBO_hydrostatic_strain_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unstrained</span><span class="o">.</span><span class="n">a_c</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">*</span>
+                <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">strain_in_plane</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">+</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">strain_out_of_plane</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="p">))</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;CBO_hydrostatic_strain_shift&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">,</span> <span class="n">references</span><span class="o">=</span><span class="p">[</span><span class="n">arent_1989</span><span class="p">])</span>
+<div class="viewcode-block" id="IIIVZincBlendeStrained001.CBO_strain_shift"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.CBO_strain_shift">[docs]</a>    <span class="k">def</span> <span class="nf">CBO_strain_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">CBO_hydrostatic_strain_shift</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;CBO&#39;</span><span class="p">,</span> <span class="s">&#39;CBO_strain_shift&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeStrained001.CBO"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.CBO">[docs]</a>    <span class="k">def</span> <span class="nf">CBO</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the strain-shifted conduction band offset (CBO), assuming</span>
+<span class="sd">        the strain affects all conduction band valleys equally.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">unstrained</span><span class="o">.</span><span class="n">CBO</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">CBO_strain_shift</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;CBO_Gamma&#39;</span><span class="p">,</span> <span class="s">&#39;CBO_strain_shift&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeStrained001.CBO_Gamma"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.CBO_Gamma">[docs]</a>    <span class="k">def</span> <span class="nf">CBO_Gamma</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the strain-shifted Gamma-valley conduction band offset (CBO),</span>
+<span class="sd">        assuming the strain affects all conduction band valleys equally.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unstrained</span><span class="o">.</span><span class="n">CBO_Gamma</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">+</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">CBO_strain_shift</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;CBO_L&#39;</span><span class="p">,</span> <span class="s">&#39;CBO_strain_shift&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeStrained001.CBO_L"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.CBO_L">[docs]</a>    <span class="k">def</span> <span class="nf">CBO_L</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the strain-shifted L-valley conduction band offset (CBO),</span>
+<span class="sd">        assuming the strain affects all conduction band valleys equally.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unstrained</span><span class="o">.</span><span class="n">CBO_L</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">+</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">CBO_strain_shift</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;CBO_X&#39;</span><span class="p">,</span> <span class="s">&#39;CBO_strain_shift&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeStrained001.CBO_X"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.CBO_X">[docs]</a>    <span class="k">def</span> <span class="nf">CBO_X</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the strain-shifted X-valley conduction band offset (CBO),</span>
+<span class="sd">        assuming the strain affects all conduction band valleys equally.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unstrained</span><span class="o">.</span><span class="n">CBO_X</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">+</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">CBO_strain_shift</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;Eg&#39;</span><span class="p">,</span> <span class="s">&#39;Eg_strain_shift&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeStrained001.Eg"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.Eg">[docs]</a>    <span class="k">def</span> <span class="nf">Eg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the strain-shifted bandgap, ``Eg``.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">unstrained</span><span class="o">.</span><span class="n">Eg</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">Eg_strain_shift</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;VBO_hh&#39;</span><span class="p">,</span> <span class="s">&#39;CBO&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeStrained001.Eg_hh"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.Eg_hh">[docs]</a>    <span class="k">def</span> <span class="nf">Eg_hh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the strain-shifted heavy-hole bandgap, ``Eg_hh``.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">CBO</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">VBO_hh</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;VBO_lh&#39;</span><span class="p">,</span> <span class="s">&#39;CBO&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeStrained001.Eg_lh"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.Eg_lh">[docs]</a>    <span class="k">def</span> <span class="nf">Eg_lh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the strain-shifted light-hole bandgap, ``Eg_lh``.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">CBO</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">VBO_lh</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;CBO_strain_shift&#39;</span><span class="p">,</span> <span class="s">&#39;VBO_strain_shift&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">,</span> <span class="n">references</span><span class="o">=</span><span class="p">[</span><span class="n">arent_1989</span><span class="p">])</span>
+<div class="viewcode-block" id="IIIVZincBlendeStrained001.Eg_strain_shift"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.Eg_strain_shift">[docs]</a>    <span class="k">def</span> <span class="nf">Eg_strain_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">CBO_strain_shift</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">VBO_strain_shift</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;a_v&#39;</span><span class="p">,</span> <span class="s">&#39;strain_in_plane&#39;</span><span class="p">,</span>
+                                    <span class="s">&#39;strain_out_of_plane&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">,</span> <span class="n">references</span><span class="o">=</span><span class="p">[</span><span class="n">arent_1989</span><span class="p">])</span>
+<div class="viewcode-block" id="IIIVZincBlendeStrained001.VBO_hydrostatic_strain_shift"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_hydrostatic_strain_shift">[docs]</a>    <span class="k">def</span> <span class="nf">VBO_hydrostatic_strain_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unstrained</span><span class="o">.</span><span class="n">a_v</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">*</span>
+                <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">strain_in_plane</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">+</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">strain_out_of_plane</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>   <span class="p">))</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;strain_in_plane&#39;</span><span class="p">,</span>
+                                    <span class="s">&#39;strain_out_of_plane&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">,</span> <span class="n">references</span><span class="o">=</span><span class="p">[</span><span class="n">arent_1989</span><span class="p">])</span>
+<div class="viewcode-block" id="IIIVZincBlendeStrained001.VBO_uniaxial_strain_shift"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_uniaxial_strain_shift">[docs]</a>    <span class="k">def</span> <span class="nf">VBO_uniaxial_strain_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unstrained</span><span class="o">.</span><span class="n">b</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">*</span>
+                <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">strain_out_of_plane</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">strain_in_plane</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>       <span class="p">))</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;VBO_hydrostatic_strain_shift&#39;</span><span class="p">,</span>
+                                    <span class="s">&#39;VBO_uniaxial_strain_shift&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">,</span> <span class="n">references</span><span class="o">=</span><span class="p">[</span><span class="n">arent_1989</span><span class="p">])</span>
+<div class="viewcode-block" id="IIIVZincBlendeStrained001.VBO_hh_strain_shift"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_hh_strain_shift">[docs]</a>    <span class="k">def</span> <span class="nf">VBO_hh_strain_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">VBO_uniaxial_strain_shift</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">+</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">VBO_hydrostatic_strain_shift</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;VBO_hydrostatic_strain_shift&#39;</span><span class="p">,</span>
+                                    <span class="s">&#39;VBO_uniaxial_strain_shift&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">,</span> <span class="n">references</span><span class="o">=</span><span class="p">[</span><span class="n">arent_1989</span><span class="p">])</span>
+<div class="viewcode-block" id="IIIVZincBlendeStrained001.VBO_lh_strain_shift"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_lh_strain_shift">[docs]</a>    <span class="k">def</span> <span class="nf">VBO_lh_strain_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">VBO_uniaxial_strain_shift</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">VBO_hydrostatic_strain_shift</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;VBO&#39;</span><span class="p">,</span> <span class="s">&#39;VBO_hh_strain_shift&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeStrained001.VBO_hh"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_hh">[docs]</a>    <span class="k">def</span> <span class="nf">VBO_hh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unstrained</span><span class="o">.</span><span class="n">VBO</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">+</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">VBO_hh_strain_shift</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;VBO&#39;</span><span class="p">,</span> <span class="s">&#39;VBO_lh_strain_shift&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeStrained001.VBO_lh"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_lh">[docs]</a>    <span class="k">def</span> <span class="nf">VBO_lh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unstrained</span><span class="o">.</span><span class="n">VBO</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">+</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">VBO_lh_strain_shift</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;VBO_hh&#39;</span><span class="p">,</span> <span class="s">&#39;VBO_lh&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeStrained001.VBO"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO">[docs]</a>    <span class="k">def</span> <span class="nf">VBO</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">VBO_hh</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">VBO_lh</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;VBO_hh_strain_shift&#39;</span><span class="p">,</span>
+                                    <span class="s">&#39;VBO_lh_strain_shift&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeStrained001.VBO_strain_shift"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.VBO_strain_shift">[docs]</a>    <span class="k">def</span> <span class="nf">VBO_strain_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">VBO_hh_strain_shift</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">VBO_lh_strain_shift</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;Eg_Gamma&#39;</span><span class="p">,</span> <span class="s">&#39;Delta_SO&#39;</span><span class="p">,</span> <span class="s">&#39;Ep&#39;</span><span class="p">,</span> <span class="s">&#39;F&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;m_e&#39;</span><span class="p">,</span> <span class="n">references</span><span class="o">=</span><span class="p">[</span><span class="n">vurgaftman_2001</span><span class="p">])</span>
+<div class="viewcode-block" id="IIIVZincBlendeStrained001.meff_e_Gamma"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_strained.IIIVZincBlendeStrained001.meff_e_Gamma">[docs]</a>    <span class="k">def</span> <span class="nf">meff_e_Gamma</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the electron effective mass in the Gamma-valley</span>
+<span class="sd">        calculated from Eg_Gamma(T), CBO_strain_shift, Delta_SO, Ep and F,</span>
+<span class="sd">        assuming the CBO_strain_shift causes warping of the Gamma-valley</span>
+<span class="sd">        consistent with Kane&#39;s k.p model. Effects on the valance band</span>
+<span class="sd">        are not included.</span>
+<span class="sd">        </span>
+<span class="sd">        TODO: verify that this is a reasonable assumption.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">Eg</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unstrained</span><span class="o">.</span><span class="n">Eg_Gamma</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">+</span>
+              <span class="bp">self</span><span class="o">.</span><span class="n">CBO_strain_shift</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="n">Delta_SO</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unstrained</span><span class="o">.</span><span class="n">Delta_SO</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">Ep</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unstrained</span><span class="o">.</span><span class="n">Ep</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">F</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unstrained</span><span class="o">.</span><span class="n">F</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mf">1.</span><span class="o">/</span><span class="p">((</span><span class="mf">1.</span><span class="o">+</span><span class="mf">2.</span><span class="o">*</span><span class="n">F</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">Ep</span><span class="o">*</span><span class="p">(</span><span class="n">Eg</span><span class="o">+</span><span class="mf">2.</span><span class="o">*</span><span class="n">Delta_SO</span><span class="o">/</span><span class="mf">3.</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">Eg</span><span class="o">*</span><span class="p">(</span><span class="n">Eg</span><span class="o">+</span><span class="n">Delta_SO</span><span class="p">)))</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">openbandparams 0.7 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../openbandparams.html" >openbandparams</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2014, Scott J Maddox.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

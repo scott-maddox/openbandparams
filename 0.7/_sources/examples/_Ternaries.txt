@@ -1,0 +1,10 @@
+Ternaries
+=========
+
+Source:
+
+.. literalinclude:: ../../src/openbandparams/examples/Ternaries.py
+
+Result:
+
+.. literalinclude:: ../_build_examples/Ternaries.txt

@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Change Log &mdash; openbandparams 0.8 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.8',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="openbandparams 0.8 documentation" href="index.html" />
+    <link rel="prev" title="Plot Strained Eg and VBO vs Composition of Quaternary3" href="examples/advanced/GaInAsSb_on_GaSb/_Plot_Strained_Eg_and_VBO_vs_Composition_of_Quaternary3.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="examples/advanced/GaInAsSb_on_GaSb/_Plot_Strained_Eg_and_VBO_vs_Composition_of_Quaternary3.html" title="Plot Strained Eg and VBO vs Composition of Quaternary3"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">openbandparams 0.8 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="examples/advanced/GaInAsSb_on_GaSb/_Plot_Strained_Eg_and_VBO_vs_Composition_of_Quaternary3.html"
+                        title="previous chapter">Plot Strained Eg and VBO vs Composition of Quaternary3</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/changelog.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="change-log">
+<h1>Change Log<a class="headerlink" href="#change-log" title="Permalink to this headline">¶</a></h1>
+<p>Changes in 0.8:</p>
+<ul class="simple">
+<li>Near complete rewrite of internals</li>
+<li>Parameters now have units, aliases, descriptions and references</li>
+<li>Strained alloy interface is much cleaner
+(see <cite>examples/Strained_Ternaries</cite>)</li>
+<li>Ternaries of ternaries are now possible
+(see <cite>examples/Ternaries_of_Ternaries</cite>)</li>
+<li>Alloy interpolation now follows the recommendations from
+Vurgaftman, et al. (2001).</li>
+<li>Added and renamed several parameters and methods</li>
+<li>Fixed Ternaries requiring lattice matching temperature</li>
+</ul>
+<p>Changes in 0.7:</p>
+<ul class="simple">
+<li>Added several functions for calculating the effects of biaxial strain</li>
+<li>Added a strained binaries band offsets vs lattice constant example</li>
+<li>Added several advanced examples</li>
+<li>Fixed the strained binaries bandgap vs lattice constant
+example (the strain effects were reversed)</li>
+<li>Fixed bug with AlGaN, AlInN, and GaInN caused by having extraneous commas</li>
+</ul>
+<p>Changes in 0.6:</p>
+<ul class="simple">
+<li>Fixed a packaging issue that prevented setup.py from working</li>
+</ul>
+<p>Changes in 0.5:</p>
+<ul class="simple">
+<li>Lattice matching temperature is no longer required (defaults to 300 K)</li>
+<li>Added the heavy and light hole effective mass parameters</li>
+<li>Added some new example scripts</li>
+<li>Added quaternary bowing</li>
+<li>Adjusted the InAsSb VBO bowing parameter</li>
+<li>Added some literature references as comments</li>
+<li>Fixed examples not loading local openbandparams</li>
+</ul>
+<p>Changes in 0.4:</p>
+<ul class="simple">
+<li>Added quaternaries</li>
+<li>Added strained binaries example</li>
+<li>Added &#8216;elements&#8217; property and &#8216;elementFraction&#8217; method</li>
+<li>Implemented __all__, so that &#8216;from openbandparams import <a href="#id1"><span class="problematic" id="id2">*</span></a>&#8216; works</li>
+<li>Moved examples into the openbandparams package</li>
+<li>Lots of internal changes (refactoring, documentation, etc.)</li>
+</ul>
+<p>Changes in 0.3:</p>
+<ul class="simple">
+<li>Added ternary lattice matching</li>
+</ul>
+<p>Changes in 0.2:</p>
+<ul class="simple">
+<li>Improved usability of ternaries</li>
+<li>Changed all methods to require key word arguments</li>
+<li>Added documentation</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="examples/advanced/GaInAsSb_on_GaSb/_Plot_Strained_Eg_and_VBO_vs_Composition_of_Quaternary3.html" title="Plot Strained Eg and VBO vs Composition of Quaternary3"
+             >previous</a> |</li>
+        <li><a href="index.html">openbandparams 0.8 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2015, Scott J Maddox.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+Plot Bandgap vs Composition of Ternary
+======================================
+
+Source:
+
+.. literalinclude:: ../../src/openbandparams/examples/Plot_Bandgap_vs_Composition_of_Ternary.py
+
+Result:
+
+.. image:: ../_build_examples/Plot_Bandgap_vs_Composition_of_Ternary.png
