@@ -12,13 +12,16 @@ Contents
 ========
 
 .. toctree::
+    :maxdepth: 1
+
     installation.rst
     tutorial.rst
-    examples.rst
     supported_parameters.rst
+    examples.rst
+    changelog.rst
 
-Indices and tables
-==================
+Source Documentation
+====================
 
 * :ref:`genindex`
 * :ref:`modindex`

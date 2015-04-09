@@ -34,7 +34,7 @@ T = 300
 # initialize the plot
 fig = plt.figure()
 ax = fig.add_subplot(111)
-plt.title('$%s/GaSb$ from 0 to -3%% strain' % (quaternary.LaTeX()))
+plt.title('$%s/GaSb$ from 0 to 3%% strain' % (quaternary.latex()))
 plt.xlabel('Unstrained Lattice Parameter at %g K ($\AA$)' % T)
 plt.ylabel('Strained Bandgap at %g K (eV)' % T)
 
@@ -58,46 +58,42 @@ for x, y, label in zip(xs, ys, labels):
 indices = numpy.arange(100)
 fractions = numpy.linspace(0, 1, 100)
 x = numpy.empty(100, dtype=numpy.float)
-E_c_hh = numpy.empty(100, dtype=numpy.float)
-E_c_lh = numpy.empty(100, dtype=numpy.float)
+Eg_hh = numpy.empty(100, dtype=numpy.float)
+Eg_lh = numpy.empty(100, dtype=numpy.float)
 first = True
 for xfrac in numpy.linspace(0, 1, 10):
     for i, yfrac in zip(indices, fractions):
         instance = quaternary(x=xfrac, y=yfrac)
         x[i] = instance.a(T=T)
-        eps_xx = quaternary.biaxial_strained_eps_xx(x=xfrac, y=yfrac,
-                                                    a0=GaSb.a(), T=T)
-        if eps_xx < -0.03 or eps_xx > 0:
-            E_c_hh[i] = numpy.nan
-            E_c_lh[i] = numpy.nan
+        strained = instance.strained_001(GaSb)
+        strain = strained.strain_out_of_plane(T=T)
+        if not (0. <= strain <= 0.03):
+            Eg_hh[i] = numpy.nan
+            Eg_lh[i] = numpy.nan
         else:
-            E_c_hh[i] = quaternary.biaxial_strained_E_c_hh(x=xfrac, y=yfrac,
-                                                           a0=GaSb.a(), T=T)
-            E_c_lh[i] = quaternary.biaxial_strained_E_c_lh(x=xfrac, y=yfrac,
-                                                           a0=GaSb.a(), T=T)
+            Eg_hh[i] = strained.Eg_hh(T=T)
+            Eg_lh[i] = strained.Eg_lh(T=T)
     if first:
-        ax.plot(x, E_c_hh, 'b-', label='E_c_hh')
-#         ax.plot(x, E_c_lh, 'b-', label='E_c_lh')
+        ax.plot(x, Eg_hh, 'b-', label='Eg_hh')
+#         ax.plot(x, Eg_lh, 'b-', label='Eg_lh')
         first = False
     else:
-        ax.plot(x, E_c_hh, 'b-')
-#         ax.plot(x, E_c_lh, 'b-')
+        ax.plot(x, Eg_hh, 'b-')
+#         ax.plot(x, Eg_lh, 'b-')
 for yfrac in numpy.linspace(0, 1, 10):
     for i, xfrac in zip(indices, fractions):
         instance = quaternary(x=xfrac, y=yfrac)
         x[i] = instance.a(T=T)
-        eps_xx = quaternary.biaxial_strained_eps_xx(x=xfrac, y=yfrac,
-                                                    a0=GaSb.a(), T=T)
-        if eps_xx < -0.03 or eps_xx > 0:
-            E_c_hh[i] = numpy.nan
-            E_c_lh[i] = numpy.nan
+        strained = instance.strained_001(GaSb)
+        strain = strained.strain_out_of_plane(T=T)
+        if not (0. <= strain <= 0.03):
+            Eg_hh[i] = numpy.nan
+            Eg_lh[i] = numpy.nan
         else:
-            E_c_hh[i] = quaternary.biaxial_strained_E_c_hh(x=xfrac, y=yfrac,
-                                                           a0=GaSb.a(), T=T)
-            E_c_lh[i] = quaternary.biaxial_strained_E_c_lh(x=xfrac, y=yfrac,
-                                                           a0=GaSb.a(), T=T)
-    ax.plot(x, E_c_hh, 'b--')
-#     ax.plot(x, E_c_lh, 'b--')
+            Eg_hh[i] = strained.Eg_hh(T=T)
+            Eg_lh[i] = strained.Eg_lh(T=T)
+    ax.plot(x, Eg_hh, 'b--')
+#     ax.plot(x, Eg_lh, 'b--')
 
 plt.xlim(6, 6.5)
 plt.ylim(0, 0.8)

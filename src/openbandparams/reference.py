@@ -1,5 +1,5 @@
 #
-#   Copyright (c) 2013-2014, Scott J Maddox
+#   Copyright (c) 2013-2015, Scott J Maddox
 #
 #   This file is part of openbandparams.
 #
@@ -18,12 +18,13 @@
 #
 #############################################################################
 
-from . import binary, quaternary, ternary
-from .binary import *
-from .quaternary import *
-from .ternary import *
+class Reference(object):
+    pass
 
-__all__ = []
-__all__ += binary.__all__
-__all__ += ternary.__all__
-__all__ += quaternary.__all__
+class BibtexReference(Reference):
+
+    def __init__(self, bibtex):
+        self.bibtex = bibtex
+
+    def __str__(self):
+        return self.bibtex

@@ -33,7 +33,7 @@ T = 300
 # initialize the plot
 fig = plt.figure()
 ax = fig.add_subplot(111)
-plt.xlabel('Strained Lattice Parameter at %g K ($\AA$)' % T)
+plt.xlabel('Substrate Lattice Parameter at %g K ($\AA$)' % T)
 plt.ylabel('Strained Bandgap at %g K (eV)' % T)
 
 # plot the binaries
@@ -56,20 +56,21 @@ for x, y, label in zip(x, y, label):
 
 # plot the strained binaries
 first = True
-eps_xx = numpy.linspace(-0.02, 0.02, 100)
-for b in [AlP, GaP, InP,
-          AlAs, GaAs, InAs,
-          AlSb, GaSb, InSb]:
-    a_strained = [b.biaxial_strained_a0(eps_xx=eps_xx_) for eps_xx_ in eps_xx]
-    E_c_hh = [b.biaxial_strained_E_c_hh(eps_xx=eps_xx_) for eps_xx_ in eps_xx]
-    E_c_lh = [b.biaxial_strained_E_c_lh(eps_xx=eps_xx_) for eps_xx_ in eps_xx]
+strains = numpy.linspace(-0.02, 0.02, 100)
+for unstrained in [AlP, GaP, InP,
+                   AlAs, GaAs, InAs,
+                   AlSb, GaSb, InSb]:
+    straineds = [unstrained.strained_001(strain) for strain in strains]
+    substrate_a = [strained.substrate_a() for strained in straineds]
+    Eg_hh = [strained.Eg_hh() for strained in straineds]
+    Eg_lh = [strained.Eg_lh() for strained in straineds]
     if first:
-        plt.plot(a_strained, E_c_hh, 'r-', label='CB-HH gap')
-        plt.plot(a_strained, E_c_lh, 'g-', label='CB-LH gap')
+        plt.plot(substrate_a, Eg_hh, 'r-', label='CB-HH gap')
+        plt.plot(substrate_a, Eg_lh, 'g-', label='CB-LH gap')
         first = False
     else:
-        plt.plot(a_strained, E_c_hh, 'r-')
-        plt.plot(a_strained, E_c_lh, 'g-')
+        plt.plot(substrate_a, Eg_hh, 'r-')
+        plt.plot(substrate_a, Eg_lh, 'g-')
 
 plt.legend(loc='best')
 

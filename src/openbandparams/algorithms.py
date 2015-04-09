@@ -32,9 +32,9 @@ def bisect(func, a, b, xtol=1e-12, maxiter=100):
 
     Requirements
     ------------
-    func must be continuous function that accepts a single number input
-        and returns a single number
-    `func(a)` and `func(b)` must have opposite sign
+    - func must be continuous function that accepts a single number input
+      and returns a single number
+    - `func(a)` and `func(b)` must have opposite sign
 
     Parameters
     ----------

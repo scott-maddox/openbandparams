@@ -76,7 +76,11 @@ print ''
 import string
 print ' Material | Lattice Param. [Ang] | Bandgap [eV]'
 print '------------------------------------------------'
-for mat in binaries:
+for mat in iii_v_zinc_blende_binaries:
     print string.rjust(str(mat), 7),
-    print '  | ', string.rjust('%.3f' % mat.a(), 12), ' ' * 4,
+    try:
+        a = mat.a()
+    except:
+        a = mat.a_300K()
+    print '  | ', string.rjust('%.3f' % a, 12), ' ' * 4,
     print '  |    %.3f' % mat.Eg()

@@ -1,5 +1,5 @@
 #
-#   Copyright (c) 2013-2014, Scott J Maddox
+#   Copyright (c) 2013-2015, Scott J Maddox
 #
 #   This file is part of openbandparams.
 #
@@ -18,8 +18,14 @@
 #
 #############################################################################
 
-from . import zinc_blende
-from .zinc_blende import *
+from .alloy import Alloy
+from .parameter import method_parameter
 
-__all__ = []
-__all__ += zinc_blende.__all__
+class IIIVAlloy(Alloy):
+    '''
+    The base class for all III-V alloys.
+    '''
+    
+    @method_parameter(dependencies=['CBO'], units='eV')
+    def electron_affinity(self, **kwargs):
+        return 4.66-self.CBO(**kwargs)

@@ -17,20 +17,25 @@
 #   along with openbandparams.  If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
+# Make sure we import the local package
+import os
+import sys
+sys.path.insert(0,
+    os.path.abspath(os.path.join(os.path.dirname(__file__), 'src')))
 
-from openbandparams.iii_v.zinc_blende.binary import binaries, GaAs, InAs
-from openbandparams.iii_v.zinc_blende.binary import *
+from openbandparams import iii_v_zinc_blende_binaries, GaAs, InAs
+from openbandparams import *
 import unittest
 
 
 class TestIIIVZincBlendeBinary(unittest.TestCase):
 
     def test_str(self):
-        for binary in binaries:
+        for binary in iii_v_zinc_blende_binaries:
             self.assertEqual(str(binary), binary.name)
 
     def test_repr(self):
-        for binary in binaries:
+        for binary in iii_v_zinc_blende_binaries:
             self.assertEqual(eval(repr(binary)), binary)
 
     def test_eq(self):
@@ -41,7 +46,7 @@ class TestIIIVZincBlendeBinary(unittest.TestCase):
         self.assertAlmostEqual(GaAs.a_300K(), 5.65325, places=5)
 
     def test_da_dT(self):
-        self.assertAlmostEqual(GaAs.da_dT(), 0.0000388, places=7)
+        self.assertAlmostEqual(GaAs.thermal_expansion(), 0.0000388, places=7)
 
     def test_a(self):
         self.assertAlmostEqual(GaAs.a(), 5.65325, places=5)
@@ -86,45 +91,49 @@ class TestIIIVZincBlendeBinary(unittest.TestCase):
         self.assertAlmostEqual(GaAs.Eg_L(), 1.70696428571, places=11)
         self.assertAlmostEqual(GaAs.Eg_L(T=0), 1.815, places=3)
 
-    def test_elementFraction(self):
-        self.assertEqual(GaAs.elementFraction('Ga'), 1.)
-        self.assertEqual(GaAs.elementFraction('As'), 1.)
-        self.assertEqual(GaAs.elementFraction('In'), 0.)
-        self.assertEqual(InAs.elementFraction('Ga'), 0.)
-        self.assertEqual(InAs.elementFraction('As'), 1.)
-        self.assertEqual(InAs.elementFraction('In'), 1.)
+    def test_element_fraction(self):
+        self.assertEqual(GaAs.element_fraction('Ga'), 1.)
+        self.assertEqual(GaAs.element_fraction('As'), 1.)
+        self.assertEqual(GaAs.element_fraction('In'), 0.)
+        self.assertEqual(InAs.element_fraction('Ga'), 0.)
+        self.assertEqual(InAs.element_fraction('As'), 1.)
+        self.assertEqual(InAs.element_fraction('In'), 1.)
 
     def test_GaAs_Eg(self):
         self.assertAlmostEqual(GaAs.Eg(), 1.42248214286, places=11)
         self.assertAlmostEqual(GaAs.Eg(T=0), 1.519, places=3)
     
     def test_compressive_biaxial_strained(self):
-        eps_xx = -0.01
-        b = GaAs
-        self.assertGreater(b.biaxial_strained_eps_zz(eps_xx=eps_xx), 0)
-        self.assertLess(b.a_c(), 0)
-        self.assertLess(b.a_v(), 0)
-        self.assertLess(b.b(), 0)
-        self.assertGreater(b.biaxial_strained_dE_c(eps_xx=eps_xx), 0)
-        self.assertGreater(b.biaxial_strained_P_eps(eps_xx=eps_xx), 0)
-        self.assertLess(b.biaxial_strained_Q_eps(eps_xx=eps_xx), 0)
-        self.assertLess(b.biaxial_strained_dE_lh(eps_xx=eps_xx), 0)
-        self.assertGreater(b.biaxial_strained_Eg(eps_xx=eps_xx),
-                           b.Eg(), b)
+        strain = 0.01 # compressive
+        unstrained = GaAs
+        strained = GaAs.strained_001(strain)
+        self.assert_(strained.strain_out_of_plane() == strain)
+        self.assert_(strained.strain_in_plane() < 0)
+        self.assert_(unstrained.a_c() < 0)
+        self.assert_(unstrained.a_v() < 0)
+        self.assert_(unstrained.b() < 0)
+        self.assert_(strained.CBO_strain_shift() > 0)
+        self.assert_(strained.VBO_hh_strain_shift() > 0)
+        self.assert_(strained.VBO_lh_strain_shift() < 0)
+        self.assert_(strained.VBO_strain_shift() > 0)
+        self.assert_(strained.Eg_strain_shift() > 0)
+        self.assert_(strained.Eg() > unstrained.Eg())
     
     def test_tensile_biaxial_strained(self):
-        eps_xx = 0.01
-        b = GaAs
-        self.assertLess(b.biaxial_strained_eps_zz(eps_xx=eps_xx), 0)
-        self.assertLess(b.a_c(), 0)
-        self.assertLess(b.a_v(), 0)
-        self.assertLess(b.b(), 0)
-        self.assertLess(b.biaxial_strained_dE_c(eps_xx=eps_xx), 0)
-        self.assertLess(b.biaxial_strained_P_eps(eps_xx=eps_xx), 0)
-        self.assertGreater(b.biaxial_strained_Q_eps(eps_xx=eps_xx), 0)
-        self.assertGreater(b.biaxial_strained_dE_lh(eps_xx=eps_xx), 0)
-        self.assertLess(b.biaxial_strained_Eg(eps_xx=eps_xx),
-                        b.Eg())
+        strain = -0.01 # tensile
+        unstrained = GaAs
+        strained = GaAs.strained_001(strain)
+        self.assert_(strained.strain_out_of_plane() == strain)
+        self.assert_(strained.strain_in_plane() > 0)
+        self.assert_(unstrained.a_c() < 0)
+        self.assert_(unstrained.a_v() < 0)
+        self.assert_(unstrained.b() < 0)
+        self.assert_(strained.CBO_strain_shift() < 0)
+        self.assert_(strained.VBO_hh_strain_shift() < 0)
+        self.assert_(strained.VBO_lh_strain_shift() > 0)
+        self.assert_(strained.VBO_strain_shift() > 0)
+        self.assert_(strained.Eg_strain_shift() < 0)
+        self.assert_(strained.Eg() < unstrained.Eg())
         
 
 if __name__ == '__main__':

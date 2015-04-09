@@ -20,8 +20,32 @@
 
 from . import version
 from .version import __version__
-from . import iii_v
-from .iii_v import *
-
 __all__ = ['__version__']
-__all__ += iii_v.__all__
+
+from . import parameter
+__all__ += parameter.__all__
+from .parameter import *
+
+from . import iii_v_zinc_blende_binary
+__all__ += iii_v_zinc_blende_binary.__all__
+from .iii_v_zinc_blende_binary import *
+
+from . import iii_v_zinc_blende_ternary
+__all__ += iii_v_zinc_blende_ternary.__all__
+from .iii_v_zinc_blende_ternary import *
+
+from . import iii_v_zinc_blende_quaternary
+__all__ += iii_v_zinc_blende_quaternary.__all__
+from .iii_v_zinc_blende_quaternary import *
+
+from . import iii_v_zinc_blende_binaries
+__all__ += iii_v_zinc_blende_binaries.__all__
+from .iii_v_zinc_blende_binaries import *
+
+from . import iii_v_zinc_blende_ternaries
+__all__ += iii_v_zinc_blende_ternaries.__all__
+from .iii_v_zinc_blende_ternaries import *
+
+from . import iii_v_zinc_blende_quaternaries
+__all__ += iii_v_zinc_blende_quaternaries.__all__
+from .iii_v_zinc_blende_quaternaries import *

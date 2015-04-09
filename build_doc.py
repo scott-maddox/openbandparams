@@ -23,6 +23,21 @@
 import os
 import sys
 import subprocess
+import shutil
+
+def clear_pycache(path):
+    for dirpath, dirnames, filenames in os.walk(path):
+        for filename in filenames:
+            root, ext = os.path.splitext(filename)
+            if ext == '.pyc':
+                os.remove(os.path.join(dirpath, filename))
+                
+def clear_rst_cache(path):
+    for dirpath, dirnames, filenames in os.walk(path):
+        for filename in filenames:
+            root, ext = os.path.splitext(filename)
+            if filename.startswith('_') and ext == '.rst':
+                os.remove(os.path.join(dirpath, filename))
 
 CLEAN = len(sys.argv) > 1 and sys.argv[1].lower() == 'clean'
 
@@ -32,21 +47,38 @@ CWD = os.getcwd()
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 SRC_DIR = os.path.abspath(os.path.join(SCRIPT_DIR, 'src'))
 EXAMPLES_DIR = os.path.join(SCRIPT_DIR, 'src/openbandparams/examples')
-OBP_FILE = os.path.join(SCRIPT_DIR, 'src/openbandparams/__init__.pyc')
+OBP_FILE = os.path.join(SCRIPT_DIR, 'src/openbandparams/__init__.py')
 DOC_DIR = os.path.join(SCRIPT_DIR, 'doc')
 DOC_EXAMPLES_DIR = os.path.join(SCRIPT_DIR, 'doc/examples')
+BUILD_DIR = os.path.join(SCRIPT_DIR, 'doc/_build_examples')
 BUILD_EXAMPLES_DIR = os.path.join(SCRIPT_DIR, 'doc/_build_examples')
+
+clear_rst_cache(DOC_EXAMPLES_DIR)
+
+if CLEAN:
+    clear_pycache(SRC_DIR)
+    if os.path.exists(BUILD_DIR):
+        shutil.rmtree(BUILD_DIR)
+    if os.path.exists(DOC_EXAMPLES_DIR):
+        shutil.rmtree(DOC_EXAMPLES_DIR)
+    if os.path.exists(BUILD_EXAMPLES_DIR):
+        shutil.rmtree(BUILD_EXAMPLES_DIR)
 
 if not os.path.exists(DOC_EXAMPLES_DIR):
     os.mkdir(DOC_EXAMPLES_DIR)
 if not os.path.exists(BUILD_EXAMPLES_DIR):
     os.mkdir(BUILD_EXAMPLES_DIR)
 
+
 # make sure that python imports the local openbandparams version
 os.chdir(SRC_DIR)
 sys.path.insert(0, SRC_DIR)
 import openbandparams
-assert openbandparams.__file__ == OBP_FILE
+if openbandparams.__file__ != OBP_FILE and openbandparams.__file__ != OBP_FILE+'c':
+    raise RuntimeError('Wrong openbandparams location:\n'
+                       '{}\n'
+                       'Expected:\n'
+                       '{}'.format(openbandparams.__file__,OBP_FILE))
 
 print ''
 print 'Building examples...'
@@ -145,5 +177,15 @@ Result:
 print 'Done building examples.'
 print ''
 
+
 os.chdir('../doc')
+
+# Run sphinx-apidoc
+subprocess.check_call(['sphinx-apidoc', '-o','apidoc', '../src/openbandparams',
+                       # exclude paths:
+                       '../src/openbandparams/tests',
+                       '../src/openbandparams/examples',
+                       ])
+
+# Build html
 subprocess.check_call(['make', 'html'])

@@ -1,5 +1,5 @@
 #
-#   Copyright (c) 2013-2014, Scott J Maddox
+#   Copyright (c) 2013-2015, Scott J Maddox
 #
 #   This file is part of openbandparams.
 #
@@ -17,32 +17,14 @@
 #   along with openbandparams.  If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
+# Make sure we import the local openbandparams version
+import os
+import sys
+sys.path.insert(0,
+    os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+from openbandparams import *
 
-
-class BaseType(type):
-    def __str__(self):
-        return self.name
-
-    def __repr__(self):
-        return self.name
-
-
-class Base(object):
-
-    name = 'Base'
-    elements = tuple([])
-
-    @classmethod
-    def elementFraction(cls, element):
-        raise NotImplementedError()
-
-    @classmethod
-    def _get_T(cls, kwargs):
-        '''
-        Returns kwargs['T'], kwargs['temp'], kwargs['temperature'], or 300.
-        '''
-        for k in ['T', 'temp', 'temperature']:
-            if k in kwargs:
-                return kwargs[k]
-        else:
-            return 300  # K
+# Print all references used to calculate a parameter
+parameter = InAsSb.Eg
+for ref in parameter.get_references():
+    print ref

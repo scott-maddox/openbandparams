@@ -1,7 +1,5 @@
-#!/bin/sh
-
 #
-#   Copyright (c) 2013-2014, Scott J Maddox
+#   Copyright (c) 2013-2015, Scott J Maddox
 #
 #   This file is part of openbandparams.
 #
@@ -19,19 +17,28 @@
 #   along with openbandparams.  If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
+__all__ = ['IIIVZincBlendeBinary']
+
+from .iii_v_zinc_blende_alloy import IIIVZincBlendeAlloy
 
 
-CWD="$(pwd)"
-HTML_DIR="$CWD/doc/_build/html/"
-TMP_DIR="/tmp/openbandparams-gh-pages/"
-rm -rf $TMP_DIR
-mkdir $TMP_DIR
-cd $TMP_DIR
-git clone https://github.com/scott-maddox/openbandparams.git
-cd openbandparams
-git pull origin gh-pages
-rsync -av "$HTML_DIR" .
-git add .
-git commit -a -m "updated documentation"
-git push origin HEAD:gh-pages
-rm -rf "$TMP_DIR"
+class IIIVZincBlendeBinary(IIIVZincBlendeAlloy):
+    '''
+    The base class for all III-V zinc blende binary alloys.
+    '''
+    def __repr__(self):
+        return self.name
+    
+    def latex(self):
+        return self.name
+    
+    def element_fraction(self, element):
+        '''
+        Returns the fractional concentration of `element` with respect
+        to its sublattice. In a III-V binary, the fraction is either 1 if
+        `element` is present, or 0 if it is not.
+        '''
+        if element in self.elements:
+            return 1.
+        else:
+            return 0.
