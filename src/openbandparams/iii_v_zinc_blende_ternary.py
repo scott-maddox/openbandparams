@@ -50,6 +50,14 @@ class IIIVZincBlendeTernary(IIIVZincBlendeMixedAlloy):
             self._x = float(x)
         else:
             self._x = None
+
+    def __eq__(self, other):
+        return (type(self) == type(other) and
+                self.name == other.name and
+                self.elements == other.elements,
+                self.binaries == other.binaries,
+                self._parameters == other._parameters,
+                self._x == other._x)
     
     def _instance(self, x=None):
         return IIIVZincBlendeTernary(self.name, self.elements,

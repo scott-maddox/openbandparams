@@ -108,6 +108,10 @@ class IIIVZincBlendeQuaternary(IIIVZincBlendeMixedAlloy):
 
     def __eq__(self, other):
         return (type(self) == type(other) and
+                self.name == other.name and
+                self.elements == other.elements,
+                self.ternaries == other.ternaries,
+                self._parameters == other._parameters,
                 self._xyz == other._xyz)
 
     def _parse_xyz(self, x, y, z):

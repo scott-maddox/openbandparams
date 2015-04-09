@@ -31,6 +31,12 @@ class Alloy(object):
         if parameters is not None:
             for parameter in parameters:
                 self.add_parameter(parameter)
+
+    def __eq__(self, other):
+        return (type(self) == type(other) and
+                self.name == other.name and
+                self.elements == other.elements,
+                self._parameters == other._parameters)
     
     def __getattribute__(self, name):
         if name in ['_parameters', '_aliases']:
