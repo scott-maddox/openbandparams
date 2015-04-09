@@ -145,5 +145,15 @@ Result:
 print 'Done building examples.'
 print ''
 
+
 os.chdir('../doc')
+
+# Run sphinx-apidoc
+subprocess.check_call(['sphinx-apidoc', '-o','apidoc', '../src/openbandparams',
+                       # exclude paths:
+                       '../src/openbandparams/tests',
+                       '../src/openbandparams/examples',
+                       ])
+
+# Build html
 subprocess.check_call(['make', 'html'])

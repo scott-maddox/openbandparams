@@ -32,9 +32,11 @@ sys.path.insert(0,os.path.abspath("../src"))
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
+    'sphinx.ext.autosummary',
     'sphinx.ext.doctest',
     'sphinx.ext.mathjax',
     'sphinx.ext.viewcode',
+    'numpydoc',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -51,7 +53,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'openbandparams'
-copyright = u'2013-2014, Scott J Maddox'
+copyright = u'2013-2015, Scott J Maddox'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

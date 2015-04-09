@@ -49,16 +49,25 @@ There are many parameters available::
     >>> GaAs.meff_e_Gamma()
     0.067
 
-A full list of parameters and functions available for a given material
+A full list of parameters available for a given material
 can be printed using the following one-liner::
 
-    >>> ', '.join([param for param in dir(GaAs) if not param.startswith('_')])
-    'Delta_SO, Eg, Eg_Gamma, Eg_Gamma_0, Eg_L, Eg_L_0, Eg_X, Eg_X_0, Ep, F,
-    LaTeX, Luttinger1, Luttinger2, Luttinger3, VBO, a, a_300K, a_c, a_v,
-    alpha_Gamma, alpha_L, alpha_X, b, beta_Gamma, beta_L, beta_X, c_11, c_12,
-    c_44, d, da_dT, elementFraction, elements, meff_SO, meff_e_Gamma,
-    meff_e_L_DOS, meff_e_L_long, meff_e_L_trans, meff_e_X_DOS, meff_e_X_long,
-    meff_e_X_trans, name'
+    >>> sorted([p.name for p in GaAs.get_unique_parameters()])
+    ['CBO', 'CBO_Gamma', 'CBO_L', 'CBO_X', 'Delta_SO', 'Eg', 'Eg_Gamma',
+    'Eg_Gamma_0', 'Eg_L', 'Eg_L_0', 'Eg_X', 'Eg_X_0', 'Ep', 'F', 'VBO', 'a',
+    'a_300K', 'a_c', 'a_v', 'alpha_Gamma', 'alpha_L', 'alpha_X', 'b',
+    'beta_Gamma', 'beta_L', 'beta_X', 'c11', 'c12', 'c44', 'd',
+    'electron_affinity', 'luttinger1', 'luttinger2', 'luttinger3',
+    'luttinger32', 'meff_SO', 'meff_e_Gamma', 'meff_e_Gamma_0',
+    'meff_e_L_DOS', 'meff_e_L_long', 'meff_e_L_trans', 'meff_e_X_DOS',
+    'meff_e_X_long', 'meff_e_X_trans', 'meff_hh_100', 'meff_hh_110',
+    'meff_hh_111', 'meff_lh_100', 'meff_lh_110', 'meff_lh_111',
+    'nonparabolicity', 'thermal_expansion']
+
+A description of any parameter can easily be printed::
+
+    >>> print GaAs.Eg.description
+    bandgap energy
 
 For documentation of the parameters, see :doc:`supported_parameters`.
 
@@ -72,10 +81,8 @@ Ternary alloys are also supported::
     AlGaAs(Al=0.3)
     >>> AlGaAs(Al=0.3).Eg()
     1.840788343373494
-    >>> AlGaAs.Eg(Al=0.3)
-    1.840788343373494
 
-As of version 0.4, you must follow the alloy naming scheme. Group III
+As of version 0.8, you must follow the alloy naming scheme. Group III
 elements come first, with the lowest atomic number elements first,
 followed by the Group V elements, also ordered by atomic number::
 
@@ -101,8 +108,6 @@ using the following syntax::
     >>> GaInP(a=GaAs.a())
     GaInP(Ga=0.516340648855)
     >>> GaInP(a=GaAs.a()).Eg()
-    1.9259077529765196
-    >>> GaInP.Eg(a=GaAs.a())
     1.9259077529765196
 
 In the previous example, a lattice matching temperature of 300 K is assumed.
@@ -138,12 +143,12 @@ The same concepts also apply to quaternaries::
     >>> myGaInPAs.a()
     5.869700012767527
 
-It's also possible to print a LaTeX representation of the alloy::
+It's also possible to get a LaTeX representation of the alloy::
 
-    >>> print GaInPAs.LaTeX()
-    Ga_{x}In_{1-x}P_{y}As_{1-y}
-    >>> print GaInPAs(P=0.1, a=InP.a(), T=300).LaTeX()
-    Ga_{0.4176}In_{0.5824}P_{0.1}As_{0.9}
+    >>> GaInPAs.latex()
+    'Ga_{x}In_{1-x}P_{y}As_{1-y}'
+    >>> GaInPAs(P=0.1, a=InP.a(), T=300).latex()
+    'Ga_{0.4176}In_{0.5824}P_{0.1}As_{0.9}'
 
 Now that you have the basics down, check out the :doc:`examples` to see
 what's possible.

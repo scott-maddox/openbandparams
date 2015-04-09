@@ -7,33 +7,32 @@ plots such as bandgap vs. lattice constant and bandgap vs. alloy
 composition.
 
 Materials included in this version:
-- III-V's
-    - Zinc Blendes
-        - Binaries
-            - AlN, GaN, InN,
-              AlP, GaP, InP,
-              AlAs, GaAs, InAs,
-              AlSb, GaSb, InSb
-        - Ternaries
-            - AlGaN, AlInN, GaInN,
-              AlGaP, AlInP, GaInP,
-              AlGaAs, AlInAs, GaInAs,
-              AlGaSb, AlInSb, GaInSb,
-              AlNP, GaNP, InNP,
-              AlNAs, GaNAs, InNAs,
-              AlPAs, GaPAs, InPAs,
-              AlPSb, GaPSb, InPSb,
-              AlAsSb, GaAsSb, InAsSb
-        - Quaternaries
-            - AlNPAs, AlPAsSb,
-              GaNPAs, GaPAsSb,
-              InNPAs, InPAsSb,
-              AlGaInN, AlGaInP, AlGaInAs, AlGaInSb,
-              AlGaNP, AlInNP, GaInNP,
-              AlGaNAs, AlInNAs, GaInNAs,
-              AlGaPAs, AlInPAs, GaInPAs,
-              AlGaPSb, AlInPSb, GaInPSb,
-              AlGaAsSb, AlInAsSb, GaInAsSb
+- III-V Zinc Blendes
+    - Binaries
+        - AlN, GaN, InN,
+          AlP, GaP, InP,
+          AlAs, GaAs, InAs,
+          AlSb, GaSb, InSb
+    - Ternaries
+        - AlGaN, AlInN, GaInN,
+          AlGaP, AlInP, GaInP,
+          AlGaAs, AlInAs, GaInAs,
+          AlGaSb, AlInSb, GaInSb,
+          AlNP, GaNP, InNP,
+          AlNAs, GaNAs, InNAs,
+          AlPAs, GaPAs, InPAs,
+          AlPSb, GaPSb, InPSb,
+          AlAsSb, GaAsSb, InAsSb
+    - Quaternaries
+        - AlNPAs, AlPAsSb,
+          GaNPAs, GaPAsSb,
+          InNPAs, InPAsSb,
+          AlGaInN, AlGaInP, AlGaInAs, AlGaInSb,
+          AlGaNP, AlInNP, GaInNP,
+          AlGaNAs, AlInNAs, GaInNAs,
+          AlGaPAs, AlInPAs, GaInPAs,
+          AlGaPSb, AlInPSb, GaInPSb,
+          AlGaAsSb, AlInAsSb, GaInAsSb
 
 Parameters included in this version:
 - lattice constants

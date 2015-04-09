@@ -1,12 +1,11 @@
 Supported Parameters
 ====================
 
-All of the parameters and functions supported in this version are documented
-below.
+The following parameters are available for unstrained binaries, ternaries, and
+quaternaries, although not every material has every parameter:
 
-.. autoclass:: openbandparams.iii_v.zinc_blende.binary.Binary
-    :members:
+.. include:: ./_build_examples/Parameters.txt
 
-    .. py:classmethod:: LaTeX(**kwargs)
+The following parameters are available for strained materials:
 
-        Returns a LaTeX representation.
+.. include:: ./_build_examples/Strained_Parameters.txt

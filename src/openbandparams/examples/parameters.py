@@ -25,10 +25,6 @@ sys.path.insert(0,
 from openbandparams import *
 import string
 
-# Print a parameter's description and units
-print GaAs.Eg.description, ',', GaAs.Eg.units
-print
-
 # Print all parameters of all III-V zinc blende alloys
 params = {}
 for binary in iii_v_zinc_blende_binaries:
@@ -39,7 +35,10 @@ names = [n for n,p in sorted(params.items())]
 descriptions = [p.description for n,p in sorted(params.items())]
 max_name_width = max([len(name) for name in names])
 max_desc_width = max([len(desc) for desc in descriptions])
-print '{} | {}'.format(string.ljust('Parameter', max_name_width),'Description')
-print '-'*(max_name_width+max_desc_width+3)
+
+print '='*max_name_width+'   '+'='*max_desc_width
+print '{}   {}'.format(string.ljust('Parameter', max_name_width),'Description')
+print '='*max_name_width+'   '+'='*max_desc_width
 for name, desc in zip(names, descriptions):
-    print '{} | {}'.format(string.ljust(name, max_name_width),desc)
+    print '{}   {}'.format(string.ljust(name, max_name_width),desc)
+print '='*max_name_width+'   '+'='*max_desc_width
