@@ -121,6 +121,16 @@ class IIIVZincBlendeMixedAlloy(IIIVZincBlendeAlloy):
     def d(self, **kwargs):
         return self._interpolate('d', kwargs)
     
+    @method_parameter(dependencies=['dielectric'],
+                      units='dimensionless')
+    def dielectric(self, **kwargs):
+        return self._interpolate('dielectric', kwargs)
+    
+    @method_parameter(dependencies=['dielectric_high_frequency'],
+                      units='dimensionless')
+    def dielectric_high_frequency(self, **kwargs):
+        return self._interpolate('dielectric_high_frequency', kwargs)
+    
     @method_parameter(dependencies=['meff_hh_100', 'meff_lh_100'],
                       units='dimensionless')
     def luttinger1(self, **kwargs):

@@ -19,7 +19,7 @@
 #############################################################################
 
 from math import tanh
-from .references import vurgaftman_2001, adachi_1987
+from .references import vurgaftman_2001, adachi_1987, adachi_1982
 from .parameter import ValueParameter, MethodParameter
 from .iii_v_zinc_blende_binary import IIIVZincBlendeBinary
 
@@ -175,6 +175,8 @@ GaP = IIIVZincBlendeBinary(
         ValueParameter('c12', 620.3, 'GPa', references=[vurgaftman_2001]),
         ValueParameter('c44', 703.3, 'GPa', references=[vurgaftman_2001]),
         ValueParameter('d', -4.6, 'eV', references=[vurgaftman_2001]),
+        ValueParameter('dielectric', 11.0, 'dimensionless', references=[adachi_1982]),
+        ValueParameter('dielectric_high_frequency', 8.5, 'dimensionless', references=[adachi_1982]),
         ValueParameter('luttinger1', 4.05, 'dimensionless', references=[vurgaftman_2001]),
         ValueParameter('luttinger2', 0.49, 'dimensionless', references=[vurgaftman_2001]),
         ValueParameter('luttinger3', 2.93, 'dimensionless', references=[vurgaftman_2001]),
@@ -227,6 +229,8 @@ InP = IIIVZincBlendeBinary(
         ValueParameter('c12', 561., 'GPa', references=[vurgaftman_2001]),
         ValueParameter('c44', 456., 'GPa', references=[vurgaftman_2001]),
         ValueParameter('d', -5., 'eV', references=[vurgaftman_2001]),
+        ValueParameter('dielectric', 12.3, 'dimensionless', references=[adachi_1982]),
+        ValueParameter('dielectric_high_frequency', 9.6, 'dimensionless', references=[adachi_1982]),
         ValueParameter('luttinger1', 5.08, 'dimensionless', references=[vurgaftman_2001]),
         ValueParameter('luttinger2', 1.6, 'dimensionless', references=[vurgaftman_2001]),
         ValueParameter('luttinger3', 2.1, 'dimensionless', references=[vurgaftman_2001]),
@@ -260,6 +264,8 @@ AlAs = IIIVZincBlendeBinary(
         ValueParameter('c12', 534., 'GPa', references=[vurgaftman_2001]),
         ValueParameter('c44', 542., 'GPa', references=[vurgaftman_2001]),
         ValueParameter('d', -3.4, 'eV', references=[vurgaftman_2001]),
+        ValueParameter('dielectric', 10.0, 'dimensionless', references=[adachi_1982]),
+        ValueParameter('dielectric_high_frequency', 8.2, 'dimensionless', references=[adachi_1982]),
         ValueParameter('luttinger1', 3.76, 'dimensionless', references=[vurgaftman_2001]),
         ValueParameter('luttinger2', 0.82, 'dimensionless', references=[vurgaftman_2001]),
         ValueParameter('luttinger3', 1.42, 'dimensionless', references=[vurgaftman_2001]),
@@ -295,6 +301,8 @@ GaAs = IIIVZincBlendeBinary(
         ValueParameter('c12', 566., 'GPa', references=[vurgaftman_2001]),
         ValueParameter('c44', 600., 'GPa', references=[vurgaftman_2001]),
         ValueParameter('d', -4.8, 'eV', references=[vurgaftman_2001]),
+        ValueParameter('dielectric', 13.0, 'dimensionless', references=[adachi_1982]),
+        ValueParameter('dielectric_high_frequency', 11.15, 'dimensionless', references=[adachi_1982]),
         ValueParameter('luttinger1', 6.98, 'dimensionless', references=[vurgaftman_2001]),
         ValueParameter('luttinger2', 2.06, 'dimensionless', references=[vurgaftman_2001]),
         ValueParameter('luttinger3', 2.93, 'dimensionless', references=[vurgaftman_2001]),
@@ -334,6 +342,8 @@ InAs = IIIVZincBlendeBinary(
         ValueParameter('c12', 452.6, 'GPa', references=[vurgaftman_2001]),
         ValueParameter('c44', 395.9, 'GPa', references=[vurgaftman_2001]),
         ValueParameter('d', -3.6, 'eV', references=[vurgaftman_2001]),
+        ValueParameter('dielectric', 14.5, 'dimensionless', references=[adachi_1982]),
+        ValueParameter('dielectric_high_frequency', 12.3, 'dimensionless', references=[adachi_1982]),
         ValueParameter('luttinger1', 20., 'dimensionless', references=[vurgaftman_2001]),
         ValueParameter('luttinger2', 8.5, 'dimensionless', references=[vurgaftman_2001]),
         ValueParameter('luttinger3', 9.2, 'dimensionless', references=[vurgaftman_2001]),
@@ -372,6 +382,8 @@ AlSb = IIIVZincBlendeBinary(
         ValueParameter('c12', 434.1, 'GPa', references=[vurgaftman_2001]),
         ValueParameter('c44', 407.6, 'GPa', references=[vurgaftman_2001]),
         ValueParameter('d', -4.3, 'eV', references=[vurgaftman_2001]),
+        ValueParameter('dielectric', 11.5, 'dimensionless', references=[adachi_1982]),
+        ValueParameter('dielectric_high_frequency', 9.95, 'dimensionless', references=[adachi_1982]),
         ValueParameter('luttinger1', 5.18, 'dimensionless', references=[vurgaftman_2001]),
         ValueParameter('luttinger2', 1.19, 'dimensionless', references=[vurgaftman_2001]),
         ValueParameter('luttinger3', 1.97, 'dimensionless', references=[vurgaftman_2001]),
@@ -407,6 +419,8 @@ GaSb = IIIVZincBlendeBinary(
         ValueParameter('c12', 402.6, 'GPa', references=[vurgaftman_2001]),
         ValueParameter('c44', 432.2, 'GPa', references=[vurgaftman_2001]),
         ValueParameter('d', -4.7, 'eV', references=[vurgaftman_2001]),
+        ValueParameter('dielectric', 15.7, 'dimensionless', references=[adachi_1982]),
+        ValueParameter('dielectric_high_frequency', 14.5, 'dimensionless', references=[adachi_1982]),
         ValueParameter('luttinger1', 13.4, 'dimensionless', references=[vurgaftman_2001]),
         ValueParameter('luttinger2', 4.7, 'dimensionless', references=[vurgaftman_2001]),
         ValueParameter('luttinger3', 6., 'dimensionless', references=[vurgaftman_2001]),
@@ -442,6 +456,8 @@ InSb = IIIVZincBlendeBinary(
         ValueParameter('c12', 373.5, 'GPa', references=[vurgaftman_2001]),
         ValueParameter('c44', 311.1, 'GPa', references=[vurgaftman_2001]),
         ValueParameter('d', -4.7, 'eV', references=[vurgaftman_2001]),
+        ValueParameter('dielectric', 17.8, 'dimensionless', references=[adachi_1982]),
+        ValueParameter('dielectric_high_frequency', 15.8, 'dimensionless', references=[adachi_1982]),
         ValueParameter('luttinger1', 34.8, 'dimensionless', references=[vurgaftman_2001]),
         ValueParameter('luttinger2', 15.5, 'dimensionless', references=[vurgaftman_2001]),
         ValueParameter('luttinger3', 16.5, 'dimensionless', references=[vurgaftman_2001]),

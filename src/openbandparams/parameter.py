@@ -224,6 +224,9 @@ descriptions = {
     'c12' : 'c12 elastic constant',
     'c44' : 'c44 elastic constant',
     'd' : 'd shear deformation potential',
+    'dielectric' : 'static relative dielectric permittivity (i.e. <~ 1 THz)',
+    'dielectric_high_frequency' : 'high-frequency dielectric permittivity '
+                                  '(i.e. >~ 100 THz)',
     'electron_affinity' : 'electron affinity energy',
     'luttinger1' : 'first Luttinger parameter',
     'luttinger2' : 'second Luttinger parameter',

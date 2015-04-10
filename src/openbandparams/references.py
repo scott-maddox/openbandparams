@@ -157,3 +157,20 @@ arent_1989 = BibtexReference('''
     pages = {1739--1747},
 }
 ''')
+
+adachi_1982 = BibtexReference('''
+@article{adachi_1982,
+    title = {Material parameters of {InGaAsP} and related binaries},
+    volume = {53},
+    issn = {0021-8979, 1089-7550},
+    url = {http://scitation.aip.org.ezproxy.lib.utexas.edu/content/aip/journal/jap/53/12/10.1063/1.330480},
+    doi = {10.1063/1.330480},
+    number = {12},
+    urldate = {2015-03-14},
+    journal = {Journal of Applied Physics},
+    author = {Adachi, Sadao},
+    month = dec,
+    year = {1982},
+    pages = {8775--8792},
+}
+''')
