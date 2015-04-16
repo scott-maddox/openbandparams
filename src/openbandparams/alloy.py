@@ -30,7 +30,7 @@ class Alloy(object):
         self._aliases = {}
         if parameters is not None:
             for parameter in parameters:
-                self.add_parameter(parameter)
+                self.set_parameter(parameter)
 
     def __eq__(self, other):
         return (type(self) == type(other) and
