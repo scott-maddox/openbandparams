@@ -190,6 +190,18 @@ class IIIVZincBlendeAlloy(IIIVAlloy):
         F = self.F(**kwargs)
         return 1./((1.+2.*F)+(Ep*(Eg+2.*Delta_SO/3.))/(Eg*(Eg+Delta_SO)))
     
+    @method_parameter(dependencies=['meff_e_L_long', 'meff_e_L_trans'],
+                      units='m_e', references=[vurgaftman_2001])
+    def meff_e_L_DOS(self, **kwargs):
+        return (self.meff_e_L_trans(**kwargs)**2 *
+                self.meff_e_L_long(**kwargs)**2)**(1./3.)
+    
+    @method_parameter(dependencies=['meff_e_X_long', 'meff_e_X_trans'],
+                      units='m_e', references=[vurgaftman_2001])
+    def meff_e_X_DOS(self, **kwargs):
+        return (self.meff_e_X_trans(**kwargs)**2 *
+                self.meff_e_X_long(**kwargs)**2)**(1./3.)
+    
     @method_parameter(dependencies=['luttinger1', 'luttinger2'], units='m_e')
     def meff_hh_100(self, **kwargs):
         '''
