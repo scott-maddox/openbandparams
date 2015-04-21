@@ -20,6 +20,8 @@
 
 from .parameter import Parameter, MethodParameter
 
+__all__ = ['Alloy']
+
 
 class Alloy(object):
 
