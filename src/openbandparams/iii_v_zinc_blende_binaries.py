@@ -463,6 +463,7 @@ InSb = IIIVZincBlendeBinary(
         ValueParameter('luttinger3', 16.5, 'dimensionless', references=[vurgaftman_2001]),
         ValueParameter('meff_e_Gamma_0', 0.0135, 'm_e', references=[vurgaftman_2001]),
         ValueParameter('meff_e_L_DOS', 0.25, 'm_e', references=[vurgaftman_2001]),
+        ValueParameter('meff_e_X_DOS', 0.5, 'm_e'), # guess
         ValueParameter('thermal_expansion', 3.48e-5, 'angstrom/K', references=[vurgaftman_2001]),
     ])
 
