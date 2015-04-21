@@ -25,6 +25,11 @@ from .references import vurgaftman_2001, kane_1956
 from .equations import varshni
 
 
+__all__ = ['IIIVZincBlendeAlloy']
+
+# Boltzmann constant
+k = 8.6173324e-5 # eV K**-1
+
 class IIIVZincBlendeAlloy(IIIVAlloy):
     '''
     The base class for all III-V zinc blende alloys.
@@ -262,7 +267,8 @@ class IIIVZincBlendeAlloy(IIIVAlloy):
         '''
         Eg = self.Eg_Gamma(**kwargs)
         meff = self.meff_e_Gamma(**kwargs)
-        return 1/Eg * (1 - meff)**2
+        T = kwargs.get('T', 300.)
+        return k*T/Eg * (1 - meff)**2
 
 #     def _get_eps_xx(self, **kwargs):
 #         if 'a0' in kwargs:
