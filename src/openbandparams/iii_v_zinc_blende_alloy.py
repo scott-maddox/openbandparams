@@ -161,7 +161,7 @@ class IIIVZincBlendeAlloy(IIIVAlloy):
         Linear interpolation of luttinger32 is the recommended way to
         estimate the valance band warping in alloys.
         '''
-        return 1. / (self.luttinger1(**kwargs) - 2 * self.luttinger2(**kwargs))
+        return self.luttinger3(**kwargs) - self.luttinger2(**kwargs)
     
     @method_parameter(dependencies=['luttinger1', 'Eg_Gamma', 'Delta_SO', 'Ep'],
                       units='m_e', references=[vurgaftman_2001])
