@@ -151,11 +151,13 @@ class MethodParameter(Parameter):
         if self.alloy is None:
             return self._references
         else:
+            params = [self]
             refs = []
             refs.extend(self._references)
             for d in self.dependencies:
                 p = self.alloy.get_parameter(d, default=None)
-                if p is not None and p is not self:
+                if p is not None and p not in params:
+                    params.append(p)
                     for ref in p.get_references():
                         if ref not in refs:
                             refs.append(ref)
@@ -163,7 +165,8 @@ class MethodParameter(Parameter):
                 for alloy in getattr(self.alloy, 'binaries'):
                     for d in self.dependencies:
                         p = alloy.get_parameter(d, default=None)
-                        if p is not None and p is not self:
+                        if p is not None and p not in params:
+                            params.append(p)
                             for ref in p.get_references():
                                 if ref not in refs:
                                     refs.append(ref)
@@ -171,7 +174,8 @@ class MethodParameter(Parameter):
                 for alloy in getattr(self.alloy, 'ternaries'):
                     for d in self.dependencies:
                         p = alloy.get_parameter(d, default=None)
-                        if p is not None and p is not self:
+                        params.append(p)
+                        if p is not None and p not in params:
                             for ref in p.get_references():
                                 if ref not in refs:
                                     refs.append(ref)
