@@ -167,11 +167,11 @@ class IIIVZincBlendeAlloy(IIIVAlloy):
                       units='m_e', references=[vurgaftman_2001])
     def meff_SO(self, **kwargs):
         '''
-        Returns the electron effective mass in the Gamma-valley
+        Returns the split-off hole effective mass
         calculated from Eg_Gamma(T), Delta_SO, Ep and F.
         
-        Interpolation of Eg_Gamma(T), Delta_SO, Ep and F, and
-        then calculation of meff_e_Gamma is recommended for alloys.
+        Interpolation of Eg_Gamma(T), Delta_SO, Ep and luttinger1, and
+        then calculation of meff_SO is recommended for alloys.
         '''
         Eg = self.Eg_Gamma(**kwargs)
         Delta_SO = self.Delta_SO(**kwargs)
@@ -198,14 +198,16 @@ class IIIVZincBlendeAlloy(IIIVAlloy):
     @method_parameter(dependencies=['meff_e_L_long', 'meff_e_L_trans'],
                       units='m_e', references=[vurgaftman_2001])
     def meff_e_L_DOS(self, **kwargs):
-        return (self.meff_e_L_trans(**kwargs)**2 *
-                self.meff_e_L_long(**kwargs)**2)**(1./3.)
+        t = self.meff_e_L_trans(**kwargs)
+        l = self.meff_e_L_long(**kwargs)
+        return (t * t * l)**(1./3.)
     
     @method_parameter(dependencies=['meff_e_X_long', 'meff_e_X_trans'],
                       units='m_e', references=[vurgaftman_2001])
     def meff_e_X_DOS(self, **kwargs):
-        return (self.meff_e_X_trans(**kwargs)**2 *
-                self.meff_e_X_long(**kwargs)**2)**(1./3.)
+        t = self.meff_e_X_trans(**kwargs)
+        l = self.meff_e_X_long(**kwargs)
+        return (t * t * l)**(1./3.)
     
     @method_parameter(dependencies=['luttinger1', 'luttinger2'], units='m_e')
     def meff_hh_100(self, **kwargs):
