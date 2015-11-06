@@ -115,7 +115,7 @@ files from `openbandparams` into `openbandparams-gh-pages/0.9`:
 Now, if 0.9 didn't exist yet, we need to add it to the front page index.
 Open `openbandparams-gh-pages/index.html` and find the following line:
 
-    <li class="toctree-l1"><a class="reference internal" href="0.7">0.7</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="0.8">0.8</a></li>
 
 Copy and paste this line just above it:
 
@@ -127,6 +127,7 @@ Now, commit the changes and push them to github:
     git add .
     git commit -m "added v0.9 documentation"
     git push origin gh-pages
+    cd ../openbandparams
 
 Next, merge the changes from the release branch into the master branch, and
 tag the release:
