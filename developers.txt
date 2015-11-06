@@ -58,13 +58,13 @@ the root of the git repository run these commands (substitute the
 appropriate version number): 
 
     git checkout develop
-    echo "__version__ = '0.9'" > src/openbandparams/version.py
-    git commit -am "Bump version to 0.9"
+    echo "__version__ = '0.10'" > src/openbandparams/version.py
+    git commit -am "Bump version to 0.10"
     
 Next, create a release branch by branching off of the develop branch (again,
 substituting the appropriate version number):
 
-    git checkout -b release-0.9 develop
+    git checkout -b release-0.10 develop
 
 Now is a good time to run the unit tests and examples, to make sure you haven't
 missed any bugs:
@@ -98,34 +98,34 @@ might look something like this:
     |   |       `-- html
     |   `-- src
     `-- openbandparams-gh-pages
-        |-- 0.6
+        |-- 0.8
         |   |-- [html files]
         |   `-- index.html
-        |-- 0.7
+        |-- 0.9
         |   |-- [html files]
         |   `-- index.html
         `-- index.html
 
 Starting from the `code` directory, execute these commands to copy the html
-files from `openbandparams` into `openbandparams-gh-pages/0.9`:
+files from `openbandparams` into `openbandparams-gh-pages/0.10`:
 
-    rm -rf openbandparams-gh-pages/0.9
-    cp -R openbandparams/doc/_build/html openbandparams-gh-pages/0.9
+    rm -rf openbandparams-gh-pages/0.10
+    cp -R openbandparams/doc/_build/html openbandparams-gh-pages/0.10
 
-Now, if 0.9 didn't exist yet, we need to add it to the front page index.
+Now, if 0.10 didn't exist yet, we need to add it to the front page index.
 Open `openbandparams-gh-pages/index.html` and find the following line:
 
-    <li class="toctree-l1"><a class="reference internal" href="0.8">0.8</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="0.9">0.9</a></li>
 
 Copy and paste this line just above it:
 
-    <li class="toctree-l1"><a class="reference internal" href="0.9">0.9</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="0.10">0.10</a></li>
 
 Now, commit the changes and push them to github:
 
     cd openbandparams-gh-pages
     git add .
-    git commit -m "added v0.9 documentation"
+    git commit -m "add v0.10 documentation"
     git push origin gh-pages
     cd ../openbandparams
 
@@ -133,8 +133,8 @@ Next, merge the changes from the release branch into the master branch, and
 tag the release:
 
     git checkout master
-    git merge --no-ff release-0.9
-    git tag -a v0.9
+    git merge --no-ff release-0.10
+    git tag -a v0.10
     git push origin
 
 Then run the following commands from the root of the git repository to build
@@ -151,16 +151,16 @@ If any changes were made during the release branche, merge the release branch
 into the develop branch, and then delete the release branch:
 
     git checkout develop
-    git merge --no-ff release-0.9
-    git branch -d release-0.9
+    git merge --no-ff release-0.10
+    git branch -d release-0.10
 
-You might want to make a doc-0.9 branch, in case you find errors in the
+You might want to make a doc-0.10 branch, in case you find errors in the
 documentation you want to correct.
 
-    git branch doc-0.9 develop
+    git branch doc-0.10 develop
 
 You can also go ahead and bump the version number now, so that future builds
 of the documentation already have the correct version number:
 
-    echo "__version__ = '0.10'" > src/openbandparams/version.py
-    git commit -am "Bumbed version number to 0.10"
+    echo "__version__ = '0.11'" > src/openbandparams/version.py
+    git commit -am "Bump version to 0.11"
