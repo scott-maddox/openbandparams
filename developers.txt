@@ -127,6 +127,7 @@ Now, commit the changes and push them to github:
     git add .
     git commit -m "added v0.9 documentation"
     git push origin gh-pages
+    cd ../openbandparams
 
 Next, merge the changes from the release branch into the master branch, and
 tag the release:
