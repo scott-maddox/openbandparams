@@ -20,6 +20,8 @@
 
 from .parameter import Parameter, MethodParameter
 
+__all__ = ['Alloy']
+
 
 class Alloy(object):
 
@@ -30,7 +32,7 @@ class Alloy(object):
         self._aliases = {}
         if parameters is not None:
             for parameter in parameters:
-                self.add_parameter(parameter)
+                self.set_parameter(parameter)
 
     def __eq__(self, other):
         return (type(self) == type(other) and
@@ -45,8 +47,13 @@ class Alloy(object):
             return self._parameters[name]
         elif name in self._aliases:
             return self._parameters[self._aliases[name]]
-
-        item = super(Alloy, self).__getattribute__(name)
+        
+        try:
+            item = super(Alloy, self).__getattribute__(name)
+        except AttributeError as e:
+            msg = e.message.replace('object',
+                                    "object '{}'".format(self.name))
+            raise AttributeError(msg)
         if isinstance(item, MethodParameter):
             # make sure MethodParameters defined with the class
             # are bound to this Alloy

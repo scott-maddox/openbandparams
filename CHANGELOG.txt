@@ -1,3 +1,13 @@
+Changes in 0.9:
+
+- added `dielectric` and `dielectric_high_frequency` parameters
+- added `meff_e_L_DOS` and `meff_e_X_DOS` parameters
+- improved error messages
+- fixed `MethodParameter.get_references` endless loop
+- fixed `nonparabolicity` parameter (temperature dependence was wrong)
+- fixed `luttinger32` parameter
+- fixed lattice matching of type 3 quaternatries
+
 Changes in 0.8:
 
 - Near complete rewrite of internals

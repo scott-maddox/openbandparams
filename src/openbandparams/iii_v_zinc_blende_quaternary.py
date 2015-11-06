@@ -242,7 +242,12 @@ class IIIVZincBlendeQuaternary(IIIVZincBlendeMixedAlloy):
             # make sure the lattice constant is available
             if self._has_x(kwargs):
                 x = self._get_x(kwargs)
-                ymax = round(1. - x, 6)
+                if self._type in [1, 2]:
+                    ymax = round(1. - x, 6)
+                elif self._type == 3:
+                    ymax = 1.
+                else:
+                    raise RuntimeError()
                 z = None
                 a0 = self(x=x, y=0.).a(T=T)
                 a1 = self(x=x, y=ymax).a(T=T)
@@ -256,7 +261,12 @@ class IIIVZincBlendeQuaternary(IIIVZincBlendeMixedAlloy):
                            a=0, b=ymax)
             elif self._has_y(kwargs):
                 y = self._get_y(kwargs)
-                xmax = round(1. - y, 6)
+                if self._type in [1, 2]:
+                    xmax = round(1. - y, 6)
+                elif self._type == 3:
+                    xmax = 1.
+                else:
+                    raise RuntimeError()
                 z = None
                 a0 = self(x=0., y=y).a(T=T)
                 a1 = self(x=xmax, y=y).a(T=T)

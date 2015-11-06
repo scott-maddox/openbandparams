@@ -26,6 +26,14 @@ from . import parameter
 __all__ += parameter.__all__
 from .parameter import *
 
+from . import alloy
+__all__ += alloy.__all__
+from .alloy import *
+
+from . import iii_v_zinc_blende_alloy
+__all__ += iii_v_zinc_blende_alloy.__all__
+from .iii_v_zinc_blende_alloy import *
+
 from . import iii_v_zinc_blende_binary
 __all__ += iii_v_zinc_blende_binary.__all__
 from .iii_v_zinc_blende_binary import *
