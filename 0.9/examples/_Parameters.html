@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Parameters &mdash; openbandparams 0.9 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="openbandparams 0.9 documentation" href="../index.html" />
+    <link rel="up" title="Examples" href="../examples.html" />
+    <link rel="next" title="Strained Parameters" href="_Strained_Parameters.html" />
+    <link rel="prev" title="GaPSb on InP" href="_GaPSb_on_InP.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="_Strained_Parameters.html" title="Strained Parameters"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="_GaPSb_on_InP.html" title="GaPSb on InP"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">openbandparams 0.9 documentation</a> &raquo;</li>
+          <li><a href="../examples.html" accesskey="U">Examples</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="_GaPSb_on_InP.html"
+                        title="previous chapter">GaPSb on InP</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="_Strained_Parameters.html"
+                        title="next chapter">Strained Parameters</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/examples/_Parameters.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="parameters">
+<h1>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h1>
+<p>Source:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#</span>
+<span class="c">#   Copyright (c) 2013-2015, Scott J Maddox</span>
+<span class="c">#</span>
+<span class="c">#   This file is part of openbandparams.</span>
+<span class="c">#</span>
+<span class="c">#   openbandparams is free software: you can redistribute it and/or modify</span>
+<span class="c">#   it under the terms of the GNU Affero General Public License as published</span>
+<span class="c">#   by the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c">#   (at your option) any later version.</span>
+<span class="c">#</span>
+<span class="c">#   openbandparams is distributed in the hope that it will be useful,</span>
+<span class="c">#   but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c">#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c">#   GNU Affero General Public License for more details.</span>
+<span class="c">#</span>
+<span class="c">#   You should have received a copy of the GNU Affero General Public License</span>
+<span class="c">#   along with openbandparams.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="c">#</span>
+<span class="c">#############################################################################</span>
+<span class="c"># Make sure we import the local openbandparams version</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> <span class="s">&#39;../..&#39;</span><span class="p">)))</span>
+<span class="kn">from</span> <span class="nn">openbandparams</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">string</span>
+
+<span class="c"># Print all parameters of all III-V zinc blende alloys</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">binary</span> <span class="ow">in</span> <span class="n">iii_v_zinc_blende_binaries</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">binary</span><span class="o">.</span><span class="n">get_unique_parameters</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+            <span class="n">params</span><span class="p">[</span><span class="n">param</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">param</span>
+<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span><span class="n">p</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">items</span><span class="p">())]</span>
+<span class="n">descriptions</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">description</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span><span class="n">p</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">items</span><span class="p">())]</span>
+<span class="n">max_name_width</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">])</span>
+<span class="n">max_desc_width</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">desc</span><span class="p">)</span> <span class="k">for</span> <span class="n">desc</span> <span class="ow">in</span> <span class="n">descriptions</span><span class="p">])</span>
+
+<span class="k">print</span> <span class="s">&#39;=&#39;</span><span class="o">*</span><span class="n">max_name_width</span><span class="o">+</span><span class="s">&#39;   &#39;</span><span class="o">+</span><span class="s">&#39;=&#39;</span><span class="o">*</span><span class="n">max_desc_width</span>
+<span class="k">print</span> <span class="s">&#39;{}   {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="s">&#39;Parameter&#39;</span><span class="p">,</span> <span class="n">max_name_width</span><span class="p">),</span><span class="s">&#39;Description&#39;</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&#39;=&#39;</span><span class="o">*</span><span class="n">max_name_width</span><span class="o">+</span><span class="s">&#39;   &#39;</span><span class="o">+</span><span class="s">&#39;=&#39;</span><span class="o">*</span><span class="n">max_desc_width</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">desc</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">descriptions</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s">&#39;{}   {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">max_name_width</span><span class="p">),</span><span class="n">desc</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&#39;=&#39;</span><span class="o">*</span><span class="n">max_name_width</span><span class="o">+</span><span class="s">&#39;   &#39;</span><span class="o">+</span><span class="s">&#39;=&#39;</span><span class="o">*</span><span class="n">max_desc_width</span>
+</pre></div>
+</div>
+<p>Result:</p>
+<div class="highlight-python"><div class="highlight"><pre>=========================   ==================================================================================
+Parameter                   Description
+=========================   ==================================================================================
+CBO                         conduction band offset energy relative to InSb VBO
+CBO_Gamma                   Gamma-valley conduction band offset energy relative to InSb VBO
+CBO_L                       L-valley conduction band offset energy relative to InSb VBO
+CBO_X                       X-valley conduction band offset energy relative to InSb VBO
+Delta_SO                    split-off energy
+Eg                          bandgap energy
+Eg_Gamma                    Gamma-valley bandgap energy
+Eg_Gamma_0                  Gamma-valley bandgap energy at 0 K
+Eg_L                        L-valley bandgap energy
+Eg_L_0                      L-valley bandgap energy at 0 K
+Eg_X                        X-valley bandgap energy
+Eg_X_0                      X-valley bandgap energy at 0 K
+Ep                          Ep interband matrix element
+F                           F Kane remote-band parameter
+VBO                         valance band offset energy relative to InSb VBO
+a                           lattice parameter
+a_300K                      lattice parameter at 300 K
+a_c                         conduction band deformation potential
+a_v                         valance band deformation potential
+alpha_Gamma                 Gamma-valley Varshni alpha parameter
+alpha_L                     L-valley Varshni alpha parameter
+alpha_X                     X-valley Varshni alpha parameter
+b                           b shear deformation potential
+beta_Gamma                  Gamma-valley Varshni beta parameter
+beta_L                      L-valley Varshni beta parameter
+beta_X                      X-valley Varshni beta parameter
+c11                         c11 elastic constant
+c12                         c12 elastic constant
+c44                         c44 elastic constant
+d                           d shear deformation potential
+dielectric                  static relative dielectric permittivity (i.e. &lt;~ 1 THz)
+dielectric_high_frequency   high-frequency dielectric permittivity (i.e. &gt;~ 100 THz)
+electron_affinity           electron affinity energy
+luttinger1                  first Luttinger parameter
+luttinger2                  second Luttinger parameter
+luttinger3                  third Luttinger parameter
+luttinger32                 difference between third and second Luttinger parameters (luttinger3 - luttinger2)
+meff_SO                     split-off band effective mass
+meff_e_Gamma                electron effective mass in the Gamma-valley
+meff_e_Gamma_0              electron effective mass in the Gamma-valley at 0 K
+meff_e_L_DOS                electron effective mass density of states in the L-valley
+meff_e_L_long               electron effective mass in the longitudinal direction in the L-valley
+meff_e_L_trans              electron effective mass in the transverse direction in the L-valley
+meff_e_X_DOS                electron effective mass density of states in the X-valley
+meff_e_X_long               electron effective mass in the longitudinal direction in the X-valley
+meff_e_X_trans              electron effective mass in the transverse direction in the X-valley
+meff_hh_100                 heavy-hole effective mass in the &lt;100&gt; direction
+meff_hh_110                 heavy-hole effective mass in the &lt;110&gt; direction
+meff_hh_111                 heavy-hole effective mass in the &lt;111&gt; direction
+meff_lh_100                 light-hole effective mass in the &lt;100&gt; direction
+meff_lh_110                 light-hole effective mass in the &lt;110&gt; direction
+meff_lh_111                 light-hole effective mass in the &lt;111&gt; direction
+nonparabolicity             Kane band nonparabolicity parameter for the Gamma-valley
+thermal_expansion           lattice parameter thermal expansion coefficient
+=========================   ==================================================================================
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="_Strained_Parameters.html" title="Strained Parameters"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="_GaPSb_on_InP.html" title="GaPSb on InP"
+             >previous</a> |</li>
+        <li><a href="../index.html">openbandparams 0.9 documentation</a> &raquo;</li>
+          <li><a href="../examples.html" >Examples</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2015, Scott J Maddox.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

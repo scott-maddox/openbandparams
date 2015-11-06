@@ -1,0 +1,10 @@
+References
+==========
+
+Source:
+
+.. literalinclude:: ../../src/openbandparams/examples/References.py
+
+Result:
+
+.. literalinclude:: ../_build_examples/References.txt

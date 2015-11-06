@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>openbandparams.algorithms &mdash; openbandparams 0.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="openbandparams 0.9 documentation" href="../../index.html" />
+    <link rel="up" title="openbandparams" href="../openbandparams.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">openbandparams 0.9 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../openbandparams.html" accesskey="U">openbandparams</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for openbandparams.algorithms</h1><div class="highlight"><pre>
+<span class="c">#</span>
+<span class="c">#   Copyright (c) 2013-2014, Scott J Maddox</span>
+<span class="c">#</span>
+<span class="c">#   This file is part of openbandparams.</span>
+<span class="c">#</span>
+<span class="c">#   openbandparams is free software: you can redistribute it and/or modify</span>
+<span class="c">#   it under the terms of the GNU Affero General Public License as published</span>
+<span class="c">#   by the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c">#   (at your option) any later version.</span>
+<span class="c">#</span>
+<span class="c">#   openbandparams is distributed in the hope that it will be useful,</span>
+<span class="c">#   but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c">#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c">#   GNU Affero General Public License for more details.</span>
+<span class="c">#</span>
+<span class="c">#   You should have received a copy of the GNU Affero General Public License</span>
+<span class="c">#   along with openbandparams.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="c">#</span>
+<span class="c">#############################################################################</span>
+
+
+<div class="viewcode-block" id="sign"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.algorithms.sign">[docs]</a><span class="k">def</span> <span class="nf">sign</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns -1, 0, or 1 if `x` is negative, zero, or positive, respectively.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">cmp</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="bisect"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.algorithms.bisect">[docs]</a><span class="k">def</span> <span class="nf">bisect</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">xtol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds the root of `func` using the bisection method.</span>
+
+<span class="sd">    Requirements</span>
+<span class="sd">    ------------</span>
+<span class="sd">    - func must be continuous function that accepts a single number input</span>
+<span class="sd">      and returns a single number</span>
+<span class="sd">    - `func(a)` and `func(b)` must have opposite sign</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    func : function</span>
+<span class="sd">        the function that we want to find the root of</span>
+<span class="sd">    a : number</span>
+<span class="sd">        one of the bounds on the input</span>
+<span class="sd">    b : number</span>
+<span class="sd">        the other bound on the input</span>
+<span class="sd">    xtol : number, optional</span>
+<span class="sd">        the solution tolerance of the input value. The algorithm is</span>
+<span class="sd">        considered converged if `abs(b-a)2. &lt; xtol`</span>
+<span class="sd">    maxiter : number, optional</span>
+<span class="sd">        the maximum number of iterations allowed for convergence</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fa</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">fa</span> <span class="o">==</span> <span class="mf">0.</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">a</span>
+
+    <span class="n">fb</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">fb</span> <span class="o">==</span> <span class="mf">0.</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">b</span>
+
+    <span class="k">assert</span> <span class="n">sign</span><span class="p">(</span><span class="n">fa</span><span class="p">)</span> <span class="o">!=</span> <span class="n">sign</span><span class="p">(</span><span class="n">fb</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">maxiter</span><span class="p">):</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.</span>
+        <span class="n">fc</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fc</span> <span class="o">==</span> <span class="mf">0.</span> <span class="ow">or</span> <span class="nb">abs</span><span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.</span> <span class="o">&lt;</span> <span class="n">xtol</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">c</span>
+        <span class="k">if</span> <span class="n">sign</span><span class="p">(</span><span class="n">fc</span><span class="p">)</span> <span class="o">==</span> <span class="n">sign</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">c</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">c</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;Failed to converge after </span><span class="si">%d</span><span class="s"> iterations.&#39;</span> <span class="o">%</span> <span class="n">maxiter</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">openbandparams 0.9 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../openbandparams.html" >openbandparams</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2015, Scott J Maddox.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+Strained Ternaries
+==================
+
+Source:
+
+.. literalinclude:: ../../src/openbandparams/examples/Strained_Ternaries.py
+
+Result:
+
+.. literalinclude:: ../_build_examples/Strained_Ternaries.txt

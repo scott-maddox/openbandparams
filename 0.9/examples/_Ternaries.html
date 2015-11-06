@@ -1,0 +1,246 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Ternaries &mdash; openbandparams 0.9 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="openbandparams 0.9 documentation" href="../index.html" />
+    <link rel="up" title="Examples" href="../examples.html" />
+    <link rel="next" title="Ternaries of Ternaries" href="_Ternaries_of_Ternaries.html" />
+    <link rel="prev" title="Binaries" href="_Binaries.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="_Ternaries_of_Ternaries.html" title="Ternaries of Ternaries"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="_Binaries.html" title="Binaries"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">openbandparams 0.9 documentation</a> &raquo;</li>
+          <li><a href="../examples.html" accesskey="U">Examples</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="_Binaries.html"
+                        title="previous chapter">Binaries</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="_Ternaries_of_Ternaries.html"
+                        title="next chapter">Ternaries of Ternaries</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/examples/_Ternaries.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ternaries">
+<h1>Ternaries<a class="headerlink" href="#ternaries" title="Permalink to this headline">¶</a></h1>
+<p>Source:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#</span>
+<span class="c">#   Copyright (c) 2013-2014, Scott J Maddox</span>
+<span class="c">#</span>
+<span class="c">#   This file is part of openbandparams.</span>
+<span class="c">#</span>
+<span class="c">#   openbandparams is free software: you can redistribute it and/or modify</span>
+<span class="c">#   it under the terms of the GNU Affero General Public License as published</span>
+<span class="c">#   by the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c">#   (at your option) any later version.</span>
+<span class="c">#</span>
+<span class="c">#   openbandparams is distributed in the hope that it will be useful,</span>
+<span class="c">#   but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c">#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c">#   GNU Affero General Public License for more details.</span>
+<span class="c">#</span>
+<span class="c">#   You should have received a copy of the GNU Affero General Public License</span>
+<span class="c">#   along with openbandparams.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="c">#</span>
+<span class="c">#############################################################################</span>
+<span class="c"># Make sure we import the local openbandparams version</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> <span class="s">&#39;../..&#39;</span><span class="p">)))</span>
+<span class="kn">from</span> <span class="nn">openbandparams</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="k">print</span> <span class="s">&#39;All three of these are identical:&#39;</span>
+<span class="k">print</span> <span class="s">&#39;&gt;&gt;&gt; AlGaAs(x=0.3).Eg()</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">AlGaAs</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span><span class="o">.</span><span class="n">Eg</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&#39;&gt;&gt;&gt; AlGaAs(Al=0.3).Eg()</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">AlGaAs</span><span class="p">(</span><span class="n">Al</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span><span class="o">.</span><span class="n">Eg</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&#39;&gt;&gt;&gt; AlGaAs(Ga=0.7).Eg()</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">AlGaAs</span><span class="p">(</span><span class="n">Ga</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span><span class="o">.</span><span class="n">Eg</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&#39;&#39;</span>
+
+<span class="k">print</span> <span class="s">&#39;These two are identical:&#39;</span>
+<span class="k">print</span> <span class="s">&#39;&gt;&gt;&gt; AlGaAs(x=0.3).Eg_Gamma()</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">AlGaAs</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span><span class="o">.</span><span class="n">Eg_Gamma</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&#39;&#39;</span>
+
+<span class="k">print</span> <span class="s">&#39;Alternate forms:&#39;</span>
+<span class="k">print</span> <span class="s">&#39;&gt;&gt;&gt; AlGaAs(x=0.3).Eg()</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">AlGaAs</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span><span class="o">.</span><span class="n">Eg</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&#39;&gt;&gt;&gt; AlGaAs(x=0.3).Eg(T=300)</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">AlGaAs</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span><span class="o">.</span><span class="n">Eg</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&#39;&#39;</span>
+
+<span class="k">print</span> <span class="p">(</span><span class="s">&#39;This is the preferred usage (more efficient),&#39;</span>
+       <span class="s">&#39;if you want multiple parameters from one alloy composition:&#39;</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&#39;&gt;&gt;&gt; myAlGaAs = AlGaAs(x=0.3)</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span>
+<span class="n">myAlGaAs</span> <span class="o">=</span> <span class="n">AlGaAs</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&#39;&gt;&gt;&gt; myAlGaAs.Eg()</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">myAlGaAs</span><span class="o">.</span><span class="n">Eg</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&#39;&gt;&gt;&gt; myAlGaAs.Eg(T=300)</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">myAlGaAs</span><span class="o">.</span><span class="n">Eg</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&#39;&#39;</span>
+
+<span class="k">print</span> <span class="s">&#39;Lattice matching to a substrate (at the growth temperature):&#39;</span>
+<span class="k">print</span> <span class="s">&#39;&gt;&gt;&gt; a_InP = InP.a(T=800)</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span>
+<span class="n">a_InP</span> <span class="o">=</span> <span class="n">InP</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&#39;&gt;&gt;&gt; GaInAs_on_InP = GaInAs(a=a_InP, T=800)</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span>
+<span class="n">GaInAs_on_InP</span> <span class="o">=</span> <span class="n">GaInAs</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">a_InP</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&#39;&gt;&gt;&gt; InP.a(T=800)</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">InP</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&#39;&gt;&gt;&gt; GaInAs_on_InP.a()</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">GaInAs_on_InP</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&#39;&gt;&gt;&gt; GaInAs_on_InP.element_fraction(&quot;Ga&quot;)</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> \
+       <span class="n">GaInAs_on_InP</span><span class="o">.</span><span class="n">element_fraction</span><span class="p">(</span><span class="s">&quot;Ga&quot;</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&#39;&gt;&gt;&gt; GaInAs_on_InP.Eg()</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">GaInAs_on_InP</span><span class="o">.</span><span class="n">Eg</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&#39;&#39;</span>
+
+<span class="k">print</span> <span class="s">&#39;Other examples:&#39;</span>
+<span class="k">print</span> <span class="s">&#39;&gt;&gt;&gt; AlGaAs.meff_hh_100(Al=0.3)</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">AlGaAs</span><span class="p">(</span><span class="n">Al</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span><span class="o">.</span><span class="n">meff_hh_100</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&#39;&gt;&gt;&gt; AlGaAs.meff_hh_110(Al=0.3)</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">AlGaAs</span><span class="p">(</span><span class="n">Al</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span><span class="o">.</span><span class="n">meff_hh_110</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&#39;&gt;&gt;&gt; AlGaAs.meff_hh_111(Al=0.3)</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">AlGaAs</span><span class="p">(</span><span class="n">Al</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span><span class="o">.</span><span class="n">meff_hh_111</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&#39;&gt;&gt;&gt; AlGaAs.meff_lh_100(Al=0.3)</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">AlGaAs</span><span class="p">(</span><span class="n">Al</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span><span class="o">.</span><span class="n">meff_lh_100</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&#39;&gt;&gt;&gt; AlGaAs.meff_lh_110(Al=0.3)</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">AlGaAs</span><span class="p">(</span><span class="n">Al</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span><span class="o">.</span><span class="n">meff_lh_110</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&#39;&gt;&gt;&gt; AlGaAs.meff_lh_111(Al=0.3)</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">AlGaAs</span><span class="p">(</span><span class="n">Al</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span><span class="o">.</span><span class="n">meff_lh_111</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&#39;&#39;</span>
+</pre></div>
+</div>
+<p>Result:</p>
+<div class="highlight-python"><div class="highlight"><pre>All three of these are identical:
+&gt;&gt;&gt; AlGaAs(x=0.3).Eg()
+1.84078834337
+&gt;&gt;&gt; AlGaAs(Al=0.3).Eg()
+1.84078834337
+&gt;&gt;&gt; AlGaAs(Ga=0.7).Eg()
+1.84078834337
+
+These two are identical:
+&gt;&gt;&gt; AlGaAs(x=0.3).Eg_Gamma()
+1.84078834337
+
+Alternate forms:
+&gt;&gt;&gt; AlGaAs(x=0.3).Eg()
+1.84078834337
+&gt;&gt;&gt; AlGaAs(x=0.3).Eg(T=300)
+1.84078834337
+
+This is the preferred usage (more efficient),if you want multiple parameters from one alloy composition:
+&gt;&gt;&gt; myAlGaAs = AlGaAs(x=0.3)
+&gt;&gt;&gt; myAlGaAs.Eg()
+1.84078834337
+&gt;&gt;&gt; myAlGaAs.Eg(T=300)
+1.84078834337
+
+Lattice matching to a substrate (at the growth temperature):
+&gt;&gt;&gt; a_InP = InP.a(T=800)
+&gt;&gt;&gt; GaInAs_on_InP = GaInAs(a=a_InP, T=800)
+&gt;&gt;&gt; InP.a(T=800)
+5.88365
+&gt;&gt;&gt; GaInAs_on_InP.a()
+5.88365
+&gt;&gt;&gt; GaInAs_on_InP.element_fraction(&quot;Ga&quot;)
+0.471641417303
+&gt;&gt;&gt; GaInAs_on_InP.Eg()
+0.73896514168
+
+Other examples:
+&gt;&gt;&gt; AlGaAs.meff_hh_100(Al=0.3)
+0.386264678718
+&gt;&gt;&gt; AlGaAs.meff_hh_110(Al=0.3)
+0.711542019716
+&gt;&gt;&gt; AlGaAs.meff_hh_111(Al=0.3)
+0.989219116681
+&gt;&gt;&gt; AlGaAs.meff_lh_100(Al=0.3)
+0.118618618619
+&gt;&gt;&gt; AlGaAs.meff_lh_110(Al=0.3)
+0.104016279206
+&gt;&gt;&gt; AlGaAs.meff_lh_111(Al=0.3)
+0.099916272693
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="_Ternaries_of_Ternaries.html" title="Ternaries of Ternaries"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="_Binaries.html" title="Binaries"
+             >previous</a> |</li>
+        <li><a href="../index.html">openbandparams 0.9 documentation</a> &raquo;</li>
+          <li><a href="../examples.html" >Examples</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2015, Scott J Maddox.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+Parameters
+==========
+
+Source:
+
+.. literalinclude:: ../../src/openbandparams/examples/Parameters.py
+
+Result:
+
+.. literalinclude:: ../_build_examples/Parameters.txt

@@ -1,0 +1,624 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>openbandparams.iii_v_zinc_blende_quaternary &mdash; openbandparams 0.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="openbandparams 0.9 documentation" href="../../index.html" />
+    <link rel="up" title="openbandparams" href="../openbandparams.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">openbandparams 0.9 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../openbandparams.html" accesskey="U">openbandparams</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for openbandparams.iii_v_zinc_blende_quaternary</h1><div class="highlight"><pre>
+<span class="c">#</span>
+<span class="c">#   Copyright (c) 2013-2015, Scott J Maddox</span>
+<span class="c">#</span>
+<span class="c">#   This file is part of openbandparams.</span>
+<span class="c">#</span>
+<span class="c">#   openbandparams is free software: you can redistribute it and/or modify</span>
+<span class="c">#   it under the terms of the GNU Affero General Public License as published</span>
+<span class="c">#   by the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c">#   (at your option) any later version.</span>
+<span class="c">#</span>
+<span class="c">#   openbandparams is distributed in the hope that it will be useful,</span>
+<span class="c">#   but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c">#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c">#   GNU Affero General Public License for more details.</span>
+<span class="c">#</span>
+<span class="c">#   You should have received a copy of the GNU Affero General Public License</span>
+<span class="c">#   along with openbandparams.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="c">#</span>
+<span class="c">#############################################################################</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;IIIVZincBlendeQuaternary&#39;</span><span class="p">]</span>
+
+<span class="kn">from</span> <span class="nn">.iii_v_zinc_blende_mixed_alloy</span> <span class="kn">import</span> <span class="n">IIIVZincBlendeMixedAlloy</span>
+<span class="kn">from</span> <span class="nn">.algorithms</span> <span class="kn">import</span> <span class="n">bisect</span>
+
+<div class="viewcode-block" id="IIIVZincBlendeQuaternary"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_quaternary.IIIVZincBlendeQuaternary">[docs]</a><span class="k">class</span> <span class="nc">IIIVZincBlendeQuaternary</span><span class="p">(</span><span class="n">IIIVZincBlendeMixedAlloy</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    The base class for all III-V zinc blende quaternary alloys.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">elements</span><span class="p">,</span> <span class="n">ternaries</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                 <span class="n">x</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ternaries</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span>
+            <span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">ternaries</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="c"># A</span>
+            <span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">ternaries</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="c"># A</span>
+            <span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">ternaries</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">and</span> <span class="c"># B</span>
+            <span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">ternaries</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">and</span> <span class="c"># C</span>
+            <span class="n">ternaries</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">ternaries</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>   <span class="c"># D</span>
+            <span class="c"># Type 1: AB_{x}C_{y}D_{1-x-y}</span>
+            <span class="c"># binaries = (AB, AC, AD)</span>
+            <span class="c"># ternaries = (ABC, ABD ,ACD)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_element_w</span> <span class="o">=</span> <span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_element_x</span> <span class="o">=</span> <span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_element_y</span> <span class="o">=</span> <span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_element_z</span> <span class="o">=</span> <span class="n">ternaries</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">binaries</span> <span class="o">=</span> <span class="p">(</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">binaries</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                             <span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">binaries</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                             <span class="n">ternaries</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">binaries</span><span class="p">[</span><span class="mi">1</span><span class="p">],)</span>
+            <span class="n">calc_elements</span> <span class="o">=</span> <span class="p">(</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                             <span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                             <span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                             <span class="n">ternaries</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ternaries</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span>
+              <span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">ternaries</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="c"># A</span>
+              <span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">ternaries</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="c"># B</span>
+              <span class="n">ternaries</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">ternaries</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">and</span> <span class="c"># C</span>
+              <span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">ternaries</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">and</span> <span class="c"># D</span>
+              <span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">ternaries</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>   <span class="c"># D</span>
+            <span class="c"># Type 2: A_{x}B_{y}C_{1-x-y}D</span>
+            <span class="c"># binaries = (AD, BD, CD)</span>
+            <span class="c"># ternaries = (ABD, ACD, BCD)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">=</span> <span class="mi">2</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_element_x</span> <span class="o">=</span> <span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_element_y</span> <span class="o">=</span> <span class="n">ternaries</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_element_z</span> <span class="o">=</span> <span class="n">ternaries</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_element_w</span> <span class="o">=</span> <span class="n">ternaries</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">binaries</span> <span class="o">=</span> <span class="p">(</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">binaries</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                             <span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">binaries</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                             <span class="n">ternaries</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">binaries</span><span class="p">[</span><span class="mi">1</span><span class="p">],)</span>
+            <span class="n">calc_elements</span> <span class="o">=</span> <span class="p">(</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                             <span class="n">ternaries</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                             <span class="n">ternaries</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                             <span class="n">ternaries</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ternaries</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span> <span class="ow">and</span>
+              <span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">ternaries</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="c"># A</span>
+              <span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">ternaries</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="c"># A</span>
+              <span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">ternaries</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">and</span> <span class="c"># B</span>
+              <span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">ternaries</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="c"># B</span>
+              <span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">ternaries</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">and</span> <span class="c"># C</span>
+              <span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">ternaries</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">and</span> <span class="c"># C</span>
+              <span class="n">ternaries</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">ternaries</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">and</span> <span class="c"># D</span>
+              <span class="n">ternaries</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">ternaries</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>   <span class="c"># D</span>
+            <span class="c"># Type 3: A_{x}B_{1-x}C_{y}D_{1-y}</span>
+            <span class="c"># binaries = (AC, AD, BC, BD)</span>
+            <span class="c"># ternaries = (ABC, ABD, ACD, BCD)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">=</span> <span class="mi">3</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_element_x</span> <span class="o">=</span> <span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_element_1mx</span> <span class="o">=</span> <span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_element_y</span> <span class="o">=</span> <span class="n">ternaries</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_element_1my</span> <span class="o">=</span> <span class="n">ternaries</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">binaries</span> <span class="o">=</span> <span class="p">(</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">binaries</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                             <span class="n">ternaries</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">binaries</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                             <span class="n">ternaries</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">binaries</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                             <span class="n">ternaries</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">binaries</span><span class="p">[</span><span class="mi">1</span><span class="p">],)</span>
+            <span class="n">calc_elements</span> <span class="o">=</span> <span class="p">(</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                             <span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                             <span class="n">ternaries</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                             <span class="n">ternaries</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="n">elements</span> <span class="o">==</span> <span class="n">calc_elements</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">IIIVZincBlendeQuaternary</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">elements</span><span class="p">,</span>
+                                                    <span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ternaries</span> <span class="o">=</span> <span class="n">ternaries</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">y</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">z</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_xyz</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">==</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">and</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">name</span> <span class="ow">and</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">elements</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">elements</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ternaries</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">ternaries</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_parameters</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_xyz</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_parse_xyz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="c"># Type 1: AB_{x}C_{y}D_{1-x-y}</span>
+            <span class="c"># binaries = (AB, AC, AD)</span>
+            <span class="c"># ternaries = (ABC, ABD ,ACD)</span>
+            <span class="c"># Type 2: A_{x}B_{y}C_{1-x-y}D</span>
+            <span class="c"># binaries = (AD, BD, CD)</span>
+            <span class="c"># ternaries = (ABD, ACD, BCD)</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">y</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">z</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+                <span class="n">z</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">y</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">z</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+                <span class="n">z</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">z</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">x</span> <span class="o">-</span> <span class="n">z</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">x</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">y</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">z</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+                <span class="n">z</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">z</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">y</span> <span class="o">-</span> <span class="n">z</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="c"># Type 3: A_{x}B_{1-x}C_{y}D_{1-y}</span>
+            <span class="c"># binaries = (AC, AD, BC, BD)</span>
+            <span class="c"># ternaries = (ABC, ABD, ACD, BCD)</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">y</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">z</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+                <span class="n">z</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">()</span>
+        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="p">(</span><span class="mf">0.</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mf">1.</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="p">(</span><span class="mf">0.</span> <span class="o">&lt;=</span> <span class="n">y</span> <span class="o">&lt;=</span> <span class="mf">1.</span><span class="p">)</span> <span class="ow">or</span>
+            <span class="n">z</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="mf">0.</span> <span class="o">&lt;=</span> <span class="n">z</span> <span class="o">&lt;=</span> <span class="mf">1.</span><span class="p">)</span>        <span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;The alloy fractions must be between 0 and 1&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span>
+    
+    <span class="k">def</span> <span class="nf">_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="n">instance</span> <span class="o">=</span> <span class="n">IIIVZincBlendeQuaternary</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">,</span>
+                                            <span class="bp">self</span><span class="o">.</span><span class="n">ternaries</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="n">z</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">parameter</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">instance</span><span class="o">.</span><span class="n">set_parameter</span><span class="p">(</span><span class="n">parameter</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">instance</span>
+
+    <span class="k">def</span> <span class="nf">_has_x</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Returns True if x is explicitly defined in kwargs&#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="p">((</span><span class="s">&#39;x&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_element_x</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">)</span> <span class="ow">or</span>
+                <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_1mx</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_get_x</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns x if it is explicitly defined in kwargs.</span>
+<span class="sd">        Otherwise, raises TypeError.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="s">&#39;x&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;x&#39;</span><span class="p">]),</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_x</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_element_x</span><span class="p">]),</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_1mx</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_element_1mx</span><span class="p">]),</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_has_y</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Returns True if y is explicitly defined in kwargs&#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="p">((</span><span class="s">&#39;y&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_element_y</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">)</span> <span class="ow">or</span>
+                <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_1my</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_get_y</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns y if it is explicitly defined in kwargs.</span>
+<span class="sd">        Otherwise, raises TypeError.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="s">&#39;y&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;y&#39;</span><span class="p">]),</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_y</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_element_y</span><span class="p">]),</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_1my</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_element_1my</span><span class="p">]),</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_has_z</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns True if type is 1 or 2 and z is explicitly defined in kwargs.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">==</span><span class="mi">2</span><span class="p">)</span> <span class="ow">and</span>
+                <span class="p">((</span><span class="s">&#39;z&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_element_z</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">)))</span>
+
+    <span class="k">def</span> <span class="nf">_get_z</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns z if type is 1 or 2 and z is explicitly defined in kwargs.</span>
+<span class="sd">        Otherwise, raises TypeError.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s">&#39;z&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;z&#39;</span><span class="p">]),</span> <span class="mi">6</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_z</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_element_z</span><span class="p">]),</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Used to specify the alloy composition.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_x</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_y</span><span class="p">(</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_x</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_y</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">z</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_x</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_z</span><span class="p">(</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_x</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_z</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_y</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_z</span><span class="p">(</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_y</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_z</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="s">&#39;a&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_has_x</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span> <span class="ow">or</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">_has_y</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span> <span class="ow">or</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">_has_z</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>   <span class="p">):</span>
+            <span class="c"># lattice match to the given lattice constant</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">]</span>
+            <span class="n">T</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;T&#39;</span><span class="p">,</span> <span class="mf">300.</span><span class="p">)</span>
+            <span class="c"># make sure the lattice constant is available</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_x</span><span class="p">(</span><span class="n">kwargs</span><span class="p">):</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_x</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]:</span>
+                    <span class="n">ymax</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">x</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                    <span class="n">ymax</span> <span class="o">=</span> <span class="mf">1.</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">()</span>
+                <span class="n">z</span> <span class="o">=</span> <span class="bp">None</span>
+                <span class="n">a0</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+                <span class="n">a1</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">ymax</span><span class="p">)</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+                <span class="n">amin</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">a0</span><span class="p">,</span> <span class="n">a1</span><span class="p">)</span>
+                <span class="n">amax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">a0</span><span class="p">,</span> <span class="n">a1</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">amin</span> <span class="o">&lt;=</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="n">amax</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;a of {:g} out of range [{:g}, {:g}]&#39;</span>
+                                     <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">amin</span><span class="p">,</span> <span class="n">amax</span><span class="p">))</span>
+                <span class="c"># find the correct composition, x</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="n">bisect</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="k">lambda</span> <span class="n">y</span><span class="p">:</span> <span class="bp">self</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="n">a</span><span class="p">,</span>
+                           <span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">ymax</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_y</span><span class="p">(</span><span class="n">kwargs</span><span class="p">):</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_y</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]:</span>
+                    <span class="n">xmax</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">y</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                    <span class="n">xmax</span> <span class="o">=</span> <span class="mf">1.</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">()</span>
+                <span class="n">z</span> <span class="o">=</span> <span class="bp">None</span>
+                <span class="n">a0</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+                <span class="n">a1</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">xmax</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+                <span class="n">amin</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">a0</span><span class="p">,</span> <span class="n">a1</span><span class="p">)</span>
+                <span class="n">amax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">a0</span><span class="p">,</span> <span class="n">a1</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">amin</span> <span class="o">&lt;=</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="n">amax</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;a of {:g} out of range [{:g}, {:g}]&#39;</span>
+                                     <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">amin</span><span class="p">,</span> <span class="n">amax</span><span class="p">))</span>
+                <span class="c"># find the correct composition, x</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">bisect</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="n">a</span><span class="p">,</span>
+                           <span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">xmax</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_z</span><span class="p">(</span><span class="n">kwargs</span><span class="p">):</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="bp">None</span>
+                <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_z</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="n">xmax</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">z</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+                <span class="n">a0</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="n">z</span><span class="p">)</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+                <span class="n">a1</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">xmax</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="n">z</span><span class="p">)</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+                <span class="n">amin</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">a0</span><span class="p">,</span> <span class="n">a1</span><span class="p">)</span>
+                <span class="n">amax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">a0</span><span class="p">,</span> <span class="n">a1</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">amin</span> <span class="o">&lt;=</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="n">amax</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;a of {:g} out of range [{:g}, {:g}]&#39;</span>
+                                     <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">amin</span><span class="p">,</span> <span class="n">amax</span><span class="p">))</span>
+                <span class="c"># find the correct composition, x</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">bisect</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="n">z</span><span class="p">)</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="n">a</span><span class="p">,</span>
+                           <span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">xmax</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s">&quot;Missing required key word argument.</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_usage</span><span class="p">())</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_instance</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="n">z</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_usage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="s">&quot;The supported kwarg combinations are as follows:&quot;</span>
+                    <span class="s">&quot;</span><span class="se">\n</span><span class="s">    - (&#39;x&#39; or &#39;{x}&#39;) and (&#39;y&#39; or &#39;{y}&#39;)&quot;</span>
+                    <span class="s">&quot;</span><span class="se">\n</span><span class="s">    - (&#39;x&#39; or &#39;{x}&#39;) and (&#39;z&#39; or &#39;{z}&#39;)&quot;</span>
+                    <span class="s">&quot;</span><span class="se">\n</span><span class="s">    - (&#39;y&#39; or &#39;{y}&#39;) and (&#39;z&#39; or &#39;{z}&#39;)&quot;</span>
+                    <span class="s">&quot;</span><span class="se">\n</span><span class="s">    - &#39;a&#39; [and &#39;T&#39;] and (&#39;x&#39; or &#39;{x}&#39;)&quot;</span>
+                    <span class="s">&quot;</span><span class="se">\n</span><span class="s">    - &#39;a&#39; [and &#39;T&#39;] and (&#39;y&#39; or &#39;{y}&#39;)&quot;</span>
+                    <span class="s">&quot;</span><span class="se">\n</span><span class="s">    - &#39;a&#39; [and &#39;T&#39;] and (&#39;z&#39; or &#39;{z}&#39;)&quot;</span>
+                    <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_element_x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_element_y</span><span class="p">,</span>
+                              <span class="n">z</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_element_z</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="s">&quot;The supported kwargs combinations are as follows:&quot;</span>
+                    <span class="s">&quot;</span><span class="se">\n</span><span class="s">    - (&#39;x&#39;, &#39;{x}&#39; or &#39;{_1mx}&#39;) and &quot;</span>
+                            <span class="s">&quot;(&#39;y&#39;, &#39;{y}&#39; or &#39;{_1my}&#39;)&quot;</span>
+                    <span class="s">&quot;</span><span class="se">\n</span><span class="s">    - &#39;a&#39; [and &#39;T&#39;] and (&#39;x&#39;, &#39;{x}&#39; or &#39;{_1mx}&#39;)&quot;</span>
+                    <span class="s">&quot;</span><span class="se">\n</span><span class="s">    - &#39;a&#39; [and &#39;T&#39;] and (&#39;y&#39;, &#39;{y}&#39; or &#39;{_1my}&#39;)&quot;</span>
+                    <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_element_x</span><span class="p">,</span> <span class="n">_1mx</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_element_1mx</span><span class="p">,</span>
+                              <span class="n">y</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_element_y</span><span class="p">,</span> <span class="n">_1my</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_element_1my</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">&#39;{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]:</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span>
+            <span class="k">return</span> <span class="s">&#39;{}({}={}, {}={})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                                             <span class="bp">self</span><span class="o">.</span><span class="n">_element_x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span>
+                                             <span class="bp">self</span><span class="o">.</span><span class="n">_element_y</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">()</span>
+     
+<div class="viewcode-block" id="IIIVZincBlendeQuaternary.latex"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_quaternary.IIIVZincBlendeQuaternary.latex">[docs]</a>    <span class="k">def</span> <span class="nf">latex</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;A&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+             <span class="s">&#39;B&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+             <span class="s">&#39;C&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+             <span class="s">&#39;D&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">3</span><span class="p">]}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">(</span><span class="s">&quot;{A}{B}_{{x}}{C}_{{y}}{D}_{{1-x-y}}&quot;</span>
+                       <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">e</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span>
+                <span class="k">return</span> <span class="p">(</span><span class="s">&quot;{A}{B}_{{{:g}}}{C}_{{{:g}}}{D}_{{{:g}}}&quot;</span>
+                        <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="o">**</span><span class="n">e</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">(</span><span class="s">&quot;{A}_{{x}}{B}_{{y}}{C}_{{1-x-y}}{D}&quot;</span>
+                        <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">e</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span>
+                <span class="k">return</span> <span class="p">(</span><span class="s">&quot;{A}_{{{:g}}}{B}_{{{:g}}}{C}_{{{:g}}}{D}&quot;</span>
+                        <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="o">**</span><span class="n">e</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">(</span><span class="s">&quot;{A}_{{x}}{B}_{{1-x}}{C}_{{y}}{D}_{{1-y}}&quot;</span>
+                        <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">e</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span>
+                <span class="n">_1mx</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">x</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+                <span class="n">_1my</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">y</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+                <span class="k">return</span> <span class="p">(</span><span class="s">&quot;{A}_{{{:g}}}{B}_{{{:g}}}{C}_{{{:g}}}{D}_{{{:g}}}&quot;</span>
+                        <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">_1mx</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">_1my</span><span class="p">,</span> <span class="o">**</span><span class="n">e</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">()</span>
+ </div>
+<div class="viewcode-block" id="IIIVZincBlendeQuaternary.element_fraction"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_quaternary.IIIVZincBlendeQuaternary.element_fraction">[docs]</a>    <span class="k">def</span> <span class="nf">element_fraction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;Alloy composition has not been specified.&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="c"># AB_{x}C_{y}D_{1-x-y}</span>
+            <span class="k">if</span> <span class="n">element</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_w</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">element</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_x</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x</span>
+            <span class="k">elif</span> <span class="n">element</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_y</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y</span>
+            <span class="k">elif</span> <span class="n">element</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_z</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_z</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">element</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_x</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x</span>
+            <span class="k">elif</span> <span class="n">element</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_1mx</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">element</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_y</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y</span>
+            <span class="k">elif</span> <span class="n">element</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_1my</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">()</span>
+     </div>
+    <span class="k">def</span> <span class="nf">_get_bowing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_parameter</span><span class="p">(</span><span class="n">name</span><span class="o">+</span><span class="s">&#39;_bowing&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">p</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span>
+        <span class="k">return</span> <span class="n">p</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="n">z</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+     
+    <span class="k">def</span> <span class="nf">_interpolate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;Alloy composition has not been specified.&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate1or2</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate3</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_interpolate1or2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span>
+
+        <span class="n">u</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">+</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">+</span> <span class="n">y</span> <span class="o">-</span> <span class="n">z</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">+</span> <span class="n">x</span> <span class="o">-</span> <span class="n">z</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.</span>
+
+        <span class="n">t12</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">](</span><span class="n">x</span><span class="o">=</span><span class="n">u</span><span class="p">)</span>
+        <span class="n">t13</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">1</span><span class="p">](</span><span class="n">x</span><span class="o">=</span><span class="n">w</span><span class="p">)</span>
+        <span class="n">t23</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">2</span><span class="p">](</span><span class="n">x</span><span class="o">=</span><span class="n">v</span><span class="p">)</span>
+        
+        <span class="n">p12</span> <span class="o">=</span> <span class="n">t12</span><span class="o">.</span><span class="n">get_parameter</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">p12</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&#39;&quot;{}&quot; is missing a required parameter: &quot;{}&quot;.&#39;</span>
+                                 <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t12</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+        <span class="n">p13</span> <span class="o">=</span> <span class="n">t13</span><span class="o">.</span><span class="n">get_parameter</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">p13</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&#39;&quot;{}&quot; is missing a required parameter: &quot;{}&quot;.&#39;</span>
+                                 <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t13</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+        <span class="n">p23</span> <span class="o">=</span> <span class="n">t23</span><span class="o">.</span><span class="n">get_parameter</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">p23</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&#39;&quot;{}&quot; is missing a required parameter: &quot;{}&quot;.&#39;</span>
+                                 <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t23</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+        
+        <span class="n">v12</span> <span class="o">=</span> <span class="n">p12</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">v13</span> <span class="o">=</span> <span class="n">p13</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">v23</span> <span class="o">=</span> <span class="n">p23</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="c"># Calculate the weights, for use in the next step</span>
+        <span class="n">weight12</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span>
+        <span class="n">weight13</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">z</span>
+        <span class="n">weight23</span> <span class="o">=</span> <span class="n">y</span> <span class="o">*</span> <span class="n">z</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="n">weight12</span> <span class="o">*</span> <span class="n">v12</span> <span class="o">+</span> <span class="n">weight13</span> <span class="o">*</span> <span class="n">v13</span> <span class="o">+</span> <span class="n">weight23</span> <span class="o">*</span> <span class="n">v23</span>
+        <span class="n">denom</span> <span class="o">=</span> <span class="n">weight12</span> <span class="o">+</span> <span class="n">weight13</span> <span class="o">+</span> <span class="n">weight23</span>
+        <span class="c"># handle these cases explicitly, so there&#39;s no divide by zero</span>
+        <span class="k">if</span> <span class="n">denom</span> <span class="o">==</span> <span class="mf">0.</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mf">0.</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">v23</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">v13</span>
+
+        <span class="c"># Check if there are bowing parameters provided</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_bowing</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">C</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="c"># a bowing parameter exists - use it</span>
+            <span class="c"># Note: this is an experimental mixing formula for</span>
+            <span class="c"># adding additional quaternary-induced bowing</span>
+            <span class="k">return</span> <span class="n">num</span> <span class="o">/</span> <span class="n">denom</span> <span class="o">-</span> <span class="n">C</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">y</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="n">z</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">z</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c"># otherwise, use a weighted average of the ternary bowing</span>
+            <span class="c"># parameters</span>
+            <span class="k">return</span> <span class="n">num</span> <span class="o">/</span> <span class="n">denom</span>
+
+    <span class="k">def</span> <span class="nf">_interpolate3</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span>
+
+        <span class="c"># B1 = Q(0, 0) = BD = InSb</span>
+        <span class="c"># B2 = Q(1, 0) = BC = InAs</span>
+        <span class="c"># B3 = Q(1, 1) = AC = AlAs</span>
+        <span class="c"># B4 = Q(0, 1) = AD = AlSb</span>
+        <span class="c"># t12 = Q(x, 0) = ABD = AlInSb</span>
+        <span class="c"># t23 = Q(1, y) = ACD = AlAsSb</span>
+        <span class="c"># t43 = Q(x, 1) = ABC = AlInAs</span>
+        <span class="c"># t14 = Q(0, y) = BCD = InAsSb</span>
+        <span class="n">t43</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">0</span><span class="p">](</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">t12</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">1</span><span class="p">](</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">t23</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">2</span><span class="p">](</span><span class="n">x</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+        <span class="n">t14</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ternaries</span><span class="p">[</span><span class="mi">3</span><span class="p">](</span><span class="n">x</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+        
+        <span class="n">p12</span> <span class="o">=</span> <span class="n">t12</span><span class="o">.</span><span class="n">get_parameter</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">p12</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&#39;&quot;{}&quot; is missing a required parameter: &quot;{}&quot;.&#39;</span>
+                                 <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t12</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+        <span class="n">p23</span> <span class="o">=</span> <span class="n">t23</span><span class="o">.</span><span class="n">get_parameter</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">p23</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&#39;&quot;{}&quot; is missing a required parameter: &quot;{}&quot;.&#39;</span>
+                                 <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t23</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+        <span class="n">p43</span> <span class="o">=</span> <span class="n">t43</span><span class="o">.</span><span class="n">get_parameter</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">p43</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&#39;&quot;{}&quot; is missing a required parameter: &quot;{}&quot;.&#39;</span>
+                                 <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t43</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+        <span class="n">p14</span> <span class="o">=</span> <span class="n">t14</span><span class="o">.</span><span class="n">get_parameter</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">p14</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&#39;&quot;{}&quot; is missing a required parameter: &quot;{}&quot;.&#39;</span>
+                                 <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t14</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+        
+        <span class="n">v12</span> <span class="o">=</span> <span class="n">p12</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">v23</span> <span class="o">=</span> <span class="n">p23</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">v43</span> <span class="o">=</span> <span class="n">p43</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">v14</span> <span class="o">=</span> <span class="n">p14</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="c"># handle these cases explicitly, so there&#39;s no divide by zero</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mf">0.</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">v14</span>
+        <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="mf">1.</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">v23</span>
+        <span class="k">elif</span> <span class="n">y</span> <span class="o">==</span> <span class="mf">0.</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">v12</span>
+        <span class="k">elif</span> <span class="n">y</span> <span class="o">==</span> <span class="mf">1.</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">v43</span>
+        <span class="n">xinv</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">-</span> <span class="n">x</span>
+        <span class="n">yinv</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">-</span> <span class="n">y</span>
+        <span class="n">xweight</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">xinv</span>
+        <span class="n">yweight</span> <span class="o">=</span> <span class="n">y</span> <span class="o">*</span> <span class="n">yinv</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="p">(</span><span class="n">xweight</span> <span class="o">*</span> <span class="p">(</span><span class="n">yinv</span> <span class="o">*</span> <span class="n">v12</span> <span class="o">+</span> <span class="n">y</span> <span class="o">*</span> <span class="n">v43</span><span class="p">)</span> <span class="o">+</span> 
+               <span class="n">yweight</span> <span class="o">*</span> <span class="p">(</span><span class="n">xinv</span> <span class="o">*</span> <span class="n">v14</span> <span class="o">+</span> <span class="n">x</span> <span class="o">*</span> <span class="n">v23</span><span class="p">))</span>
+        <span class="n">denom</span> <span class="o">=</span> <span class="n">xweight</span> <span class="o">+</span> <span class="n">yweight</span>
+
+        <span class="c"># Check if there are bowing parameters provided</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_bowing</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">C</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="c"># a bowing parameter exists - use it</span>
+            <span class="c"># Note: this is a new, experimental mixing formula for</span>
+            <span class="c"># adding additional quaternary-induced bowing</span>
+            <span class="k">return</span> <span class="n">num</span> <span class="o">/</span> <span class="n">denom</span> <span class="o">-</span> <span class="n">C</span> <span class="o">*</span> <span class="n">xweight</span> <span class="o">*</span> <span class="n">yweight</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">num</span> <span class="o">/</span> <span class="n">denom</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">openbandparams 0.9 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../openbandparams.html" >openbandparams</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2015, Scott J Maddox.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Tutorial &mdash; openbandparams 0.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="openbandparams 0.9 documentation" href="index.html" />
+    <link rel="next" title="Supported Parameters" href="supported_parameters.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="supported_parameters.html" title="Supported Parameters"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Installation"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">openbandparams 0.9 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="installation.html"
+                        title="previous chapter">Installation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="supported_parameters.html"
+                        title="next chapter">Supported Parameters</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/tutorial.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="tutorial">
+<h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
+<p>Welcome to the <cite>openbandparams</cite> tutorial. This will teach you the basics.
+If you have not already installed <cite>openbandparams</cite>, please see
+<a class="reference internal" href="installation.html"><em>Installation</em></a>. First, start up an interactive python shell:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ python
+</pre></div>
+</div>
+<p>Next, import everything from the <cite>openbandparams</cite> package:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openbandparams</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<p>Now you can access the materials and their properties:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">GaAs</span>
+<span class="go">GaAs</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">InAs</span>
+<span class="go">InAs</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">InSb</span>
+<span class="go">InSb</span>
+</pre></div>
+</div>
+<p>The lattice constant, in units of Angstroms (Å), is accessed like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">GaAs</span><span class="o">.</span><span class="n">a</span><span class="p">()</span>
+<span class="go">5.65325</span>
+</pre></div>
+</div>
+<p>The bandgap, in units of electron Volts (eV), is accessed like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">GaAs</span><span class="o">.</span><span class="n">Eg</span><span class="p">()</span>
+<span class="go">1.4224821428571428</span>
+</pre></div>
+</div>
+<p>Some parameters depend on temperature. If the temperature is not provided,
+it defaults to 300 Kelvin:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">GaAs</span><span class="o">.</span><span class="n">Eg</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="go">1.4224821428571428</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">GaAs</span><span class="o">.</span><span class="n">Eg</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">1.519</span>
+</pre></div>
+</div>
+<p>There are many parameters available:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">GaAs</span><span class="o">.</span><span class="n">Eg_Gamma</span><span class="p">()</span>
+<span class="go">1.4224821428571428</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">GaAs</span><span class="o">.</span><span class="n">Eg_X</span><span class="p">()</span>
+<span class="go">1.898857142857143</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">GaAs</span><span class="o">.</span><span class="n">Eg_L</span><span class="p">()</span>
+<span class="go">1.7069642857142857</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">GaAs</span><span class="o">.</span><span class="n">meff_e_Gamma</span><span class="p">()</span>
+<span class="go">0.067</span>
+</pre></div>
+</div>
+<p>A full list of parameters available for a given material
+can be printed using the following one-liner:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">([</span><span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">GaAs</span><span class="o">.</span><span class="n">get_unique_parameters</span><span class="p">()])</span>
+<span class="go">[&#39;CBO&#39;, &#39;CBO_Gamma&#39;, &#39;CBO_L&#39;, &#39;CBO_X&#39;, &#39;Delta_SO&#39;, &#39;Eg&#39;, &#39;Eg_Gamma&#39;,</span>
+<span class="go">&#39;Eg_Gamma_0&#39;, &#39;Eg_L&#39;, &#39;Eg_L_0&#39;, &#39;Eg_X&#39;, &#39;Eg_X_0&#39;, &#39;Ep&#39;, &#39;F&#39;, &#39;VBO&#39;, &#39;a&#39;,</span>
+<span class="go">&#39;a_300K&#39;, &#39;a_c&#39;, &#39;a_v&#39;, &#39;alpha_Gamma&#39;, &#39;alpha_L&#39;, &#39;alpha_X&#39;, &#39;b&#39;,</span>
+<span class="go">&#39;beta_Gamma&#39;, &#39;beta_L&#39;, &#39;beta_X&#39;, &#39;c11&#39;, &#39;c12&#39;, &#39;c44&#39;, &#39;d&#39;,</span>
+<span class="go">&#39;electron_affinity&#39;, &#39;luttinger1&#39;, &#39;luttinger2&#39;, &#39;luttinger3&#39;,</span>
+<span class="go">&#39;luttinger32&#39;, &#39;meff_SO&#39;, &#39;meff_e_Gamma&#39;, &#39;meff_e_Gamma_0&#39;,</span>
+<span class="go">&#39;meff_e_L_DOS&#39;, &#39;meff_e_L_long&#39;, &#39;meff_e_L_trans&#39;, &#39;meff_e_X_DOS&#39;,</span>
+<span class="go">&#39;meff_e_X_long&#39;, &#39;meff_e_X_trans&#39;, &#39;meff_hh_100&#39;, &#39;meff_hh_110&#39;,</span>
+<span class="go">&#39;meff_hh_111&#39;, &#39;meff_lh_100&#39;, &#39;meff_lh_110&#39;, &#39;meff_lh_111&#39;,</span>
+<span class="go">&#39;nonparabolicity&#39;, &#39;thermal_expansion&#39;]</span>
+</pre></div>
+</div>
+<p>A description of any parameter can easily be printed:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">GaAs</span><span class="o">.</span><span class="n">Eg</span><span class="o">.</span><span class="n">description</span>
+<span class="go">bandgap energy</span>
+</pre></div>
+</div>
+<p>For documentation of the parameters, see <a class="reference internal" href="supported_parameters.html"><em>Supported Parameters</em></a>.</p>
+<p>Ternary alloys are also supported:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">AlGaAs</span><span class="p">(</span><span class="n">x</span><span class="o">=.</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">AlGaAs(Al=0.3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">AlGaAs</span><span class="p">(</span><span class="n">Al</span><span class="o">=.</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">AlGaAs(Al=0.3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">AlGaAs</span><span class="p">(</span><span class="n">Ga</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="go">AlGaAs(Al=0.3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">AlGaAs</span><span class="p">(</span><span class="n">Al</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span><span class="o">.</span><span class="n">Eg</span><span class="p">()</span>
+<span class="go">1.840788343373494</span>
+</pre></div>
+</div>
+<p>As of version 0.8, you must follow the alloy naming scheme. Group III
+elements come first, with the lowest atomic number elements first,
+followed by the Group V elements, also ordered by atomic number:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">GaInAs</span>
+<span class="go">GaInAs</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">GaPAs</span>
+<span class="go">GaPAs</span>
+</pre></div>
+</div>
+<p>If you reverse the element order, an error will be raised to let you know:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">InGaAs</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">NameError</span>: <span class="n">name &#39;InGaAs&#39; is not defined</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">GaAsP</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">NameError</span>: <span class="n">name &#39;GaAsP&#39; is not defined</span>
+</pre></div>
+</div>
+<p>Ternaries can be lattice matched to a desired lattice constant
+using the following syntax:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">GaInP</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">GaAs</span><span class="o">.</span><span class="n">a</span><span class="p">())</span>
+<span class="go">GaInP(Ga=0.516340648855)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">GaInP</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">GaAs</span><span class="o">.</span><span class="n">a</span><span class="p">())</span><span class="o">.</span><span class="n">Eg</span><span class="p">()</span>
+<span class="go">1.9259077529765196</span>
+</pre></div>
+</div>
+<p>In the previous example, a lattice matching temperature of 300 K is assumed.
+To lattice match to a different lattice matching temperature use the
+following syntax:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">GaInP</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">GaAs</span><span class="o">.</span><span class="n">a</span><span class="p">(),</span> <span class="n">T</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="go">GaInP(Ga=0.516340648855)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">GaInP</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">GaAs</span><span class="o">.</span><span class="n">a</span><span class="p">(),</span> <span class="n">T</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+<span class="go">GaInP(Ga=0.523158422221)</span>
+</pre></div>
+</div>
+<p>Instancing can be used to get multiple parameters from an alloy:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">GaInP_on_GaAs</span> <span class="o">=</span> <span class="n">GaInP</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">GaAs</span><span class="o">.</span><span class="n">a</span><span class="p">(),</span> <span class="n">T</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">GaInP_on_GaAs</span>
+<span class="go">GaInP(Ga=0.516340648855)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">GaInP_on_GaAs</span><span class="o">.</span><span class="n">Eg</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="go">1.9259077529765196</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">GaInP_on_GaAs</span><span class="o">.</span><span class="n">Eg</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mi">77</span><span class="p">)</span>
+<span class="go">2.010415191481605</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">GaInP_on_GaAs</span><span class="o">.</span><span class="n">a</span><span class="p">()</span>
+<span class="go">5.653250000000166</span>
+</pre></div>
+</div>
+<p>The same concepts also apply to quaternaries:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">GaInPAs</span><span class="p">(</span><span class="n">P</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">InP</span><span class="o">.</span><span class="n">a</span><span class="p">(),</span> <span class="n">T</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="go">GaInPAs(Ga=0.4176, P=0.1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">GaInPAs</span><span class="p">(</span><span class="n">P</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">InP</span><span class="o">.</span><span class="n">a</span><span class="p">(),</span> <span class="n">T</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span><span class="o">.</span><span class="n">Eg</span><span class="p">()</span>
+<span class="go">0.8237397670939017</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myGaInPAs</span> <span class="o">=</span> <span class="n">GaInPAs</span><span class="p">(</span><span class="n">P</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">InP</span><span class="o">.</span><span class="n">a</span><span class="p">(),</span> <span class="n">T</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myGaInPAs</span><span class="o">.</span><span class="n">Eg</span><span class="p">()</span>
+<span class="go">0.8237397670939017</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myGaInPAs</span><span class="o">.</span><span class="n">a</span><span class="p">()</span>
+<span class="go">5.869700012767527</span>
+</pre></div>
+</div>
+<p>It&#8217;s also possible to get a LaTeX representation of the alloy:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">GaInPAs</span><span class="o">.</span><span class="n">latex</span><span class="p">()</span>
+<span class="go">&#39;Ga_{x}In_{1-x}P_{y}As_{1-y}&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">GaInPAs</span><span class="p">(</span><span class="n">P</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">InP</span><span class="o">.</span><span class="n">a</span><span class="p">(),</span> <span class="n">T</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span><span class="o">.</span><span class="n">latex</span><span class="p">()</span>
+<span class="go">&#39;Ga_{0.4176}In_{0.5824}P_{0.1}As_{0.9}&#39;</span>
+</pre></div>
+</div>
+<p>Now that you have the basics down, check out the <a class="reference internal" href="examples.html"><em>Examples</em></a> to see
+what&#8217;s possible.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="supported_parameters.html" title="Supported Parameters"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Installation"
+             >previous</a> |</li>
+        <li><a href="index.html">openbandparams 0.9 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2015, Scott J Maddox.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

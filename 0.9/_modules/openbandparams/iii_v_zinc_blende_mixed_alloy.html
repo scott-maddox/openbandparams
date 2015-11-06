@@ -1,0 +1,340 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>openbandparams.iii_v_zinc_blende_mixed_alloy &mdash; openbandparams 0.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="openbandparams 0.9 documentation" href="../../index.html" />
+    <link rel="up" title="openbandparams" href="../openbandparams.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">openbandparams 0.9 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../openbandparams.html" accesskey="U">openbandparams</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for openbandparams.iii_v_zinc_blende_mixed_alloy</h1><div class="highlight"><pre>
+<span class="c">#</span>
+<span class="c">#   Copyright (c) 2013-2015, Scott J Maddox</span>
+<span class="c">#</span>
+<span class="c">#   This file is part of openbandparams.</span>
+<span class="c">#</span>
+<span class="c">#   openbandparams is free software: you can redistribute it and/or modify</span>
+<span class="c">#   it under the terms of the GNU Affero General Public License as published</span>
+<span class="c">#   by the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c">#   (at your option) any later version.</span>
+<span class="c">#</span>
+<span class="c">#   openbandparams is distributed in the hope that it will be useful,</span>
+<span class="c">#   but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c">#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c">#   GNU Affero General Public License for more details.</span>
+<span class="c">#</span>
+<span class="c">#   You should have received a copy of the GNU Affero General Public License</span>
+<span class="c">#   along with openbandparams.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="c">#</span>
+<span class="c">#############################################################################</span>
+
+<span class="kn">from</span> <span class="nn">.iii_v_zinc_blende_alloy</span> <span class="kn">import</span> <span class="n">IIIVZincBlendeAlloy</span>
+<span class="kn">from</span> <span class="nn">.parameter</span> <span class="kn">import</span> <span class="n">method_parameter</span>
+<span class="kn">from</span> <span class="nn">.references</span> <span class="kn">import</span> <span class="n">vurgaftman_2001</span>
+
+<div class="viewcode-block" id="IIIVZincBlendeMixedAlloy"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy">[docs]</a><span class="k">class</span> <span class="nc">IIIVZincBlendeMixedAlloy</span><span class="p">(</span><span class="n">IIIVZincBlendeAlloy</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    The base class for all III-V zinc blende mixed alloys, i.e. ternaries,</span>
+<span class="sd">    quaternaries, quinaries, etc.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Used to specify the alloy composition.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">_interpolate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+        
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;Delta_SO&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeMixedAlloy.Delta_SO"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.Delta_SO">[docs]</a>    <span class="k">def</span> <span class="nf">Delta_SO</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="s">&#39;Delta_SO&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+        </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;Eg_Gamma&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeMixedAlloy.Eg_Gamma"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.Eg_Gamma">[docs]</a>    <span class="k">def</span> <span class="nf">Eg_Gamma</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="s">&#39;Eg_Gamma&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+        </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;Eg_L&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeMixedAlloy.Eg_L"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.Eg_L">[docs]</a>    <span class="k">def</span> <span class="nf">Eg_L</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="s">&#39;Eg_L&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+        </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;Eg_X&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeMixedAlloy.Eg_X"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.Eg_X">[docs]</a>    <span class="k">def</span> <span class="nf">Eg_X</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="s">&#39;Eg_X&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;Ep&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">,</span> <span class="n">references</span><span class="o">=</span><span class="p">[</span><span class="n">vurgaftman_2001</span><span class="p">])</span>
+<div class="viewcode-block" id="IIIVZincBlendeMixedAlloy.Ep"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.Ep">[docs]</a>    <span class="k">def</span> <span class="nf">Ep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Linear interpolation is recommended for alloys.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="s">&#39;Ep&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;F&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;dimensionless&#39;</span><span class="p">,</span> <span class="n">references</span><span class="o">=</span><span class="p">[</span><span class="n">vurgaftman_2001</span><span class="p">])</span>
+<div class="viewcode-block" id="IIIVZincBlendeMixedAlloy.F"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.F">[docs]</a>    <span class="k">def</span> <span class="nf">F</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Linear interpolation is recommended for alloys.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="s">&#39;F&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;VBO&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeMixedAlloy.VBO"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.VBO">[docs]</a>    <span class="k">def</span> <span class="nf">VBO</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="s">&#39;VBO&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+</div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;a_300K&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;angstrom&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeMixedAlloy.a_300K"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.a_300K">[docs]</a>    <span class="k">def</span> <span class="nf">a_300K</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the lattice parameter, a, in Angstroms at 300 K.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="s">&#39;a_300K&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;a_c&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeMixedAlloy.a_c"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.a_c">[docs]</a>    <span class="k">def</span> <span class="nf">a_c</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="s">&#39;a_c&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;a_v&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeMixedAlloy.a_v"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.a_v">[docs]</a>    <span class="k">def</span> <span class="nf">a_v</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="s">&#39;a_v&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;b&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeMixedAlloy.b"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.b">[docs]</a>    <span class="k">def</span> <span class="nf">b</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;c11&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeMixedAlloy.c11"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.c11">[docs]</a>    <span class="k">def</span> <span class="nf">c11</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="s">&#39;c11&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;c12&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeMixedAlloy.c12"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.c12">[docs]</a>    <span class="k">def</span> <span class="nf">c12</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="s">&#39;c12&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;c44&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeMixedAlloy.c44"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.c44">[docs]</a>    <span class="k">def</span> <span class="nf">c44</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="s">&#39;c44&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;d&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;eV&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeMixedAlloy.d"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.d">[docs]</a>    <span class="k">def</span> <span class="nf">d</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="s">&#39;d&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;dielectric&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;dimensionless&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeMixedAlloy.dielectric"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.dielectric">[docs]</a>    <span class="k">def</span> <span class="nf">dielectric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="s">&#39;dielectric&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;dielectric_high_frequency&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;dimensionless&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeMixedAlloy.dielectric_high_frequency"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.dielectric_high_frequency">[docs]</a>    <span class="k">def</span> <span class="nf">dielectric_high_frequency</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="s">&#39;dielectric_high_frequency&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;meff_hh_100&#39;</span><span class="p">,</span> <span class="s">&#39;meff_lh_100&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;dimensionless&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeMixedAlloy.luttinger1"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.luttinger1">[docs]</a>    <span class="k">def</span> <span class="nf">luttinger1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">((</span><span class="mf">1.</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">meff_lh_100</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">+</span>
+                 <span class="mf">1.</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">meff_hh_100</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="p">)</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;meff_hh_100&#39;</span><span class="p">,</span> <span class="s">&#39;meff_lh_100&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;dimensionless&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeMixedAlloy.luttinger2"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.luttinger2">[docs]</a>    <span class="k">def</span> <span class="nf">luttinger2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">((</span><span class="mf">1.</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">meff_lh_100</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-</span>
+                 <span class="mf">1.</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">meff_hh_100</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="p">)</span> <span class="o">/</span> <span class="mf">4.</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;luttinger2&#39;</span><span class="p">,</span> <span class="s">&#39;luttinger32&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;dimensionless&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeMixedAlloy.luttinger3"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.luttinger3">[docs]</a>    <span class="k">def</span> <span class="nf">luttinger3</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">luttinger32</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">luttinger2</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;luttinger32&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;dimensionless&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeMixedAlloy.luttinger32"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.luttinger32">[docs]</a>    <span class="k">def</span> <span class="nf">luttinger32</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the difference between the third and second Luttinger</span>
+<span class="sd">        parameters, i.e. `luttinger3 - luttinger2`.</span>
+<span class="sd">        </span>
+<span class="sd">        Linear interpolation of luttinger32 is the recommended way to</span>
+<span class="sd">        estimate the valance band warping in alloys.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="s">&#39;luttinger32&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;meff_e_L_DOS&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;m_e&#39;</span><span class="p">,</span> <span class="n">references</span><span class="o">=</span><span class="p">[</span><span class="n">vurgaftman_2001</span><span class="p">])</span>
+<div class="viewcode-block" id="IIIVZincBlendeMixedAlloy.meff_e_L_DOS"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_e_L_DOS">[docs]</a>    <span class="k">def</span> <span class="nf">meff_e_L_DOS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Linear interpolation of meff_e_L_DOS is recommended for alloys.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="s">&#39;meff_e_L_DOS&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;meff_e_L_long&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;m_e&#39;</span><span class="p">,</span> <span class="n">references</span><span class="o">=</span><span class="p">[</span><span class="n">vurgaftman_2001</span><span class="p">])</span>
+<div class="viewcode-block" id="IIIVZincBlendeMixedAlloy.meff_e_L_long"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_e_L_long">[docs]</a>    <span class="k">def</span> <span class="nf">meff_e_L_long</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Linear interpolation of meff_e_L_long is recommended for alloys.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="s">&#39;meff_e_L_long&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;meff_e_L_trans&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;m_e&#39;</span><span class="p">,</span> <span class="n">references</span><span class="o">=</span><span class="p">[</span><span class="n">vurgaftman_2001</span><span class="p">])</span>
+<div class="viewcode-block" id="IIIVZincBlendeMixedAlloy.meff_e_L_trans"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_e_L_trans">[docs]</a>    <span class="k">def</span> <span class="nf">meff_e_L_trans</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Linear interpolation of meff_e_L_trans is recommended for alloys.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="s">&#39;meff_e_L_trans&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;meff_e_X_DOS&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;m_e&#39;</span><span class="p">,</span> <span class="n">references</span><span class="o">=</span><span class="p">[</span><span class="n">vurgaftman_2001</span><span class="p">])</span>
+<div class="viewcode-block" id="IIIVZincBlendeMixedAlloy.meff_e_X_DOS"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_e_X_DOS">[docs]</a>    <span class="k">def</span> <span class="nf">meff_e_X_DOS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Linear interpolation of meff_e_X_DOS is recommended for alloys.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="s">&#39;meff_e_X_DOS&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;meff_e_X_long&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;m_e&#39;</span><span class="p">,</span> <span class="n">references</span><span class="o">=</span><span class="p">[</span><span class="n">vurgaftman_2001</span><span class="p">])</span>
+<div class="viewcode-block" id="IIIVZincBlendeMixedAlloy.meff_e_X_long"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_e_X_long">[docs]</a>    <span class="k">def</span> <span class="nf">meff_e_X_long</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Linear interpolation of meff_e_X_long is recommended for alloys.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="s">&#39;meff_e_X_long&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;meff_e_X_trans&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;m_e&#39;</span><span class="p">,</span> <span class="n">references</span><span class="o">=</span><span class="p">[</span><span class="n">vurgaftman_2001</span><span class="p">])</span>
+<div class="viewcode-block" id="IIIVZincBlendeMixedAlloy.meff_e_X_trans"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_e_X_trans">[docs]</a>    <span class="k">def</span> <span class="nf">meff_e_X_trans</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Linear interpolation of meff_e_X_trans is recommended for alloys.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="s">&#39;meff_e_X_trans&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;meff_hh_100&#39;</span><span class="p">],</span> <span class="n">units</span><span class="o">=</span><span class="s">&#39;m_e&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeMixedAlloy.meff_hh_100"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_hh_100">[docs]</a>    <span class="k">def</span> <span class="nf">meff_hh_100</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the light-hole band effective mass in the [100] direction,</span>
+<span class="sd">        meff_hh_100, in units of electron mass.</span>
+
+<span class="sd">        Linear interpolation of meff_hh_100 is recommended for alloys.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="s">&#39;meff_hh_100&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;meff_lh_100&#39;</span><span class="p">],</span> <span class="n">units</span><span class="o">=</span><span class="s">&#39;m_e&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeMixedAlloy.meff_lh_100"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_lh_100">[docs]</a>    <span class="k">def</span> <span class="nf">meff_lh_100</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the heavy-hole band effective mass in the [100] direction,</span>
+<span class="sd">        meff_hh_100, in units of electron mass.</span>
+
+<span class="sd">        Linear interpolation of meff_lh_100 is recommended for alloys.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="s">&#39;meff_lh_100&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+    </div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;meff_SO&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;m_e&#39;</span><span class="p">,</span> <span class="n">references</span><span class="o">=</span><span class="p">[</span><span class="n">vurgaftman_2001</span><span class="p">])</span>
+<div class="viewcode-block" id="IIIVZincBlendeMixedAlloy.meff_SO"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.meff_SO">[docs]</a>    <span class="k">def</span> <span class="nf">meff_SO</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Linear interpolation of meff_SO is recommended for alloys.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="s">&#39;meff_SO&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+</div>
+    <span class="nd">@method_parameter</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;thermal_expansion&#39;</span><span class="p">],</span>
+                      <span class="n">units</span><span class="o">=</span><span class="s">&#39;angstrom/K&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="IIIVZincBlendeMixedAlloy.thermal_expansion"><a class="viewcode-back" href="../../apidoc/openbandparams.html#openbandparams.iii_v_zinc_blende_mixed_alloy.IIIVZincBlendeMixedAlloy.thermal_expansion">[docs]</a>    <span class="k">def</span> <span class="nf">thermal_expansion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the thermal expansion coefficient.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span><span class="s">&#39;thermal_expansion&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">openbandparams 0.9 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../openbandparams.html" >openbandparams</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2015, Scott J Maddox.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

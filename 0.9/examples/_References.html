@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>References &mdash; openbandparams 0.9 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="openbandparams 0.9 documentation" href="../index.html" />
+    <link rel="up" title="Examples" href="../examples.html" />
+    <link rel="next" title="Plot Bandgap vs Composition of Ternary" href="_Plot_Bandgap_vs_Composition_of_Ternary.html" />
+    <link rel="prev" title="Strained Parameters" href="_Strained_Parameters.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="_Plot_Bandgap_vs_Composition_of_Ternary.html" title="Plot Bandgap vs Composition of Ternary"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="_Strained_Parameters.html" title="Strained Parameters"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">openbandparams 0.9 documentation</a> &raquo;</li>
+          <li><a href="../examples.html" accesskey="U">Examples</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="_Strained_Parameters.html"
+                        title="previous chapter">Strained Parameters</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="_Plot_Bandgap_vs_Composition_of_Ternary.html"
+                        title="next chapter">Plot Bandgap vs Composition of Ternary</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/examples/_References.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="references">
+<h1>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h1>
+<p>Source:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#</span>
+<span class="c">#   Copyright (c) 2013-2015, Scott J Maddox</span>
+<span class="c">#</span>
+<span class="c">#   This file is part of openbandparams.</span>
+<span class="c">#</span>
+<span class="c">#   openbandparams is free software: you can redistribute it and/or modify</span>
+<span class="c">#   it under the terms of the GNU Affero General Public License as published</span>
+<span class="c">#   by the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c">#   (at your option) any later version.</span>
+<span class="c">#</span>
+<span class="c">#   openbandparams is distributed in the hope that it will be useful,</span>
+<span class="c">#   but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c">#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c">#   GNU Affero General Public License for more details.</span>
+<span class="c">#</span>
+<span class="c">#   You should have received a copy of the GNU Affero General Public License</span>
+<span class="c">#   along with openbandparams.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="c">#</span>
+<span class="c">#############################################################################</span>
+<span class="c"># Make sure we import the local openbandparams version</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> <span class="s">&#39;../..&#39;</span><span class="p">)))</span>
+<span class="kn">from</span> <span class="nn">openbandparams</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="c"># Print all references used to calculate a parameter</span>
+<span class="n">parameter</span> <span class="o">=</span> <span class="n">InAsSb</span><span class="o">.</span><span class="n">Eg</span>
+<span class="k">for</span> <span class="n">ref</span> <span class="ow">in</span> <span class="n">parameter</span><span class="o">.</span><span class="n">get_references</span><span class="p">():</span>
+    <span class="k">print</span> <span class="n">ref</span>
+</pre></div>
+</div>
+<p>Result:</p>
+<div class="highlight-python"><div class="highlight"><pre>@article{vurgaftman_2001,
+    title = {Band parameters for {III}-{V} compound semiconductors and their
+             alloys},
+    volume = {89},
+    issn = {00218979},
+    url = {http://jap.aip.org/resource/1/japiau/v89/i11/p5815_s1},
+    doi = {doi:10.1063/1.1368156},
+    number = {11},
+    urldate = {2012-06-04},
+    journal = {Journal of Applied Physics},
+    author = {Vurgaftman, I. and Meyer, J. R and Ram-Mohan, L. R},
+    month = jun,
+    year = {2001},
+    pages = {5815--5875},
+}
+
+
+@article{adachi_band_1987,
+    title = {Band gaps and refractive indices of {AlGaAsSb}, {GaInAsSb}, and {InPAsSb}: {Key} properties for a variety of the 2--4-$\mu$m optoelectronic device applications},
+    volume = {61},
+    issn = {00218979},
+    shorttitle = {Band gaps and refractive indices of {AlGaAsSb}, {GaInAsSb}, and {InPAsSb}},
+    url = {http://jap.aip.org/resource/1/japiau/v61/i10/p4869_s1},
+    doi = {doi:10.1063/1.338352},
+    number = {10},
+    urldate = {2013-03-07},
+    journal = {Journal of Applied Physics},
+    author = {Adachi, Sadao},
+    month = may,
+    year = {1987},
+    pages = {4869--4876},
+}
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="_Plot_Bandgap_vs_Composition_of_Ternary.html" title="Plot Bandgap vs Composition of Ternary"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="_Strained_Parameters.html" title="Strained Parameters"
+             >previous</a> |</li>
+        <li><a href="../index.html">openbandparams 0.9 documentation</a> &raquo;</li>
+          <li><a href="../examples.html" >Examples</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2015, Scott J Maddox.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>
