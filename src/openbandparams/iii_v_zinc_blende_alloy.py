@@ -17,18 +17,23 @@
 #   along with openbandparams.  If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
+
 from .alloy import Alloy
 from .iii_v_alloy import IIIVAlloy
 from .iii_v_zinc_blende_strained import IIIVZincBlendeStrained001
 from .parameter import method_parameter
-from .references import vurgaftman_2001, kane_1956
+from .references import vurgaftman_2001, kane_1956, luttinger_1956
 from .equations import varshni
+from math import sqrt
 
 
 __all__ = ['IIIVZincBlendeAlloy']
 
 # Boltzmann constant
 k = 8.6173324e-5 # eV K**-1
+
+# Conversion factor for Kane momentum matrix element
+pf_P = 1.951917539299979
 
 class IIIVZincBlendeAlloy(IIIVAlloy):
     '''
@@ -55,7 +60,7 @@ class IIIVZincBlendeAlloy(IIIVAlloy):
         else:
             return IIIVZincBlendeStrained001(unstrained=self,
                                              strain_out_of_plane=target)
-        
+    
     @method_parameter(dependencies=['VBO', 'Eg'], units='eV')
     def CBO(self, **kwargs):
         '''
@@ -139,7 +144,28 @@ class IIIVZincBlendeAlloy(IIIVAlloy):
         Ep = self.Ep(**kwargs)
         meff = self.meff_e_Gamma_0(**kwargs)
         return (1./meff-1-(Ep*(Eg+2.*Delta_SO/3.))/(Eg*(Eg+Delta_SO)))/2
-
+    
+    @method_parameter(dependencies=['Ep'], units='eV angstrom')
+    def P(self, **kwargs):
+        '''
+        Returns the Kane momentum matrix element, `P`, calculated from `Ep`.
+        '''
+        Ep = self.Ep(**kwargs)
+        return pf_P*sqrt(Ep)
+    
+    @method_parameter(dependencies=['lutinger1', 'lutinger2', 'lutinger3'],
+                      units='dimensionless',
+                      references=[luttinger_1956])
+    def luttinger4(self, **kwargs):
+        '''
+        Returns the fourth Luttinger parameter, `luttinger4`, calculated from
+        `luttinger1`, `luttinger2`, and `luttinger3`.
+        '''
+        luttinger1 = self.luttinger1(**kwargs)
+        luttinger2 = self.luttinger2(**kwargs)
+        luttinger3 = self.luttinger3(**kwargs)
+        return -1./3.*(luttinger1-2.*luttinger2-3.*luttinger3+2)
+    
     @method_parameter(dependencies=['a_300K', 'thermal_expansion'],
                       units='angstrom')
     def a(self, **kwargs):

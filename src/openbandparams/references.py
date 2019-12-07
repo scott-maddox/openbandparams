@@ -174,3 +174,15 @@ adachi_1982 = BibtexReference('''
     pages = {8775--8792},
 }
 ''')
+
+luttinger_1956 = BibtexReference('''
+@article{luttinger_1956,
+    author = {Luttinger, J. M.},
+    title = {{Quantum Theory of Cyclotron Resonance in Semiconductors: General Theory}},
+    journal = {Phys. Rev.},
+    year = {1956},
+    volume = {102},
+    number = {4},
+    pages = {1030--1041}
+}
+''')

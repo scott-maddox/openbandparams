@@ -20,7 +20,7 @@
 
 from .iii_v_alloy import IIIVAlloy
 from .parameter import method_parameter
-from .references import arent_1989, vurgaftman_2001
+from .references import arent_1989
 
 
 class IIIVZincBlendeStrained001(IIIVAlloy):
@@ -258,21 +258,33 @@ class IIIVZincBlendeStrained001(IIIVAlloy):
         return max(self.VBO_hh_strain_shift(**kwargs),
                    self.VBO_lh_strain_shift(**kwargs))
     
-    @method_parameter(dependencies=['Eg_Gamma', 'Delta_SO', 'Ep', 'F'],
-                      units='m_e', references=[vurgaftman_2001])
-    def meff_e_Gamma(self, **kwargs):
-        '''
-        Returns the electron effective mass in the Gamma-valley
-        calculated from Eg_Gamma(T), CBO_strain_shift, Delta_SO, Ep and F,
-        assuming the CBO_strain_shift causes warping of the Gamma-valley
-        consistent with Kane's k.p model. Effects on the valance band
-        are not included.
-        
-        TODO: verify that this is a reasonable assumption.
-        '''
-        Eg = (self.unstrained.Eg_Gamma(**kwargs) +
-              self.CBO_strain_shift(**kwargs))
-        Delta_SO = self.unstrained.Delta_SO(**kwargs)
-        Ep = self.unstrained.Ep(**kwargs)
-        F = self.unstrained.F(**kwargs)
-        return 1./((1.+2.*F)+(Ep*(Eg+2.*Delta_SO/3.))/(Eg*(Eg+Delta_SO)))
+    # The effective mass results from 'unstrained' values, e.g. it does not
+    # change once strain is introduced.
+    # see Eq. (3.62) in:
+    # S. Birner,
+    # Modeling of Semiconductor Nanostructures and Semiconductor–Electrolyte
+    # Interfaces, 2011.
+    # 
+    # See also:
+    # T. B. Bahder, Phys. Rev. B 41, 11992 (1990).
+    #
+    # Therefore, the following function should be deleted.
+    
+#    @method_parameter(dependencies=['Eg_Gamma', 'Delta_SO', 'Ep', 'F'],
+#                      units='m_e', references=[vurgaftman_2001])
+#    def meff_e_Gamma(self, **kwargs):
+#        '''
+#        Returns the electron effective mass in the Gamma-valley
+#        calculated from Eg_Gamma(T), CBO_strain_shift, Delta_SO, Ep and F,
+#        assuming the CBO_strain_shift causes warping of the Gamma-valley
+#        consistent with Kane's k.p model. Effects on the valance band
+#        are not included.
+#        
+#        TODO: verify that this is a reasonable assumption.
+#        '''
+#        Eg = (self.unstrained.Eg_Gamma(**kwargs) +
+#              self.CBO_strain_shift(**kwargs))
+#        Delta_SO = self.unstrained.Delta_SO(**kwargs)
+#        Ep = self.unstrained.Ep(**kwargs)
+#        F = self.unstrained.F(**kwargs)
+#        return 1./((1.+2.*F)+(Ep*(Eg+2.*Delta_SO/3.))/(Eg*(Eg+Delta_SO)))
